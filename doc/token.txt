@@ -1,0 +1,48 @@
+token的枚举
+
+## 变量
+ID
+    \b[a-zA-Z_]\w*\b
+STRING
+    \"[^\"]\"
+INT
+COMMENT
+    //.*$
+    \*.**/
+## 标点符号
+COMMA   逗号
+COLON   冒号
+SEMICOLON   分号
+LPAREN  小括号 parenthesis
+RPAREN  
+LBRACK  中括号 square bracket
+RBRACK
+LBRACE  大括号 curly brace
+RBRACE
+DOT 点
+PLUS
+MINUS
+TIMES
+DIVIDE
+EQ
+NEQ
+LT  <
+LE
+GT
+GE
+NOT
+AND
+OR
+ASSIGN
+POUND   井号
+QUESTION
+
+
+## 语言保留字
+if
+then
+else
+while
+for
+break
+nil
