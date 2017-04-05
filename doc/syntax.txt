@@ -1,0 +1,27 @@
+prog        -> 'Shader' String { shader_body }
+shader_body -> prop subshr 
+
+props       -> Props { props_body }
+            -> 
+props_body  -> prop_stm prop_body
+prop_stm    -> ID (String, ID) = prop_init
+prop_init   -> Number
+            -> String { }
+            -> (1,1,1,1) 这种
+
+subshr      -> SubShader { subshr_body }
+subshr_body -> shr_tags directives pass
+
+shr_tags    -> string = string shr_tags
+directives  -> directive_name ID directives
+directive_name -> Lighting
+               -> Cull
+               -> ZTest
+               -> ZWrite
+               -> Blend
+
+pass        -> Pass { pass_body }
+pass_body   -> CGPROGRAM
+
+CGPROGRAM   -> 'CGPROGRAM' cgprog 'ENDCG'
+cgprog      -> 后面就是类似C语言的产生式了
