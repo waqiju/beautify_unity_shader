@@ -11,22 +11,24 @@ def lexicalAnalyze(inputText):
         for rule in rules:
             match = rule['pattern'].match(inputText, pos)
             if match:
-                 matchText = match.group()
-                 tokens.append(rule['action'](matchText))
-                 error_message.forward(matchText)
-                 pos = match.end()
-                 break
+                matchText = match.group()
+                tokens.append(rule['action'](matchText))
+                error_message.forward(matchText)
+                pos = match.end()
+                break
 
     return tokens
 
 
 if __name__ == '__main__':
-    testFile = r'D:\1_Workspace\github\beautify_unity_shader\test\test.shader'
+    import os
+    testFile = os.path.abspath( os.path.join(__file__, r"../../test/test.shader") )
+
     with open(testFile) as f:
         buf = f.read()
         tokens = lexicalAnalyze(buf)
 
-    outputFile = r'C:\Users\Plato\Desktop\Tmp\lex_output.txt'
+    outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
     with open(outputFile, 'w') as f:
         for token in tokens:
             f.write(str(token))
