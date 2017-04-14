@@ -52,7 +52,7 @@ TokenType = Enum('TokenType', (
 
 class Token:
 
-    def __init__(self, kind, text, value=None):
+    def __init__(self, kind, text=None, value=None):
         self.kind = kind
         self.text = text
         self.value = value
