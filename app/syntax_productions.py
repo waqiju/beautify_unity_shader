@@ -1,12 +1,7 @@
 from syntax_symbol import SymbolType
-from syntax_token import Token, TokenType
+from lex_token import Token, TokenType
 
 
-class Production:
-
-    def __init__(self, left, right):
-        self.left = left
-        self.right = right
 
 
 # todo 优化下规则书写，syntax_reader，syntax.txt -> SyntaxProductions

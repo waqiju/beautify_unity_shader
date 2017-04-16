@@ -1,18 +1,21 @@
+from .syntax_nonterminal import Nonterminal
 from enum import Enum
+import unittest
 
-SymbolType = Enum('SymbolType', (
+NonterminalType = Enum('NonterminalType', (
     'Prog',
     'ShaderBody',
 ))
 
 
-class Prog:
+class Prog(Nonterminal):
 
     def __init__(self, pos, name, shader_body):
-        self.kind = SymbolType.Prog
+        self.kind = NonterminalType.Prog
         self.pos = pos
         self.name = name  # String
         self.shader_body = shader_body  # nonterminal
+        Nonterminal.registerClass(self.kind, Prog)
 
     def toDict(self):
         d = {}
@@ -23,10 +26,10 @@ class Prog:
         return d
 
 
-class ShaderBody:
+class ShaderBody(Nonterminal):
 
     def __init__(self, pos, raw):
-        self.kind = SymbolType.ShaderBody
+        self.kind = NonterminalType.ShaderBody
         self.pos = pos
         self.raw = raw
 
@@ -38,15 +41,10 @@ class ShaderBody:
         return d
 
 
-if __name__ == '__main__':
-    import json
+class Test(unittest.TestCase):
 
-    shaderBody = ShaderBody(10, 'This is Shader Body')
-    prog = Prog(1, 'Shader', shaderBody)
-    # print(prog.toDict())
+    def test(self):
+        prog = Prog(1, 'a_shader', 'body')
 
-    t = json.dumps(prog, default=lambda obj: obj.toDict(), indent=4, sort_keys=True)
-    print(t)
-
-    # text = json.dumps(prog, default=lambda obj: obj.__dict__)
-    # print(text)
+        cls = Nonterminal.getClass(NonterminalType.Prog)
+        self.assertTrue(cls == Prog)

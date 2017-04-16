@@ -1,3 +1,9 @@
+/* 为了方便写出可以被 ？？识别的product，做以下约定：
+1. 小写字母开头 = 语法Symbol
+2. 大写字母开头 = 词法Token
+3. 单引号开头 = TokenType.ID( xxx )
+4. 标点 = TokenType.XXX
+*/
 prog        -> 'Shader' String { shader_body }
 shader_body -> prop subshr 
 

@@ -21,3 +21,15 @@ if __name__ == '__main__':
     #     for token in tokens:
     #         f.write(str(token))
     #         f.write('\n')
+
+    # import json
+
+    # shaderBody = ShaderBody(10, 'This is Shader Body')
+    # prog = Prog(1, 'Shader', shaderBody)
+    # # print(prog.toDict())
+
+    # t = json.dumps(prog, default=lambda obj: obj.toDict(), indent=4, sort_keys=True)
+    # print(t)
+
+    # # text = json.dumps(prog, default=lambda obj: obj.__dict__)
+    # # print(text)
