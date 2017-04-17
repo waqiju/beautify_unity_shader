@@ -1,6 +1,6 @@
 from ..syntax_production import Production
-from .base_types import ObjectSet, ItemLR0
-from .base_algorithms import calcClosureLR0, gotoLR0
+from .base_types import ObjectSet, Item
+from .base_algorithms import calcClosure, goto, calcFirstDict
 import unittest
 
 
@@ -20,20 +20,26 @@ def construct(productionList):
     )
     productionList.insert(0, beginningProduction)
     beginningItemSet = ObjectSet()
-    beginningItemSet.add(ItemLR0(beginningProduction))
+    beginningItemSet.add(Item(beginningProduction, 0, '*'))
+
+    # 初始化symbolType
+    from test.lr1_test.tokens import TokenType
+    from test.lr1_test.nonterminals import NonterminalType
+    SymbolType = [ty for ty in TokenType] + [ty for ty in NonterminalType]
+
+    # 根据productionList获取firstDict和nullableDict
+    firstDict, nullableDict = calcFirstDict(productionList, TokenType)
 
     # 初始化stateSet
-    beginningState = calcClosureLR0(productionList, beginningItemSet)
+    beginningState = calcClosure(productionList, firstDict, nullableDict, beginningItemSet)
     stateSet = ObjectSet()
     stateSet.add(beginningState)
     stateList = []
     stateList.append(beginningState)
+
+
     # 初始化edges
     edges = {}
-    # 初始化symbolType
-    from test.lr0_test.tokens import TokenType
-    from test.lr0_test.nonterminals import NonterminalType
-    SymbolType = [ty for ty in TokenType] + [ty for ty in NonterminalType]
 
     stateIndex = 0
     while (stateIndex < len(stateList)):
@@ -44,13 +50,12 @@ def construct(productionList):
         for item in state:
             if item.getNextSymbolType() is None:
                 productionNo = item.production.name[1:]
-                for ty in TokenType:
-                    _addEdge(edges, stateIndex, ty.name, 'r' + productionNo)
-                    # edges[stateIndex][ty.name] = 'r' + productionNo
+                st = item.getLookAheadST()
+                _addEdge(edges, stateIndex, st if isinstance(st, str) else st.name, 'r' + productionNo)
 
         # 放置Shift
         for ty in SymbolType:
-            newState = gotoLR0(productionList, state, ty)
+            newState = goto(productionList, firstDict, nullableDict, state, ty)
             if len(newState) == 0:
                 continue
 
@@ -59,22 +64,23 @@ def construct(productionList):
                 stateList.append(newState)
 
             _addEdge(edges, stateIndex, ty.name, 's%s' % stateSet.getSerialNumber(newState))
-            # edges[stateIndex][ty.name] = 's%s' % stateSet.getSerialNumber(newState)
 
         stateIndex = stateIndex + 1
 
     for i, state in enumerate(stateList):
         print(i, state)
 
-    print('---------------------------')
+    print('---------------------------------')
+    _printCell('')
     for ty in SymbolType:
-        print(ty.name + '\t', end='')
+        _printCell(ty.name)
     print('')
 
     for i, state in enumerate(stateList):
+        _printCell(str(i))
         for ty in SymbolType:
-            actionStr = str(edges[i][ty.name] if edges[i].get(ty.name) else '\t') + '\t'
-            print(actionStr, end='')
+            actionStr = str(edges[i][ty.name] if edges[i].get(ty.name) else '')
+            _printCell(actionStr)
         print('')
 
 
@@ -82,23 +88,31 @@ def _addEdge(edges, key1, key2, action):
     oldValue = edges[key1].get(key2)
     if oldValue is None:
         edges[key1][key2] = action
-    elif isinstance(oldValue, str):
+    elif isinstance(oldValue, str) and oldValue != action:
         edges[key1][key2] = [oldValue, action]
-    elif isinstance(oldValue, list):
+    elif isinstance(oldValue, list) and not action in edges[key1][key2]:
         edges[key1][key2].append(action)
     else:
         print('should not go here!')
 
 
+def _printCell(text):
+    for i in range(len(text), 15):
+        text = text + ' '
+    print(text, end='')
+
+
 class Test(unittest.TestCase):
 
     def test(self):
-        from test.lr0_test.productions import productionList
+        from test.lr1_test.productions import productionList
+        for p in productionList:
+            print(p)
+        print('--------------------------------')
         dfmEdges = construct(productionList)
 
-    # 测试s0和s1
-    def DDtest2(self):
-        from test.lr0_test.productions import productionList
+
+    def DDtestFirstDict(self):        
         # 加入S -> XX $
         firstNonterminalType = productionList[0].left
         beginningProduction = Production(
@@ -110,12 +124,18 @@ class Test(unittest.TestCase):
         )
         productionList.insert(0, beginningProduction)
         beginningItemSet = ObjectSet()
-        beginningItemSet.add(ItemLR0(beginningProduction))
+        beginningItemSet.add(Item(beginningProduction, 0, endingTerminal))
 
-        stateSet = ObjectSet()
-        s = calcClosureLR0(productionList, beginningItemSet)
-        print(s)
+        # 初始化symbolType
+        from test.lr1_test.tokens import TokenType
+        from test.lr1_test.nonterminals import NonterminalType
+        SymbolType = [ty for ty in TokenType] + [ty for ty in NonterminalType]
 
-        from ..lex_tokens import TokenType
-        s1 = gotoLR0(productionList, s, TokenType.ID)
-        print(s1)
+        # 根据productionList获取firstDict和nullableDict
+        firstDict, nullableDict = calcFirstDict(productionList, TokenType)
+        for st in firstDict:
+            print(st)
+            for st2 in firstDict[st]:
+                print('\t', st2)
+
+        print(nullableDict)
