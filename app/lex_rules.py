@@ -1,6 +1,7 @@
 import re
-import error_message
-from lex_token import Token, TokenType
+from . import error_message
+from .lex_token import Token
+from .lex_tokens import TokenType
 
 
 def LexicalError(text):

@@ -1,50 +1,61 @@
-from enum import Enum
+import unittest
+from .symbol_type import SymbolType
 
-TokenType = Enum('TokenType', (
+class TokenType(SymbolType):
+
     # 变量
-    'ID',
-    'String',
-    'Int',
-    'Number',  # Int Float
-    'Comment',
-    'SpaceLike',
+    ID = "ID"
+    String = "String"
+    Int = "Int"
+    Number = "Number"  # Int Float
+    Comment = "Comment"
+    SpaceLike = "SpaceLike"
     # 标点
-    'Comma',
-    'Colon',
-    'Semicolon',
-    'LParen',
-    'RParen',
-    'LBrack',
-    'RBrack',
-    'LBrace',
-    'RBrace',
-    'Dot',
-    'Plus',
-    'Minus',
-    'Times',
-    'Divide',
-    'EQ',
-    'NEQ',
-    'LT',
-    'LE',
-    'GT',
-    'GE',
-    'NOT',
-    'AND',
-    'OR',
-    'Assign',
-    'Pound',
-    'Question',
+    Comma = "Comma"
+    Colon = "Colon"
+    Semicolon = "Semicolon"
+    LParen = "LParen"
+    RParen = "RParen"
+    LBrack = "LBrack"
+    RBrack = "RBrack"
+    LBrace = "LBrace"
+    RBrace = "RBrace"
+    Dot = "Dot"
+    Plus = "Plus"
+    Minus = "Minus"
+    Times = "Times"
+    Divide = "Divide"
+    EQ = "EQ"
+    NEQ = "NEQ"
+    LT = "LT"
+    LE = "LE"
+    GT = "GT"
+    GE = "GE"
+    NOT = "NOT"
+    AND = "AND"
+    OR = "OR"
+    Assign = "Assign"
+    Pound = "Pound"
+    Question = "Question"
     # 语言保留字
-    'if',
-    'then',
-    'else',
-    'while',
-    'for',
-    'break',
-    'none',
+    if_ = "if"
+    then_ = "then"
+    else_ = "else"
+    while_ = "while"
+    for_ = "for"
+    break_ = "break"
+    none_ = "none"
     # Debug
-    'ReservedWord',
-    'LexicalError',
-    'Any',
-))
+    ReservedWord = "ReservedWord"
+    LexicalError = "LexicalError"
+    Any = "Any"
+
+    def isNonterminal(self):
+        return False
+
+
+class Test(unittest.TestCase):
+
+    def test(self):
+        print('hi')
+        print(TokenType.if_)

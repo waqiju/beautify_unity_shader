@@ -1,3 +1,4 @@
+import unittest
 from .base_types import ObjectSet, ItemLR0, Item
 from ..syntax_nonterminal import Nonterminal
 
@@ -47,7 +48,7 @@ def calcClosure(productionList, firstDict, nullableDict, itemSet):
     closure = ObjectSet(itemSet)
     # print(closure)
 
-    while (dirtyCount > 0):
+    while dirtyCount > 0:
         dirtyCount = False
 
         for item in closure:
@@ -62,7 +63,7 @@ def calcClosure(productionList, firstDict, nullableDict, itemSet):
                 # print('----', production, tail, calcSTListFirst(firstDict, nullableDict, tail))
                 for lookAheadST in calcSTListFirst(firstDict, nullableDict, tail): # todo
                     closure, isDirty = ObjectSet.unionReportDirty(closure, _production2ItemSet(production, lookAheadST))
-                    dirtyCount = dirtyCount + isDirty
+                    dirtyCount += isDirty
 
         # print(closure)
 
@@ -84,6 +85,7 @@ def calcFirstDict(productionList, TokenType):
     '''
 
     # init
+    # todo deal with things like 'if'
     firstDict = {}
     for production in productionList:
         x = production.left
@@ -99,10 +101,6 @@ def calcFirstDict(productionList, TokenType):
             firstDict[ty] = ObjectSet()
         firstDict[ty].add(ty)
 
-    for st in firstDict:
-        if isinstance(st, str):
-            firstDict[st].add(st)
-
     nullableDict = {}
     nullableDict[TokenType.NULL] = True
 
@@ -114,13 +112,13 @@ def calcFirstDict(productionList, TokenType):
             x = production.left
             if _isAllNullable(nullableDict, production.right) and not nullableDict.get(x):
                 nullableDict[x] = True
-                dirtyCount = dirtyCount + 1
+                dirtyCount += 1
 
             for i in range(0, len(production.right)):
                 y = production.right[i]
 
                 firstDict[x], isDirty = ObjectSet.unionReportDirty(firstDict[x], firstDict[y])
-                dirtyCount = dirtyCount + isDirty
+                dirtyCount += isDirty
 
                 if not nullableDict.get(y):
                     break
@@ -156,3 +154,16 @@ def _isAllNullable(nullableDict, stList):
             return False
 
     return True
+
+
+class Test(unittest.TestCase):
+
+    def test(self):
+        firstDict, nullableDict = calcFirstDict(productionList, TokenType)
+
+        for ty in firstDict:
+            print(ty, '-->')
+            for ty2 in firstDict[ty]:
+                print('\t', ty2)
+
+        print(nullableDict)

@@ -1,3 +1,4 @@
+import unittest
 
 
 class Token:
@@ -16,5 +17,8 @@ class Token:
             return str(self.kind)
 
 
-if __name__ == '__main__':
-    print(Token(TokenType.ID, 'Shader', 'Shader'))
+class Test(unittest.TestCase):
+
+    def test(self):
+        from .lex_tokens import TokenType
+        print(Token(TokenType.ID, 'Shader', 'Shader'))

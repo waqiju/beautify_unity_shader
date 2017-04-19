@@ -1,37 +1,44 @@
 from ..syntax_production import Production
+from ..symbol_type import SymbolType
 from .base_types import ObjectSet, Item
 from .base_algorithms import calcClosure, goto, calcFirstDict
 import unittest
 
 
-beginningNonterminal = '__Begin'
-endingTerminal = '__End'
+BeginningNonterminal = '__Begin'
+EndingTerminal = '__End'
 
 
 def construct(productionList):
+    # 初始化symbolType
+    TokenType = SymbolType.TokenType
+    NonterminalType = SymbolType.NonterminalType
+
     # 加入S -> XX $
+    NonterminalType.add(BeginningNonterminal)
+    TokenType.add(EndingTerminal)
+
     firstNonterminalType = productionList[0].left
     beginningProduction = Production(
-        '%s -> %s %s' % (beginningNonterminal,
-                         firstNonterminalType.name, endingTerminal),
+        '%s -> %s %s' % (BeginningNonterminal,
+                         firstNonterminalType, EndingTerminal),
         'p0',
-        beginningNonterminal,
-        (firstNonterminalType, endingTerminal),
+        BeginningNonterminal,
+        (firstNonterminalType, EndingTerminal),
     )
     productionList.insert(0, beginningProduction)
-    beginningItemSet = ObjectSet()
-    beginningItemSet.add(Item(beginningProduction, 0, '*'))
-
-    # 初始化symbolType
-    from test.lr1_test.tokens import TokenType
-    from test.lr1_test.nonterminals import NonterminalType
-    SymbolType = [ty for ty in TokenType] + [ty for ty in NonterminalType]
 
     # 根据productionList获取firstDict和nullableDict
     firstDict, nullableDict = calcFirstDict(productionList, TokenType)
 
-    # 初始化stateSet
+    # 初始的stateSet
+    beginningItemSet = ObjectSet()
+    beginningItemSet.add(Item(beginningProduction, 0, '*'))
     beginningState = calcClosure(productionList, firstDict, nullableDict, beginningItemSet)
+
+    print(beginningState)
+    return
+
     stateSet = ObjectSet()
     stateSet.add(beginningState)
     stateList = []
@@ -51,7 +58,7 @@ def construct(productionList):
             if item.getNextSymbolType() is None:
                 productionNo = item.production.name[1:]
                 st = item.getLookAheadST()
-                _addEdge(edges, stateIndex, st if isinstance(st, str) else st.name, 'r' + productionNo)
+                _addEdge(edges, stateIndex, st if isinstance(st, str) else st, 'r' + productionNo)
 
         # 放置Shift
         for ty in SymbolType:
@@ -63,7 +70,7 @@ def construct(productionList):
                 stateSet.add(newState)
                 stateList.append(newState)
 
-            _addEdge(edges, stateIndex, ty.name, 's%s' % stateSet.getSerialNumber(newState))
+            _addEdge(edges, stateIndex, ty, 's%s' % stateSet.getSerialNumber(newState))
 
         stateIndex = stateIndex + 1
 
@@ -73,13 +80,13 @@ def construct(productionList):
     print('---------------------------------')
     _printCell('')
     for ty in SymbolType:
-        _printCell(ty.name)
+        _printCell(ty)
     print('')
 
     for i, state in enumerate(stateList):
         _printCell(str(i))
         for ty in SymbolType:
-            actionStr = str(edges[i][ty.name] if edges[i].get(ty.name) else '')
+            actionStr = str(edges[i][ty] if edges[i].get(ty) else '')
             _printCell(actionStr)
         print('')
 
@@ -106,6 +113,7 @@ class Test(unittest.TestCase):
 
     def test(self):
         from test.lr1_test.productions import productionList
+        print('-------ProductionList-----------')
         for p in productionList:
             print(p)
         print('--------------------------------')
@@ -116,15 +124,15 @@ class Test(unittest.TestCase):
         # 加入S -> XX $
         firstNonterminalType = productionList[0].left
         beginningProduction = Production(
-            '%s -> %s %s' % (beginningNonterminal,
-                             firstNonterminalType.name, endingTerminal),
+            '%s -> %s %s' % (BeginningNonterminal,
+                             firstNonterminalType, EndingTerminal),
             'p0',
-            beginningNonterminal,
-            (firstNonterminalType, endingTerminal),
+            BeginningNonterminal,
+            (firstNonterminalType, EndingTerminal),
         )
         productionList.insert(0, beginningProduction)
         beginningItemSet = ObjectSet()
-        beginningItemSet.add(Item(beginningProduction, 0, endingTerminal))
+        beginningItemSet.add(Item(beginningProduction, 0, EndingTerminal))
 
         # 初始化symbolType
         from test.lr1_test.tokens import TokenType

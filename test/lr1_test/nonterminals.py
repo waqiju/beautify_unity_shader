@@ -1,15 +1,14 @@
-from enum import Enum
+from app.symbol_type import SymbolType
 from app.syntax_nonterminal import Nonterminal
 import unittest
 
-NonterminalType = Enum('NonterminalType', (
-    'S',
-    'E',
-    'V',
-))
 
-NonterminalType.getHashValue = lambda obj: str(obj.__hash__())
-NonterminalType.isNonterminal = lambda obj: True
+class NonterminalType(SymbolType):
+
+    S = 'S'
+    E = 'E'
+    V = 'V'
+
 
 class S(Nonterminal):
 

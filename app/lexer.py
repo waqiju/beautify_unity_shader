@@ -1,5 +1,6 @@
-from lex_rules import rules
-import error_message
+import unittest
+from .lex_rules import rules
+from . import error_message
 
 
 def lexicalAnalyze(inputText):
@@ -20,16 +21,19 @@ def lexicalAnalyze(inputText):
     return tokens
 
 
-if __name__ == '__main__':
-    import os
-    testFile = os.path.abspath( os.path.join(__file__, r"../../test/test.shader") )
 
-    with open(testFile) as f:
-        buf = f.read()
-        tokens = lexicalAnalyze(buf)
+class Test(unittest.TestCase):
 
-    outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
-    with open(outputFile, 'w') as f:
-        for token in tokens:
-            f.write(str(token))
-            f.write('\n')
+    def test(self):
+        import os
+        testFile = os.path.abspath( os.path.join(__file__, r"../../test/test.shader") )
+
+        with open(testFile) as f:
+            buf = f.read()
+            tokens = lexicalAnalyze(buf)
+
+        outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
+        with open(outputFile, 'w') as f:
+            for token in tokens:
+                f.write(str(token))
+                f.write('\n')
