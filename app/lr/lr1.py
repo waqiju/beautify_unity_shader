@@ -31,19 +31,16 @@ def construct(productionList):
     # 根据productionList获取firstDict和nullableDict
     firstDict, nullableDict = calcFirstDict(productionList, TokenType)
 
-    # 初始的stateSet
+    # 初始的ItemSet
     beginningItemSet = ObjectSet()
     beginningItemSet.add(Item(beginningProduction, 0, '*'))
     beginningState = calcClosure(productionList, firstDict, nullableDict, beginningItemSet)
 
-    print(beginningState)
-    return
-
+    # 初始的StateSet
     stateSet = ObjectSet()
     stateSet.add(beginningState)
     stateList = []
     stateList.append(beginningState)
-
 
     # 初始化edges
     edges = {}
@@ -58,12 +55,17 @@ def construct(productionList):
             if item.getNextSymbolType() is None:
                 productionNo = item.production.name[1:]
                 st = item.getLookAheadST()
-                _addEdge(edges, stateIndex, st if isinstance(st, str) else st, 'r' + productionNo)
+                _addEdge(edges, stateIndex, st, 'r' + productionNo)
 
         # 放置Shift
         for ty in SymbolType:
             newState = goto(productionList, firstDict, nullableDict, state, ty)
             if len(newState) == 0:
+                continue
+
+            # 放置Accept
+            if ty == EndingTerminal:
+                _addEdge(edges, stateIndex, ty, 'a')
                 continue
 
             if not stateSet.has(newState):
@@ -74,21 +76,10 @@ def construct(productionList):
 
         stateIndex = stateIndex + 1
 
-    for i, state in enumerate(stateList):
-        print(i, state)
+    _printStateList(stateList)
+    _printEdges(edges)
 
-    print('---------------------------------')
-    _printCell('')
-    for ty in SymbolType:
-        _printCell(ty)
-    print('')
-
-    for i, state in enumerate(stateList):
-        _printCell(str(i))
-        for ty in SymbolType:
-            actionStr = str(edges[i][ty] if edges[i].get(ty) else '')
-            _printCell(actionStr)
-        print('')
+    return edges
 
 
 def _addEdge(edges, key1, key2, action):
@@ -97,7 +88,7 @@ def _addEdge(edges, key1, key2, action):
         edges[key1][key2] = action
     elif isinstance(oldValue, str) and oldValue != action:
         edges[key1][key2] = [oldValue, action]
-    elif isinstance(oldValue, list) and not action in edges[key1][key2]:
+    elif isinstance(oldValue, list) and action not in edges[key1][key2]:
         edges[key1][key2].append(action)
     else:
         print('should not go here!')
@@ -109,15 +100,44 @@ def _printCell(text):
     print(text, end='')
 
 
+def _printProductionList(productionList):
+    print('-------ProductionList-----------')
+    for p in productionList:
+        print(p)
+    print('--------------------------------')
+
+
+def _printStateList(stateList):
+    print('-----------StateList------------')
+    for i, state in enumerate(stateList):
+        print(i, state)
+    print('--------------------------------')
+
+
+def _printEdges(edges):
+    print('------------Edges---------------')
+    _printCell('')
+    for ty in SymbolType:
+        _printCell(ty)
+    print('')
+
+    for i, _ in enumerate(edges):
+        _printCell(str(i))
+        for ty in SymbolType:
+            actionStr = str(edges[i][ty] if edges[i].get(ty) else '')
+            _printCell(actionStr)
+        print('')
+    print('--------------------------------')
+
+
+
 class Test(unittest.TestCase):
 
     def test(self):
         from test.lr1_test.productions import productionList
-        print('-------ProductionList-----------')
-        for p in productionList:
-            print(p)
-        print('--------------------------------')
+        _printProductionList(productionList)
         dfmEdges = construct(productionList)
+
 
 
     def DDtestFirstDict(self):        

@@ -1,6 +1,7 @@
 import unittest
 from .base_types import ObjectSet, ItemLR0, Item
 from ..syntax_nonterminal import Nonterminal
+from ..symbol_type import SymbolType
 
 # below is algorithm for LR0
 def calcClosureLR0(productionList, itemSet):
@@ -53,11 +54,10 @@ def calcClosure(productionList, firstDict, nullableDict, itemSet):
 
         for item in closure:
             x = item.getNextSymbolType()
-            if x is None or isinstance(x, str) or not x.isNonterminal(): # todo refactor
+            if x is None or x in SymbolType.TokenType: 
                 continue
 
-            # print(x.name)
-            XClass = Nonterminal.getClass(x.name)
+            XClass = Nonterminal.getClass(x)
             for production in XClass.leadingProductions:
                 tail = item.getTailSTList()
                 # print('----', production, tail, calcSTListFirst(firstDict, nullableDict, tail))

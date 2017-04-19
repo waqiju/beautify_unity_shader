@@ -133,7 +133,6 @@ class Item:
     def getLookAheadST(self):
         return self.lookAheadST
 
-
     def __str__(self):
         # return 'Item<%s , %s>' % (str(self.production), self.point)
 
