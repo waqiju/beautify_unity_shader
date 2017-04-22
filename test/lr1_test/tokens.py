@@ -9,7 +9,7 @@ class TokenType(SymbolType):
     String = 'String'
     # 标点
     Times = 'Times'
-    EQ = 'EQ'
+    Assign = 'Assign'
     # Debug
     NULL = 'NULL'
 

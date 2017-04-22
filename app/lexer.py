@@ -1,9 +1,12 @@
 import unittest
 from .lex_rules import rules
 from . import error_message
+from .symbol_type import SymbolType
+from .lex_token import Token
+from .lex_tokens import TokenType
 
 
-def lexicalAnalyze(inputText):
+def analyze(inputText, isKeepSpace=True, isEnding=False):
     pos = 0
     tokens = []
     error_message.reset()
@@ -18,6 +21,12 @@ def lexicalAnalyze(inputText):
                 pos = match.end()
                 break
 
+    if not isKeepSpace:
+        tokens = list(filter(lambda token: token.kind != TokenType.SpaceLike, tokens))
+
+    if isEnding:
+        tokens.append(Token(SymbolType.EndingTerminal))
+
     return tokens
 
 
@@ -30,7 +39,7 @@ class Test(unittest.TestCase):
 
         with open(testFile) as f:
             buf = f.read()
-            tokens = lexicalAnalyze(buf)
+            tokens = analyze(buf, False, True)
 
         outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
         with open(outputFile, 'w') as f:

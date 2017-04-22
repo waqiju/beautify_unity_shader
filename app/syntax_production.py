@@ -6,6 +6,7 @@ class Production:
         self.name = name
         self.left = left
         self.right = right
+        self.LeftNonterminalClass = None
 
     def __str__(self):
         # return self.raw + '\n\t' + str(self.left) + ' ' + str(self.right)

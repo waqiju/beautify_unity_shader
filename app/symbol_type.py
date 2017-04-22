@@ -39,14 +39,15 @@ class SymbolTypeMeta(type):
         cls.__members__.sort()
 
         # SymbolType should not use this menthod
-        SymbolType.__members__.append(member)
-        SymbolType.__members__.sort()
-
+        if member not in SymbolType.__members__:
+            SymbolType.__members__.append(member)
+            SymbolType.__members__.sort()
 
 
 class SymbolType(metaclass=SymbolTypeMeta):
 
-    pass
+    BeginningNonterminal = '__Begin'
+    EndingTerminal = '__End'
 
 
 class Test(unittest.TestCase):

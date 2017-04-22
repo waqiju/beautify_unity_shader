@@ -18,7 +18,7 @@ productionList = [
     Production('S -> V = E',
                'p1',
                NonterminalType.S,
-               (NonterminalType.V, TokenType.EQ, NonterminalType.E)),
+               (NonterminalType.V, TokenType.Assign, NonterminalType.E)),
     Production('S -> E',
                'p2',
                NonterminalType.S,
@@ -55,5 +55,7 @@ def _init():
     cls1.leadingProductions.append(p)
     cls2 = Nonterminal.getClass(name2) or Nonterminal.getClass(name1)
     cls2.production = p
+    p.LeftNonterminalClass = cls2
+    # print(cls1, cls2, p.left)
 
 _init()

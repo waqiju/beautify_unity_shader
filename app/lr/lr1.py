@@ -76,8 +76,8 @@ def construct(productionList):
 
         stateIndex = stateIndex + 1
 
-    _printStateList(stateList)
-    _printEdges(edges)
+    # _printStateList(stateList)
+    # _printEdges(edges)
 
     return edges
 
@@ -86,8 +86,9 @@ def _addEdge(edges, key1, key2, action):
     oldValue = edges[key1].get(key2)
     if oldValue is None:
         edges[key1][key2] = action
-    elif isinstance(oldValue, str) and oldValue != action:
-        edges[key1][key2] = [oldValue, action]
+    elif isinstance(oldValue, str):
+        if oldValue != action:
+            edges[key1][key2] = [oldValue, action]
     elif isinstance(oldValue, list) and action not in edges[key1][key2]:
         edges[key1][key2].append(action)
     else:
@@ -136,7 +137,8 @@ class Test(unittest.TestCase):
     def test(self):
         from test.lr1_test.productions import productionList
         _printProductionList(productionList)
-        dfmEdges = construct(productionList)
+        edges = construct(productionList)
+        _printEdges(edges)
 
 
 

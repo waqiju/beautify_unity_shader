@@ -16,16 +16,16 @@ class S(Nonterminal):
     leadingProductions = []
 
 
-class Sp1(Nonterminal):
+class Sp1(S):
 
     production = None
 
-    def __init__(self, v, e):
+    def __init__(self, v, equel, e):
         self.leftValue = v
         self.rightValue = e
 
 
-class Sp2(Nonterminal):
+class Sp2(S):
 
     production = None
 
@@ -49,19 +49,21 @@ class V(Nonterminal):
     leadingProductions = []
 
 
-def Vp4(Nonterminal):
+class Vp4(V):
 
+    kind = NonterminalType.V
     production = None
 
     def __init__(self, id):
         self.ID = id
 
 
-def Vp5(Nonterminal):
+class Vp5(V):
 
+    kind = NonterminalType.V
     production = None
 
-    def __init__(self, e):
+    def __init__(self, times, e):
         self.exp = e
 
 
@@ -78,6 +80,7 @@ class Test(unittest.TestCase):
 
 
 def _init():
+
     g = globals()
     for k, v in g.items():
         if isinstance(v, type) and issubclass(v, Nonterminal) and v is not Nonterminal:
