@@ -85,7 +85,6 @@ def calcFirstDict(productionList, TokenType):
     '''
 
     # init
-    # todo deal with things like 'if'
     firstDict = {}
     for production in productionList:
         x = production.left
@@ -102,7 +101,9 @@ def calcFirstDict(productionList, TokenType):
         firstDict[ty].add(ty)
 
     nullableDict = {}
-    nullableDict[TokenType.NULL] = True
+    for production in productionList:
+        if len(production.right) == 0:
+            nullableDict[production.left] = True
 
     dirtyCount = 1
     while dirtyCount > 0:
@@ -159,6 +160,9 @@ def _isAllNullable(nullableDict, stList):
 class Test(unittest.TestCase):
 
     def test(self):
+        from ..syntax_productions import productionList
+        from ..lex_tokens import TokenType
+
         firstDict, nullableDict = calcFirstDict(productionList, TokenType)
 
         for ty in firstDict:

@@ -9,7 +9,7 @@ BeginningNonterminal = '__Begin'
 EndingTerminal = '__End'
 
 
-def construct(productionList):
+def construct(productionList, isDebug=False):
     # 初始化symbolType
     TokenType = SymbolType.TokenType
     NonterminalType = SymbolType.NonterminalType
@@ -76,8 +76,9 @@ def construct(productionList):
 
         stateIndex = stateIndex + 1
 
-    # _printStateList(stateList)
-    # _printEdges(edges)
+    if isDebug:
+        _printStateList(stateList)
+        _printEdges(edges)
 
     return edges
 

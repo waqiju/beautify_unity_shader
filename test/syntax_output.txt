@@ -1,364 +1,82 @@
-TokenType.ID(Shader)
-TokenType.SpaceLike
-TokenType.String("GUI/Text Shader")
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(Properties)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(_MainTex)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.String("Font Texture")
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.ReservedWord(2D)
-TokenType.RParen
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.String("white")
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.ID(_Color)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.String("Text Color")
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.ReservedWord(Color)
-TokenType.RParen
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.Number(1)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.Number(1)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.Number(1)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.Number(1)
-TokenType.RParen
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.ID(SubShader)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(Tags)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.String("Queue")
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.String("Transparent")
-TokenType.SpaceLike
-TokenType.String("IgnoreProjector")
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.String("True")
-TokenType.SpaceLike
-TokenType.String("RenderType")
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.String("Transparent")
-TokenType.SpaceLike
-TokenType.String("PreviewType")
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.String("Plane")
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.ID(Lighting)
-TokenType.SpaceLike
-TokenType.ID(Off)
-TokenType.SpaceLike
-TokenType.ID(Cull)
-TokenType.SpaceLike
-TokenType.ID(Off)
-TokenType.SpaceLike
-TokenType.ID(ZTest)
-TokenType.SpaceLike
-TokenType.ID(Always)
-TokenType.SpaceLike
-TokenType.ID(ZWrite)
-TokenType.SpaceLike
-TokenType.ID(Off)
-TokenType.SpaceLike
-TokenType.ID(Blend)
-TokenType.SpaceLike
-TokenType.ID(SrcAlpha)
-TokenType.SpaceLike
-TokenType.ID(OneMinusSrcAlpha)
-TokenType.SpaceLike
-TokenType.ID(Pass)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(CGPROGRAM)
-TokenType.SpaceLike
-TokenType.Pound
-TokenType.ID(pragma)
-TokenType.SpaceLike
-TokenType.ID(vertex)
-TokenType.SpaceLike
-TokenType.ID(vert)
-TokenType.SpaceLike
-TokenType.Pound
-TokenType.ID(pragma)
-TokenType.SpaceLike
-TokenType.ID(fragment)
-TokenType.SpaceLike
-TokenType.ID(frag)
-TokenType.SpaceLike
-TokenType.Pound
-TokenType.ID(include)
-TokenType.SpaceLike
-TokenType.String("UnityCG.cginc")
-TokenType.SpaceLike
-TokenType.ID(struct)
-TokenType.SpaceLike
-TokenType.ID(appdata_t)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(float4)
-TokenType.SpaceLike
-TokenType.ID(vertex)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(POSITION)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(fixed4)
-TokenType.SpaceLike
-TokenType.ID(color)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(COLOR)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(float2)
-TokenType.SpaceLike
-TokenType.ID(texcoord)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(TEXCOORD0)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(struct)
-TokenType.SpaceLike
-TokenType.ID(v2f)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(float4)
-TokenType.SpaceLike
-TokenType.ID(vertex)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(SV_POSITION)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(fixed4)
-TokenType.SpaceLike
-TokenType.ID(color)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(COLOR)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(float2)
-TokenType.SpaceLike
-TokenType.ID(texcoord)
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(TEXCOORD0)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(sampler2D)
-TokenType.SpaceLike
-TokenType.ID(_MainTex)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(uniform)
-TokenType.SpaceLike
-TokenType.ID(float4)
-TokenType.SpaceLike
-TokenType.ID(_MainTex_ST)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(uniform)
-TokenType.SpaceLike
-TokenType.ID(fixed4)
-TokenType.SpaceLike
-TokenType.ID(_Color)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(v2f)
-TokenType.SpaceLike
-TokenType.ID(vert)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.ID(appdata_t)
-TokenType.SpaceLike
-TokenType.ID(v)
-TokenType.RParen
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(v2f)
-TokenType.SpaceLike
-TokenType.ID(o)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(o)
-TokenType.Dot
-TokenType.ID(vertex)
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.ID(mul)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.ID(UNITY_MATRIX_MVP)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.ID(v)
-TokenType.Dot
-TokenType.ID(vertex)
-TokenType.RParen
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(o)
-TokenType.Dot
-TokenType.ID(color)
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.ID(v)
-TokenType.Dot
-TokenType.ID(color)
-TokenType.SpaceLike
-TokenType.Times
-TokenType.SpaceLike
-TokenType.ID(_Color)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(o)
-TokenType.Dot
-TokenType.ID(texcoord)
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.ID(TRANSFORM_TEX)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.ID(v)
-TokenType.Dot
-TokenType.ID(texcoord)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.ID(_MainTex)
-TokenType.RParen
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(return)
-TokenType.SpaceLike
-TokenType.ID(o)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.ID(fixed4)
-TokenType.SpaceLike
-TokenType.ID(frag)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.ID(v2f)
-TokenType.SpaceLike
-TokenType.ID(i)
-TokenType.RParen
-TokenType.SpaceLike
-TokenType.Colon
-TokenType.SpaceLike
-TokenType.ID(SV_Target)
-TokenType.SpaceLike
-TokenType.LBrace
-TokenType.SpaceLike
-TokenType.ID(fixed4)
-TokenType.SpaceLike
-TokenType.ID(col)
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.ID(i)
-TokenType.Dot
-TokenType.ID(color)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(col)
-TokenType.Dot
-TokenType.ID(a)
-TokenType.SpaceLike
-TokenType.Times
-TokenType.SpaceLike
-TokenType.Assign
-TokenType.SpaceLike
-TokenType.ID(tex2D)
-TokenType.SpaceLike
-TokenType.LParen
-TokenType.ID(_MainTex)
-TokenType.Comma
-TokenType.SpaceLike
-TokenType.ID(i)
-TokenType.Dot
-TokenType.ID(texcoord)
-TokenType.RParen
-TokenType.Dot
-TokenType.ID(a)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.ID(return)
-TokenType.SpaceLike
-TokenType.ID(col)
-TokenType.Semicolon
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.ID(ENDCG)
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
-TokenType.RBrace
-TokenType.SpaceLike
+{
+    "shader_body": {
+        "subshr": {
+            "subshr_body": {
+                "tags": {
+                    "tags_body": {
+                        "tag_smt": {
+                            "value": "String(\"Transparent\")",
+                            "key": "String(\"Queue\")",
+                            "kind": "tag_smt"
+                        },
+                        "tags_body": {
+                            "tag_smt": {
+                                "value": "String(\"True\")",
+                                "key": "String(\"IgnoreProjector\")",
+                                "kind": "tag_smt"
+                            },
+                            "tags_body": {
+                                "tag_smt": {
+                                    "value": "String(\"Transparent\")",
+                                    "key": "String(\"RenderType\")",
+                                    "kind": "tag_smt"
+                                },
+                                "tags_body": {
+                                    "tag_smt": {
+                                        "value": "String(\"Plane\")",
+                                        "key": "String(\"PreviewType\")",
+                                        "kind": "tag_smt"
+                                    },
+                                    "tags_body": {
+                                        "kind": "tags_body"
+                                    },
+                                    "kind": "tags_body"
+                                },
+                                "kind": "tags_body"
+                            },
+                            "kind": "tags_body"
+                        },
+                        "kind": "tags_body"
+                    },
+                    "kind": "tags"
+                },
+                "kind": "subshr_body"
+            },
+            "kind": "subshr"
+        },
+        "props": {
+            "props_body": {
+                "props_body": {
+                    "props_body": {
+                        "kind": "props_body"
+                    },
+                    "prop_stm": {
+                        "varType": "ReservedWord(Color)",
+                        "prop_init": {
+                            "kind": "prop_init"
+                        },
+                        "inspectName": "String(\"Text Color\")",
+                        "varName": "ID(_Color)",
+                        "kind": "prop_stm"
+                    },
+                    "kind": "props_body"
+                },
+                "prop_stm": {
+                    "varType": "ReservedWord(2D)",
+                    "prop_init": {
+                        "color": "String(\"white\")",
+                        "kind": "prop_init"
+                    },
+                    "inspectName": "String(\"Font Texture\")",
+                    "varName": "ID(_MainTex)",
+                    "kind": "prop_stm"
+                },
+                "kind": "props_body"
+            },
+            "kind": "props"
+        },
+        "kind": "shader_body"
+    },
+    "name": "String(\"GUI/Text Shader\")",
+    "kind": "prog"
+}

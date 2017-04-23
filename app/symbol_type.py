@@ -1,4 +1,5 @@
 import unittest
+import enum
 
 r''' 定制SymbolType，实现如下目标：
 1. TokenType.ID，用.的写法来表示Enum，
@@ -35,6 +36,7 @@ class SymbolTypeMeta(type):
         return item in cls.__members__
 
     def add(cls, member):
+        # it will never add the member into cls attributes, cause it is unnecessary
         cls.__members__.append(member)
         cls.__members__.sort()
 
@@ -71,20 +73,13 @@ class Test(unittest.TestCase):
             S = 'S'
             E = 'E'
 
-        for ty in TokenType:
-            print(ty)
-
-        print('-------')
-
-        TokenType.add('__End')
-
-        for ty in TokenType:
-            print(ty)
-
-        print('-------')
-
-        for ty in SymbolType:
-            print(ty)
-
         self.assertIn(TokenType.ID, TokenType)
         self.assertNotIn(TokenType.ID, NonterminalType)
+
+        TokenType.add("--End")
+        TokenType.add("-Shader-")
+        for ty in TokenType:
+            print(ty)
+
+
+        print(getattr(TokenType, "--End"))

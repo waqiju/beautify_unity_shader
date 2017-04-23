@@ -48,6 +48,7 @@ class TokenType(SymbolType):
     # Debug
     ReservedWord = "ReservedWord"
     LexicalError = "LexicalError"
+    # NULL = 'NULL'
     Any = "Any"
 
     def isNonterminal(self):

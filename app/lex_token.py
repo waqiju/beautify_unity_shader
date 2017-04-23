@@ -16,6 +16,10 @@ class Token:
         else:
             return str(self.kind)
 
+    def toLiteral(self):
+        if self.kind == "ID":
+            return '-%s-' % self.value
+
 
 class Test(unittest.TestCase):
 

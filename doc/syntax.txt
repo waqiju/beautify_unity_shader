@@ -4,21 +4,27 @@
 3. 单引号开头 = TokenType.ID( xxx )
 4. 标点 = TokenType.XXX
 */
+//1
 prog        -> 'Shader' String { shader_body }
-shader_body -> prop subshr 
-
-props       -> Props { props_body }
+shader_body -> props subshr 
+//2
+props       -> 'Properties' { props_body }
             -> 
-props_body  -> prop_stm prop_body
-prop_stm    -> ID (String, ID) = prop_init
+props_body  -> prop_stm props_body
+            -> 
+prop_stm    -> ID ( String, ID ) = prop_init
 prop_init   -> Number
             -> String { }
-            -> (1,1,1,1) 这种
-
-subshr      -> SubShader { subshr_body }
-subshr_body -> shr_tags directives pass
-
-shr_tags    -> string = string shr_tags
+            -> ( Number, Number, Number, Number )
+//3
+subshr      -> 'SubShader' { subshr_body }
+subshr_body -> tags directives pass
+//4
+tags        -> 'Tags' { tags_body }
+tags_body   -> tag_smt tags_body
+            -> 
+tag_smt     -> String = String
+//5
 directives  -> directive_name ID directives
 directive_name -> Lighting
                -> Cull

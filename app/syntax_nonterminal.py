@@ -1,7 +1,25 @@
 import unittest
 from .lex_token import Token
 
-class Nonterminal:
+
+class NonterminalMeta(type):
+
+    def __new__(cls, name, bases, attrs):
+        if name != 'Nonterminal':
+            attrs['kind'] = name if Nonterminal is bases[0] else bases[0].__qualname__
+            attrs['leadingProductions'] = []
+            attrs['production'] = None
+
+        newCls = super().__new__(cls, name, bases, attrs)
+
+        # register
+        if name != 'Nonterminal':
+            Nonterminal.registerClass(name, newCls)
+
+        return newCls
+
+
+class Nonterminal(metaclass=NonterminalMeta):
 
     classDict = {}
 

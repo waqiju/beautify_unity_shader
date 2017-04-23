@@ -30,8 +30,16 @@ def analyze(inputText, isKeepSpace=True, isEnding=False):
     return tokens
 
 
-
 class Test(unittest.TestCase):
+
+    def _writeTokens(tokens):
+        import os
+        outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
+        with open(outputFile, 'w') as f:
+            for token in tokens:
+                f.write(str(token))
+                f.write('\n')
+
 
     def test(self):
         import os
@@ -40,9 +48,5 @@ class Test(unittest.TestCase):
         with open(testFile) as f:
             buf = f.read()
             tokens = analyze(buf, False, True)
+            Test._writeTokens(tokens)
 
-        outputFile = os.path.abspath( os.path.join(__file__, r"../../test/lex_output.txt") )
-        with open(outputFile, 'w') as f:
-            for token in tokens:
-                f.write(str(token))
-                f.write('\n')

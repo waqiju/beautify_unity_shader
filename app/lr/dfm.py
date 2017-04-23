@@ -23,6 +23,7 @@ class SymbolStack:
 
 
 def reduce(production, symbols):
+    print(production)
     cls = production.LeftNonterminalClass
     return cls(*symbols)
 
@@ -35,9 +36,10 @@ def run(edges, productions, tokens):
     index = 0
     while index < len(tokens):
         token = tokens[index]
-        actionStr = edges[stateId].get(token.kind)
+        actionStr = edges[stateId].get(token.kind) or edges[stateId].get(token.toLiteral())
         if actionStr is None:
             print('syntax error: stateId = %s, token = %s' % (stateId, token))
+            break
         elif actionStr[0] == 's':
             stateId = int(actionStr[1:])
             stack.push(token, stateId)
@@ -49,6 +51,9 @@ def run(edges, productions, tokens):
             nonterminal = reduce(production, topSymbols)
 
             actionStr = edges[topStateId].get(nonterminal.kind)
+            if actionStr is None:
+                print('syntax error: stateId = %s, symbol = %s' % (topStateId, nonterminal.kind))
+                break
             stateId = int(actionStr[1:])
             stack.push(nonterminal, stateId)
 
@@ -62,7 +67,6 @@ def run(edges, productions, tokens):
 
     # print(list(str(token) for token in stack.stack))
     return stack.pop()[0]
-
 
 
 class Test(unittest.TestCase):
