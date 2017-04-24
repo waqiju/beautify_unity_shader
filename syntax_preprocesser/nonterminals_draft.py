@@ -1,0 +1,17 @@
+class NonterminalType(SymbolType):
+
+    prog = 'prog'
+    shader_body = 'shader_body'
+    props = 'props'
+    props_body = 'props_body'
+    prop_stm = 'prop_stm'
+    prop_init = 'prop_init'
+    subshr = 'subshr'
+    subshr_body = 'subshr_body'
+    tags = 'tags'
+    tags_body = 'tags_body'
+    tag_smt = 'tag_smt'
+    directives = 'directives'
+    directive_name = 'directive_name'
+    pass = 'pass'
+    pass_body = 'pass_body'
