@@ -1,0 +1,499 @@
+
+<!-- saved from url=(0052)http://www.csci.csusb.edu/dick/samples/c.syntax.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Sample:
+Syntax of The C Programming Language
+</title>
+<style type="text/css">
+BODY{font-family:serif;}
+H1,H2,H3,H4{font-family:sans-serif;}
+CODE,PRE,TT{font-family:monospace;}
+HR{color: black;}
+A{ font-weight: bolder; }
+.InlineFormula{
+	font-style: italic;
+}
+.Formula{
+	padding-left:10px;
+	font-style: italic;
+}
+.Let{
+	border-style: solid;
+	padding:10px;
+	border-width:thin;
+}
+.Net{
+	border-style: solid;
+	padding:10px;
+	border-width:thin;
+	border-color:red;
+}
+.Case{
+	border-style: solid;
+	padding:10px;
+	border-width:thin;
+	border-color:blue;
+}
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body bgcolor="#E0FFE0" text="#000000" link="#0000FF" alink="#FF0000" vlink="#8000AF">
+<form method="get" action="http://www.csci.csusb.edu/dick/samples/lookup.php">
+[<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Main Content">Skip Navigation</a>] 
+[<a href="http://www.csusb.edu/">CSUSB</a>]
+/ [<a href="http://nsci.csusb.edu/">CNS</a>]
+/ [<a href="http://www.csci.csusb.edu/">Comp Sci Dept</a>]
+/ [<a href="http://www.csci.csusb.edu/dick/">R J Botting</a>]
+/ [<a href="http://www.csci.csusb.edu/dick/samples/index.html">Samples</a>] 
+/
+<a name="top_of_page">
+c.syntax
+</a>
+<br> [<a href="http://www.csci.csusb.edu/dick/samples/">Index</a>] 
+ [<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">Contents</a>] 
+[<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.txt">Source Text</a>]
+ [<a href="http://www.csci.csusb.edu/dick/samples/about.html">About</a>] 
+ [<a href="http://www.csci.csusb.edu/dick/maths/intro_characters.html">Notation</a>] 
+ [<a href="http://www.csci.csusb.edu/dick/maths/intro_copyright.html">Copyright</a>] 
+ [<a href="http://www.csci.csusb.edu/dick/samples/comment.html" target="SendEMail">Comment/Contact</a>] 
+ [Search <input name="search" size="10" value="">
+<input type="hidden" name="from" value="c.syntax.mth">
+<input type="submit" value="Go">]
+<br>
+Fri Sep 28 16:10:30 PDT 2007
+</form>
+<hr>
+<a name="Contents"><h3>Contents</h3></a>
+<ul class="Contents">
+<li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Syntax of The C Programming Language">Syntax of The C Programming Language</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Cross-Refferences">: Cross-Refferences</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Notation">: Notation</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Lexemes">: Lexemes</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Expressions">: Expressions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Operators">: : Operators</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Arithmetic">: : Arithmetic</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Shifts">: : Shifts</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Relations">: : Relations</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Bitwise Expressions">: : Bitwise Expressions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Logical Expressions">: : Logical Expressions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Conditional Expressions">: : Conditional Expressions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Assignment Statements">: : Assignment Statements</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Declarations">: Declarations</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Types">: : Types</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Initialization">: : Initialization</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Structs and Unions">: : Structs and Unions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Enums">: : Enums</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Functions">: : Functions</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Main Function">: : Main Function</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Pointers">: : Pointers</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Functions and Arrays">: : Functions and Arrays</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Statements">: Statements</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Branch">: : Branch</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Structured">: : Structured</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Compound">: : Compound</a>
+</li><li><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Pre-Processor Commands">: Pre-Processor Commands</a>
+</li></ul><a name="Main Content"><hr></a><ol>
+<a name="Syntax of The C Programming Language"><h1>Syntax of The C Programming Language</h1></a><ol class="Section">
+<a name="Cross-Refferences"><h2>Cross-Refferences</h2></a>
+<li><a name="ASCII">ASCII</a>::= See <a href="http://www.csci.csusb.edu/dick/samples/comp.text.ASCII.html">http://www.csci.csusb.edu/dick/samples/comp.text.ASCII.html</a>
+<p>
+Used_in The definition of C++
+[<a href="http://www.csci.csusb.edu/dick/samples/c++.syntax.html"> c++.syntax.html </a>]
+</p><p>
+Used_in The definition of Java
+[<a href="http://www.csci.csusb.edu/dick/samples/java.syntax.html"> java.syntax.html </a>]
+<a name="Notation"></a></p><h2><a name="Notation">Notation</a></h2>
+This uses my XBNF Extended BNF Notation where "|" indicates "or", "(...)" indicates priority.
+For more information see
+[<a href="http://csci.csusb.edu/dick/maths/intro_ebnf.html"> intro_ebnf.html </a>]
+<p>
+The following abbreviations are also used:
+</p><hr><ol class="Box">
+<li><a name="O">O</a>(_)::= 0 or 1 occurrences,
+</li><li><a name="N">N</a>(_)::= 1 or more occurrence
+</li><li><a name="L">L</a>(_)::= a comma separated list
+</li><li><a name="#">#</a>(_)::= 0 or more occurrences.
+<p>
+</p></li><li><a name="S">S</a>(E,Op)::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#serial_operator_expression">serial_operator_expression</a>(E, Op)
+</li><li><a name="serial_operator_expression">serial_operator_expression</a>(E,Op)::= E #(Op E).
+<pre> 		S(E,Op) = E Op E Op E Op ... E</pre>
+</li></ol><hr>
+<p>
+It also uses the following shorthand
+</p><p>
+<a name="Lexemes"></a></p><h2><a name="Lexemes">Lexemes</a></h2><ol class="Section">
+<li><a name="identifier">identifier</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#nondigit">nondigit</a>  #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#nondigit">nondigit</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a>),
+<p>
+</p></li><li><a name="nondigit">nondigit</a>::="_" | "a" | "A" | "b" | "B" | "c" | "C" | "d" | "D" | "e" | "E" | "f" | "F" | "g" | "G" | "h" | "H" | "i" | "I" | "j" | "J" | "k" | "K" | "l" | "L" | "m" | "M" | "n" | "N" | "o" | "O" | "p" | "P" | "q" | "Q" | "r" | "R" | "s" | "S" | "t" | "T" | "u" | "U" | "v" | "V" | "w" | "W" | "x" | "X" | "y" | "Y" | "z" | "Z",
+<p>
+</p></li><li><a name="digit">digit</a>::="0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9",
+<p>
+</p></li><li><a name="punctuator">punctuator</a>::="[" | "]" | "(" | ")" | "{" | "}" | "*" | "," | ":" | "=" | ";" | "..." | "#",
+<p>
+</p></li><li><a name="operator">operator</a>::="[" | "]" | "(" | ")" | "." | "-&gt;" | "++" | "--" | "&amp;" | "*" | "+"  | "-" | "~" | "!" | "sizeof" | "/" | "%" | "&lt;&lt;" | "&gt;&gt;" | "&lt;" | "&gt;" | "&lt;=" | "&gt;=" | "==" | "!=" | "^" | "|" | "&amp;&amp;" | "||" | "?" | ":" | "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "&lt;&lt;=" | "&gt;&gt;=" | "&amp;=" | "^=" | "||=" | "," | "#" | "##",
+<p>
+</p></li><li><a name="infix">infix</a>::= "-&gt;" | "&amp;" | "*" | "+"  | "-"  | "/" | "%" | "&lt;&lt;" | "&gt;&gt;" | "&lt;" | "&gt;" | "&lt;=" | "&gt;=" | "==" | "!=" | "^" | "|" | "&amp;&amp;" | "||" | "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "&lt;&lt;=" | "&gt;&gt;=" | "&amp;=" | "^=" | "||=" | "," ,
+<p>
+</p></li><li><a name="prefix">prefix</a>::= "++" | "--" | "&amp;" | "*" | "+"  | "-" | "~" | "!" | "sizeof" ,
+<p>
+</p><p>
+</p></li><li><a name="postfix">postfix</a>::= "++" | "--",
+<p>
+</p></li><li><a name="integer_suffix">integer_suffix</a>::=#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unsigned_suffix">unsigned_suffix</a>) | #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#long_suffix">long_suffix</a>),
+<p>
+</p></li><li><a name="unsigned_suffix">unsigned_suffix</a>::="u" | "U",
+<p>
+</p></li><li><a name="long_suffix">long_suffix</a>::="l" | "L",
+<p>
+</p></li><li><a name="sign">sign</a>::="+" | "-",
+<p>
+</p></li><li><a name="octal_constant">octal_constant</a>::="0" #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#octal_digit">octal_digit</a>),
+<p>
+</p></li><li><a name="octal_digit">octal_digit</a>::="0" | "1" | "2" | "3" | "4" | "5" | "6" | "7",
+<p>
+</p></li><li><a name="hex_constant">hex_constant</a>::=("0x" | "0X") (<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#hex_digit">hex_digit</a>),
+<p>
+</p></li><li><a name="hex_digit">hex_digit</a>::="0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "a" | "b" | "c" | "d" | "e" | "f" | "A" | "B" | "C" | "D" | "E" | "F",
+<p>
+</p></li><li><a name="decimal_constant">decimal_constant</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#non_zero_digit">non_zero_digit</a>  #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a>),
+<p>
+</p></li><li><a name="non_zero_digit">non_zero_digit</a>::="1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9",
+<p>
+</p></li><li><a name="integer_constant">integer_constant</a>::=(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#decimal_constant">decimal_constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#octal_constant">octal_constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#hex_constant">hex_constant</a>) | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#integer_suffix">integer_suffix</a>,
+<p>
+</p></li><li><a name="float_suffix">float_suffix</a>::="f" | "l" | "F" | "L",
+<p>
+</p></li><li><a name="fraction">fraction</a>::=#<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a> "." <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a> #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a>,
+<p>
+</p></li><li><a name="exponent_part">exponent_part</a>::=("e" | "E") <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#sign">sign</a> #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#digit">digit</a>),
+<p>
+</p></li><li><a name="float_constant">float_constant</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#fraction">fraction</a> (<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#exponent_part">exponent_part</a>|) (<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#float_suffix">float_suffix</a>|)|(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#decimal_constant">decimal_constant</a> (<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#exponent_part">exponent_part</a>|) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#float_suffix">float_suffix</a>,
+<p>
+</p></li><li><a name="enumeration_constant">enumeration_constant</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a>,
+<p>
+</p></li><li><a name="char_constant">char_constant</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#char">char</a>~(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#double_quote">double_quote</a>|<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#eoln">eoln</a>|<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#backslash">backslash</a>)| <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#escape_sequence">escape_sequence</a>,
+<p>
+</p></li><li><a name="escape_sequence">escape_sequence</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#backslash">backslash</a> (<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#char">char</a> | "0" #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#octal_digit">octal_digit</a> |"0x"#<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#hexadecimal_digit">hexadecimal_digit</a>),
+<p>
+</p></li><li><a name="character_constant">character_constant</a>::="'" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#char_constant">char_constant</a>"'" ,
+<p>
+constant :=::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#float_constant">float_constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#integer_constant">integer_constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_constant">enumeration_constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#character_constant">character_constant</a>,
+</p><p>
+</p></li><li><a name="string__char">string__char</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#char">char</a>~(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#double_quote">double_quote</a>|<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#eoln">eoln</a>|<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#backslash">backslash</a>)| <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#escape_sequence">escape_sequence</a>,
+<p>
+</p></li><li><a name="string_literal">string_literal</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#double_quote">double_quote</a> #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#string_char">string_char</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#double_quote">double_quote</a>,
+<p>
+</p></li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Lexemes">Lexemes</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+<a name="Expressions"></a></p><h2><a name="Expressions">Expressions</a></h2><ol class="Section">
+<p>
+Expressions are made up by applying operators to <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#primary_expressions">primary_expressions</a>.
+</p><li><a name="primary_expression">primary_expression</a>::= <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#variable">variable</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant">constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#string_literal">string_literal</a> | "(" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ")",
+<p>
+</p></li><li><a name="variable">variable</a>::= <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> &amp; <span class="InlineFormula">declared and in scope of declaration</span>.
+</li><li><a name="argument_list">argument_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>),
+<p>
+<a name="Operators"></a></p><h3><a name="Operators">Operators</a></h3>
+<table border="1"><tbody><tr><th>Symbol</th><th>See
+</th></tr><tr><td>"("... ")"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#primary_expression">primary_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#cast_expression">cast_expression</a> function_call
+</td></tr><tr><td>"."</td><td>part of a structure
+</td></tr><tr><td>"-"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#additive_expression">additive_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>
+</td></tr><tr><td>"-&gt;"</td><td>part of a pointed at structure
+</td></tr><tr><td>"--"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#postfix_expression">postfix_expression</a>
+</td></tr><tr><td>"-="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"&amp;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#AND_expression">AND_expression</a> bitwise Boolean
+</td></tr><tr><td>"&amp;="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"&amp;"</td><td>address_of <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>
+</td></tr><tr><td>"&amp;&amp;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_AND_expression">logical_AND_expression</a>
+</td></tr><tr><td>"*"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#multiplicative_expression">multiplicative_expression</a> contents of pointer <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>
+</td></tr><tr><td>"*="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"+" </td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#additive_expression">additive_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>
+</td></tr><tr><td>"++"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#postfix_expression">postfix_expression</a>
+</td></tr><tr><td>"+="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"~"</td><td>bitwise negation prefix
+</td></tr><tr><td>"!"</td><td>logical negation prefix
+</td></tr><tr><td>"!="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#equality_expression">equality_expression</a>
+</td></tr><tr><td>"sizeof"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>
+</td></tr><tr><td>"/"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#multiplicative_expression">multiplicative_expression</a> divide
+</td></tr><tr><td>"/="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"%"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#multiplicative_expression">multiplicative_expression</a> mod
+</td></tr><tr><td>"%="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"&lt;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_expression">relational_expression</a>
+</td></tr><tr><td>"&lt;&lt;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#shift_expression">shift_expression</a> left
+</td></tr><tr><td>"&lt;&lt;="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"&lt;="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_expression">relational_expression</a>
+</td></tr><tr><td>"&gt;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_expression">relational_expression</a>
+</td></tr><tr><td>"&gt;&gt;"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#shift_expression">shift_expression</a> right
+</td></tr><tr><td>"&gt;="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_expression">relational_expression</a>
+</td></tr><tr><td>"&gt;&gt;="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"=="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#equality_expression">equality_expression</a>
+</td></tr><tr><td>"="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"^"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#XOR_expression">XOR_expression</a> exclusive-or bitwise
+</td></tr><tr><td>"^="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>"|"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#OR_expression">OR_expression</a> bitwise or
+</td></tr><tr><td>"||"</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_OR_expression">logical_OR_expression</a>
+</td></tr><tr><td>"||="</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a>
+</td></tr><tr><td>..."?"... ":"...</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#conditional_expression">conditional_expression</a>
+</td></tr><tr><td>","</td><td><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> (discard previous value)
+</td></tr></tbody></table>
+<p>
+</p><p>
+<a name="Arithmetic"></a></p><h3><a name="Arithmetic">Arithmetic</a></h3>
+</li><li><a name="post_fix">post_fix</a>::="++" | "--",
+<p>
+</p></li><li><a name="post_fix_expression">post_fix_expression</a>::=(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#primary_expression">primary_expression</a>) #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#post_fix">post_fix</a>),
+<p>
+</p></li><li><a name="unary_operator">unary_operator</a>::="&amp;" | "*" | "+" | "-" | "!" | "-",
+<p>
+</p></li><li><a name="pre_fix">pre_fix</a>::="++" | "--" | "sizeof",
+<p>
+</p></li><li><a name="unary_expression">unary_expression</a>::=#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pre">pre</a>-<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#fix">fix</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#post_fix_expression">post_fix_expression</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_operator">unary_operator</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#cast_expression">cast_expression</a> | "sizeof" "(" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_name">type_name</a>")",
+<p>
+</p></li><li><a name="cast_expression">cast_expression</a>::=#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_name">type_name</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>.
+This implies that casts are done after doing post-fix operations..
+<p>
+</p></li><li><a name="multiplicative_expression">multiplicative_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#cast_expression">cast_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#multiplicative_operator">multiplicative_operator</a>).
+[<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#serial_operator_expression"> serial_operator_expression </a>]
+<p>
+The rule above means that 'casts' are done before multiplication and division, and that multiplication and division are done from left to right.
+</p><p>
+</p></li><li><a name="multiplicative_operator">multiplicative_operator</a>::="*" | "%" | "/",
+<p>
+</p></li><li><a name="additive_expression">additive_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#multiplicative_expression">multiplicative_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#additive_operator">additive_operator</a>).
+This means that addition and subtraction occurs after multiplication and from left to right.
+<p>
+</p></li><li><a name="additive_operator">additive_operator</a>::="+" | "-",
+<p>
+<a name="Shifts"></a></p><h3><a name="Shifts">Shifts</a></h3>
+</li><li><a name="shift_expression">shift_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#additive_expression">additive_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#shift_operator">shift_operator</a>),
+<p>
+</p></li><li><a name="shift_operator">shift_operator</a>::="&gt;&gt;" | "&lt;&lt;",  "&lt;&lt;" is left shift of bits (multiply by 2),
+and "&gt;&gt;" is the reverse and divides by 2.
+<p>
+<a name="Relations"></a></p><h3><a name="Relations">Relations</a></h3>
+</li><li><a name="relational_expression">relational_expression</a>::= <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#shift_expression">shift_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_operator">relational_operator</a>),
+<p>
+</p></li><li><a name="relational_operator">relational_operator</a>::="&lt;" | "&gt;" | "&lt;=" | "&gt;=",
+<p>
+</p></li><li><a name="equality_expression">equality_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#relational_expression">relational_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#equality_operator">equality_operator</a>),
+<p>
+</p></li><li><a name="equality_operator">equality_operator</a>::="==" | "!=",
+<p>
+<a name="Bitwise Expressions"></a></p><h3><a name="Bitwise Expressions">Bitwise Expressions</a></h3>
+These use the lowest level machine code operations that manipulate the
+bits in words.  They are very fast and powerful.  They are mostly
+used in system programming: drivers, operating systems, compilers,
+interpreters, shells, ... . They are also a very fast and tight coding for
+subsets of small sets: one bit per element has 1 for membership and
+0 for nonmembership.  For example if a class can meet on any collection of
+the 5 working days in a week (Monday=1, ..., Friday=5) then
+<pre> 		FRWTM</pre>
+<pre> 		10101 = MWF</pre>
+<p>
+</p><p>
+<table border="1"><tbody><tr><th>Decimal</th><th>Binary (last 4 bits/ 1 byte)
+</th></tr><tr><td>0</td><td>0000
+</td></tr><tr><td>1</td><td>0001
+</td></tr><tr><td>2</td><td>0010
+</td></tr><tr><td>3</td><td>0011
+</td></tr><tr><td>4</td><td>0100
+</td></tr><tr><td>5</td><td>0101
+</td></tr><tr><td>6</td><td>0110
+</td></tr><tr><td>7</td><td>0111
+</td></tr><tr><td>8</td><td>1000
+</td></tr></tbody></table>
+</p><p>
+</p></li><li><a name="AND_expression">AND_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#equality_expression">equality_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#and_operator">and_operator</a>),
+<p>
+</p></li><li><a name="and_operator">and_operator</a>::="&amp;", This operator takes each bit in the value of its arguments in turn to calculate the bit in the answer. A bit is 1 if and only if both arguments have bits in that place that are 1.
+<table border="1"><tbody><tr><th>Decimal</th><th>Binary
+</th></tr><tr><td>3  </td><td>0011
+</td></tr><tr><td>5  </td><td>0101
+</td></tr><tr><td>3&amp;5</td><td>0001
+</td></tr></tbody></table>
+<p>
+</p></li><li><a name="XOR_expression">XOR_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#AND_expression">AND_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#XOR_operator">XOR_operator</a>),
+<p>
+</p></li><li><a name="XOR_operator">XOR_operator</a>::="^", XOR is short for eXclusive-OR. The n'th bit in the value is 1 precisly when the n'th bits in the two arguments are different.
+<table border="1"><tbody><tr><th>Decimal</th><th>Binary
+</th></tr><tr><td>3  </td><td>0011
+</td></tr><tr><td>5  </td><td>0101
+</td></tr><tr><td>3^5</td><td>0110
+</td></tr></tbody></table>
+<p>
+</p></li><li><a name="OR_expression">OR_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#XOR_expression">XOR_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#OR_operator">OR_operator</a>),
+<p>
+</p></li><li><a name="OR_operator">OR_operator</a>::="|", This operator takes each bit in the value of its arguments in turn to calculate the bit in the answer. The n'th bit is 1 if either n'th
+bits is 1.
+<table border="1"><tbody><tr><th>Decimal</th><th>Binary
+</th></tr><tr><td>3  </td><td>0011
+</td></tr><tr><td>5  </td><td>0101
+</td></tr><tr><td>3|5</td><td>0111
+</td></tr></tbody></table>
+<p>
+<a name="Logical Expressions"></a></p><h3><a name="Logical Expressions">Logical Expressions</a></h3>
+In C, logical false is reresented by any zero value and true by any
+nonzero value.  Here is a list of operators
+<br><ol class="List">
+<li><a name="and">and</a>::="&amp;&amp;".
+</li><li><a name="or">or</a>::="||",
+</li><li><a name="not">not</a>::="!",
+</li></ol><br>
+<p>
+</p></li><li><a name="logical_AND_expression">logical_AND_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#OR_expression">OR_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_AND_operator">logical_AND_operator</a>),
+<p>
+</p></li><li><a name="logical_AND_operator">logical_AND_operator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#and">and</a>,  A&amp;&amp;B is true precisely when both A and B evaluate to be true.  If A evaluates to false, B is not evaluated.
+<p>
+</p></li><li><a name="logical_OR_expression">logical_OR_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_AND_expression">logical_AND_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_OR_operator">logical_OR_operator</a>),
+<p>
+</p></li><li><a name="logical_OR_operator">logical_OR_operator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#or">or</a>, A||B is true if A evaluates to be true, or when A is false and B evaluates to be true.  If both evaluate to false (zero) then A||B is false.
+<p>
+<a name="Conditional Expressions"></a></p><h3><a name="Conditional Expressions">Conditional Expressions</a></h3>
+</li><li><a name="conditional_expression">conditional_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_OR_expression">logical_OR_expression</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#logical_OR_expression">logical_OR_expression</a> "?" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ":" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#conditional_expression">conditional_expression</a>,
+<p>
+<a name="Assignment Statements"></a></p><h3><a name="Assignment Statements">Assignment Statements</a></h3>
+</li><li><a name="assignment_expression">assignment_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#S">S</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#unary_expression">unary_expression</a>, <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_operator">assignment_operator</a>),
+<p>
+</p></li><li><a name="assignment_operator">assignment_operator</a>::="=" | "*=" | "/=" | "%=" | "+=" | "&lt;&lt;=" | "&gt;&gt;=" | "&amp;=" | "^=" | "|=",
+<p>
+</p></li><li><a name="expression">expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a> ),
+<p>
+</p></li><li><a name="constant_expression">constant_expression</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#conditional_expression">conditional_expression</a>,
+<p>
+</p></li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Expressions">Expressions</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+<a name="Declarations"></a></p><h2><a name="Declarations">Declarations</a></h2><ol class="Section">
+<li><a name="declaration">declaration</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration_specifier">declaration_specifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator_list">declarator_list</a>,
+<p>
+</p></li><li><a name="declarator_list">declarator_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator_initialized">declarator_initialized</a>),
+<p>
+</p></li><li><a name="declaration_specifier">declaration_specifier</a>::=(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#storage_class">storage_class</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_specifier">type_specifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_qualifier">type_qualifier</a>),
+<p>
+</p></li><li><a name="storage_class">storage_class</a>::="typedef" | "extern" | "static" | "auto" | "register",
+<p>
+<a name="Types"></a></p><h3><a name="Types">Types</a></h3>
+</li><li><a name="type_specifier">type_specifier</a>::="void" | "char" | "short" | "int" | "long" | "float" | "double" | "signed" | "unsigned" | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#struct_union_specifier">struct_union_specifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_specifier">enumeration_specifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#typedef_name">typedef_name</a>,
+<p>
+</p></li><li><a name="type-qualifier">type-qualifier</a>::="const" | "volatile",
+<p>
+</p></li><li><a name="typedef_name">typedef_name</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a>,
+<a name="Initialization"><h3>Initialization</h3></a>
+</li><li><a name="initializer">initializer</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#assignment_expression">assignment_expression</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#initializer_list">initializer_list</a>,
+<p>
+</p></li><li><a name="initializer_list">initializer_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#initializer">initializer</a>),
+<p>
+</p></li><li><a name="declarator_initialized">declarator_initialized</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a>  ("=" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#initializer">initializer</a>),
+<a name="Structs and Unions"><h3>Structs and Unions</h3></a>
+</li><li><a name="structure_declarator">structure_declarator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a> ":" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a>,
+<p>
+</p></li><li><a name="structure_declarator_list">structure_declarator_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#structure_declarator">structure_declarator</a>),
+<p>
+</p></li><li><a name="structure_declaration">structure_declaration</a>::=(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_specifier">type_specifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_qualifier">type_qualifier</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#structure_declarator_list">structure_declarator_list</a> ";" ,
+<p>
+</p></li><li><a name="struct_union_specifier">struct_union_specifier</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#struct_union">struct_union</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#struct_union">struct_union</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> "{"<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#structure_declarator_list">structure_declarator_list</a> "}",
+<p>
+</p></li><li><a name="struct_union">struct_union</a>::=( "struct" | "union" ),
+<p>
+<a name="Enums"></a></p><h3><a name="Enums">Enums</a></h3>
+</li><li><a name="enumeration_value">enumeration_value</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_constant">enumeration_constant</a> ("=" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a>|)
+<p>
+</p></li><li><a name="enumeration_list">enumeration_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_value">enumeration_value</a> ),
+<p>
+</p></li><li><a name="enumeration_specifier">enumeration_specifier</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_identifier">enumeration_identifier</a> | "enum" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> "{"<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#enumeration_list">enumeration_list</a>"}",
+<p>
+<a name="Functions"></a></p><h3><a name="Functions">Functions</a></h3>
+</li><li><a name="function_definition">function_definition</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration_specifier">declaration_specifier</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration_list">declaration_list</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#compound_statement">compound_statement</a>,
+</li><li><a name="parameter_declaration">parameter_declaration</a>::=#<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration_specifier">declaration_specifier</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#abstract_declarator">abstract_declarator</a>,
+<p>
+</p></li><li><a name="parameter_list">parameter_list</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#List">List</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#parameter_declaration">parameter_declaration</a>) (",..."|),
+<p>
+<a name="Main Function"></a></p><h3><a name="Main Function">Main Function</a></h3>
+A complete C program has to have a function with name 'main'.  This is the
+function called by the operating system.  It must return an <span class="InlineFormula">int</span> value indicating
+whether the prograam executed correctly or if there was an error.  In UNIX, the
+main program returns 0 to indicate no errors.  Their are several valid forms:
+</li><li><span class="Formula">int main()</span>
+</li><li><span class="Formula">int main(argc, argv)</span>
+</li><li><span class="Formula">int main(argc, argv, envp)</span>
+The parameters are set up by the operating system when the program starts.  The
+traditional <span class="InlineFormula">arg</span> stands for <span class="InlineFormula">argument</span>.
+<p>
+<a name="Pointers"></a></p><h3><a name="Pointers">Pointers</a></h3>
+</li><li><a name="pointer">pointer</a>::=#( "*" | #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#type_qualifier">type_qualifier</a>),
+<p>
+</p></li><li><a name="declarator">declarator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pointer">pointer</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#direct_declarator">direct_declarator</a>,
+<p>
+<a name="Functions and Arrays"></a></p><h3><a name="Functions and Arrays">Functions and Arrays</a></h3>
+</li><li><a name="post_declarator">post_declarator</a>::="["<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a>"]" | "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#parameter_list">parameter_list</a>")" | "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier_list">identifier_list</a>")"
+<p>
+</p></li><li><a name="direct_declarator">direct_declarator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> | "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declarator">declarator</a>")" | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#direct_declarator">direct_declarator</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#post_declarator">post_declarator</a>,
+<p>
+</p></li><li><a name="abstract_declarator">abstract_declarator</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pointer">pointer</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pointer">pointer</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#direct_abstract_declarator">direct_abstract_declarator</a>,
+<p>
+</p></li><li><a name="direct_abstract_declarator">direct_abstract_declarator</a>::= "(" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#abstract_declarator">abstract_declarator</a> ")" | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#O">O</a>( <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#direct_abstract_declarator">direct_abstract_declarator</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#O">O</a>("[" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#O">O</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a>) "]" | "(" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#O">O</a>(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#parameter_list">parameter_list</a>) ")" ),
+</li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Declarations">Declarations</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+<a name="Statements"></a></p><h2><a name="Statements">Statements</a></h2><ol class="Section">
+<li><a name="statement">statement</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#labeled_statement">labeled_statement</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#compound_statement">compound_statement</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression_statement">expression_statement</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#selection_statement">selection_statement</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#iteration_statement">iteration_statement</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#jump_statement">jump_statement</a>
+<a name="Branch"><h3>Branch</h3></a>
+</li><li><a name="jump_statement">jump_statement</a>::="goto" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a>";" | "continue" ";" | "break;" | "return" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ";",
+<a name="Structured"><h3>Structured</h3></a>
+</li><li><a name="loop">loop</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#iteration_statement">iteration_statement</a>.
+</li><li><a name="iteration_statement">iteration_statement</a>::="while" "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> | "do" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> "while" "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" ";" | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#for_statement">for_statement</a>.
+<p>
+</p></li><li><a name="for_statement">for_statement</a>::="for" "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ";" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ";" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a>,
+<p>
+</p></li><li><a name="selection_statement">selection_statement</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#if_statement">if_statement</a> | "switch" "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a>,
+</li><li><a name="if_statement">if_statement</a>::="if ("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> | "if" "("<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a>")" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> "else" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a>.
+<p>
+</p></li><li><a name="expression_statement">expression_statement</a>::=  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#expression">expression</a> ";",
+<p>
+</p></li><li><a name="labeled_statement">labeled_statement</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> ":" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> | "case" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a> ":" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> | "default" ":" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a>,
+<a name="Compound"><h3>Compound</h3></a>
+</li><li><a name="compound_statement">compound_statement</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#block">block</a> | "{" #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> "}",
+<p>
+</p></li><li><a name="block">block</a>::="{" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration">declaration</a> #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#declaration">declaration</a> #<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#statement">statement</a> "}",
+<p>
+</p><p>
+</p></li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Statements">Statements</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+<a name="Pre-Processor Commands"></a></p><h2><a name="Pre-Processor Commands">Pre-Processor Commands</a></h2><ol class="Section">
+<p>
+</p><li><a name="preprocess_token">preprocess_token</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant">constant</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#string_literal">string_literal</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#operator">operator</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#punctuator">punctuator</a> | <span class="InlineFormula"><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#each">each</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Non">Non</a>-<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#white">white</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#space">space</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#not">not</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#one">one</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#of">of</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#the">the</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#previous">previous</a></span>,
+<p>
+</p></li><li><a name="header_char">header_char</a>::=<span class="InlineFormula"><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#any">any</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#character">character</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#except">except</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#and">and</a> | &gt;</span>,
+<p>
+</p></li><li><a name="header_name">header_name</a>::=#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#header_char">header_char</a>),
+<p>
+</p></li><li><a name="new_line">new_line</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#character">character</a>,
+<p>
+</p></li><li><a name="Left_paren">Left_paren</a>::=<span class="InlineFormula"><a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#left">left</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#parenthesis">parenthesis</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#with">with</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#no">no</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#white">white</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#space">space</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#before">before</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#it">it</a></span>,
+<p>
+</p></li><li><a name="control_line">control_line</a>::="#include" (#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#header_name">header_name</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#define" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#define" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#left_paren">left_paren</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier_list">identifier_list</a> #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a>, | "#undef" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#line" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#error" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#pragma" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | "#"<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a>,
+<p>
+</p></li><li><a name="endif_line">endif_line</a>::="#endif" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a>,
+<p>
+</p></li><li><a name="elif_group">elif_group</a>::="#elif" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pp_group">pp_group</a>,
+<p>
+</p></li><li><a name="else_group">else_group</a>::="#else" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pp_group">pp_group</a>,
+<p>
+</p></li><li><a name="if_group">if_group</a>::=("#if" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#constant_expression">constant_expression</a> | "#ifdef" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a> | "#ifndef" <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#identifier">identifier</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pp_group">pp_group</a>,
+<p>
+</p></li><li><a name="if_part">if_part</a>::=<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#if_group">if_group</a> #(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#elif_group">elif_group</a>) <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#else_group">else_group</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#endif_line">endif_line</a>,
+<p>
+</p></li><li><a name="pp_part">pp_part</a>::=#<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#preprocess_token">preprocess_token</a> <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#new_line">new_line</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#if_part">if_part</a> | <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#control_line">control_line</a>,
+<p>
+</p></li><li><a name="pp_group">pp_group</a>::=#(<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#pp_part">pp_part</a>),
+</li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Pre-Processor Commands">Pre-Processor Commands</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+</p></li></ol><p>. . . . . . . . . ( end of section <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Syntax of The C Programming Language">Syntax of The C Programming Language</a>)  <a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#Contents">&lt;&lt;</a>Contents | End<a href="http://www.csci.csusb.edu/dick/samples/c.syntax.html#__End">&gt;&gt;</a>
+</p></ol>
+<a name="__End"><h3>End</h3></a>
+
+</body></html>

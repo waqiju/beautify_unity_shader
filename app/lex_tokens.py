@@ -10,7 +10,9 @@ class TokenType(SymbolType):
     Number = "Number"  # Int Float
     Comment = "Comment"
     SpaceLike = "SpaceLike"
-    # 标点
+    # 双符号标点
+    RightArrow = "RightArrow"
+    # 单符号标点
     Comma = "Comma"
     Colon = "Colon"
     Semicolon = "Semicolon"

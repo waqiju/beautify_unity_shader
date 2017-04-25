@@ -6,8 +6,8 @@ from .syntax_productions import productionList
 
 
 def analyze(tokens):
-    # edges = lr1.construct(productionList, isDebug=True)
-    edges = lr1.construct(productionList)
+    edges = lr1.construct(productionList, isDebug=True)
+    # edges = lr1.construct(productionList)
 
     ast = dfm.run(edges, productionList, tokens)
     print(ast)

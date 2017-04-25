@@ -36,7 +36,8 @@ def run(edges, productions, tokens):
     index = 0
     while index < len(tokens):
         token = tokens[index]
-        actionStr = edges[stateId].get(token.kind) or edges[stateId].get(token.toLiteral())
+        # notice, should try toLiteral() for TokenType.ID firstly
+        actionStr = edges[stateId].get(token.toLiteral()) or edges[stateId].get(token.kind) 
         if actionStr is None:
             print('syntax error: stateId = %s, token = %s' % (stateId, token))
             break

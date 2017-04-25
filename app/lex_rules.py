@@ -12,7 +12,7 @@ def LexicalError(text):
 floatPattern = '[-+]?([\d]*[\.]?[\d]+)[fF]?'
 numberPattern = '%s(e%s)?' % (floatPattern, floatPattern)
 
-rules = (
+rules = [
     # priority 1 行注释
     {'pattern': re.compile(r"//.*"),
      'action': lambda text: Token(TokenType.Comment, text)},
@@ -25,12 +25,17 @@ rules = (
     # 保留字
     {'pattern': re.compile(r'\b(Color|Vector|Range|Int|Float|2D|Cube|3D)\b'),
      'action': lambda text: Token(TokenType.ReservedWord, text, text)},
+    {'pattern': re.compile(r'\b(Lighting|Cull|ZTest|ZWrite|Blend)\b'),
+     'action': lambda text: Token(TokenType.ReservedWord, text, text)},
     # priority 2 ID，ID的前后一定要是\b
     {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
      'action': lambda text: Token(TokenType.ID, text, text)},
     {'pattern': re.compile(numberPattern),
      'action': lambda text: Token(TokenType.Number, text, text)},
     # 标点符号
+    {'pattern': re.compile(r"->"),
+     'action': lambda text: Token(TokenType.RightArrow, text)},    
+    # 单
     {'pattern': re.compile(r","),
      'action': lambda text: Token(TokenType.Comma, text)},
     {'pattern': re.compile(r":"),
@@ -92,4 +97,4 @@ rules = (
      'action': LexicalError},
     {'pattern': re.compile(r".", re.DOTALL),
      'action': lambda text: Token(TokenType.Any, text)},
-)
+]

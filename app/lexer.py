@@ -6,7 +6,7 @@ from .lex_token import Token
 from .lex_tokens import TokenType
 
 
-def analyze(inputText, isKeepSpace=True, isEnding=False):
+def analyze(inputText, isKeepSpace=True, isKeepComment=True, isEnding=False):
     pos = 0
     tokens = []
     error_message.reset()
@@ -23,6 +23,8 @@ def analyze(inputText, isKeepSpace=True, isEnding=False):
 
     if not isKeepSpace:
         tokens = list(filter(lambda token: token.kind != TokenType.SpaceLike, tokens))
+    if not isKeepComment:
+        tokens = list(filter(lambda token: token.kind != TokenType.Comment, tokens))
 
     if isEnding:
         tokens.append(Token(SymbolType.EndingTerminal))

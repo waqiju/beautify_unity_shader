@@ -14,5 +14,13 @@ Shader "GUI/Text Shader"
             "RenderType" = "Transparent"
             "PreviewType" = "Plane"
         }
+        Lighting Off Cull Off ZTest Always ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+        
+        Pass
+        {
+            CGPROGRAM
+            ENDCG
+        }
     }
 }

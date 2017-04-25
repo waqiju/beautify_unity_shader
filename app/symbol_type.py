@@ -36,11 +36,11 @@ class SymbolTypeMeta(type):
         return item in cls.__members__
 
     def add(cls, member):
-        # it will never add the member into cls attributes, cause it is unnecessary
+        # the new member will never add the member into cls attributes, cause it is unnecessary
         cls.__members__.append(member)
         cls.__members__.sort()
 
-        # SymbolType should not use this menthod
+        # SymbolType should not call this menthod
         if member not in SymbolType.__members__:
             SymbolType.__members__.append(member)
             SymbolType.__members__.sort()
