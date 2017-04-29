@@ -23,6 +23,11 @@ class NonterminalType(SymbolType):
     passes = 'passes'
     shr_pass = 'shr_pass'
     pass_body = 'pass_body'
+    cg_prog = 'cg_prog'
+    cg_stm = 'cg_stm'
+    preprocessing_stm = 'preprocessing_stm'
+    pp_if_stm = 'pp_if_stm'
+    pp_cmd = 'pp_cmd'
 
 
 class prog(Nonterminal):
@@ -173,8 +178,8 @@ class shr_pass(Nonterminal):
 
 
 class pass_body(Nonterminal):
-    def __init__(self, CGPROGRAM, ENDCG):
-        pass
+    def __init__(self, CGPROGRAM, cg_prog, ENDCG):
+        self.cg_prog = cg_prog
 
 
 class Test(unittest.TestCase):

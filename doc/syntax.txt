@@ -34,7 +34,20 @@ ids         -> ID ids
 passes      -> shr_pass passes
             ->
 shr_pass    -> 'Pass' { pass_body }
-pass_body   -> 'CGPROGRAM' 'ENDCG'
+pass_body   -> 'CGPROGRAM' cg_prog 'ENDCG'
+//7 cg
+cg_prog     -> cg_stm
+cg_stm      -> preprocessing_stm
+//8 预处理当做特殊的stm处理好了，简单点
+preprocessing_stm   -> pp_if_stm 
+                    -> pp_cmd
+pp_if_stm   -> # 'if' ID
+            -> # 'ifdef' ID
+            -> # 'idndef' ID
+            -> # 'elif' ID
+            -> # 'else'
+            -> # 'endif'
+pp_cmd      -> # 'include' String
 
 
 //CGPROGRAM   -> 'CGPROGRAM' cgprog 'ENDCG'
