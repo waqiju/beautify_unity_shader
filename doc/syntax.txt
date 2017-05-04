@@ -111,7 +111,7 @@ exp         -> assignment_exp
             -> exp, assignment_exp
 // 10 declaration
 dec               -> dec_specifiers init_dec_list ;
-dec_specifiers    -> type_specifier dec_specifiers
+dec_specifiers    -> type_specifier
 
 type_specifier    -> 'void'
                   -> 'char'
@@ -123,13 +123,44 @@ type_specifier    -> 'void'
                   -> struct_specifier
 struct_specifier  -> 'struct' ID
                   -> 'struct' ID { struct_dec_list }
+struct_dec_list   -> struct_dec
+                  -> struct_dec_list struct_dec
+struct_dec        -> type_specifier declarator_list
+declarator_list   -> declarator
+                  -> declarator_list , declarator
+declarator        -> ID
+                  -> ( declarator )
+                  -> declarator [ exp ]
+                  -> declarator ( parameter_list )
+parameter_list    -> parameter_dec
+                  -> parameter_list , parameter_dec
+parameter_dec     -> dec_specifier declarator
 
-
-
-
+init_dec_list     -> init_dec
+                  -> init_dec_list , init_dec
+init_dec          -> declarator
+                  -> declarator = exp
 // 11 statement
-
-
-
-//CGPROGRAM   -> 'CGPROGRAM' cgprog 'ENDCG'
-//cgprog      -> 后面就是类似C语言的产生式了
+stm               -> exp_stm
+                  -> compound_stm
+                  -> selection_stm
+                  -> iteration_stm
+                  -> jump_stm
+exp_stm           -> exp ;
+                  -> ;
+compound_stm      -> { block_item_list }
+                  -> { }
+block_item_list   -> block_item
+                  -> block_item_list block_item
+block_item        -> dec
+                  -> stm
+selection_stm     -> 'if' ( exp ) stm
+                  -> 'if' ( exp ) stm else stm
+iteration_stm     -> 'while' (exp) stm
+                  -> 'do' stm 'while' (exp);
+                  -> 'for' (exp; exp; exp) stm 
+jump_stm          -> 'goto' ID
+                  -> 'continue'
+                  -> 'break'
+                  -> 'return' exp ;
+                  -> 'return' ;
