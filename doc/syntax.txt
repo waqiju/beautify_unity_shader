@@ -36,7 +36,9 @@ passes      -> shr_pass passes
 shr_pass    -> 'Pass' { pass_body }
 pass_body   -> 'CGPROGRAM' cg_prog 'ENDCG'
 //7 cg
-cg_prog     -> cg_stm
+cg_prog     -> cg_stms
+cg_stms     -> cg_stm cg_stms
+            -> 
 cg_stm      -> preprocessing_stm
 //8 预处理当做特殊的stm处理好了，简单点
 preprocessing_stm   -> pp_if_stm 
@@ -48,6 +50,85 @@ pp_if_stm   -> # 'if' ID
             -> # 'else'
             -> # 'endif'
 pp_cmd      -> # 'include' String
+            -> # 'pragma' ids
+//9 expression，C语言的简化版
+primary_exp -> ID
+            -> String
+            -> Number
+            -> ( exp )
+postfix_exp -> primary_exp
+            -> postfix_exp [ exp ]
+            -> postfix_exp ( argument_exp_list )
+            -> postfix_exp . ID
+            -> postfix_exp ++
+            -> postfix_exp --
+argument_exp_list       -> assignment_exp argument_exp_list
+                        -> 
+unary_exp   -> postfix_exp
+            -> ++ unary_exp
+            -> -- unary_exp
+            -> unary_op unary_exp
+unary_op    -> +
+            -> -
+            -> !
+            -> ~
+binary_exp  -> unary_exp
+            -> binary_exp binary_op unary_exp
+binary_op   -> *
+            -> /
+            -> %
+            -> +
+            -> -
+            -> <<
+            -> >>
+            -> <
+            -> >
+            -> <=
+            -> >=
+            -> ==
+            -> !=
+            -> &
+            -> ^
+            -> |
+            -> &&
+            -> ||
+conditional_exp   -> binary_exp
+                  -> binary_exp ? exp : conditional_exp
+assignment_exp    -> conditional_exp
+                  -> unary_exp assignment_op assignment_exp
+assignment_op     -> =
+                  -> *=
+                  -> /=
+                  -> %=
+                  -> +=
+                  -> -=
+                  -> <<=
+                  -> >>=
+                  -> &=
+                  -> ^=
+                  -> |=
+exp         -> assignment_exp
+            -> exp, assignment_exp
+// 10 declaration
+dec               -> dec_specifiers init_dec_list ;
+dec_specifiers    -> type_specifier dec_specifiers
+
+type_specifier    -> 'void'
+                  -> 'char'
+                  -> 'short'
+                  -> 'int'
+                  -> 'long'
+                  -> 'float'
+                  -> 'double'
+                  -> struct_specifier
+struct_specifier  -> 'struct' ID
+                  -> 'struct' ID { struct_dec_list }
+
+
+
+
+// 11 statement
+
 
 
 //CGPROGRAM   -> 'CGPROGRAM' cgprog 'ENDCG'

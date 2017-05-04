@@ -140,7 +140,14 @@ Enter
 Enter
 ID(cg_prog)
 RightArrow
+ID(cg_stms)
+Enter
+ID(cg_stms)
+RightArrow
 ID(cg_stm)
+ID(cg_stms)
+Enter
+RightArrow
 Enter
 ID(cg_stm)
 RightArrow
@@ -188,6 +195,11 @@ RightArrow
 Pound
 String('include')
 ID(String)
+Enter
+RightArrow
+Pound
+String('pragma')
+ID(ids)
 Enter
 Enter
 Enter

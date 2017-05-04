@@ -1,171 +1,236 @@
 {
     "name": "String(\"GUI/Text Shader\")",
+    "kind": "prog",
     "shader_body": {
+        "props": {
+            "kind": "props",
+            "props_body": {
+                "kind": "props_body",
+                "props_body": {
+                    "kind": "props_body",
+                    "props_body": {
+                        "kind": "props_body"
+                    },
+                    "prop_stm": {
+                        "kind": "prop_stm",
+                        "varType": "ReservedWord(Color)",
+                        "prop_init": {
+                            "kind": "prop_init"
+                        },
+                        "inspectName": "String(\"Text Color\")",
+                        "varName": "ID(_Color)"
+                    }
+                },
+                "prop_stm": {
+                    "kind": "prop_stm",
+                    "varType": "ReservedWord(2D)",
+                    "prop_init": {
+                        "kind": "prop_init",
+                        "color": "String(\"white\")"
+                    },
+                    "inspectName": "String(\"Font Texture\")",
+                    "varName": "ID(_MainTex)"
+                }
+            }
+        },
+        "kind": "shader_body",
         "subshr": {
+            "kind": "subshr",
             "subshr_body": {
                 "tags": {
                     "kind": "tags",
                     "tags_body": {
+                        "kind": "tags_body",
                         "tags_body": {
+                            "kind": "tags_body",
                             "tags_body": {
+                                "kind": "tags_body",
                                 "tags_body": {
+                                    "kind": "tags_body",
                                     "tags_body": {
                                         "kind": "tags_body"
                                     },
-                                    "kind": "tags_body",
                                     "tag_smt": {
-                                        "value": "String(\"Plane\")",
                                         "kind": "tag_smt",
+                                        "value": "String(\"Plane\")",
                                         "key": "String(\"PreviewType\")"
                                     }
                                 },
-                                "kind": "tags_body",
                                 "tag_smt": {
-                                    "value": "String(\"Transparent\")",
                                     "kind": "tag_smt",
+                                    "value": "String(\"Transparent\")",
                                     "key": "String(\"RenderType\")"
                                 }
                             },
-                            "kind": "tags_body",
                             "tag_smt": {
-                                "value": "String(\"True\")",
                                 "kind": "tag_smt",
+                                "value": "String(\"True\")",
                                 "key": "String(\"IgnoreProjector\")"
                             }
                         },
-                        "kind": "tags_body",
                         "tag_smt": {
-                            "value": "String(\"Transparent\")",
                             "kind": "tag_smt",
+                            "value": "String(\"Transparent\")",
                             "key": "String(\"Queue\")"
                         }
                     }
                 },
+                "kind": "subshr_body",
                 "cmds": {
+                    "kind": "cmds",
                     "cmds": {
+                        "kind": "cmds",
                         "cmds": {
+                            "kind": "cmds",
                             "cmds": {
+                                "kind": "cmds",
                                 "cmds": {
+                                    "kind": "cmds",
                                     "cmds": {
                                         "kind": "cmds"
                                     },
                                     "cmd_stm": {
+                                        "kind": "cmd_stm",
                                         "cmd_values": {
-                                            "id": "ID(SrcAlpha)",
+                                            "kind": "ids",
                                             "ids": {
-                                                "id": "ID(OneMinusSrcAlpha)",
+                                                "kind": "ids",
                                                 "ids": {
                                                     "kind": "ids"
                                                 },
-                                                "kind": "ids"
+                                                "id": "ID(OneMinusSrcAlpha)"
                                             },
-                                            "kind": "ids"
+                                            "id": "ID(SrcAlpha)"
                                         },
-                                        "cmd_name": "ReservedWord(Blend)",
-                                        "kind": "cmd_stm"
-                                    },
-                                    "kind": "cmds"
+                                        "cmd_name": "ReservedWord(Blend)"
+                                    }
                                 },
                                 "cmd_stm": {
+                                    "kind": "cmd_stm",
                                     "cmd_values": {
-                                        "id": "ID(Off)",
+                                        "kind": "ids",
                                         "ids": {
                                             "kind": "ids"
                                         },
-                                        "kind": "ids"
+                                        "id": "ID(Off)"
                                     },
-                                    "cmd_name": "ReservedWord(ZWrite)",
-                                    "kind": "cmd_stm"
-                                },
-                                "kind": "cmds"
+                                    "cmd_name": "ReservedWord(ZWrite)"
+                                }
                             },
                             "cmd_stm": {
+                                "kind": "cmd_stm",
                                 "cmd_values": {
-                                    "id": "ID(Always)",
+                                    "kind": "ids",
                                     "ids": {
                                         "kind": "ids"
                                     },
-                                    "kind": "ids"
+                                    "id": "ID(Always)"
                                 },
-                                "cmd_name": "ReservedWord(ZTest)",
-                                "kind": "cmd_stm"
-                            },
-                            "kind": "cmds"
+                                "cmd_name": "ReservedWord(ZTest)"
+                            }
                         },
                         "cmd_stm": {
+                            "kind": "cmd_stm",
                             "cmd_values": {
-                                "id": "ID(Off)",
+                                "kind": "ids",
                                 "ids": {
                                     "kind": "ids"
                                 },
-                                "kind": "ids"
+                                "id": "ID(Off)"
                             },
-                            "cmd_name": "ReservedWord(Cull)",
-                            "kind": "cmd_stm"
-                        },
-                        "kind": "cmds"
+                            "cmd_name": "ReservedWord(Cull)"
+                        }
                     },
                     "cmd_stm": {
+                        "kind": "cmd_stm",
                         "cmd_values": {
-                            "id": "ID(Off)",
+                            "kind": "ids",
                             "ids": {
                                 "kind": "ids"
                             },
-                            "kind": "ids"
+                            "id": "ID(Off)"
                         },
-                        "cmd_name": "ReservedWord(Lighting)",
-                        "kind": "cmd_stm"
-                    },
-                    "kind": "cmds"
+                        "cmd_name": "ReservedWord(Lighting)"
+                    }
                 },
                 "passes": {
+                    "kind": "passes",
                     "shr_pass": {
+                        "kind": "shr_pass",
                         "pass_body": {
-                            "kind": "pass_body"
-                        },
-                        "kind": "shr_pass"
+                            "kind": "pass_body",
+                            "cg_prog": {
+                                "kind": "cg_prog",
+                                "cg_stms": {
+                                    "kind": "cg_stms",
+                                    "cg_stms": {
+                                        "kind": "cg_stms",
+                                        "cg_stms": {
+                                            "kind": "cg_stms",
+                                            "cg_stms": {
+                                                "kind": "cg_stms"
+                                            },
+                                            "cg_stm": {
+                                                "kind": "cg_stm",
+                                                "preprocessing_stm": {
+                                                    "kind": "preprocessing_stm",
+                                                    "pp_cmd": {
+                                                        "kind": "pp_cmd",
+                                                        "String": "String(\"UnityCG.cginc\")"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "cg_stm": {
+                                            "kind": "cg_stm",
+                                            "preprocessing_stm": {
+                                                "kind": "preprocessing_stm",
+                                                "pp_cmd": {
+                                                    "kind": "pp_cmd",
+                                                    "ids": {
+                                                        "kind": "ids",
+                                                        "ids": {
+                                                            "kind": "ids",
+                                                            "ids": {
+                                                                "kind": "ids"
+                                                            },
+                                                            "id": "ID(frag)"
+                                                        },
+                                                        "id": "ID(fragment)"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "cg_stm": {
+                                        "kind": "cg_stm",
+                                        "preprocessing_stm": {
+                                            "kind": "preprocessing_stm",
+                                            "pp_cmd": {
+                                                "kind": "pp_cmd",
+                                                "ids": {
+                                                    "kind": "ids",
+                                                    "ids": {
+                                                        "kind": "ids",
+                                                        "ids": {
+                                                            "kind": "ids"
+                                                        },
+                                                        "id": "ID(vert)"
+                                                    },
+                                                    "id": "ID(vertex)"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "passes": {
                         "kind": "passes"
-                    },
-                    "kind": "passes"
-                },
-                "kind": "subshr_body"
-            },
-            "kind": "subshr"
-        },
-        "kind": "shader_body",
-        "props": {
-            "props_body": {
-                "props_body": {
-                    "props_body": {
-                        "kind": "props_body"
-                    },
-                    "kind": "props_body",
-                    "prop_stm": {
-                        "inspectName": "String(\"Text Color\")",
-                        "prop_init": {
-                            "kind": "prop_init"
-                        },
-                        "varName": "ID(_Color)",
-                        "kind": "prop_stm",
-                        "varType": "ReservedWord(Color)"
                     }
-                },
-                "kind": "props_body",
-                "prop_stm": {
-                    "inspectName": "String(\"Font Texture\")",
-                    "prop_init": {
-                        "color": "String(\"white\")",
-                        "kind": "prop_init"
-                    },
-                    "varName": "ID(_MainTex)",
-                    "kind": "prop_stm",
-                    "varType": "ReservedWord(2D)"
                 }
-            },
-            "kind": "props"
+            }
         }
-    },
-    "kind": "prog"
+    }
 }

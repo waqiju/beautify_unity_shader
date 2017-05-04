@@ -24,6 +24,7 @@ class NonterminalType(SymbolType):
     shr_pass = 'shr_pass'
     pass_body = 'pass_body'
     cg_prog = 'cg_prog'
+    cg_stms = 'cg_stms'
     cg_stm = 'cg_stm'
     preprocessing_stm = 'preprocessing_stm'
     pp_if_stm = 'pp_if_stm'
@@ -102,6 +103,10 @@ class cg_prog(Nonterminal):
     pass
 
 
+class cg_stms(Nonterminal):
+    pass
+
+
 class cg_stm(Nonterminal):
     pass
 
@@ -119,82 +124,82 @@ class pp_cmd(Nonterminal):
 
 
 class progp1(prog):
-
-    def __init__(self, Shader, name, LBrace, shader_body, RBrace):
-        self.name = name
+    # prog --> 'Shader' String { shader_body }
+    def __init__(self, Shader, String, LBrace, shader_body, RBrace):
+        self.String = String
         self.shader_body = shader_body
 
 
 class shader_bodyp2(shader_body):
-
+    # shader_body --> props subshr
     def __init__(self, props, subshr):
         self.props = props
         self.subshr = subshr
 
 
 class propsp3(props):
-
+    # props --> 'Properties' { props_body }
     def __init__(self, Properties, LBrace, props_body, RBrace):
         self.props_body = props_body
 
 
 class propsp4(props):
-
+    # props -->
     def __init__(self):
         pass
 
 
 class props_bodyp5(props_body):
-
+    # props_body --> prop_stm props_body
     def __init__(self, prop_stm, props_body):
         self.prop_stm = prop_stm
         self.props_body = props_body
 
 
 class props_bodyp6(props_body):
-
+    # props_body -->
     def __init__(self):
         pass
 
 
 class prop_stmp7(prop_stm):
-
-    def __init__(self, varName, LParen, inspectName, Comma, varType, RParen, Assign, prop_init):
-        self.varName = varName
-        self.inspectName = inspectName
-        self.varType = varType
+    # prop_stm --> ID ( String , ReservedWord ) = prop_init
+    def __init__(self, ID, LParen, String, Comma, ReservedWord, RParen, Assign, prop_init):
+        self.ID = ID
+        self.String = String
+        self.ReservedWord = ReservedWord
         self.prop_init = prop_init
 
 
 class prop_initp8(prop_init):
-
-    def __init__(self, number):
-        self.number = number
+    # prop_init --> Number
+    def __init__(self, Number):
+        self.Number = Number
 
 
 class prop_initp9(prop_init):
-
-    def __init__(self, color, LBrace, RBrace):
-        self.color = color
+    # prop_init --> String { }
+    def __init__(self, String, LBrace, RBrace):
+        self.String = String
 
 
 class prop_initp10(prop_init):
-
-    def __init__(self, *args):
-        self.numbers = []
-        for arg in args:
-            if arg.kind == TokenType.Number:
-                self.numbers.append(arg.value)
+    # prop_init --> ( Number , Number , Number , Number )
+    def __init__(self, LParen, Number, Comma, Number, Comma, Number, Comma, Number, RParen):
+        self.Number = Number
+        self.Number = Number
+        self.Number = Number
+        self.Number = Number
 
 
 class subshrp11(subshr):
-
+    # subshr --> 'SubShader' { subshr_body }
     def __init__(self, SubShader, LBrace, subshr_body, RBrace):
         self.subshr_body = subshr_body
 
 
 class subshr_bodyp12(subshr_body):
-
+    # subshr_body --> tags cmds passes
     def __init__(self, tags, cmds, passes):
         self.tags = tags
         self.cmds = cmds
@@ -202,153 +207,172 @@ class subshr_bodyp12(subshr_body):
 
 
 class tagsp13(tags):
-
+    # tags --> 'Tags' { tags_body }
     def __init__(self, Tags, LBrace, tags_body, RBrace):
         self.tags_body = tags_body
 
 
 class tags_bodyp14(tags_body):
-
+    # tags_body --> tag_smt tags_body
     def __init__(self, tag_smt, tags_body):
         self.tag_smt = tag_smt
         self.tags_body = tags_body
 
 
 class tags_bodyp15(tags_body):
-
+    # tags_body -->
     def __init__(self):
         pass
 
 
 class tag_smtp16(tag_smt):
-
-    def __init__(self, key, Assign, value):
-        self.key = key
-        self.value = value
+    # tag_smt --> String = String
+    def __init__(self, String, Assign, String):
+        self.String = String
+        self.String = String
 
 
 class cmdsp17(cmds):
-
+    # cmds --> cmd_stm cmds
     def __init__(self, cmd_stm, cmds):
         self.cmd_stm = cmd_stm
         self.cmds = cmds
 
 
 class cmdsp18(cmds):
-
+    # cmds -->
     def __init__(self):
         pass
 
 
 class cmd_stmp19(cmd_stm):
-
-    def __init__(self, cmd_name, cmd_values):
-        self.cmd_name = cmd_name
-        self.cmd_values = cmd_values
+    # cmd_stm --> ReservedWord ids
+    def __init__(self, ReservedWord, ids):
+        self.ReservedWord = ReservedWord
+        self.ids = ids
 
 
 class idsp20(ids):
-
+    # ids --> ID ids
     def __init__(self, ID, ids):
         self.ID = ID
         self.ids = ids
 
 
 class idsp21(ids):
-
+    # ids -->
     def __init__(self):
         pass
 
 
 class passesp22(passes):
-
+    # passes --> shr_pass passes
     def __init__(self, shr_pass, passes):
         self.shr_pass = shr_pass
         self.passes = passes
 
 
 class passesp23(passes):
-
+    # passes -->
     def __init__(self):
         pass
 
 
 class shr_passp24(shr_pass):
-
+    # shr_pass --> 'Pass' { pass_body }
     def __init__(self, Pass, LBrace, pass_body, RBrace):
         self.pass_body = pass_body
 
 
 class pass_bodyp25(pass_body):
-
+    # pass_body --> 'CGPROGRAM' cg_prog 'ENDCG'
     def __init__(self, CGPROGRAM, cg_prog, ENDCG):
         self.cg_prog = cg_prog
 
 
 class cg_progp26(cg_prog):
+    # cg_prog --> cg_stms
+    def __init__(self, cg_stms):
+        self.cg_stms = cg_stms
 
-    def __init__(self, cg_stm):
+
+class cg_stmsp27(cg_stms):
+    # cg_stms --> cg_stm cg_stms
+    def __init__(self, cg_stm, cg_stms):
         self.cg_stm = cg_stm
+        self.cg_stms = cg_stms
 
 
-class cg_stmp27(cg_stm):
+class cg_stmsp28(cg_stms):
+    # cg_stms -->
+    def __init__(self):
+        pass
 
+
+class cg_stmp29(cg_stm):
+    # cg_stm --> preprocessing_stm
     def __init__(self, preprocessing_stm):
         self.preprocessing_stm = preprocessing_stm
 
 
-class preprocessing_stmp28(preprocessing_stm):
-
+class preprocessing_stmp30(preprocessing_stm):
+    # preprocessing_stm --> pp_if_stm
     def __init__(self, pp_if_stm):
         self.pp_if_stm = pp_if_stm
 
 
-class preprocessing_stmp29(preprocessing_stm):
-
+class preprocessing_stmp31(preprocessing_stm):
+    # preprocessing_stm --> pp_cmd
     def __init__(self, pp_cmd):
         self.pp_cmd = pp_cmd
 
 
-class pp_if_stmp30(pp_if_stm):
-
-    def __init__(self, Pound, _if, ID):
-        self.ID = ID
-
-
-class pp_if_stmp31(pp_if_stm):
-
-    def __init__(self, Pound, ifdef, ID):
-        self.ID = ID
-
-
 class pp_if_stmp32(pp_if_stm):
-
-    def __init__(self, Pound, idndef, ID):
+    # pp_if_stm --> # 'if' ID
+    def __init__(self, Pound, if, ID):
         self.ID = ID
 
 
 class pp_if_stmp33(pp_if_stm):
-
-    def __init__(self, Pound, _elif, ID):
+    # pp_if_stm --> # 'ifdef' ID
+    def __init__(self, Pound, ifdef, ID):
         self.ID = ID
 
 
 class pp_if_stmp34(pp_if_stm):
-
-    def __init__(self, Pound, _else):
-        pass
+    # pp_if_stm --> # 'idndef' ID
+    def __init__(self, Pound, idndef, ID):
+        self.ID = ID
 
 
 class pp_if_stmp35(pp_if_stm):
+    # pp_if_stm --> # 'elif' ID
+    def __init__(self, Pound, elif, ID):
+        self.ID = ID
 
+
+class pp_if_stmp36(pp_if_stm):
+    # pp_if_stm --> # 'else'
+    def __init__(self, Pound, else):
+        pass
+
+
+class pp_if_stmp37(pp_if_stm):
+    # pp_if_stm --> # 'endif'
     def __init__(self, Pound, endif):
         pass
 
 
-class pp_cmdp36(pp_cmd):
-
+class pp_cmdp38(pp_cmd):
+    # pp_cmd --> # 'include' String
     def __init__(self, Pound, include, String):
         self.String = String
+
+
+class pp_cmdp39(pp_cmd):
+    # pp_cmd --> # 'pragma' ids
+    def __init__(self, Pound, pragma, ids):
+        self.ids = ids
 
 
 class Test(unittest.TestCase):

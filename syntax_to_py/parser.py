@@ -54,6 +54,9 @@ class Production:
         self.left = left
         self.right = right
         self.name = name
+        self.text = left.text + ' -->'
+        for token in right:
+            self.text += ' ' + token.text
 
 
 def analyze(tokens):
@@ -104,12 +107,8 @@ class Test(unittest.TestCase):
                 f.write(str(token) + '\n')
 
         # 语法分析
-        translator.writeNonterminalFileBegin()
         productionNonterminals = collectNonterminalTypeOfProduction(tokens)
-        translator.writeNonterminalType(productionNonterminals)
-
         productionList = analyze(tokens)
-        translator.writeProductionList(productionList, productionNonterminals, TokenType)
 
-        translator.writeNonterminalClassList(productionNonterminals, productionList)
-        translator.writeNonterminalFileEnd()
+        translator.writeProductionList(productionList, productionNonterminals, TokenType)
+        translator.writeNonterminals(productionList, productionNonterminals)

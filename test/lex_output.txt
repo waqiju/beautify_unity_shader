@@ -61,6 +61,17 @@ ID(OneMinusSrcAlpha)
 ID(Pass)
 LBrace
 ID(CGPROGRAM)
+Pound
+ID(pragma)
+ID(vertex)
+ID(vert)
+Pound
+ID(pragma)
+ID(fragment)
+ID(frag)
+Pound
+ID(include)
+String("UnityCG.cginc")
 ID(ENDCG)
 RBrace
 RBrace

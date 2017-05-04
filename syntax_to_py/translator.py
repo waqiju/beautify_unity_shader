@@ -1,7 +1,15 @@
 import os
 
 
-def writeNonterminalFileBegin():
+# write nonterminls.py
+def writeNonterminals(productionList, NonterminalType):
+    _writeBegin()
+    _writeNonterminalType(NonterminalType)
+    _writeNonterminalClassList(productionList, NonterminalType)
+    _writeEnd()
+
+
+def _writeBegin():
     texts = [
         "from app.symbol_type import SymbolType",
         "from app.syntax_nonterminal import Nonterminal",
@@ -14,7 +22,7 @@ def writeNonterminalFileBegin():
         f.writelines(texts)
 
 
-def writeNonterminalFileEnd():
+def _writeEnd():
     texts = [
         "\n\n"
         "class Test(unittest.TestCase):",
@@ -28,7 +36,7 @@ def writeNonterminalFileEnd():
         f.writelines(texts)
 
 
-def writeNonterminalType(types):
+def _writeNonterminalType(types):
     with open(os.path.join(__file__, '../nonterminals_draft.py'), 'a') as f:
         f.write('\n\n')
         f.write('class NonterminalType(SymbolType):\n')
@@ -37,7 +45,7 @@ def writeNonterminalType(types):
             f.write("    %s = '%s'\n" % (ty, ty))
 
 
-def writeNonterminalClassList(types, productionList):
+def _writeNonterminalClassList(productionList, types):
     with open(os.path.join(__file__, '../nonterminals_draft.py'), 'a') as f:
         for ty in types:
             _writeBaseClass(f, ty)
@@ -57,7 +65,7 @@ def _writeBaseClass(file, className):
 def _writeDeriveClass(file, production):
     file.write('\n\n')
     text = "class %s%s(%s):\n" % (production.left.text, production.name, production.left.text)
-    text += "\n"
+    text += "    # %s\n" % production.text 
     # line 3
     text += "    def __init__(self"
     for symbol in production.right:
@@ -86,6 +94,7 @@ def _writeDeriveClass(file, production):
     file.write(text)
 
 
+# write productions
 def writeProductionList(productionList, productionNonterminals, productionTokens):
     with open(os.path.join(__file__, '../productions_draft.py'), 'w') as f:
         f.write('productionList = [\n')
