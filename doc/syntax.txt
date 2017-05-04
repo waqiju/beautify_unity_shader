@@ -40,6 +40,9 @@ cg_prog     -> cg_stms
 cg_stms     -> cg_stm cg_stms
             -> 
 cg_stm      -> preprocessing_stm
+            -> function_definition
+            -> dec
+function_definition     -> dec_specifier  declarator compound_stm 
 //8 预处理当做特殊的stm处理好了，简单点
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
@@ -110,10 +113,8 @@ assignment_op     -> =
 exp         -> assignment_exp
             -> exp, assignment_exp
 // 10 declaration
-dec               -> dec_specifiers init_dec_list ;
-dec_specifiers    -> type_specifier
-
-type_specifier    -> 'void'
+dec               -> dec_specifier init_dec_list ;
+dec_specifier     -> 'void'
                   -> 'char'
                   -> 'short'
                   -> 'int'
@@ -125,7 +126,7 @@ struct_specifier  -> 'struct' ID
                   -> 'struct' ID { struct_dec_list }
 struct_dec_list   -> struct_dec
                   -> struct_dec_list struct_dec
-struct_dec        -> type_specifier declarator_list
+struct_dec        -> dec_specifier declarator_list
 declarator_list   -> declarator
                   -> declarator_list , declarator
 declarator        -> ID
@@ -155,7 +156,7 @@ block_item_list   -> block_item
 block_item        -> dec
                   -> stm
 selection_stm     -> 'if' ( exp ) stm
-                  -> 'if' ( exp ) stm else stm
+                  -> 'if' ( exp ) stm 'else' stm
 iteration_stm     -> 'while' (exp) stm
                   -> 'do' stm 'while' (exp);
                   -> 'for' (exp; exp; exp) stm 
@@ -163,4 +164,4 @@ jump_stm          -> 'goto' ID
                   -> 'continue'
                   -> 'break'
                   -> 'return' exp ;
-                  -> 'return' ;
+                  -> 'return' ;                  

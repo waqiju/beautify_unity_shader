@@ -12,6 +12,10 @@ class TokenType(SymbolType):
     SpaceLike = "SpaceLike"
     # 双符号标点
     RightArrow = "RightArrow"
+    ModAssign = "ModAssign"
+    AndAssign = "AndAssign"
+    XorAssign = "XorAssign"
+    OrAssign = "OrAssign"
     # 单符号标点
     Comma = "Comma"
     Colon = "Colon"
@@ -27,6 +31,12 @@ class TokenType(SymbolType):
     Minus = "Minus"
     Times = "Times"
     Divide = "Divide"
+    Tilde = "Tilde"
+    Percent = "Percent"
+    Ampersand = "Ampersand"
+    Caret = "Caret"
+    VerticalBar = "VerticalBar"
+
     EQ = "EQ"
     NEQ = "NEQ"
     LT = "LT"
