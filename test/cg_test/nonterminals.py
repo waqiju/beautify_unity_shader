@@ -128,7 +128,7 @@ class preprocessing_stmp8(preprocessing_stm):
 
 class pp_if_stmp9(pp_if_stm):
     # pp_if_stm --> # 'if' ID
-    def __init__(self, Pound, if, ID):
+    def __init__(self, Pound, _if, ID):
         self.ID = ID
 
 
@@ -146,13 +146,13 @@ class pp_if_stmp11(pp_if_stm):
 
 class pp_if_stmp12(pp_if_stm):
     # pp_if_stm --> # 'elif' ID
-    def __init__(self, Pound, elif, ID):
+    def __init__(self, Pound, _elif, ID):
         self.ID = ID
 
 
 class pp_if_stmp13(pp_if_stm):
     # pp_if_stm --> # 'else'
-    def __init__(self, Pound, else):
+    def __init__(self, Pound, _else):
         pass
 
 

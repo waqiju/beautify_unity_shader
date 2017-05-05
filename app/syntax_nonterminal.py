@@ -29,7 +29,12 @@ class Nonterminal(metaclass=NonterminalMeta):
 
     @staticmethod
     def getClass(name):
-        return Nonterminal.classDict.get(name)
+        cls = Nonterminal.classDict.get(name)
+        if cls is not None:
+            return cls
+        else:
+            print('Error, donot have the class, name = %s' % name)
+            raise Exception
 
     def __init__(self):
         pass

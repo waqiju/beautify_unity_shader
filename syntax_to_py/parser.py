@@ -17,12 +17,10 @@ def prepare():
                  )
     # 引入回车(Enter)和空格(Space)，替代原来的SpaceLike
     rules.insert(10,
-                 # 字符串
                  {'pattern': re.compile(r"\n"),
                   'action': lambda text: Token("Enter", text)}
                  )
     rules.insert(10,
-                 # 字符串
                  {'pattern': re.compile(r"[ \t]+"),
                   'action': lambda text: Token(TokenType.SpaceLike, text)}
                  )
@@ -92,11 +90,33 @@ def analyze(tokens):
 
 class Test(unittest.TestCase):
 
-    def test(self):
+    def Dtest(self):
         prepare()
 
         # 词法分析
         syntaxFile = os.path.abspath(os.path.join(__file__, '../../doc/syntax.txt'))
+        with open(syntaxFile, encoding='utf-8') as f:
+            buf = f.read()
+        tokens = lexer.analyze(buf, isKeepSpace=False, isKeepComment=False)
+
+        lexOutputFile = os.path.abspath(os.path.join(__file__, '../lex_output.txt'))
+        with open(lexOutputFile, 'w', encoding='utf-8') as f:
+            for token in tokens:
+                f.write(str(token) + '\n')
+
+        # 语法分析
+        productionNonterminals = collectNonterminalTypeOfProduction(tokens)
+        productionList = analyze(tokens)
+
+        translator.writeProductionList(productionList, productionNonterminals, TokenType)
+        translator.writeNonterminals(productionList, productionNonterminals)
+
+
+    def testCg(self):
+        prepare()
+
+        # 词法分析
+        syntaxFile = os.path.abspath(os.path.join(__file__, '../../test/cg_test/syntax.txt'))
         with open(syntaxFile, encoding='utf-8') as f:
             buf = f.read()
         tokens = lexer.analyze(buf, isKeepSpace=False, isKeepComment=False)

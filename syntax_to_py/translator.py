@@ -13,7 +13,7 @@ def _writeBegin():
     texts = [
         "from app.symbol_type import SymbolType",
         "from app.syntax_nonterminal import Nonterminal",
-        "from .lex_tokens import TokenType",
+        # "from .lex_tokens import TokenType",
         "import unittest",
     ]
     texts = map(lambda text: text + '\n', texts)

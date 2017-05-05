@@ -1,0 +1,68 @@
+{
+    "cg_prog": {
+        "cg_stms": {
+            "cg_stm": {
+                "preprocessing_stm": {
+                    "pp_cmd": {
+                        "kind": "pp_cmd",
+                        "ids": {
+                            "ID": "ID(vertex)",
+                            "kind": "ids",
+                            "ids": {
+                                "ID": "ID(vert)",
+                                "kind": "ids",
+                                "ids": {
+                                    "kind": "ids"
+                                }
+                            }
+                        }
+                    },
+                    "kind": "preprocessing_stm"
+                },
+                "kind": "cg_stm"
+            },
+            "kind": "cg_stms",
+            "cg_stms": {
+                "cg_stm": {
+                    "preprocessing_stm": {
+                        "pp_cmd": {
+                            "kind": "pp_cmd",
+                            "ids": {
+                                "ID": "ID(fragment)",
+                                "kind": "ids",
+                                "ids": {
+                                    "ID": "ID(frag)",
+                                    "kind": "ids",
+                                    "ids": {
+                                        "kind": "ids"
+                                    }
+                                }
+                            }
+                        },
+                        "kind": "preprocessing_stm"
+                    },
+                    "kind": "cg_stm"
+                },
+                "kind": "cg_stms",
+                "cg_stms": {
+                    "cg_stm": {
+                        "preprocessing_stm": {
+                            "pp_cmd": {
+                                "kind": "pp_cmd",
+                                "String": "String(\"UnityCG.cginc\")"
+                            },
+                            "kind": "preprocessing_stm"
+                        },
+                        "kind": "cg_stm"
+                    },
+                    "kind": "cg_stms",
+                    "cg_stms": {
+                        "kind": "cg_stms"
+                    }
+                }
+            }
+        },
+        "kind": "cg_prog"
+    },
+    "kind": "prog"
+}

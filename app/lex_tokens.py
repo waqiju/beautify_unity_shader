@@ -12,10 +12,14 @@ class TokenType(SymbolType):
     SpaceLike = "SpaceLike"
     # 双符号标点
     RightArrow = "RightArrow"
+    LeftShiftAssign = "LeftShiftAssign"
+    RightShiftAssign = "RightShiftAssign"
     ModAssign = "ModAssign"
     AndAssign = "AndAssign"
     XorAssign = "XorAssign"
     OrAssign = "OrAssign"
+    LeftShift = "LeftShift"
+    RightShift = "RightShift"
     # 单符号标点
     Comma = "Comma"
     Colon = "Colon"

@@ -2,6 +2,7 @@ from ..syntax_production import Production
 from ..symbol_type import SymbolType
 from .base_types import ObjectSet, Item
 from .base_algorithms import calcClosure, goto, calcFirstDict
+import sys
 import unittest
 
 
@@ -9,7 +10,7 @@ BeginningNonterminal = '__Begin'
 EndingTerminal = '__End'
 
 
-def construct(productionList, isDebug=False):
+def construct(productionList, stateListOutputFile=None, edgesOutputFile=None):
     # 初始化symbolType
     TokenType = SymbolType.TokenType
     NonterminalType = SymbolType.NonterminalType
@@ -44,9 +45,11 @@ def construct(productionList, isDebug=False):
 
     # 初始化edges
     edges = {}
-
     stateIndex = 0
+    debugIterationCount = 0
     while (stateIndex < len(stateList)):
+        debugIterationCount += 1
+        # print(debugIterationCount)
         state = stateList[stateIndex]
         edges[stateIndex] = {}
 
@@ -59,6 +62,7 @@ def construct(productionList, isDebug=False):
 
         # 放置Shift
         for ty in SymbolType:
+            # print(state, ty)
             newState = goto(productionList, firstDict, nullableDict, state, ty)
             if len(newState) == 0:
                 continue
@@ -76,9 +80,10 @@ def construct(productionList, isDebug=False):
 
         stateIndex = stateIndex + 1
 
-    if isDebug:
-        _printStateList(stateList)
-        _printEdges(edges)
+    if stateListOutputFile:
+        _printStateList(stateList, stateListOutputFile)
+    if edgesOutputFile:
+        _printEdges(edges, edgesOutputFile)
 
     return edges
 
@@ -109,15 +114,29 @@ def _printProductionList(productionList):
     print('--------------------------------')
 
 
-def _printStateList(stateList):
-    print('-----------StateList------------')
+def _printStateList(stateList, file=None):
+    if file is not None:
+        oldStdout = sys.stdout
+        sys.stdout = file
+    else:
+        print('-----------StateList------------')
+    
     for i, state in enumerate(stateList):
         print(i, state)
-    print('--------------------------------')
+
+    if file is not None:
+        sys.stdout = oldStdout
+    else:
+        print('--------------------------------')
 
 
-def _printEdges(edges):
-    print('------------Edges---------------')
+def _printEdges(edges, file=None):
+    if file is not None:
+        oldStdout = sys.stdout
+        sys.stdout = file
+    else:
+        print('------------Edges---------------')
+
     _printCell('')
     for ty in SymbolType:
         _printCell(ty)
@@ -129,7 +148,17 @@ def _printEdges(edges):
             actionStr = str(edges[i][ty] if edges[i].get(ty) else '')
             _printCell(actionStr)
         print('')
-    print('--------------------------------')
+
+    print('unsolved conflicts:')
+    for i, _ in enumerate(edges):
+        for ty in SymbolType:
+            if  isinstance(edges[i].get(ty), list):
+                print('%s x %s' % (i, ty))
+
+    if file is not None:
+        sys.stdout = oldStdout
+    else:
+        print('--------------------------------')
 
 
 

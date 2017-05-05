@@ -720,14 +720,14 @@ class binary_opp69(binary_op):
 
 
 class binary_opp70(binary_op):
-    # binary_op --> < <
-    def __init__(self, LT1, LT2):
+    # binary_op --> <<
+    def __init__(self, LeftShift):
         pass
 
 
 class binary_opp71(binary_op):
-    # binary_op --> > >
-    def __init__(self, GT1, GT2):
+    # binary_op --> >>
+    def __init__(self, RightShift):
         pass
 
 
@@ -744,14 +744,14 @@ class binary_opp73(binary_op):
 
 
 class binary_opp74(binary_op):
-    # binary_op --> < =
-    def __init__(self, LT, Assign):
+    # binary_op --> <=
+    def __init__(self, LE):
         pass
 
 
 class binary_opp75(binary_op):
-    # binary_op --> > =
-    def __init__(self, GT, Assign):
+    # binary_op --> >=
+    def __init__(self, GE):
         pass
 
 
@@ -786,14 +786,14 @@ class binary_opp80(binary_op):
 
 
 class binary_opp81(binary_op):
-    # binary_op --> & &
-    def __init__(self, Ampersand1, Ampersand2):
+    # binary_op --> &&
+    def __init__(self, AND):
         pass
 
 
 class binary_opp82(binary_op):
-    # binary_op --> | |
-    def __init__(self, VerticalBar1, VerticalBar2):
+    # binary_op --> ||
+    def __init__(self, OR):
         pass
 
 
@@ -862,14 +862,14 @@ class assignment_opp92(assignment_op):
 
 
 class assignment_opp93(assignment_op):
-    # assignment_op --> < < =
-    def __init__(self, LT1, LT2, Assign):
+    # assignment_op --> <<=
+    def __init__(self, LeftShiftAssign):
         pass
 
 
 class assignment_opp94(assignment_op):
-    # assignment_op --> > > =
-    def __init__(self, GT1, GT2, Assign):
+    # assignment_op --> >>=
+    def __init__(self, RightShiftAssign):
         pass
 
 
@@ -986,9 +986,9 @@ class struct_dec_listp112(struct_dec_list):
 
 
 class struct_decp113(struct_dec):
-    # struct_dec --> type_specifier declarator_list
-    def __init__(self, type_specifier, declarator_list):
-        self.type_specifier = type_specifier
+    # struct_dec --> dec_specifier declarator_list
+    def __init__(self, dec_specifier, declarator_list):
+        self.dec_specifier = dec_specifier
         self.declarator_list = declarator_list
 
 

@@ -29,7 +29,8 @@ class Test(unittest.TestCase):
                 f.write(str(token))
                 f.write('\n')
 
-    def test(self):
+
+    def DtestLexer(self):
         import os
         testFile = os.path.abspath( os.path.join(__file__, r"../../test/test.shader") )
 
@@ -38,4 +39,22 @@ class Test(unittest.TestCase):
             tokens = lexer.analyze(buf, isKeepSpace=False, isEnding=True)
             Test._writeTokens(tokens)
 
-        ast = analyze(tokens)
+
+    def testLRConstruct(self):
+        print(1000)
+        # edges = lr1.construct(productionList, isDebug=True)
+
+
+    def Dtest(self):
+        import os
+        testFile = os.path.abspath( os.path.join(__file__, r"../../test/test.shader") )
+
+        with open(testFile) as f:
+            buf = f.read()
+            tokens = lexer.analyze(buf, isKeepSpace=False, isEnding=True)
+            Test._writeTokens(tokens)
+
+        # ast = analyze(tokens)
+
+if __name__ == '__main__':
+    edges = lr1.construct(productionList, isDebug=True)

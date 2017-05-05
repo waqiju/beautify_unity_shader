@@ -1,0 +1,20 @@
+{
+    "kind": "S",
+    "rightValue": {
+        "kind": "E",
+        "value": {
+            "kind": "V",
+            "ID": "ID(b)"
+        }
+    },
+    "leftValue": {
+        "exp": {
+            "kind": "E",
+            "value": {
+                "kind": "V",
+                "ID": "ID(a)"
+            }
+        },
+        "kind": "V"
+    }
+}

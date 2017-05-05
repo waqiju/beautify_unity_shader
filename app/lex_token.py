@@ -9,8 +9,7 @@ class Token:
         self.value = value
 
     def __str__(self):
-        # return 'kind = %s, text = %s, value = %s' % (self.kind, self.text,
-        # self.value)
+        # return 'kind = %s, text = %s, value = %s' % (self.kind, self.text, self.value)
         if self.value:
             return '%s(%s)' % (self.kind, self.value)
         else:
