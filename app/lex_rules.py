@@ -9,6 +9,29 @@ def LexicalError(text):
     return Token(TokenType.LexicalError, text)
 
 
+def PragmaSpecialDealer(text):
+    # 特殊处理（pragma一直吃到回车），要么特殊处理preprocess命令，要么近似为stm处理但是特殊捕获Enter
+    # 假如是pragma，则将下一个Enter捕获为Enter，而非SpaceLike。
+    def enableEnterOnce(d):
+        d['EnableEnterOnce'] = True
+        return d
+    SpaceDealer(modifyEnv=enableEnterOnce)
+    return Token(TokenType.ID, text, text)
+
+
+
+
+def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
+    if modifyEnv:
+        modifyEnv(env)
+        return
+
+    if env['EnableEnterOnce'] and '\n' in text:
+        env['EnableEnterOnce'] = False
+        return Token(TokenType.Enter, text)
+    return Token(TokenType.SpaceLike, text)
+
+
 floatPattern = '[-+]?([\d]*[\.]?[\d]+)[fF]?'
 numberPattern = '%s(e%s)?' % (floatPattern, floatPattern)
 
@@ -28,6 +51,8 @@ rules = [
     {'pattern': re.compile(r'\b(Lighting|Cull|ZTest|ZWrite|Blend)\b'),
      'action': lambda text: Token(TokenType.ReservedWord, text, text)},
     # priority 2 ID，ID的前后一定要是\b
+    {'pattern': re.compile(r"\bpragma\b"),
+     'action': PragmaSpecialDealer},
     {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
      'action': lambda text: Token(TokenType.ID, text, text)},
     {'pattern': re.compile(numberPattern),
@@ -47,7 +72,6 @@ rules = [
      'action': lambda text: Token(TokenType.XorAssign, text)},
     {'pattern': re.compile(r"\|="),
      'action': lambda text: Token(TokenType.OrAssign, text)},
-
     {'pattern': re.compile(r"=="),
      'action': lambda text: Token(TokenType.EQ, text)},
     {'pattern': re.compile(r"!="),
@@ -64,6 +88,10 @@ rules = [
      'action': lambda text: Token(TokenType.LeftShift, text)},
     {'pattern': re.compile(r">>"),
      'action': lambda text: Token(TokenType.RightShift, text)},
+    {'pattern': re.compile(r"\+\+"),
+     'action': lambda text: Token(TokenType.Increment, text)},
+    {'pattern': re.compile(r"--"),
+     'action': lambda text: Token(TokenType.Decrement, text)},
     # 单
     {'pattern': re.compile(r","),
      'action': lambda text: Token(TokenType.Comma, text)},
@@ -118,8 +146,10 @@ rules = [
     # { 'pattern' : re.compile(r"tab1"),
     #   'action' : lambda text: Token(TokenType.tab2, text)},
     # priority 3
+    # switchable Enter
     {'pattern': re.compile(r"\s+", re.DOTALL),
-     'action': lambda text: Token(TokenType.SpaceLike, text)},
+     'action': SpaceDealer},
+     # 'action': lambda text: Token(TokenType.SpaceLike, text)},
     {'pattern': re.compile(r".*"),
      'action': LexicalError},
     {'pattern': re.compile(r".", re.DOTALL),

@@ -10,6 +10,7 @@ class TokenType(SymbolType):
     Number = "Number"  # Int Float
     Comment = "Comment"
     SpaceLike = "SpaceLike"
+    Enter = "Enter" # 偶尔需要这个，比如C语言的pragma
     # 双符号标点
     RightArrow = "RightArrow"
     LeftShiftAssign = "LeftShiftAssign"
@@ -20,6 +21,8 @@ class TokenType(SymbolType):
     OrAssign = "OrAssign"
     LeftShift = "LeftShift"
     RightShift = "RightShift"
+    Increment = "Increment"
+    Decrement = "Decrement"
     # 单符号标点
     Comma = "Comma"
     Colon = "Colon"

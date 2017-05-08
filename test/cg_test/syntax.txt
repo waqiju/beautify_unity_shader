@@ -4,9 +4,9 @@ cg_prog     -> cg_stms
 cg_stms     -> cg_stm cg_stms
             -> 
 cg_stm      -> preprocessing_stm
-//            -> function_definition
+            -> function_definition
             -> dec
-//function_definition     -> dec_specifier  declarator compound_stm 
+function_definition     -> dec_specifier declarator compound_stm 
 //8 预处理当做特殊的stm处理好了，简单点
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
@@ -17,11 +17,10 @@ pp_if_stm   -> # 'if' ID
             -> # 'else'
             -> # 'endif'
 pp_cmd      -> # 'include' String
-            -> # 'pragma' ids
+            -> # 'pragma' ids Enter
 ids         -> ID ids
             ->
 
-/*
 //9 expression，C语言的简化版
 primary_exp -> ID
             -> String
@@ -29,12 +28,13 @@ primary_exp -> ID
             -> ( exp )
 postfix_exp -> primary_exp
             -> postfix_exp [ exp ]
+            -> postfix_exp ( )
             -> postfix_exp ( argument_exp_list )
             -> postfix_exp . ID
             -> postfix_exp ++
             -> postfix_exp --
-argument_exp_list       -> assignment_exp argument_exp_list
-                        -> 
+argument_exp_list       -> assignment_exp
+                        -> argument_exp_list , assignment_exp
 unary_exp   -> postfix_exp
             -> ++ unary_exp
             -> -- unary_exp
@@ -68,6 +68,7 @@ conditional_exp   -> binary_exp
 assignment_exp    -> conditional_exp
                   -> unary_exp assignment_op assignment_exp
 assignment_op     -> =
+/*
                   -> *=
                   -> /=
                   -> %=
@@ -78,15 +79,14 @@ assignment_op     -> =
                   -> &=
                   -> ^=
                   -> |=
+*/
 exp         -> assignment_exp
             -> exp, assignment_exp
-*/
 // 10 declaration
-dec               -> dec_specifier_list init_dec_list ;
-dec_specifier_list-> dec_specifier
-                  -> dec_specifier_list dec_specifier
+dec               -> struct_specifier ;
+                  -> dec_specifier init_dec_list ;
 dec_specifier     -> type_specifier
-                  -> type_qualifier
+                  -> type_qualifier type_specifier
 type_specifier    -> 'void'
                   -> 'char'
                   -> 'short'
@@ -95,23 +95,37 @@ type_specifier    -> 'void'
                   -> 'float'
                   -> 'double'
                   -> 'sampler2D'
-//                  -> struct_specifier
+                  -> 'float2'
+                  -> 'float3'
+                  -> 'float4'
+                  -> 'half2'
+                  -> 'half3'
+                  -> 'half4'
+                  -> 'fixed2'
+                  -> 'fixed3'
+                  -> 'fixed4'
+                  -> typedef_name
 type_qualifier    -> 'uniform'
-/*
+typedef_name      -> ID
+
 struct_specifier  -> 'struct' ID
                   -> 'struct' ID { struct_dec_list }
 struct_dec_list   -> struct_dec
                   -> struct_dec_list struct_dec
-struct_dec        -> dec_specifier declarator_list
-declarator_list   -> declarator
-                  -> declarator_list , declarator
+struct_dec        -> type_specifier struct_declarator_list ;
+struct_declarator_list  -> struct_declarator
+                        -> struct_declarator_list , struct_declarator
+struct_declarator -> declarator
+                  -> declarator : ID
+
 declarator        -> ID
                   -> ( declarator )
-                  -> declarator [ exp ]
+//                  -> declarator [ exp ]
                   -> declarator ( parameter_list )
 parameter_list    -> parameter_dec
                   -> parameter_list , parameter_dec
-parameter_dec     -> dec_specifier declarator
+parameter_dec     -> type_specifier declarator
+/*
 init_dec_list     -> init_dec
                   -> init_dec_list , init_dec
 init_dec          -> declarator
@@ -119,7 +133,6 @@ init_dec          -> declarator
 */
 init_dec_list     -> ID
 // 11 statement
-/*
 stm               -> exp_stm
                   -> compound_stm
                   -> selection_stm
@@ -143,4 +156,3 @@ jump_stm          -> 'goto' ID
                   -> 'break'
                   -> 'return' exp ;
                   -> 'return' ;
-*/

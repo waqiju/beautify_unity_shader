@@ -62,7 +62,8 @@ def run(edges, productions, tokens):
         elif actionStr == 'a':
             break
         else:
-            print('should not go here!')
+            print(token)
+            raise Exception('should not go here! maybe cause unsolved conflicts')
 
         index += 1
 

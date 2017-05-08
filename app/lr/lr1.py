@@ -6,35 +6,35 @@ import sys
 import unittest
 
 
-BeginningNonterminal = '__Begin'
-EndingTerminal = '__End'
+# BeginningNonterminal = '__Begin'
+# EndingTerminal = '__End'
 
 
-def construct(productionList, stateListOutputFile=None, edgesOutputFile=None):
+def construct(productionList, stateListOutputFile=None, edgesOutputFile=None, isDebug=False):
     # 初始化symbolType
     TokenType = SymbolType.TokenType
     NonterminalType = SymbolType.NonterminalType
 
-    # 加入S -> XX $
-    NonterminalType.add(BeginningNonterminal)
-    TokenType.add(EndingTerminal)
+    # # 加入S -> XX $
+    # NonterminalType.add(BeginningNonterminal)
+    # TokenType.add(EndingTerminal)
 
-    firstNonterminalType = productionList[0].left
-    beginningProduction = Production(
-        '%s -> %s %s' % (BeginningNonterminal,
-                         firstNonterminalType, EndingTerminal),
-        'p0',
-        BeginningNonterminal,
-        (firstNonterminalType, EndingTerminal),
-    )
-    productionList.insert(0, beginningProduction)
+    # firstNonterminalType = productionList[0].left
+    # beginningProduction = Production(
+    #     '%s -> %s %s' % (BeginningNonterminal,
+    #                      firstNonterminalType, EndingTerminal),
+    #     'p0',
+    #     BeginningNonterminal,
+    #     (firstNonterminalType, EndingTerminal),
+    # )
+    # productionList.insert(0, beginningProduction)
 
     # 根据productionList获取firstDict和nullableDict
     firstDict, nullableDict = calcFirstDict(productionList, TokenType)
 
     # 初始的ItemSet
     beginningItemSet = ObjectSet()
-    beginningItemSet.add(Item(beginningProduction, 0, '*'))
+    beginningItemSet.add(Item(productionList[0], 0, '*')) 
     beginningState = calcClosure(productionList, firstDict, nullableDict, beginningItemSet)
 
     # 初始的StateSet
@@ -42,16 +42,22 @@ def construct(productionList, stateListOutputFile=None, edgesOutputFile=None):
     stateSet.add(beginningState)
     stateList = []
     stateList.append(beginningState)
+    # preStateIndex查看state之间的关系，state1 -> state2
+    preStateIndex = []
+    preStateIndex.append((0,0)) # 0 -> 0
 
     # 初始化edges
     edges = {}
     stateIndex = 0
-    debugIterationCount = 0
+    debug_IterationCount = 0
     while (stateIndex < len(stateList)):
-        debugIterationCount += 1
-        # print(debugIterationCount)
         state = stateList[stateIndex]
         edges[stateIndex] = {}
+
+        #for debug
+        debug_IterationCount += 1
+        if isDebug:
+            print('Iteration Count = %s, now state = \n\t %s' % (debug_IterationCount, state))
 
         # 放置Reduce
         for item in state:
@@ -62,26 +68,28 @@ def construct(productionList, stateListOutputFile=None, edgesOutputFile=None):
 
         # 放置Shift
         for ty in SymbolType:
-            # print(state, ty)
+   
             newState = goto(productionList, firstDict, nullableDict, state, ty)
             if len(newState) == 0:
                 continue
 
             # 放置Accept
-            if ty == EndingTerminal:
+            if ty == TokenType.EndingTerminal:
                 _addEdge(edges, stateIndex, ty, 'a')
                 continue
 
             if not stateSet.has(newState):
                 stateSet.add(newState)
                 stateList.append(newState)
+                # update preStateIndex
+                preStateIndex.append((stateIndex, ty))
 
             _addEdge(edges, stateIndex, ty, 's%s' % stateSet.getSerialNumber(newState))
 
         stateIndex = stateIndex + 1
 
     if stateListOutputFile:
-        _printStateList(stateList, stateListOutputFile)
+        _printStateList(stateList, preStateIndex, stateListOutputFile)
     if edgesOutputFile:
         _printEdges(edges, edgesOutputFile)
 
@@ -101,9 +109,24 @@ def _addEdge(edges, key1, key2, action):
         print('should not go here!')
 
 
+_cellOffset = 0
 def _printCell(text):
-    for i in range(len(text), 15):
+    global _cellOffset
+    if text == '\n':
+        print('')
+        _cellOffset = 0
+        
+        return
+
+    if _cellOffset > 0:
+        text = ' ' + text
+    for i in range(len(text), 15-_cellOffset):
         text = text + ' '
+    mayShortedLen = 15 - len(text)
+    _cellOffset -= mayShortedLen
+    if _cellOffset < 0:
+        _cellOffset = 0
+
     print(text, end='')
 
 
@@ -114,7 +137,7 @@ def _printProductionList(productionList):
     print('--------------------------------')
 
 
-def _printStateList(stateList, file=None):
+def _printStateList(stateList, preStateIndex, file=None):
     if file is not None:
         oldStdout = sys.stdout
         sys.stdout = file
@@ -122,7 +145,7 @@ def _printStateList(stateList, file=None):
         print('-----------StateList------------')
     
     for i, state in enumerate(stateList):
-        print(i, state)
+        print(i, '<-', preStateIndex[i], state)
 
     if file is not None:
         sys.stdout = oldStdout
@@ -140,20 +163,20 @@ def _printEdges(edges, file=None):
     _printCell('')
     for ty in SymbolType:
         _printCell(ty)
-    print('')
+    _printCell('\n')
 
     for i, _ in enumerate(edges):
         _printCell(str(i))
         for ty in SymbolType:
             actionStr = str(edges[i][ty] if edges[i].get(ty) else '')
             _printCell(actionStr)
-        print('')
+        _printCell('\n')
 
     print('unsolved conflicts:')
     for i, _ in enumerate(edges):
         for ty in SymbolType:
             if  isinstance(edges[i].get(ty), list):
-                print('%s x %s' % (i, ty))
+                print('%s x %s : %s' % (i, ty, edges[i].get(ty)))
 
     if file is not None:
         sys.stdout = oldStdout

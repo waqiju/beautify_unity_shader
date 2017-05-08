@@ -8,7 +8,7 @@ class ObjectSet:
     def __init__(self, srcSet=None):
         self.set = {}
         self.serialNumber = {}
-        self.hashValue = ''
+        self.hashValue = None
 
         if srcSet:
             for i in srcSet:
@@ -21,7 +21,7 @@ class ObjectSet:
         key = obj if isinstance(obj, str) else obj.getHashValue()
         self.set[key] = obj
         self.serialNumber[key] = len(self) - 1
-        self.updateHashValue()
+        # self.updateHashValue()
 
     def has(self, obj):
         return self.set.get(obj if isinstance(obj, str) else obj.getHashValue()) is not None
@@ -63,6 +63,8 @@ class ObjectSet:
             self.hashValue = self.hashValue + '__S_' + key
 
     def getHashValue(self):
+        if self.hashValue is None:
+            self.updateHashValue()
         return self.hashValue
 
     def getSerialNumber(self, obj):
