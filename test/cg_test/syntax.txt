@@ -12,7 +12,9 @@ function_definition     -> dec_specifier declarator compound_stm
 //8 预处理当做特殊的stm处理好了，简单点
 //  C语言的MARCO可以大致分为两种。一种是不带参数的宏，这个文法近似当做ID处理；另一种是带参数的宏，近似当做函数调用ID(...)处理。
 //  这种近似有漏洞吗？有的。比如MARCO展开后末尾有';'号，在源文件中就可以不加分号。这会导致语法识别错误。
-//  彻底解决这个问题的方法是把C语言的MARCO机制也模拟出来。BUT！我！不！想！模！拟！它！
+//  彻底解决这个问题的方法是把C语言的MARCO机制也模拟出来。BUT！我！不！想！模！拟！它！我！受！够！了！
+//题外话，C语言为什么不是context-free语法
+//  一个证据是typedef，半个证据是preprocess
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
 pp_if_stm   -> # 'if' ID
@@ -112,6 +114,7 @@ type_specifier    -> 'void'
                   -> 'fixed4'
                   -> typedef_name
 type_qualifier    -> 'uniform'
+                  -> 'inout'
 typedef_name      -> ID
 
 struct_specifier  -> 'struct' ID
@@ -131,7 +134,7 @@ declarator        -> ID
                   -> declarator ( parameter_list )
 parameter_list    -> parameter_dec
                   -> parameter_list , parameter_dec
-parameter_dec     -> type_specifier declarator
+parameter_dec     -> dec_specifier declarator
 
 init_dec_list     -> init_dec
                   -> init_dec_list , init_dec

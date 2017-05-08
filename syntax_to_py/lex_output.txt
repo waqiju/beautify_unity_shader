@@ -45,6 +45,11 @@ ID(ID)
 ID(compound_stm)
 Enter
 Enter
+Enter
+Enter
+Enter
+Enter
+Enter
 ID(preprocessing_stm)
 RightArrow
 ID(pp_if_stm)
@@ -400,6 +405,9 @@ ID(type_qualifier)
 RightArrow
 String('uniform')
 Enter
+RightArrow
+String('inout')
+Enter
 ID(typedef_name)
 RightArrow
 ID(ID)
@@ -479,7 +487,7 @@ ID(parameter_dec)
 Enter
 ID(parameter_dec)
 RightArrow
-ID(type_specifier)
+ID(dec_specifier)
 ID(declarator)
 Enter
 Enter

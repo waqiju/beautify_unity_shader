@@ -869,224 +869,230 @@ class type_qualifierp104(type_qualifier):
         pass
 
 
-class typedef_namep105(typedef_name):
+class type_qualifierp105(type_qualifier):
+    # type_qualifier --> 'inout'
+    def __init__(self, inout):
+        pass
+
+
+class typedef_namep106(typedef_name):
     # typedef_name --> ID
     def __init__(self, ID):
         self.ID = ID
 
 
-class struct_specifierp106(struct_specifier):
+class struct_specifierp107(struct_specifier):
     # struct_specifier --> 'struct' ID
     def __init__(self, struct, ID):
         self.ID = ID
 
 
-class struct_specifierp107(struct_specifier):
+class struct_specifierp108(struct_specifier):
     # struct_specifier --> 'struct' ID { struct_dec_list }
     def __init__(self, struct, ID, LBrace, struct_dec_list, RBrace):
         self.ID = ID
         self.struct_dec_list = struct_dec_list
 
 
-class struct_dec_listp108(struct_dec_list):
+class struct_dec_listp109(struct_dec_list):
     # struct_dec_list --> struct_dec
     def __init__(self, struct_dec):
         self.struct_dec = struct_dec
 
 
-class struct_dec_listp109(struct_dec_list):
+class struct_dec_listp110(struct_dec_list):
     # struct_dec_list --> struct_dec_list struct_dec
     def __init__(self, struct_dec_list, struct_dec):
         self.struct_dec_list = struct_dec_list
         self.struct_dec = struct_dec
 
 
-class struct_decp110(struct_dec):
+class struct_decp111(struct_dec):
     # struct_dec --> type_specifier struct_declarator_list ;
     def __init__(self, type_specifier, struct_declarator_list, Semicolon):
         self.type_specifier = type_specifier
         self.struct_declarator_list = struct_declarator_list
 
 
-class struct_declarator_listp111(struct_declarator_list):
+class struct_declarator_listp112(struct_declarator_list):
     # struct_declarator_list --> struct_declarator
     def __init__(self, struct_declarator):
         self.struct_declarator = struct_declarator
 
 
-class struct_declarator_listp112(struct_declarator_list):
+class struct_declarator_listp113(struct_declarator_list):
     # struct_declarator_list --> struct_declarator_list , struct_declarator
     def __init__(self, struct_declarator_list, Comma, struct_declarator):
         self.struct_declarator_list = struct_declarator_list
         self.struct_declarator = struct_declarator
 
 
-class struct_declaratorp113(struct_declarator):
+class struct_declaratorp114(struct_declarator):
     # struct_declarator --> declarator
     def __init__(self, declarator):
         self.declarator = declarator
 
 
-class struct_declaratorp114(struct_declarator):
+class struct_declaratorp115(struct_declarator):
     # struct_declarator --> declarator : ID
     def __init__(self, declarator, Colon, ID):
         self.declarator = declarator
         self.ID = ID
 
 
-class declaratorp115(declarator):
+class declaratorp116(declarator):
     # declarator --> ID
     def __init__(self, ID):
         self.ID = ID
 
 
-class declaratorp116(declarator):
+class declaratorp117(declarator):
     # declarator --> declarator [ exp ]
     def __init__(self, declarator, LBrack, exp, RBrack):
         self.declarator = declarator
         self.exp = exp
 
 
-class declaratorp117(declarator):
+class declaratorp118(declarator):
     # declarator --> declarator ( parameter_list )
     def __init__(self, declarator, LParen, parameter_list, RParen):
         self.declarator = declarator
         self.parameter_list = parameter_list
 
 
-class parameter_listp118(parameter_list):
+class parameter_listp119(parameter_list):
     # parameter_list --> parameter_dec
     def __init__(self, parameter_dec):
         self.parameter_dec = parameter_dec
 
 
-class parameter_listp119(parameter_list):
+class parameter_listp120(parameter_list):
     # parameter_list --> parameter_list , parameter_dec
     def __init__(self, parameter_list, Comma, parameter_dec):
         self.parameter_list = parameter_list
         self.parameter_dec = parameter_dec
 
 
-class parameter_decp120(parameter_dec):
-    # parameter_dec --> type_specifier declarator
-    def __init__(self, type_specifier, declarator):
-        self.type_specifier = type_specifier
+class parameter_decp121(parameter_dec):
+    # parameter_dec --> dec_specifier declarator
+    def __init__(self, dec_specifier, declarator):
+        self.dec_specifier = dec_specifier
         self.declarator = declarator
 
 
-class init_dec_listp121(init_dec_list):
+class init_dec_listp122(init_dec_list):
     # init_dec_list --> init_dec
     def __init__(self, init_dec):
         self.init_dec = init_dec
 
 
-class init_dec_listp122(init_dec_list):
+class init_dec_listp123(init_dec_list):
     # init_dec_list --> init_dec_list , init_dec
     def __init__(self, init_dec_list, Comma, init_dec):
         self.init_dec_list = init_dec_list
         self.init_dec = init_dec
 
 
-class init_decp123(init_dec):
+class init_decp124(init_dec):
     # init_dec --> declarator
     def __init__(self, declarator):
         self.declarator = declarator
 
 
-class init_decp124(init_dec):
+class init_decp125(init_dec):
     # init_dec --> declarator = assignment_exp
     def __init__(self, declarator, Assign, assignment_exp):
         self.declarator = declarator
         self.assignment_exp = assignment_exp
 
 
-class stmp125(stm):
+class stmp126(stm):
     # stm --> exp_stm
     def __init__(self, exp_stm):
         self.exp_stm = exp_stm
 
 
-class stmp126(stm):
+class stmp127(stm):
     # stm --> compound_stm
     def __init__(self, compound_stm):
         self.compound_stm = compound_stm
 
 
-class stmp127(stm):
+class stmp128(stm):
     # stm --> selection_stm
     def __init__(self, selection_stm):
         self.selection_stm = selection_stm
 
 
-class stmp128(stm):
+class stmp129(stm):
     # stm --> iteration_stm
     def __init__(self, iteration_stm):
         self.iteration_stm = iteration_stm
 
 
-class stmp129(stm):
+class stmp130(stm):
     # stm --> jump_stm
     def __init__(self, jump_stm):
         self.jump_stm = jump_stm
 
 
-class exp_stmp130(exp_stm):
+class exp_stmp131(exp_stm):
     # exp_stm --> exp ;
     def __init__(self, exp, Semicolon):
         self.exp = exp
 
 
-class exp_stmp131(exp_stm):
+class exp_stmp132(exp_stm):
     # exp_stm --> ;
     def __init__(self, Semicolon):
         pass
 
 
-class compound_stmp132(compound_stm):
+class compound_stmp133(compound_stm):
     # compound_stm --> { block_item_list }
     def __init__(self, LBrace, block_item_list, RBrace):
         self.block_item_list = block_item_list
 
 
-class compound_stmp133(compound_stm):
+class compound_stmp134(compound_stm):
     # compound_stm --> { }
     def __init__(self, LBrace, RBrace):
         pass
 
 
-class block_item_listp134(block_item_list):
+class block_item_listp135(block_item_list):
     # block_item_list --> block_item
     def __init__(self, block_item):
         self.block_item = block_item
 
 
-class block_item_listp135(block_item_list):
+class block_item_listp136(block_item_list):
     # block_item_list --> block_item_list block_item
     def __init__(self, block_item_list, block_item):
         self.block_item_list = block_item_list
         self.block_item = block_item
 
 
-class block_itemp136(block_item):
+class block_itemp137(block_item):
     # block_item --> dec
     def __init__(self, dec):
         self.dec = dec
 
 
-class block_itemp137(block_item):
+class block_itemp138(block_item):
     # block_item --> stm
     def __init__(self, stm):
         self.stm = stm
 
 
-class selection_stmp138(selection_stm):
+class selection_stmp139(selection_stm):
     # selection_stm --> 'if' ( exp ) stm
     def __init__(self, _if, LParen, exp, RParen, stm):
         self.exp = exp
         self.stm = stm
 
 
-class selection_stmp139(selection_stm):
+class selection_stmp140(selection_stm):
     # selection_stm --> 'if' ( exp ) stm 'else' stm
     def __init__(self, _if, LParen, exp, RParen, stm1, _else, stm2):
         self.exp = exp
@@ -1094,21 +1100,21 @@ class selection_stmp139(selection_stm):
         self.stm2 = stm2
 
 
-class iteration_stmp140(iteration_stm):
+class iteration_stmp141(iteration_stm):
     # iteration_stm --> 'while' ( exp ) stm
     def __init__(self, _while, LParen, exp, RParen, stm):
         self.exp = exp
         self.stm = stm
 
 
-class iteration_stmp141(iteration_stm):
+class iteration_stmp142(iteration_stm):
     # iteration_stm --> 'do' stm 'while' ( exp ) ;
     def __init__(self, do, stm, _while, LParen, exp, RParen, Semicolon):
         self.stm = stm
         self.exp = exp
 
 
-class iteration_stmp142(iteration_stm):
+class iteration_stmp143(iteration_stm):
     # iteration_stm --> 'for' ( exp ; exp ; exp ) stm
     def __init__(self, _for, LParen, exp1, Semicolon1, exp2, Semicolon2, exp3, RParen, stm):
         self.exp1 = exp1
@@ -1117,25 +1123,25 @@ class iteration_stmp142(iteration_stm):
         self.stm = stm
 
 
-class jump_stmp143(jump_stm):
+class jump_stmp144(jump_stm):
     # jump_stm --> 'goto' ID
     def __init__(self, goto, ID):
         self.ID = ID
 
 
-class jump_stmp144(jump_stm):
+class jump_stmp145(jump_stm):
     # jump_stm --> 'continue'
     def __init__(self, _continue):
         pass
 
 
-class jump_stmp145(jump_stm):
+class jump_stmp146(jump_stm):
     # jump_stm --> 'break'
     def __init__(self, _break):
         pass
 
 
-class jump_stmp146(jump_stm):
+class jump_stmp147(jump_stm):
     # jump_stm --> 'return' exp ;
     def __init__(self, _return, exp, Semicolon):
         self.exp = exp
