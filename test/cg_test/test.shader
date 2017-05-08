@@ -30,7 +30,7 @@ v2f vert (appdata_t v)
     o.vertex = mul (UNITY_MATRIX_MVP, v.vertex);
     o.color = v.color * _Color;
     o.texcoord = TRANSFORM_TEX (v.texcoord, _MainTex);
-//     // return o;
+    return o;
 }
 
 

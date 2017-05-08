@@ -109,6 +109,9 @@ Comma
 ID(_MainTex)
 RParen
 Semicolon
+ID(return)
+ID(o)
+Semicolon
 RBrace
 ID(ENDCG)
 __End

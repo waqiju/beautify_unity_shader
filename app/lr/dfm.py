@@ -23,12 +23,12 @@ class SymbolStack:
 
 
 def reduce(production, symbols):
-    print(production)
     cls = production.LeftNonterminalClass
     return cls(*symbols)
 
 
-def run(edges, productions, tokens):
+def run(edges, productions, tokens, isDebug=False):
+    productions.insert(0, None)
     stack = SymbolStack()
 
     stack.push('__Begin', 0)
@@ -44,12 +44,18 @@ def run(edges, productions, tokens):
         elif actionStr[0] == 's':
             stateId = int(actionStr[1:])
             stack.push(token, stateId)
+            # debug
+            if isDebug:
+                print('shift: %s s%s' % (token, stateId))
         elif actionStr[0] == 'r':
             productionId = int(actionStr[1:])
             production = productions[productionId]
             topSymbols = stack.pop(len(production.right))
             topStateId = stack.getTopStateId()
             nonterminal = reduce(production, topSymbols)
+            # debug
+            if isDebug:
+                print('reduce: %s , LookAheadST = %s %s' % (production, token, actionStr))
 
             actionStr = edges[topStateId].get(nonterminal.kind)
             if actionStr is None:
@@ -57,6 +63,9 @@ def run(edges, productions, tokens):
                 break
             stateId = int(actionStr[1:])
             stack.push(nonterminal, stateId)
+            # debug
+            if isDebug:
+                print('  >>>shift: %s s%s' % (nonterminal.kind, stateId))
 
             continue
         elif actionStr == 'a':

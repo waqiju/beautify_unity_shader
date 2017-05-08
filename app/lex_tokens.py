@@ -13,6 +13,11 @@ class TokenType(SymbolType):
     Enter = "Enter" # 偶尔需要这个，比如C语言的pragma
     # 双符号标点
     RightArrow = "RightArrow"
+    AddAssign = "AddAssign"
+    SubAssign = "SubAssign"
+    MulAssign = "MulAssign"
+    DivAssign = "DivAssign"
+    ModAssign = "ModAssign"
     LeftShiftAssign = "LeftShiftAssign"
     RightShiftAssign = "RightShiftAssign"
     ModAssign = "ModAssign"

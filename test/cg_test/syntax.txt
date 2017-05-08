@@ -68,7 +68,6 @@ conditional_exp   -> binary_exp
 assignment_exp    -> conditional_exp
                   -> unary_exp assignment_op assignment_exp
 assignment_op     -> =
-/*
                   -> *=
                   -> /=
                   -> %=
@@ -79,10 +78,11 @@ assignment_op     -> =
                   -> &=
                   -> ^=
                   -> |=
-*/
 exp         -> assignment_exp
             -> exp, assignment_exp
 // 10 declaration
+// 因为typedef的存在，'ID ;'存在两种解释。所以禁用这条，并且把struct_specifier和dec_specifier的关系。
+//dec               -> dec_specifier ;
 dec               -> struct_specifier ;
                   -> dec_specifier init_dec_list ;
 dec_specifier     -> type_specifier
@@ -119,19 +119,18 @@ struct_declarator -> declarator
                   -> declarator : ID
 
 declarator        -> ID
-                  -> ( declarator )
-//                  -> declarator [ exp ]
+// 因为typedef的存在，'ID ('会存在两种解释，所以禁用这条。
+//                  -> ( declarator )
+                  -> declarator [ exp ]
                   -> declarator ( parameter_list )
 parameter_list    -> parameter_dec
                   -> parameter_list , parameter_dec
 parameter_dec     -> type_specifier declarator
-/*
+
 init_dec_list     -> init_dec
                   -> init_dec_list , init_dec
 init_dec          -> declarator
-                  -> declarator = exp
-*/
-init_dec_list     -> ID
+                  -> declarator = assignment_exp
 // 11 statement
 stm               -> exp_stm
                   -> compound_stm
