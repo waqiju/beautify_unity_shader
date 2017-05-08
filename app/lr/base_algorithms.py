@@ -45,29 +45,34 @@ def _productions2ItemSetLR0(productions):
 
 # below is algorithm for LR1
 def calcClosure(productionList, firstDict, nullableDict, itemSet):
-    dirtyCount = True
+    pendingElementCount = len(itemSet)
     closure = ObjectSet(itemSet)
-    # print(closure)
+    nowElementIndex = 0
 
-    while dirtyCount > 0:
-        dirtyCount = False
+    while nowElementIndex < len(closure):
+        item = closure[nowElementIndex]
+        nowElementIndex += 1
 
-        for item in closure:
-            x = item.getNextSymbolType()
-            if x is None or x in SymbolType.TokenType: 
-                continue
+        x = item.getNextSymbolType()
+        if x is None or x in SymbolType.TokenType:
+            continue
 
-            XClass = Nonterminal.getClass(x)
-            for production in XClass.leadingProductions:
-                tail = item.getTailSTList()
-                # print('----', production, tail, calcSTListFirst(firstDict, nullableDict, tail))
-                for lookAheadST in calcSTListFirst(firstDict, nullableDict, tail): # todo
-                    closure, isDirty = ObjectSet.unionReportDirty(closure, _production2ItemSet(production, lookAheadST))
-                    dirtyCount += isDirty
-
-        # print(closure)
+        XClass = Nonterminal.getClass(x)
+        for production in XClass.leadingProductions:
+            tail = item.getTailSTList()
+            for lookAheadST in calcSTListFirst(firstDict, nullableDict, tail):
+                isDirty = _addElementAndReportDirty(closure, production, lookAheadST)
 
     return closure
+
+
+def _addElementAndReportDirty(itemSet, production, lookAheadST):
+    item = Item(production, 0, lookAheadST)
+    if itemSet.has(item):
+        return False
+
+    itemSet.add(item)
+    return True
 
 
 def _production2ItemSet(production, lookAheadST):

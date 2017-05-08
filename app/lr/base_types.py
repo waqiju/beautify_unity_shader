@@ -7,6 +7,7 @@ class ObjectSet:
 
     def __init__(self, srcSet=None):
         self.set = {}
+        self.setInSequence = []
         self.serialNumber = {}
         self.hashValue = None
 
@@ -20,6 +21,7 @@ class ObjectSet:
 
         key = obj if isinstance(obj, str) else obj.getHashValue()
         self.set[key] = obj
+        self.setInSequence.append(obj)
         self.serialNumber[key] = len(self) - 1
         # self.updateHashValue()
 
@@ -56,6 +58,10 @@ class ObjectSet:
         for obj in self:
             text = text + str(obj) + ', '
         return '(%s)' % text
+
+    def __getitem__(self, key):
+        return self.setInSequence[key]
+
 
     def updateHashValue(self):
         self.hashValue = ''
