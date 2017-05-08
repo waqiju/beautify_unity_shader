@@ -61,14 +61,10 @@ class TokenType(SymbolType):
     Assign = "Assign"
     Pound = "Pound"
     Question = "Question"
-    # 语言保留字
-    if_ = "if"
-    then_ = "then"
-    else_ = "else"
-    while_ = "while"
-    for_ = "for"
-    break_ = "break"
-    none_ = "none"
+
+    # C语言的宏变量
+    C_MARCO_VARIABLE = "C_MARCO_VARIABLE"
+
     # Debug
     ReservedWord = "ReservedWord"
     LexicalError = "LexicalError"

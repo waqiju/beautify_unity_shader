@@ -131,4 +131,6 @@ class Test(unittest.TestCase):
         productionList = analyze(tokens)
 
         translator.writeProductionList(productionList, productionNonterminals, TokenType)
+        translator.mergeProductionListToFile(productionList, productionNonterminals, TokenType, os.path.join(__file__, '../../test/cg_test/productions.py'))
         translator.writeNonterminals(productionList, productionNonterminals)
+        translator.mergeNonterminalsToFile(productionList, productionNonterminals, os.path.join(__file__, '../../test/cg_test/nonterminals.py'))

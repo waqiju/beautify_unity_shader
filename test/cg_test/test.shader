@@ -1,38 +1,35 @@
-CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
+    CGINCLUDE
+    #pragma vertex vert
+    #pragma fragment frag
+    #pragma target 2.0
+    #pragma multi_compile _ UNITY_SINGLE_PASS_STEREO
+    #pragma multi_compile ___ STEREO_INSTANCING_ON 
+    #include "UnityCG.cginc"
 
-#include "UnityCG.cginc"
+    struct appdata_t {
+        float4 vertex : POSITION;
+        fixed4 color : COLOR;
+        // UNITY_VERTEX_INPUT_INSTANCE_ID
+    };
 
-struct appdata_t
-{
-    float4 vertex : POSITION;
-    fixed4 color : COLOR;
-    float2 texcoord : TEXCOORD0;
-};
+    struct v2f {
+        float4 vertex : SV_POSITION;
+        fixed4 color : COLOR;
+        // UNITY_VERTEX_OUTPUT_STEREO
+    };
 
+    v2f vert (appdata_t v)
+    {
+        UNITY_SETUP_INSTANCE_ID(v);
+        v2f o;
+        UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+        o.vertex = UnityObjectToClipPos(v.vertex);
+        o.color = v.color;
+        return o;
+    }
 
-struct v2f
-{
-    float4 vertex : SV_POSITION;
-    fixed4 color : COLOR;
-    float2 texcoord : TEXCOORD0;
-};
-
-
-sampler2D _MainTex;
-uniform float4 _MainTex_ST;
-uniform fixed4 _Color;
-            
-v2f vert (appdata_t v)
-{
-    v2f o;
-    o.vertex = mul (UNITY_MATRIX_MVP, v.vertex);
-    o.color = v.color * _Color;
-    o.texcoord = TRANSFORM_TEX (v.texcoord, _MainTex);
-    return o;
-}
-
-
-
-ENDCG
+    fixed4 frag (v2f i) : SV_Target
+    {
+        return i.color;
+    }
+    ENDCG 

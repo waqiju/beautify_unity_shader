@@ -2,14 +2,54 @@ import os
 
 
 # write nonterminls.py
-def writeNonterminals(productionList, NonterminalType):
-    _writeBegin()
-    _writeNonterminalType(NonterminalType)
-    _writeNonterminalClassList(productionList, NonterminalType)
-    _writeEnd()
+def writeNonterminals(productionList, productionNonterminals):
+    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'w') as f:
+        _writeBegin(f)
+        _writeNonterminalType(f, productionNonterminals)
+        _writeNonterminalClassList(f, productionList, productionNonterminals)
+        _writeEnd(f)
 
 
-def _writeBegin():
+def mergeNonterminalsToFile(productionList, productionNonterminals, filePath):
+    from io import StringIO
+    import re
+
+    # 获得老文件内容
+    with open(filePath) as f:
+        fileBuf = f.read()
+
+    # 纠正编号
+    for production in productionList:
+        pattern = r"class %s(p\d+)\(%s\):\n" % (production.left.text, production.left.text)
+        pattern += "    # %s\n" % _replaceRegexKeyWord(production.text)
+
+        match = re.search(pattern, fileBuf)
+        if match is None:
+            continue
+
+        text = "class %s%s(%s):\n" % (production.left.text, production.name, production.left.text)
+        text += "    # %s\n" % production.text
+
+        fileBuf = fileBuf[:match.start()] + text + fileBuf[match.end():]
+
+    # 完成
+    with open(filePath, 'w') as f:
+        f.write(fileBuf)
+
+
+_kws = { '\\', '*', '+', '?', '^', '|', '[', ']', '(', ')', '.' }
+def _replaceRegexKeyWord(text):
+    newText = ''
+    for ch in text:
+        if ch in _kws:
+            newText += '\\' + ch
+        else:
+            newText += ch
+
+    return newText
+
+
+def _writeBegin(file):
     texts = [
         "from app.symbol_type import SymbolType",
         "from app.syntax_nonterminal import Nonterminal",
@@ -17,12 +57,10 @@ def _writeBegin():
         "import unittest",
     ]
     texts = map(lambda text: text + '\n', texts)
-
-    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'w') as f:
-        f.writelines(texts)
+    file.writelines(texts)
 
 
-def _writeEnd():
+def _writeEnd(file):
     texts = [
         "\n\n"
         "class Test(unittest.TestCase):",
@@ -31,27 +69,23 @@ def _writeEnd():
         "        pass",
     ]
     texts = map(lambda text: text + '\n', texts)
-
-    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'a') as f:
-        f.writelines(texts)
+    file.writelines(texts)
 
 
-def _writeNonterminalType(types):
-    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'a') as f:
-        f.write('\n\n')
-        f.write('class NonterminalType(SymbolType):\n')
-        f.write('\n')
-        for ty in types:
-            f.write("    %s = '%s'\n" % (ty, ty))
+def _writeNonterminalType(file, types):
+    file.write('\n\n')
+    file.write('class NonterminalType(SymbolType):\n')
+    file.write('\n')
+    for ty in types:
+        file.write("    %s = '%s'\n" % (ty, ty))
 
 
-def _writeNonterminalClassList(productionList, types):
-    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'a') as f:
-        for ty in types:
-            _writeBaseClass(f, ty)
+def _writeNonterminalClassList(file, productionList, types):
+    for ty in types:
+        _writeBaseClass(file, ty)
 
-        for production in productionList:
-            _writeDeriveClass(f, production)
+    for production in productionList:
+        _writeDeriveClass(file, production)
 
 
 def _writeBaseClass(file, className):
@@ -135,3 +169,23 @@ def _writeProduction(file, NonterminalType, TokenType, left, right, name):
             print('error: symbol = %s' % symbol)
     text += ")),\n"
     file.write(text)
+
+
+def mergeProductionListToFile(productionList, productionNonterminals, productionTokens, filePath):
+    from io import StringIO
+    import re
+
+    memFile = StringIO()
+    memFile.write('productionList = [\n')
+    for p in productionList:
+        _writeProduction(memFile, productionNonterminals, productionTokens, p.left, p.right, p.name)
+    memFile.write(']\n')
+
+    with open(filePath) as f:
+        fileBuf = f.read()
+    match = re.search(r'productionList = \[\n.*\)\),\n\]', fileBuf, re.DOTALL)
+    memFile.seek(0)
+    newFileBuf = fileBuf[:match.start()] + memFile.read() + fileBuf[match.end():]
+
+    with open(filePath, 'w') as f:
+        f.write(newFileBuf)

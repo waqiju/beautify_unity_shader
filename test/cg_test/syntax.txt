@@ -1,4 +1,5 @@
 prog   -> 'CGPROGRAM' cg_prog 'ENDCG'
+       -> 'CGINCLUDE' cg_prog 'ENDCG'
 //7 cg
 cg_prog     -> cg_stms
 cg_stms     -> cg_stm cg_stms
@@ -7,7 +8,11 @@ cg_stm      -> preprocessing_stm
             -> function_definition
             -> dec
 function_definition     -> dec_specifier declarator compound_stm 
+                        -> dec_specifier declarator : ID compound_stm 
 //8 预处理当做特殊的stm处理好了，简单点
+//  C语言的MARCO可以大致分为两种。一种是不带参数的宏，这个文法近似当做ID处理；另一种是带参数的宏，近似当做函数调用ID(...)处理。
+//  这种近似有漏洞吗？有的。比如MARCO展开后末尾有';'号，在源文件中就可以不加分号。这会导致语法识别错误。
+//  彻底解决这个问题的方法是把C语言的MARCO机制也模拟出来。BUT！我！不！想！模！拟！它！
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
 pp_if_stm   -> # 'if' ID
@@ -17,9 +22,10 @@ pp_if_stm   -> # 'if' ID
             -> # 'else'
             -> # 'endif'
 pp_cmd      -> # 'include' String
-            -> # 'pragma' ids Enter
-ids         -> ID ids
-            ->
+            -> # 'pragma' ids_or_numbers Enter
+ids_or_numbers    -> ID ids_or_numbers
+                  -> Number ids_or_numbers
+                  ->
 
 //9 expression，C语言的简化版
 primary_exp -> ID

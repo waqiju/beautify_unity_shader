@@ -1,688 +1,700 @@
 {
-    "kind": "prog",
     "cg_prog": {
-        "kind": "cg_prog",
         "cg_stms": {
-            "cg_stm": {
-                "preprocessing_stm": {
-                    "kind": "preprocessing_stm",
-                    "pp_cmd": {
-                        "ids": {
-                            "ids": {
-                                "ids": {
-                                    "kind": "ids"
-                                },
-                                "kind": "ids",
-                                "ID": "ID(vert)"
-                            },
-                            "kind": "ids",
-                            "ID": "ID(vertex)"
-                        },
-                        "kind": "pp_cmd"
-                    }
-                },
-                "kind": "cg_stm"
-            },
-            "kind": "cg_stms",
             "cg_stms": {
-                "cg_stm": {
-                    "preprocessing_stm": {
-                        "kind": "preprocessing_stm",
-                        "pp_cmd": {
-                            "ids": {
-                                "ids": {
-                                    "ids": {
-                                        "kind": "ids"
-                                    },
-                                    "kind": "ids",
-                                    "ID": "ID(frag)"
-                                },
-                                "kind": "ids",
-                                "ID": "ID(fragment)"
-                            },
-                            "kind": "pp_cmd"
-                        }
-                    },
-                    "kind": "cg_stm"
-                },
-                "kind": "cg_stms",
                 "cg_stms": {
-                    "cg_stm": {
-                        "preprocessing_stm": {
-                            "kind": "preprocessing_stm",
-                            "pp_cmd": {
-                                "kind": "pp_cmd",
-                                "String": "String(\"UnityCG.cginc\")"
-                            }
-                        },
-                        "kind": "cg_stm"
-                    },
-                    "kind": "cg_stms",
                     "cg_stms": {
-                        "cg_stm": {
-                            "kind": "cg_stm",
-                            "dec": {
-                                "struct_specifier": {
-                                    "kind": "struct_specifier",
-                                    "struct_dec_list": {
-                                        "kind": "struct_dec_list",
-                                        "struct_dec_list": {
-                                            "kind": "struct_dec_list",
-                                            "struct_dec_list": {
-                                                "kind": "struct_dec_list",
-                                                "struct_dec": {
-                                                    "type_specifier": {
-                                                        "kind": "type_specifier"
-                                                    },
-                                                    "struct_declarator_list": {
-                                                        "struct_declarator": {
-                                                            "declarator": {
-                                                                "kind": "declarator",
-                                                                "ID": "ID(vertex)"
-                                                            },
-                                                            "kind": "struct_declarator",
-                                                            "ID": "ID(POSITION)"
-                                                        },
-                                                        "kind": "struct_declarator_list"
-                                                    },
-                                                    "kind": "struct_dec"
-                                                }
-                                            },
-                                            "struct_dec": {
-                                                "type_specifier": {
-                                                    "kind": "type_specifier"
-                                                },
-                                                "struct_declarator_list": {
-                                                    "struct_declarator": {
-                                                        "declarator": {
-                                                            "kind": "declarator",
-                                                            "ID": "ID(color)"
-                                                        },
-                                                        "kind": "struct_declarator",
-                                                        "ID": "ID(COLOR)"
-                                                    },
-                                                    "kind": "struct_declarator_list"
-                                                },
-                                                "kind": "struct_dec"
-                                            }
-                                        },
-                                        "struct_dec": {
-                                            "type_specifier": {
-                                                "kind": "type_specifier"
-                                            },
-                                            "struct_declarator_list": {
-                                                "struct_declarator": {
-                                                    "declarator": {
-                                                        "kind": "declarator",
-                                                        "ID": "ID(texcoord)"
-                                                    },
-                                                    "kind": "struct_declarator",
-                                                    "ID": "ID(TEXCOORD0)"
-                                                },
-                                                "kind": "struct_declarator_list"
-                                            },
-                                            "kind": "struct_dec"
-                                        }
-                                    },
-                                    "ID": "ID(appdata_t)"
-                                },
-                                "kind": "dec"
-                            }
-                        },
-                        "kind": "cg_stms",
                         "cg_stms": {
-                            "cg_stm": {
-                                "kind": "cg_stm",
-                                "dec": {
-                                    "struct_specifier": {
-                                        "kind": "struct_specifier",
-                                        "struct_dec_list": {
-                                            "kind": "struct_dec_list",
-                                            "struct_dec_list": {
-                                                "kind": "struct_dec_list",
-                                                "struct_dec_list": {
-                                                    "kind": "struct_dec_list",
-                                                    "struct_dec": {
-                                                        "type_specifier": {
-                                                            "kind": "type_specifier"
-                                                        },
-                                                        "struct_declarator_list": {
-                                                            "struct_declarator": {
-                                                                "declarator": {
-                                                                    "kind": "declarator",
-                                                                    "ID": "ID(vertex)"
-                                                                },
-                                                                "kind": "struct_declarator",
-                                                                "ID": "ID(SV_POSITION)"
-                                                            },
-                                                            "kind": "struct_declarator_list"
-                                                        },
-                                                        "kind": "struct_dec"
-                                                    }
+                            "cg_stms": {
+                                "cg_stms": {
+                                    "cg_stms": {
+                                        "cg_stms": {
+                                            "cg_stms": {
+                                                "cg_stms": {
+                                                    "kind": "cg_stms"
                                                 },
-                                                "struct_dec": {
-                                                    "type_specifier": {
-                                                        "kind": "type_specifier"
-                                                    },
-                                                    "struct_declarator_list": {
-                                                        "struct_declarator": {
+                                                "cg_stm": {
+                                                    "function_definition": {
+                                                        "declarator": {
+                                                            "parameter_list": {
+                                                                "parameter_dec": {
+                                                                    "type_specifier": {
+                                                                        "typedef_name": {
+                                                                            "kind": "typedef_name",
+                                                                            "ID": "ID(v2f)"
+                                                                        },
+                                                                        "kind": "type_specifier"
+                                                                    },
+                                                                    "kind": "parameter_dec",
+                                                                    "declarator": {
+                                                                        "kind": "declarator",
+                                                                        "ID": "ID(i)"
+                                                                    }
+                                                                },
+                                                                "kind": "parameter_list"
+                                                            },
+                                                            "kind": "declarator",
                                                             "declarator": {
                                                                 "kind": "declarator",
-                                                                "ID": "ID(color)"
+                                                                "ID": "ID(frag)"
+                                                            }
+                                                        },
+                                                        "dec_specifier": {
+                                                            "type_specifier": {
+                                                                "kind": "type_specifier"
                                                             },
-                                                            "kind": "struct_declarator",
-                                                            "ID": "ID(COLOR)"
+                                                            "kind": "dec_specifier"
                                                         },
-                                                        "kind": "struct_declarator_list"
-                                                    },
-                                                    "kind": "struct_dec"
-                                                }
-                                            },
-                                            "struct_dec": {
-                                                "type_specifier": {
-                                                    "kind": "type_specifier"
-                                                },
-                                                "struct_declarator_list": {
-                                                    "struct_declarator": {
-                                                        "declarator": {
-                                                            "kind": "declarator",
-                                                            "ID": "ID(texcoord)"
+                                                        "compound_stm": {
+                                                            "block_item_list": {
+                                                                "block_item": {
+                                                                    "stm": {
+                                                                        "jump_stm": {
+                                                                            "exp": {
+                                                                                "assignment_exp": {
+                                                                                    "conditional_exp": {
+                                                                                        "binary_exp": {
+                                                                                            "unary_exp": {
+                                                                                                "kind": "unary_exp",
+                                                                                                "postfix_exp": {
+                                                                                                    "postfix_exp": {
+                                                                                                        "primary_exp": {
+                                                                                                            "kind": "primary_exp",
+                                                                                                            "ID": "ID(i)"
+                                                                                                        },
+                                                                                                        "kind": "postfix_exp"
+                                                                                                    },
+                                                                                                    "kind": "postfix_exp",
+                                                                                                    "ID": "ID(color)"
+                                                                                                }
+                                                                                            },
+                                                                                            "kind": "binary_exp"
+                                                                                        },
+                                                                                        "kind": "conditional_exp"
+                                                                                    },
+                                                                                    "kind": "assignment_exp"
+                                                                                },
+                                                                                "kind": "exp"
+                                                                            },
+                                                                            "kind": "jump_stm"
+                                                                        },
+                                                                        "kind": "stm"
+                                                                    },
+                                                                    "kind": "block_item"
+                                                                },
+                                                                "kind": "block_item_list"
+                                                            },
+                                                            "kind": "compound_stm"
                                                         },
-                                                        "kind": "struct_declarator",
-                                                        "ID": "ID(TEXCOORD0)"
+                                                        "kind": "function_definition",
+                                                        "ID": "ID(SV_Target)"
                                                     },
-                                                    "kind": "struct_declarator_list"
+                                                    "kind": "cg_stm"
                                                 },
-                                                "kind": "struct_dec"
-                                            }
-                                        },
-                                        "ID": "ID(v2f)"
-                                    },
-                                    "kind": "dec"
-                                }
-                            },
-                            "kind": "cg_stms",
-                            "cg_stms": {
-                                "cg_stm": {
-                                    "kind": "cg_stm",
-                                    "dec": {
-                                        "dec_specifier": {
-                                            "type_specifier": {
-                                                "kind": "type_specifier"
+                                                "kind": "cg_stms"
                                             },
-                                            "kind": "dec_specifier"
-                                        },
-                                        "init_dec_list": {
-                                            "init_dec": {
-                                                "declarator": {
-                                                    "kind": "declarator",
-                                                    "ID": "ID(_MainTex)"
-                                                },
-                                                "kind": "init_dec"
-                                            },
-                                            "kind": "init_dec_list"
-                                        },
-                                        "kind": "dec"
-                                    }
-                                },
-                                "kind": "cg_stms",
-                                "cg_stms": {
-                                    "cg_stm": {
-                                        "kind": "cg_stm",
-                                        "dec": {
-                                            "dec_specifier": {
-                                                "type_specifier": {
-                                                    "kind": "type_specifier"
-                                                },
-                                                "kind": "dec_specifier",
-                                                "type_qualifier": {
-                                                    "kind": "type_qualifier"
-                                                }
-                                            },
-                                            "init_dec_list": {
-                                                "init_dec": {
-                                                    "declarator": {
-                                                        "kind": "declarator",
-                                                        "ID": "ID(_MainTex_ST)"
-                                                    },
-                                                    "kind": "init_dec"
-                                                },
-                                                "kind": "init_dec_list"
-                                            },
-                                            "kind": "dec"
-                                        }
-                                    },
-                                    "kind": "cg_stms",
-                                    "cg_stms": {
-                                        "cg_stm": {
-                                            "kind": "cg_stm",
-                                            "dec": {
-                                                "dec_specifier": {
-                                                    "type_specifier": {
-                                                        "kind": "type_specifier"
-                                                    },
-                                                    "kind": "dec_specifier",
-                                                    "type_qualifier": {
-                                                        "kind": "type_qualifier"
-                                                    }
-                                                },
-                                                "init_dec_list": {
-                                                    "init_dec": {
-                                                        "declarator": {
-                                                            "kind": "declarator",
-                                                            "ID": "ID(_Color)"
-                                                        },
-                                                        "kind": "init_dec"
-                                                    },
-                                                    "kind": "init_dec_list"
-                                                },
-                                                "kind": "dec"
-                                            }
-                                        },
-                                        "kind": "cg_stms",
-                                        "cg_stms": {
                                             "cg_stm": {
-                                                "kind": "cg_stm",
                                                 "function_definition": {
                                                     "dec_specifier": {
                                                         "type_specifier": {
-                                                            "kind": "type_specifier",
                                                             "typedef_name": {
                                                                 "kind": "typedef_name",
                                                                 "ID": "ID(v2f)"
-                                                            }
+                                                            },
+                                                            "kind": "type_specifier"
                                                         },
                                                         "kind": "dec_specifier"
                                                     },
                                                     "compound_stm": {
                                                         "block_item_list": {
-                                                            "block_item_list": {
-                                                                "block_item_list": {
-                                                                    "block_item_list": {
-                                                                        "block_item_list": {
-                                                                            "kind": "block_item_list",
-                                                                            "block_item": {
-                                                                                "kind": "block_item",
-                                                                                "dec": {
-                                                                                    "dec_specifier": {
-                                                                                        "type_specifier": {
-                                                                                            "kind": "type_specifier",
-                                                                                            "typedef_name": {
-                                                                                                "kind": "typedef_name",
-                                                                                                "ID": "ID(v2f)"
-                                                                                            }
-                                                                                        },
-                                                                                        "kind": "dec_specifier"
-                                                                                    },
-                                                                                    "init_dec_list": {
-                                                                                        "init_dec": {
-                                                                                            "declarator": {
-                                                                                                "kind": "declarator",
-                                                                                                "ID": "ID(o)"
-                                                                                            },
-                                                                                            "kind": "init_dec"
-                                                                                        },
-                                                                                        "kind": "init_dec_list"
-                                                                                    },
-                                                                                    "kind": "dec"
-                                                                                }
-                                                                            }
-                                                                        },
-                                                                        "kind": "block_item_list",
-                                                                        "block_item": {
-                                                                            "stm": {
-                                                                                "exp_stm": {
-                                                                                    "kind": "exp_stm",
-                                                                                    "exp": {
-                                                                                        "assignment_exp": {
-                                                                                            "assignment_exp": {
-                                                                                                "kind": "assignment_exp",
-                                                                                                "conditional_exp": {
-                                                                                                    "binary_exp": {
-                                                                                                        "kind": "binary_exp",
-                                                                                                        "unary_exp": {
-                                                                                                            "postfix_exp": {
-                                                                                                                "postfix_exp": {
-                                                                                                                    "kind": "postfix_exp",
-                                                                                                                    "primary_exp": {
-                                                                                                                        "kind": "primary_exp",
-                                                                                                                        "ID": "ID(mul)"
-                                                                                                                    }
-                                                                                                                },
-                                                                                                                "kind": "postfix_exp",
-                                                                                                                "argument_exp_list": {
-                                                                                                                    "assignment_exp": {
-                                                                                                                        "kind": "assignment_exp",
-                                                                                                                        "conditional_exp": {
-                                                                                                                            "binary_exp": {
-                                                                                                                                "kind": "binary_exp",
-                                                                                                                                "unary_exp": {
-                                                                                                                                    "postfix_exp": {
-                                                                                                                                        "postfix_exp": {
-                                                                                                                                            "kind": "postfix_exp",
-                                                                                                                                            "primary_exp": {
-                                                                                                                                                "kind": "primary_exp",
-                                                                                                                                                "ID": "ID(v)"
-                                                                                                                                            }
-                                                                                                                                        },
-                                                                                                                                        "kind": "postfix_exp",
-                                                                                                                                        "ID": "ID(vertex)"
-                                                                                                                                    },
-                                                                                                                                    "kind": "unary_exp"
-                                                                                                                                }
-                                                                                                                            },
-                                                                                                                            "kind": "conditional_exp"
-                                                                                                                        }
-                                                                                                                    },
-                                                                                                                    "kind": "argument_exp_list",
-                                                                                                                    "argument_exp_list": {
-                                                                                                                        "assignment_exp": {
-                                                                                                                            "kind": "assignment_exp",
-                                                                                                                            "conditional_exp": {
-                                                                                                                                "binary_exp": {
-                                                                                                                                    "kind": "binary_exp",
-                                                                                                                                    "unary_exp": {
-                                                                                                                                        "postfix_exp": {
-                                                                                                                                            "kind": "postfix_exp",
-                                                                                                                                            "primary_exp": {
-                                                                                                                                                "kind": "primary_exp",
-                                                                                                                                                "ID": "ID(UNITY_MATRIX_MVP)"
-                                                                                                                                            }
-                                                                                                                                        },
-                                                                                                                                        "kind": "unary_exp"
-                                                                                                                                    }
-                                                                                                                                },
-                                                                                                                                "kind": "conditional_exp"
-                                                                                                                            }
-                                                                                                                        },
-                                                                                                                        "kind": "argument_exp_list"
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            },
-                                                                                                            "kind": "unary_exp"
-                                                                                                        }
-                                                                                                    },
-                                                                                                    "kind": "conditional_exp"
-                                                                                                }
-                                                                                            },
-                                                                                            "kind": "assignment_exp",
-                                                                                            "assignment_op": {
-                                                                                                "kind": "assignment_op"
-                                                                                            },
-                                                                                            "unary_exp": {
-                                                                                                "postfix_exp": {
-                                                                                                    "postfix_exp": {
-                                                                                                        "kind": "postfix_exp",
-                                                                                                        "primary_exp": {
-                                                                                                            "kind": "primary_exp",
-                                                                                                            "ID": "ID(o)"
-                                                                                                        }
-                                                                                                    },
-                                                                                                    "kind": "postfix_exp",
-                                                                                                    "ID": "ID(vertex)"
-                                                                                                },
-                                                                                                "kind": "unary_exp"
-                                                                                            }
-                                                                                        },
-                                                                                        "kind": "exp"
-                                                                                    }
-                                                                                },
-                                                                                "kind": "stm"
-                                                                            },
-                                                                            "kind": "block_item"
-                                                                        }
-                                                                    },
-                                                                    "kind": "block_item_list",
-                                                                    "block_item": {
-                                                                        "stm": {
-                                                                            "exp_stm": {
-                                                                                "kind": "exp_stm",
-                                                                                "exp": {
-                                                                                    "assignment_exp": {
-                                                                                        "assignment_exp": {
-                                                                                            "kind": "assignment_exp",
-                                                                                            "conditional_exp": {
-                                                                                                "binary_exp": {
-                                                                                                    "unary_exp": {
-                                                                                                        "postfix_exp": {
-                                                                                                            "kind": "postfix_exp",
-                                                                                                            "primary_exp": {
-                                                                                                                "kind": "primary_exp",
-                                                                                                                "ID": "ID(_Color)"
-                                                                                                            }
-                                                                                                        },
-                                                                                                        "kind": "unary_exp"
-                                                                                                    },
-                                                                                                    "binary_exp": {
-                                                                                                        "kind": "binary_exp",
-                                                                                                        "unary_exp": {
-                                                                                                            "postfix_exp": {
-                                                                                                                "postfix_exp": {
-                                                                                                                    "kind": "postfix_exp",
-                                                                                                                    "primary_exp": {
-                                                                                                                        "kind": "primary_exp",
-                                                                                                                        "ID": "ID(v)"
-                                                                                                                    }
-                                                                                                                },
-                                                                                                                "kind": "postfix_exp",
-                                                                                                                "ID": "ID(color)"
-                                                                                                            },
-                                                                                                            "kind": "unary_exp"
-                                                                                                        }
-                                                                                                    },
-                                                                                                    "kind": "binary_exp",
-                                                                                                    "binary_op": {
-                                                                                                        "kind": "binary_op"
-                                                                                                    }
-                                                                                                },
-                                                                                                "kind": "conditional_exp"
-                                                                                            }
-                                                                                        },
-                                                                                        "kind": "assignment_exp",
-                                                                                        "assignment_op": {
-                                                                                            "kind": "assignment_op"
-                                                                                        },
-                                                                                        "unary_exp": {
-                                                                                            "postfix_exp": {
-                                                                                                "postfix_exp": {
-                                                                                                    "kind": "postfix_exp",
-                                                                                                    "primary_exp": {
-                                                                                                        "kind": "primary_exp",
-                                                                                                        "ID": "ID(o)"
-                                                                                                    }
-                                                                                                },
-                                                                                                "kind": "postfix_exp",
-                                                                                                "ID": "ID(color)"
-                                                                                            },
-                                                                                            "kind": "unary_exp"
-                                                                                        }
-                                                                                    },
-                                                                                    "kind": "exp"
-                                                                                }
-                                                                            },
-                                                                            "kind": "stm"
-                                                                        },
-                                                                        "kind": "block_item"
-                                                                    }
-                                                                },
-                                                                "kind": "block_item_list",
-                                                                "block_item": {
-                                                                    "stm": {
-                                                                        "exp_stm": {
-                                                                            "kind": "exp_stm",
-                                                                            "exp": {
-                                                                                "assignment_exp": {
-                                                                                    "assignment_exp": {
-                                                                                        "kind": "assignment_exp",
-                                                                                        "conditional_exp": {
-                                                                                            "binary_exp": {
-                                                                                                "kind": "binary_exp",
-                                                                                                "unary_exp": {
-                                                                                                    "postfix_exp": {
-                                                                                                        "postfix_exp": {
-                                                                                                            "kind": "postfix_exp",
-                                                                                                            "primary_exp": {
-                                                                                                                "kind": "primary_exp",
-                                                                                                                "ID": "ID(TRANSFORM_TEX)"
-                                                                                                            }
-                                                                                                        },
-                                                                                                        "kind": "postfix_exp",
-                                                                                                        "argument_exp_list": {
-                                                                                                            "assignment_exp": {
-                                                                                                                "kind": "assignment_exp",
-                                                                                                                "conditional_exp": {
-                                                                                                                    "binary_exp": {
-                                                                                                                        "kind": "binary_exp",
-                                                                                                                        "unary_exp": {
-                                                                                                                            "postfix_exp": {
-                                                                                                                                "kind": "postfix_exp",
-                                                                                                                                "primary_exp": {
-                                                                                                                                    "kind": "primary_exp",
-                                                                                                                                    "ID": "ID(_MainTex)"
-                                                                                                                                }
-                                                                                                                            },
-                                                                                                                            "kind": "unary_exp"
-                                                                                                                        }
-                                                                                                                    },
-                                                                                                                    "kind": "conditional_exp"
-                                                                                                                }
-                                                                                                            },
-                                                                                                            "kind": "argument_exp_list",
-                                                                                                            "argument_exp_list": {
-                                                                                                                "assignment_exp": {
-                                                                                                                    "kind": "assignment_exp",
-                                                                                                                    "conditional_exp": {
-                                                                                                                        "binary_exp": {
-                                                                                                                            "kind": "binary_exp",
-                                                                                                                            "unary_exp": {
-                                                                                                                                "postfix_exp": {
-                                                                                                                                    "postfix_exp": {
-                                                                                                                                        "kind": "postfix_exp",
-                                                                                                                                        "primary_exp": {
-                                                                                                                                            "kind": "primary_exp",
-                                                                                                                                            "ID": "ID(v)"
-                                                                                                                                        }
-                                                                                                                                    },
-                                                                                                                                    "kind": "postfix_exp",
-                                                                                                                                    "ID": "ID(texcoord)"
-                                                                                                                                },
-                                                                                                                                "kind": "unary_exp"
-                                                                                                                            }
-                                                                                                                        },
-                                                                                                                        "kind": "conditional_exp"
-                                                                                                                    }
-                                                                                                                },
-                                                                                                                "kind": "argument_exp_list"
-                                                                                                            }
-                                                                                                        }
-                                                                                                    },
-                                                                                                    "kind": "unary_exp"
-                                                                                                }
-                                                                                            },
-                                                                                            "kind": "conditional_exp"
-                                                                                        }
-                                                                                    },
-                                                                                    "kind": "assignment_exp",
-                                                                                    "assignment_op": {
-                                                                                        "kind": "assignment_op"
-                                                                                    },
-                                                                                    "unary_exp": {
-                                                                                        "postfix_exp": {
-                                                                                            "postfix_exp": {
-                                                                                                "kind": "postfix_exp",
-                                                                                                "primary_exp": {
-                                                                                                    "kind": "primary_exp",
-                                                                                                    "ID": "ID(o)"
-                                                                                                }
-                                                                                            },
-                                                                                            "kind": "postfix_exp",
-                                                                                            "ID": "ID(texcoord)"
-                                                                                        },
-                                                                                        "kind": "unary_exp"
-                                                                                    }
-                                                                                },
-                                                                                "kind": "exp"
-                                                                            }
-                                                                        },
-                                                                        "kind": "stm"
-                                                                    },
-                                                                    "kind": "block_item"
-                                                                }
-                                                            },
-                                                            "kind": "block_item_list",
                                                             "block_item": {
                                                                 "stm": {
                                                                     "jump_stm": {
-                                                                        "kind": "jump_stm",
                                                                         "exp": {
                                                                             "assignment_exp": {
-                                                                                "kind": "assignment_exp",
                                                                                 "conditional_exp": {
                                                                                     "binary_exp": {
-                                                                                        "kind": "binary_exp",
                                                                                         "unary_exp": {
+                                                                                            "kind": "unary_exp",
                                                                                             "postfix_exp": {
-                                                                                                "kind": "postfix_exp",
                                                                                                 "primary_exp": {
                                                                                                     "kind": "primary_exp",
                                                                                                     "ID": "ID(o)"
-                                                                                                }
-                                                                                            },
-                                                                                            "kind": "unary_exp"
-                                                                                        }
+                                                                                                },
+                                                                                                "kind": "postfix_exp"
+                                                                                            }
+                                                                                        },
+                                                                                        "kind": "binary_exp"
                                                                                     },
                                                                                     "kind": "conditional_exp"
-                                                                                }
+                                                                                },
+                                                                                "kind": "assignment_exp"
                                                                             },
                                                                             "kind": "exp"
-                                                                        }
+                                                                        },
+                                                                        "kind": "jump_stm"
                                                                     },
                                                                     "kind": "stm"
                                                                 },
                                                                 "kind": "block_item"
-                                                            }
+                                                            },
+                                                            "block_item_list": {
+                                                                "block_item": {
+                                                                    "stm": {
+                                                                        "exp_stm": {
+                                                                            "exp": {
+                                                                                "assignment_exp": {
+                                                                                    "assignment_op": {
+                                                                                        "kind": "assignment_op"
+                                                                                    },
+                                                                                    "assignment_exp": {
+                                                                                        "conditional_exp": {
+                                                                                            "binary_exp": {
+                                                                                                "unary_exp": {
+                                                                                                    "kind": "unary_exp",
+                                                                                                    "postfix_exp": {
+                                                                                                        "postfix_exp": {
+                                                                                                            "primary_exp": {
+                                                                                                                "kind": "primary_exp",
+                                                                                                                "ID": "ID(v)"
+                                                                                                            },
+                                                                                                            "kind": "postfix_exp"
+                                                                                                        },
+                                                                                                        "kind": "postfix_exp",
+                                                                                                        "ID": "ID(color)"
+                                                                                                    }
+                                                                                                },
+                                                                                                "kind": "binary_exp"
+                                                                                            },
+                                                                                            "kind": "conditional_exp"
+                                                                                        },
+                                                                                        "kind": "assignment_exp"
+                                                                                    },
+                                                                                    "unary_exp": {
+                                                                                        "kind": "unary_exp",
+                                                                                        "postfix_exp": {
+                                                                                            "postfix_exp": {
+                                                                                                "primary_exp": {
+                                                                                                    "kind": "primary_exp",
+                                                                                                    "ID": "ID(o)"
+                                                                                                },
+                                                                                                "kind": "postfix_exp"
+                                                                                            },
+                                                                                            "kind": "postfix_exp",
+                                                                                            "ID": "ID(color)"
+                                                                                        }
+                                                                                    },
+                                                                                    "kind": "assignment_exp"
+                                                                                },
+                                                                                "kind": "exp"
+                                                                            },
+                                                                            "kind": "exp_stm"
+                                                                        },
+                                                                        "kind": "stm"
+                                                                    },
+                                                                    "kind": "block_item"
+                                                                },
+                                                                "block_item_list": {
+                                                                    "block_item": {
+                                                                        "stm": {
+                                                                            "exp_stm": {
+                                                                                "exp": {
+                                                                                    "assignment_exp": {
+                                                                                        "assignment_op": {
+                                                                                            "kind": "assignment_op"
+                                                                                        },
+                                                                                        "assignment_exp": {
+                                                                                            "conditional_exp": {
+                                                                                                "binary_exp": {
+                                                                                                    "unary_exp": {
+                                                                                                        "kind": "unary_exp",
+                                                                                                        "postfix_exp": {
+                                                                                                            "argument_exp_list": {
+                                                                                                                "assignment_exp": {
+                                                                                                                    "conditional_exp": {
+                                                                                                                        "binary_exp": {
+                                                                                                                            "unary_exp": {
+                                                                                                                                "kind": "unary_exp",
+                                                                                                                                "postfix_exp": {
+                                                                                                                                    "postfix_exp": {
+                                                                                                                                        "primary_exp": {
+                                                                                                                                            "kind": "primary_exp",
+                                                                                                                                            "ID": "ID(v)"
+                                                                                                                                        },
+                                                                                                                                        "kind": "postfix_exp"
+                                                                                                                                    },
+                                                                                                                                    "kind": "postfix_exp",
+                                                                                                                                    "ID": "ID(vertex)"
+                                                                                                                                }
+                                                                                                                            },
+                                                                                                                            "kind": "binary_exp"
+                                                                                                                        },
+                                                                                                                        "kind": "conditional_exp"
+                                                                                                                    },
+                                                                                                                    "kind": "assignment_exp"
+                                                                                                                },
+                                                                                                                "kind": "argument_exp_list"
+                                                                                                            },
+                                                                                                            "kind": "postfix_exp",
+                                                                                                            "postfix_exp": {
+                                                                                                                "primary_exp": {
+                                                                                                                    "kind": "primary_exp",
+                                                                                                                    "ID": "ID(UnityObjectToClipPos)"
+                                                                                                                },
+                                                                                                                "kind": "postfix_exp"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "kind": "binary_exp"
+                                                                                                },
+                                                                                                "kind": "conditional_exp"
+                                                                                            },
+                                                                                            "kind": "assignment_exp"
+                                                                                        },
+                                                                                        "unary_exp": {
+                                                                                            "kind": "unary_exp",
+                                                                                            "postfix_exp": {
+                                                                                                "postfix_exp": {
+                                                                                                    "primary_exp": {
+                                                                                                        "kind": "primary_exp",
+                                                                                                        "ID": "ID(o)"
+                                                                                                    },
+                                                                                                    "kind": "postfix_exp"
+                                                                                                },
+                                                                                                "kind": "postfix_exp",
+                                                                                                "ID": "ID(vertex)"
+                                                                                            }
+                                                                                        },
+                                                                                        "kind": "assignment_exp"
+                                                                                    },
+                                                                                    "kind": "exp"
+                                                                                },
+                                                                                "kind": "exp_stm"
+                                                                            },
+                                                                            "kind": "stm"
+                                                                        },
+                                                                        "kind": "block_item"
+                                                                    },
+                                                                    "block_item_list": {
+                                                                        "block_item": {
+                                                                            "stm": {
+                                                                                "exp_stm": {
+                                                                                    "exp": {
+                                                                                        "assignment_exp": {
+                                                                                            "conditional_exp": {
+                                                                                                "binary_exp": {
+                                                                                                    "unary_exp": {
+                                                                                                        "kind": "unary_exp",
+                                                                                                        "postfix_exp": {
+                                                                                                            "argument_exp_list": {
+                                                                                                                "assignment_exp": {
+                                                                                                                    "conditional_exp": {
+                                                                                                                        "binary_exp": {
+                                                                                                                            "unary_exp": {
+                                                                                                                                "kind": "unary_exp",
+                                                                                                                                "postfix_exp": {
+                                                                                                                                    "primary_exp": {
+                                                                                                                                        "kind": "primary_exp",
+                                                                                                                                        "ID": "ID(o)"
+                                                                                                                                    },
+                                                                                                                                    "kind": "postfix_exp"
+                                                                                                                                }
+                                                                                                                            },
+                                                                                                                            "kind": "binary_exp"
+                                                                                                                        },
+                                                                                                                        "kind": "conditional_exp"
+                                                                                                                    },
+                                                                                                                    "kind": "assignment_exp"
+                                                                                                                },
+                                                                                                                "kind": "argument_exp_list"
+                                                                                                            },
+                                                                                                            "kind": "postfix_exp",
+                                                                                                            "postfix_exp": {
+                                                                                                                "primary_exp": {
+                                                                                                                    "kind": "primary_exp",
+                                                                                                                    "ID": "ID(UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO)"
+                                                                                                                },
+                                                                                                                "kind": "postfix_exp"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "kind": "binary_exp"
+                                                                                                },
+                                                                                                "kind": "conditional_exp"
+                                                                                            },
+                                                                                            "kind": "assignment_exp"
+                                                                                        },
+                                                                                        "kind": "exp"
+                                                                                    },
+                                                                                    "kind": "exp_stm"
+                                                                                },
+                                                                                "kind": "stm"
+                                                                            },
+                                                                            "kind": "block_item"
+                                                                        },
+                                                                        "block_item_list": {
+                                                                            "block_item": {
+                                                                                "dec": {
+                                                                                    "init_dec_list": {
+                                                                                        "init_dec": {
+                                                                                            "kind": "init_dec",
+                                                                                            "declarator": {
+                                                                                                "kind": "declarator",
+                                                                                                "ID": "ID(o)"
+                                                                                            }
+                                                                                        },
+                                                                                        "kind": "init_dec_list"
+                                                                                    },
+                                                                                    "dec_specifier": {
+                                                                                        "type_specifier": {
+                                                                                            "typedef_name": {
+                                                                                                "kind": "typedef_name",
+                                                                                                "ID": "ID(v2f)"
+                                                                                            },
+                                                                                            "kind": "type_specifier"
+                                                                                        },
+                                                                                        "kind": "dec_specifier"
+                                                                                    },
+                                                                                    "kind": "dec"
+                                                                                },
+                                                                                "kind": "block_item"
+                                                                            },
+                                                                            "block_item_list": {
+                                                                                "block_item": {
+                                                                                    "stm": {
+                                                                                        "exp_stm": {
+                                                                                            "exp": {
+                                                                                                "assignment_exp": {
+                                                                                                    "conditional_exp": {
+                                                                                                        "binary_exp": {
+                                                                                                            "unary_exp": {
+                                                                                                                "kind": "unary_exp",
+                                                                                                                "postfix_exp": {
+                                                                                                                    "argument_exp_list": {
+                                                                                                                        "assignment_exp": {
+                                                                                                                            "conditional_exp": {
+                                                                                                                                "binary_exp": {
+                                                                                                                                    "unary_exp": {
+                                                                                                                                        "kind": "unary_exp",
+                                                                                                                                        "postfix_exp": {
+                                                                                                                                            "primary_exp": {
+                                                                                                                                                "kind": "primary_exp",
+                                                                                                                                                "ID": "ID(v)"
+                                                                                                                                            },
+                                                                                                                                            "kind": "postfix_exp"
+                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                                    "kind": "binary_exp"
+                                                                                                                                },
+                                                                                                                                "kind": "conditional_exp"
+                                                                                                                            },
+                                                                                                                            "kind": "assignment_exp"
+                                                                                                                        },
+                                                                                                                        "kind": "argument_exp_list"
+                                                                                                                    },
+                                                                                                                    "kind": "postfix_exp",
+                                                                                                                    "postfix_exp": {
+                                                                                                                        "primary_exp": {
+                                                                                                                            "kind": "primary_exp",
+                                                                                                                            "ID": "ID(UNITY_SETUP_INSTANCE_ID)"
+                                                                                                                        },
+                                                                                                                        "kind": "postfix_exp"
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "kind": "binary_exp"
+                                                                                                        },
+                                                                                                        "kind": "conditional_exp"
+                                                                                                    },
+                                                                                                    "kind": "assignment_exp"
+                                                                                                },
+                                                                                                "kind": "exp"
+                                                                                            },
+                                                                                            "kind": "exp_stm"
+                                                                                        },
+                                                                                        "kind": "stm"
+                                                                                    },
+                                                                                    "kind": "block_item"
+                                                                                },
+                                                                                "kind": "block_item_list"
+                                                                            },
+                                                                            "kind": "block_item_list"
+                                                                        },
+                                                                        "kind": "block_item_list"
+                                                                    },
+                                                                    "kind": "block_item_list"
+                                                                },
+                                                                "kind": "block_item_list"
+                                                            },
+                                                            "kind": "block_item_list"
                                                         },
                                                         "kind": "compound_stm"
                                                     },
+                                                    "kind": "function_definition",
                                                     "declarator": {
                                                         "parameter_list": {
-                                                            "kind": "parameter_list",
                                                             "parameter_dec": {
                                                                 "type_specifier": {
-                                                                    "kind": "type_specifier",
                                                                     "typedef_name": {
                                                                         "kind": "typedef_name",
                                                                         "ID": "ID(appdata_t)"
-                                                                    }
+                                                                    },
+                                                                    "kind": "type_specifier"
                                                                 },
+                                                                "kind": "parameter_dec",
                                                                 "declarator": {
                                                                     "kind": "declarator",
                                                                     "ID": "ID(v)"
-                                                                },
-                                                                "kind": "parameter_dec"
-                                                            }
+                                                                }
+                                                            },
+                                                            "kind": "parameter_list"
                                                         },
+                                                        "kind": "declarator",
                                                         "declarator": {
                                                             "kind": "declarator",
                                                             "ID": "ID(vert)"
-                                                        },
-                                                        "kind": "declarator"
-                                                    },
-                                                    "kind": "function_definition"
-                                                }
+                                                        }
+                                                    }
+                                                },
+                                                "kind": "cg_stm"
                                             },
-                                            "kind": "cg_stms",
-                                            "cg_stms": {
-                                                "kind": "cg_stms"
-                                            }
+                                            "kind": "cg_stms"
+                                        },
+                                        "cg_stm": {
+                                            "dec": {
+                                                "struct_specifier": {
+                                                    "struct_dec_list": {
+                                                        "struct_dec": {
+                                                            "struct_declarator_list": {
+                                                                "struct_declarator": {
+                                                                    "declarator": {
+                                                                        "kind": "declarator",
+                                                                        "ID": "ID(color)"
+                                                                    },
+                                                                    "kind": "struct_declarator",
+                                                                    "ID": "ID(COLOR)"
+                                                                },
+                                                                "kind": "struct_declarator_list"
+                                                            },
+                                                            "type_specifier": {
+                                                                "kind": "type_specifier"
+                                                            },
+                                                            "kind": "struct_dec"
+                                                        },
+                                                        "kind": "struct_dec_list",
+                                                        "struct_dec_list": {
+                                                            "struct_dec": {
+                                                                "struct_declarator_list": {
+                                                                    "struct_declarator": {
+                                                                        "declarator": {
+                                                                            "kind": "declarator",
+                                                                            "ID": "ID(vertex)"
+                                                                        },
+                                                                        "kind": "struct_declarator",
+                                                                        "ID": "ID(SV_POSITION)"
+                                                                    },
+                                                                    "kind": "struct_declarator_list"
+                                                                },
+                                                                "type_specifier": {
+                                                                    "kind": "type_specifier"
+                                                                },
+                                                                "kind": "struct_dec"
+                                                            },
+                                                            "kind": "struct_dec_list"
+                                                        }
+                                                    },
+                                                    "kind": "struct_specifier",
+                                                    "ID": "ID(v2f)"
+                                                },
+                                                "kind": "dec"
+                                            },
+                                            "kind": "cg_stm"
+                                        },
+                                        "kind": "cg_stms"
+                                    },
+                                    "cg_stm": {
+                                        "dec": {
+                                            "struct_specifier": {
+                                                "struct_dec_list": {
+                                                    "struct_dec": {
+                                                        "struct_declarator_list": {
+                                                            "struct_declarator": {
+                                                                "declarator": {
+                                                                    "kind": "declarator",
+                                                                    "ID": "ID(color)"
+                                                                },
+                                                                "kind": "struct_declarator",
+                                                                "ID": "ID(COLOR)"
+                                                            },
+                                                            "kind": "struct_declarator_list"
+                                                        },
+                                                        "type_specifier": {
+                                                            "kind": "type_specifier"
+                                                        },
+                                                        "kind": "struct_dec"
+                                                    },
+                                                    "kind": "struct_dec_list",
+                                                    "struct_dec_list": {
+                                                        "struct_dec": {
+                                                            "struct_declarator_list": {
+                                                                "struct_declarator": {
+                                                                    "declarator": {
+                                                                        "kind": "declarator",
+                                                                        "ID": "ID(vertex)"
+                                                                    },
+                                                                    "kind": "struct_declarator",
+                                                                    "ID": "ID(POSITION)"
+                                                                },
+                                                                "kind": "struct_declarator_list"
+                                                            },
+                                                            "type_specifier": {
+                                                                "kind": "type_specifier"
+                                                            },
+                                                            "kind": "struct_dec"
+                                                        },
+                                                        "kind": "struct_dec_list"
+                                                    }
+                                                },
+                                                "kind": "struct_specifier",
+                                                "ID": "ID(appdata_t)"
+                                            },
+                                            "kind": "dec"
+                                        },
+                                        "kind": "cg_stm"
+                                    },
+                                    "kind": "cg_stms"
+                                },
+                                "cg_stm": {
+                                    "preprocessing_stm": {
+                                        "pp_cmd": {
+                                            "String": "String(\"UnityCG.cginc\")",
+                                            "kind": "pp_cmd"
+                                        },
+                                        "kind": "preprocessing_stm"
+                                    },
+                                    "kind": "cg_stm"
+                                },
+                                "kind": "cg_stms"
+                            },
+                            "cg_stm": {
+                                "preprocessing_stm": {
+                                    "pp_cmd": {
+                                        "kind": "pp_cmd",
+                                        "ids_or_numbers": {
+                                            "ids_or_numbers": {
+                                                "ids_or_numbers": {
+                                                    "ids_or_numbers": {
+                                                        "kind": "ids_or_numbers"
+                                                    },
+                                                    "kind": "ids_or_numbers",
+                                                    "ID": "ID(STEREO_INSTANCING_ON)"
+                                                },
+                                                "kind": "ids_or_numbers",
+                                                "ID": "ID(___)"
+                                            },
+                                            "kind": "ids_or_numbers",
+                                            "ID": "ID(multi_compile)"
                                         }
+                                    },
+                                    "kind": "preprocessing_stm"
+                                },
+                                "kind": "cg_stm"
+                            },
+                            "kind": "cg_stms"
+                        },
+                        "cg_stm": {
+                            "preprocessing_stm": {
+                                "pp_cmd": {
+                                    "kind": "pp_cmd",
+                                    "ids_or_numbers": {
+                                        "ids_or_numbers": {
+                                            "ids_or_numbers": {
+                                                "ids_or_numbers": {
+                                                    "kind": "ids_or_numbers"
+                                                },
+                                                "kind": "ids_or_numbers",
+                                                "ID": "ID(UNITY_SINGLE_PASS_STEREO)"
+                                            },
+                                            "kind": "ids_or_numbers",
+                                            "ID": "ID(_)"
+                                        },
+                                        "kind": "ids_or_numbers",
+                                        "ID": "ID(multi_compile)"
                                     }
+                                },
+                                "kind": "preprocessing_stm"
+                            },
+                            "kind": "cg_stm"
+                        },
+                        "kind": "cg_stms"
+                    },
+                    "cg_stm": {
+                        "preprocessing_stm": {
+                            "pp_cmd": {
+                                "kind": "pp_cmd",
+                                "ids_or_numbers": {
+                                    "ids_or_numbers": {
+                                        "Number": "Number(2.0)",
+                                        "kind": "ids_or_numbers",
+                                        "ids_or_numbers": {
+                                            "kind": "ids_or_numbers"
+                                        }
+                                    },
+                                    "kind": "ids_or_numbers",
+                                    "ID": "ID(target)"
                                 }
+                            },
+                            "kind": "preprocessing_stm"
+                        },
+                        "kind": "cg_stm"
+                    },
+                    "kind": "cg_stms"
+                },
+                "cg_stm": {
+                    "preprocessing_stm": {
+                        "pp_cmd": {
+                            "kind": "pp_cmd",
+                            "ids_or_numbers": {
+                                "ids_or_numbers": {
+                                    "ids_or_numbers": {
+                                        "kind": "ids_or_numbers"
+                                    },
+                                    "kind": "ids_or_numbers",
+                                    "ID": "ID(frag)"
+                                },
+                                "kind": "ids_or_numbers",
+                                "ID": "ID(fragment)"
                             }
+                        },
+                        "kind": "preprocessing_stm"
+                    },
+                    "kind": "cg_stm"
+                },
+                "kind": "cg_stms"
+            },
+            "cg_stm": {
+                "preprocessing_stm": {
+                    "pp_cmd": {
+                        "kind": "pp_cmd",
+                        "ids_or_numbers": {
+                            "ids_or_numbers": {
+                                "ids_or_numbers": {
+                                    "kind": "ids_or_numbers"
+                                },
+                                "kind": "ids_or_numbers",
+                                "ID": "ID(vert)"
+                            },
+                            "kind": "ids_or_numbers",
+                            "ID": "ID(vertex)"
                         }
-                    }
-                }
-            }
-        }
-    }
+                    },
+                    "kind": "preprocessing_stm"
+                },
+                "kind": "cg_stm"
+            },
+            "kind": "cg_stms"
+        },
+        "kind": "cg_prog"
+    },
+    "kind": "prog"
 }

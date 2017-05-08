@@ -37,8 +37,9 @@ class SymbolTypeMeta(type):
 
     def add(cls, member):
         # the new member will never add the member into cls attributes, cause it is unnecessary
-        cls.__members__.append(member)
-        cls.__members__.sort()
+        if member not in cls.__members__:
+            cls.__members__.append(member)
+            cls.__members__.sort()
 
         # SymbolType should not call this menthod
         if member not in SymbolType.__members__:
@@ -81,5 +82,6 @@ class Test(unittest.TestCase):
         for ty in TokenType:
             print(ty)
 
+        print("-Shader-" in TokenType)
 
-        print(getattr(TokenType, "--End"))
+        # print(getattr(TokenType, "--End"))
