@@ -43,7 +43,7 @@ class Nonterminal(metaclass=NonterminalMeta):
 
     def toDict(self):
         d = {}
-        d['kind'] = self.kind
+        # d['kind'] = self.kind
         for k in dir(self):
             v = getattr(self, k)
             # token
@@ -53,6 +53,19 @@ class Nonterminal(metaclass=NonterminalMeta):
             if isinstance(v, Nonterminal):
                 d[k] = v.toDict()
         return d
+
+    def toCode(self):
+        code = ''
+        for k in dir(self):
+            v = getattr(self, k)
+            # token
+            if isinstance(v, Token):
+                code += v.toCode() + ' '
+            # nonterminal
+            if isinstance(v, Nonterminal):
+                code += v.toCode()
+
+        return code
 
 
 class Test(unittest.TestCase):
@@ -69,4 +82,5 @@ class Test(unittest.TestCase):
     def test(self):
         e = Test.E('x')
         print(e.toDict())
+        print(e.indenter)
 

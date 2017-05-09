@@ -125,6 +125,26 @@ def _writeDeriveClass(file, production):
     if line4Count == 0:
         text += "        pass\n"
 
+    # block 2, toCode()
+    # line 1
+    text += '\n'
+    # line 2
+    text += "    def toCode(self):\n"
+    # line 3
+    codeText = ''
+    for symbol in production.right:
+        codeText +=  (' + ' if codeText != '' else '') 
+        if symbol.kind == "ID":
+            codeText += 'self.' + symbol.text+ ".toCode()"
+        elif symbol.kind == "String":
+            codeText += symbol.text
+        else :
+            codeText += "'%s'" % symbol.text
+    if codeText == '':
+        text += "        return ''\n"
+    else:
+        text += "        return " + codeText + '\n'
+
     file.write(text)
 
 

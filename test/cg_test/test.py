@@ -50,12 +50,17 @@ def verify():
             f.write(str(token))
             f.write('\n')
 
-    ast = dfm.run(edges, productionList, tokens, isDebug=True)
+    ast = dfm.run(edges, productionList, tokens, isDebug=False)
 
     outputFile = os.path.abspath(os.path.join(__file__, '../2_syntax_output.txt'))
     with open(outputFile, 'w') as f:
         import json
         json.dump(ast.toDict(), f, indent=4)
+
+    outputFile = os.path.abspath(os.path.join(__file__, '../3_formatted_code.shader'))
+    with open(outputFile, 'w') as f:
+        f.write(ast.toCode())
+
 
 
 def profileConstruct():

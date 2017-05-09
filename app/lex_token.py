@@ -1,4 +1,5 @@
 import unittest
+from . import formatter
 
 
 class Token:
@@ -7,6 +8,7 @@ class Token:
         self.kind = kind
         self.text = text
         self.value = value
+        self.nextToken = None  # 按照是源文件的顺序，不受lexer中filter的影响
 
     def __str__(self):
         # return 'kind = %s, text = %s, value = %s' % (self.kind, self.text, self.value)
@@ -18,6 +20,9 @@ class Token:
     def toLiteral(self):
         if self.kind == "ID":
             return '-%s-' % self.value
+
+    def toCode(self):
+        return formatter.token2Code(self)
 
 
 class Test(unittest.TestCase):
