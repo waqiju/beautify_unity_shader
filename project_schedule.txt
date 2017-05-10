@@ -1,0 +1,16 @@
+
+
+[ ] example_for_formatter.shader
+
+[ ] shader_part1_test
+
+
+() 合并cg_test和shader_part_test
+
+() github重整
+
+() ？实现的到底是lr1还是lalr1
+
+() 记忆。eg: re, StringIO
+
+() git学习
