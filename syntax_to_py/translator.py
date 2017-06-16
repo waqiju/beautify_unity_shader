@@ -3,7 +3,7 @@ import os
 
 # write nonterminls.py
 def writeNonterminals(productionList, productionNonterminals):
-    with open(os.path.join(__file__, '../nonterminals_draft.py'), 'w') as f:
+    with open(os.path.join(__file__, '../output/nonterminals_output.py'), 'w') as f:
         _writeBegin(f)
         _writeNonterminalType(f, productionNonterminals)
         _writeNonterminalClassList(f, productionList, productionNonterminals)
@@ -53,7 +53,7 @@ def _writeBegin(file):
     texts = [
         "from app.symbol_type import SymbolType",
         "from app.syntax_nonterminal import Nonterminal",
-        # "from .lex_tokens import TokenType",
+        "from app.formatter import I, AAI, IAA, SSI, ISS, GB, GA, RestoreComment",
         "import unittest",
     ]
     texts = map(lambda text: text + '\n', texts)
@@ -150,7 +150,7 @@ def _writeDeriveClass(file, production):
 
 # write productions
 def writeProductionList(productionList, productionNonterminals, productionTokens):
-    with open(os.path.join(__file__, '../productions_draft.py'), 'w') as f:
+    with open(os.path.join(__file__, '../output/productions_output.py'), 'w') as f:
         f.write('productionList = [\n')
         for p in productionList:
             _writeProduction(f, productionNonterminals, productionTokens, p.left, p.right, p.name)

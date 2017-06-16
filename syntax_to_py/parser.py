@@ -26,13 +26,13 @@ def prepare():
                  )
 
 
-def collectNonterminalTypeOfProduction(tokens):
-    types = []
+def collectNonterminalOfProduction(tokens):
+    nonterminals = []
     pos = 1
     for token in tokens:
         if pos == 1 and token.kind == TokenType.ID:
-            if token.text not in types:
-                types.append(token.text)
+            if token.text not in nonterminals:
+                nonterminals.append(token.text)
         elif pos == 2 and token.kind != 'Enter':
             pass
         elif token.kind == TokenType.RightArrow:
@@ -40,10 +40,9 @@ def collectNonterminalTypeOfProduction(tokens):
         elif token.kind == 'Enter':
             pos = 1
         else:
-            print('error: token = %s' % token)
-            break
+            raise Exception('error: token = %s' % token)
 
-    return types
+    return nonterminals
 
 
 class Production:
@@ -82,8 +81,7 @@ def analyze(tokens):
             pos = 1
             right = []
         else:
-            print('error: token = %s' % token)
-            break
+            raise Exception('error: token = %s' % token)
 
     return productionList
 
@@ -105,7 +103,7 @@ class Test(unittest.TestCase):
                 f.write(str(token) + '\n')
 
         # 语法分析
-        productionNonterminals = collectNonterminalTypeOfProduction(tokens)
+        productionNonterminals = collectNonterminalOfProduction(tokens)
         productionList = analyze(tokens)
 
         translator.writeProductionList(productionList, productionNonterminals, TokenType)
@@ -121,13 +119,13 @@ class Test(unittest.TestCase):
             buf = f.read()
         tokens = lexer.analyze(buf, isKeepSpace=False, isKeepComment=False)
 
-        lexOutputFile = os.path.abspath(os.path.join(__file__, '../lex_output.txt'))
+        lexOutputFile = os.path.abspath(os.path.join(__file__, '../output/lex_output.txt'))
         with open(lexOutputFile, 'w', encoding='utf-8') as f:
             for token in tokens:
                 f.write(str(token) + '\n')
 
         # 语法分析
-        productionNonterminals = collectNonterminalTypeOfProduction(tokens)
+        productionNonterminals = collectNonterminalOfProduction(tokens)
         productionList = analyze(tokens)
 
         translator.writeProductionList(productionList, productionNonterminals, TokenType)
