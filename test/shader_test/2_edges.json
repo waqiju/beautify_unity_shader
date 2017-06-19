@@ -1,0 +1,3076 @@
+{
+    "0": {
+        "-shader-": "s1",
+        "prog": "s2"
+    },
+    "1": {
+        "String": "s3"
+    },
+    "2": {
+        "__End": "a"
+    },
+    "3": {
+        "LBrace": "s4"
+    },
+    "4": {
+        "-customeditor-": "s8",
+        "-fallback-": "s9",
+        "-cgprogram-": "s7",
+        "custom_editor_cmd": "s14",
+        "-properties-": "s10",
+        "category": "s12",
+        "-cginclude-": "s6",
+        "shader_body_elm": "s17",
+        "RBrace": "r3",
+        "subshr": "s19",
+        "fall_back_cmd": "s15",
+        "-subshader-": "s11",
+        "cg_prog": "s13",
+        "props": "s16",
+        "-category-": "s5",
+        "shader_body_elms": "s18"
+    },
+    "5": {
+        "LBrace": "s20"
+    },
+    "6": {
+        "-endcg-": "s21"
+    },
+    "7": {
+        "-endcg-": "s22"
+    },
+    "8": {
+        "String": "s23"
+    },
+    "9": {
+        "-off-": "s24",
+        "String": "s25"
+    },
+    "10": {
+        "LBrace": "s26"
+    },
+    "11": {
+        "LBrace": "s27"
+    },
+    "12": {
+        "-customeditor-": "r5",
+        "-subshader-": "r5",
+        "-fallback-": "r5",
+        "-category-": "r5",
+        "-cgprogram-": "r5",
+        "-properties-": "r5",
+        "-cginclude-": "r5",
+        "RBrace": "r5"
+    },
+    "13": {
+        "-customeditor-": "r7",
+        "-subshader-": "r7",
+        "-fallback-": "r7",
+        "-properties-": "r7",
+        "-cgprogram-": "r7",
+        "-category-": "r7",
+        "-cginclude-": "r7",
+        "RBrace": "r7"
+    },
+    "14": {
+        "-customeditor-": "r9",
+        "-subshader-": "r9",
+        "-fallback-": "r9",
+        "-cgprogram-": "r9",
+        "-category-": "r9",
+        "-properties-": "r9",
+        "-cginclude-": "r9",
+        "RBrace": "r9"
+    },
+    "15": {
+        "-customeditor-": "r8",
+        "-subshader-": "r8",
+        "-properties-": "r8",
+        "-cgprogram-": "r8",
+        "-category-": "r8",
+        "-cginclude-": "r8",
+        "-fallback-": "r8",
+        "RBrace": "r8"
+    },
+    "16": {
+        "-customeditor-": "r4",
+        "-subshader-": "r4",
+        "-cginclude-": "r4",
+        "-fallback-": "r4",
+        "-category-": "r4",
+        "-properties-": "r4",
+        "-cgprogram-": "r4",
+        "RBrace": "r4"
+    },
+    "17": {
+        "-customeditor-": "s8",
+        "-fallback-": "s9",
+        "-cgprogram-": "s7",
+        "custom_editor_cmd": "s14",
+        "-properties-": "s10",
+        "category": "s12",
+        "-cginclude-": "s6",
+        "shader_body_elm": "s17",
+        "RBrace": "r3",
+        "subshr": "s19",
+        "fall_back_cmd": "s15",
+        "-subshader-": "s11",
+        "cg_prog": "s13",
+        "props": "s16",
+        "-category-": "s5",
+        "shader_body_elms": "s28"
+    },
+    "18": {
+        "RBrace": "s29"
+    },
+    "19": {
+        "-customeditor-": "r6",
+        "-subshader-": "r6",
+        "-fallback-": "r6",
+        "-properties-": "r6",
+        "-cgprogram-": "r6",
+        "-category-": "r6",
+        "-cginclude-": "r6",
+        "RBrace": "r6"
+    },
+    "20": {
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-separatespecular-": "s42",
+        "-settexture-": "s43",
+        "-offset-": "s41",
+        "-lighting-": "s37",
+        "-subshader-": "s45",
+        "category_body_elm": "s49",
+        "category_body_elms": "s50",
+        "-cull-": "s36",
+        "cmd_name": "s51",
+        "-tags-": "s46",
+        "-colormaterial-": "s35",
+        "-stencil-": "s44",
+        "-alphatomask-": "s31",
+        "cmd_stm": "s52",
+        "-alphatest-": "s30",
+        "-ztest-": "s47",
+        "RBrace": "r44",
+        "subshr": "s53",
+        "tags": "s54",
+        "-name-": "s40",
+        "-material-": "s39",
+        "-blend-": "s33",
+        "-bindchannels-": "s32"
+    },
+    "21": {
+        "-customeditor-": "r116",
+        "-subshader-": "r116",
+        "-fallback-": "r116",
+        "-cgprogram-": "r116",
+        "-category-": "r116",
+        "-properties-": "r116",
+        "-cginclude-": "r116",
+        "RBrace": "r116"
+    },
+    "22": {
+        "-customeditor-": "r115",
+        "-subshader-": "r115",
+        "-fallback-": "r115",
+        "-cgprogram-": "r115",
+        "-properties-": "r115",
+        "-category-": "r115",
+        "-cginclude-": "r115",
+        "RBrace": "r115"
+    },
+    "23": {
+        "-customeditor-": "r119",
+        "-subshader-": "r119",
+        "-fallback-": "r119",
+        "-cgprogram-": "r119",
+        "-properties-": "r119",
+        "-category-": "r119",
+        "-cginclude-": "r119",
+        "RBrace": "r119"
+    },
+    "24": {
+        "-customeditor-": "r118",
+        "-subshader-": "r118",
+        "-fallback-": "r118",
+        "-category-": "r118",
+        "-cgprogram-": "r118",
+        "-properties-": "r118",
+        "-cginclude-": "r118",
+        "RBrace": "r118"
+    },
+    "25": {
+        "-customeditor-": "r117",
+        "-subshader-": "r117",
+        "-fallback-": "r117",
+        "-cgprogram-": "r117",
+        "-properties-": "r117",
+        "-category-": "r117",
+        "-cginclude-": "r117",
+        "RBrace": "r117"
+    },
+    "26": {
+        "ID": "s55",
+        "prop_stm": "s57",
+        "LBrack": "s56",
+        "RBrace": "r12",
+        "props_body": "s58"
+    },
+    "27": {
+        "subshr_body_elms": "s77",
+        "-cginclude-": "s62",
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-pass-": "s67",
+        "-settexture-": "s68",
+        "shr_pass": "s75",
+        "-usepass-": "s71",
+        "-offset-": "s66",
+        "-lighting-": "s37",
+        "-alphatomask-": "s31",
+        "cmd_name": "s73",
+        "-tags-": "s70",
+        "-colormaterial-": "s35",
+        "-stencil-": "s69",
+        "-cull-": "s36",
+        "cmd_stm": "s74",
+        "-alphatest-": "s59",
+        "-cgprogram-": "s63",
+        "-ztest-": "s47",
+        "RBrace": "r50",
+        "-bindchannels-": "s60",
+        "cg_prog": "s72",
+        "tags": "s78",
+        "-name-": "s65",
+        "subshr_body_elm": "s76",
+        "-material-": "s64",
+        "-blend-": "s61",
+        "-separatespecular-": "s42"
+    },
+    "28": {
+        "RBrace": "r2"
+    },
+    "29": {
+        "__End": "r1"
+    },
+    "30": {
+        "ID": "s79"
+    },
+    "31": {
+        "ID": "r68",
+        "Number": "r68",
+        "LBrack": "r68"
+    },
+    "32": {
+        "LBrace": "s80"
+    },
+    "33": {
+        "ID": "s81",
+        "id_or_number_or_placeholder": "s84",
+        "Number": "s83",
+        "LBrack": "s82",
+        "placeholder": "s85"
+    },
+    "34": {
+        "ID": "r69",
+        "Number": "r69",
+        "LBrack": "r69"
+    },
+    "35": {
+        "ID": "r70",
+        "Number": "r70",
+        "LBrack": "r70"
+    },
+    "36": {
+        "ID": "r71",
+        "Number": "r71",
+        "LBrack": "r71"
+    },
+    "37": {
+        "ID": "r72",
+        "Number": "r72",
+        "LBrack": "r72"
+    },
+    "38": {
+        "ID": "r73",
+        "Number": "r73",
+        "LBrack": "r73"
+    },
+    "39": {
+        "LBrace": "s86"
+    },
+    "40": {
+        "String": "s87"
+    },
+    "41": {
+        "ID": "s88",
+        "id_or_number_or_placeholder": "s91",
+        "Number": "s90",
+        "LBrack": "s89",
+        "placeholder": "s92"
+    },
+    "42": {
+        "ID": "r74",
+        "Number": "r74",
+        "LBrack": "r74"
+    },
+    "43": {
+        "placeholder": "s94",
+        "LBrack": "s93"
+    },
+    "44": {
+        "LBrace": "s95"
+    },
+    "45": {
+        "LBrace": "s96"
+    },
+    "46": {
+        "LBrace": "s97"
+    },
+    "47": {
+        "ID": "r75",
+        "Number": "r75",
+        "LBrack": "r75"
+    },
+    "48": {
+        "ID": "r76",
+        "Number": "r76",
+        "LBrack": "r76"
+    },
+    "49": {
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-separatespecular-": "s42",
+        "-settexture-": "s43",
+        "-offset-": "s41",
+        "-lighting-": "s37",
+        "-subshader-": "s45",
+        "category_body_elm": "s49",
+        "category_body_elms": "s98",
+        "-cull-": "s36",
+        "cmd_name": "s51",
+        "-tags-": "s46",
+        "-colormaterial-": "s35",
+        "-stencil-": "s44",
+        "-alphatomask-": "s31",
+        "cmd_stm": "s52",
+        "-alphatest-": "s30",
+        "-ztest-": "s47",
+        "RBrace": "r44",
+        "subshr": "s53",
+        "tags": "s54",
+        "-name-": "s40",
+        "-material-": "s39",
+        "-blend-": "s33",
+        "-bindchannels-": "s32"
+    },
+    "50": {
+        "RBrace": "s99"
+    },
+    "51": {
+        "ID": "s100",
+        "id_or_number_or_placeholder": "s103",
+        "Number": "s102",
+        "LBrack": "s101",
+        "placeholder": "s104"
+    },
+    "52": {
+        "-colormaterial-": "r46",
+        "-stencil-": "r46",
+        "-material-": "r46",
+        "-lod-": "r46",
+        "-zwrite-": "r46",
+        "-alphatest-": "r46",
+        "-colormask-": "r46",
+        "-cull-": "r46",
+        "-separatespecular-": "r46",
+        "-settexture-": "r46",
+        "-offset-": "r46",
+        "RBrace": "r46",
+        "-lighting-": "r46",
+        "-subshader-": "r46",
+        "-ztest-": "r46",
+        "-name-": "r46",
+        "-alphatomask-": "r46",
+        "-blend-": "r46",
+        "-bindchannels-": "r46",
+        "-tags-": "r46"
+    },
+    "53": {
+        "-colormaterial-": "r47",
+        "-stencil-": "r47",
+        "-cull-": "r47",
+        "-lod-": "r47",
+        "-alphatest-": "r47",
+        "-zwrite-": "r47",
+        "-colormask-": "r47",
+        "-blend-": "r47",
+        "-separatespecular-": "r47",
+        "-settexture-": "r47",
+        "-ztest-": "r47",
+        "RBrace": "r47",
+        "-lighting-": "r47",
+        "-subshader-": "r47",
+        "-offset-": "r47",
+        "-name-": "r47",
+        "-material-": "r47",
+        "-alphatomask-": "r47",
+        "-bindchannels-": "r47",
+        "-tags-": "r47"
+    },
+    "54": {
+        "-colormaterial-": "r45",
+        "-stencil-": "r45",
+        "-material-": "r45",
+        "-lod-": "r45",
+        "-zwrite-": "r45",
+        "-alphatest-": "r45",
+        "-colormask-": "r45",
+        "-alphatomask-": "r45",
+        "-separatespecular-": "r45",
+        "-settexture-": "r45",
+        "-offset-": "r45",
+        "RBrace": "r45",
+        "-lighting-": "r45",
+        "-subshader-": "r45",
+        "-ztest-": "r45",
+        "-name-": "r45",
+        "-cull-": "r45",
+        "-blend-": "r45",
+        "-bindchannels-": "r45",
+        "-tags-": "r45"
+    },
+    "55": {
+        "LParen": "s105"
+    },
+    "56": {
+        "ID": "s109",
+        "-enum-": "s106",
+        "-keywordenum-": "s107",
+        "-materialenum-": "s108"
+    },
+    "57": {
+        "ID": "s55",
+        "prop_stm": "s57",
+        "LBrack": "s56",
+        "RBrace": "r12",
+        "props_body": "s110"
+    },
+    "58": {
+        "RBrace": "s111"
+    },
+    "59": {
+        "ID": "s112"
+    },
+    "60": {
+        "LBrace": "s113"
+    },
+    "61": {
+        "ID": "s81",
+        "id_or_number_or_placeholder": "s114",
+        "Number": "s83",
+        "LBrack": "s82",
+        "placeholder": "s85"
+    },
+    "62": {
+        "-endcg-": "s115"
+    },
+    "63": {
+        "-endcg-": "s116"
+    },
+    "64": {
+        "LBrace": "s117"
+    },
+    "65": {
+        "String": "s118"
+    },
+    "66": {
+        "ID": "s88",
+        "id_or_number_or_placeholder": "s119",
+        "Number": "s90",
+        "LBrack": "s89",
+        "placeholder": "s92"
+    },
+    "67": {
+        "LBrace": "s120"
+    },
+    "68": {
+        "placeholder": "s121",
+        "LBrack": "s93"
+    },
+    "69": {
+        "LBrace": "s122"
+    },
+    "70": {
+        "LBrace": "s123"
+    },
+    "71": {
+        "String": "s124"
+    },
+    "72": {
+        "-cginclude-": "r54",
+        "-lod-": "r54",
+        "-zwrite-": "r54",
+        "-colormask-": "r54",
+        "-pass-": "r54",
+        "-settexture-": "r54",
+        "-usepass-": "r54",
+        "-lighting-": "r54",
+        "-offset-": "r54",
+        "-cull-": "r54",
+        "-separatespecular-": "r54",
+        "-tags-": "r54",
+        "-colormaterial-": "r54",
+        "-stencil-": "r54",
+        "-alphatomask-": "r54",
+        "-alphatest-": "r54",
+        "-cgprogram-": "r54",
+        "-ztest-": "r54",
+        "RBrace": "r54",
+        "-name-": "r54",
+        "-material-": "r54",
+        "-blend-": "r54",
+        "-bindchannels-": "r54"
+    },
+    "73": {
+        "ID": "s125",
+        "id_or_number_or_placeholder": "s128",
+        "Number": "s127",
+        "LBrack": "s126",
+        "placeholder": "s129"
+    },
+    "74": {
+        "-settexture-": "r52",
+        "-lod-": "r52",
+        "-zwrite-": "r52",
+        "-colormask-": "r52",
+        "-pass-": "r52",
+        "-cginclude-": "r52",
+        "-usepass-": "r52",
+        "-lighting-": "r52",
+        "-offset-": "r52",
+        "-cull-": "r52",
+        "-separatespecular-": "r52",
+        "-tags-": "r52",
+        "-colormaterial-": "r52",
+        "-stencil-": "r52",
+        "-alphatomask-": "r52",
+        "-alphatest-": "r52",
+        "-cgprogram-": "r52",
+        "-ztest-": "r52",
+        "RBrace": "r52",
+        "-name-": "r52",
+        "-material-": "r52",
+        "-blend-": "r52",
+        "-bindchannels-": "r52"
+    },
+    "75": {
+        "-cginclude-": "r53",
+        "-lod-": "r53",
+        "-zwrite-": "r53",
+        "-colormask-": "r53",
+        "-separatespecular-": "r53",
+        "-settexture-": "r53",
+        "-offset-": "r53",
+        "-usepass-": "r53",
+        "-lighting-": "r53",
+        "-cull-": "r53",
+        "-tags-": "r53",
+        "-colormaterial-": "r53",
+        "-stencil-": "r53",
+        "-alphatomask-": "r53",
+        "-alphatest-": "r53",
+        "-cgprogram-": "r53",
+        "-pass-": "r53",
+        "-ztest-": "r53",
+        "RBrace": "r53",
+        "-name-": "r53",
+        "-material-": "r53",
+        "-blend-": "r53",
+        "-bindchannels-": "r53"
+    },
+    "76": {
+        "subshr_body_elms": "s130",
+        "-cginclude-": "s62",
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-pass-": "s67",
+        "-settexture-": "s68",
+        "shr_pass": "s75",
+        "-usepass-": "s71",
+        "-offset-": "s66",
+        "-lighting-": "s37",
+        "-alphatomask-": "s31",
+        "cmd_name": "s73",
+        "-tags-": "s70",
+        "-colormaterial-": "s35",
+        "-stencil-": "s69",
+        "-cull-": "s36",
+        "cmd_stm": "s74",
+        "-alphatest-": "s59",
+        "-cgprogram-": "s63",
+        "-ztest-": "s47",
+        "RBrace": "r50",
+        "-bindchannels-": "s60",
+        "cg_prog": "s72",
+        "tags": "s78",
+        "-name-": "s65",
+        "subshr_body_elm": "s76",
+        "-material-": "s64",
+        "-blend-": "s61",
+        "-separatespecular-": "s42"
+    },
+    "77": {
+        "RBrace": "s131"
+    },
+    "78": {
+        "-settexture-": "r51",
+        "-lod-": "r51",
+        "-zwrite-": "r51",
+        "-colormask-": "r51",
+        "-pass-": "r51",
+        "-cginclude-": "r51",
+        "-usepass-": "r51",
+        "-lighting-": "r51",
+        "-offset-": "r51",
+        "-cull-": "r51",
+        "-tags-": "r51",
+        "-colormaterial-": "r51",
+        "-stencil-": "r51",
+        "-alphatomask-": "r51",
+        "-alphatest-": "r51",
+        "-cgprogram-": "r51",
+        "-ztest-": "r51",
+        "RBrace": "r51",
+        "-bindchannels-": "r51",
+        "-name-": "r51",
+        "-material-": "r51",
+        "-blend-": "r51",
+        "-separatespecular-": "r51"
+    },
+    "79": {
+        "placeholder": "s132",
+        "LBrack": "s101"
+    },
+    "80": {
+        "bind_channel_stm": "s134",
+        "-bind-": "s133",
+        "RBrace": "r84",
+        "bind_channel_stms": "s135"
+    },
+    "81": {
+        "ID": "r77",
+        "Number": "r77",
+        "LBrack": "r77"
+    },
+    "82": {
+        "ID": "s136"
+    },
+    "83": {
+        "ID": "r78",
+        "Number": "r78",
+        "LBrack": "r78"
+    },
+    "84": {
+        "ID": "s100",
+        "id_or_number_or_placeholder": "s137",
+        "Number": "s102",
+        "LBrack": "s101",
+        "placeholder": "s104"
+    },
+    "85": {
+        "ID": "r79",
+        "Number": "r79",
+        "LBrack": "r79"
+    },
+    "86": {
+        "ID": "s138",
+        "meterial_stms": "s140",
+        "RBrace": "r87",
+        "meterial_stm": "s139"
+    },
+    "87": {
+        "-colormaterial-": "r64",
+        "-stencil-": "r64",
+        "-cull-": "r64",
+        "-lod-": "r64",
+        "-zwrite-": "r64",
+        "-alphatest-": "r64",
+        "-colormask-": "r64",
+        "-alphatomask-": "r64",
+        "-separatespecular-": "r64",
+        "-settexture-": "r64",
+        "-subshader-": "r64",
+        "-ztest-": "r64",
+        "RBrace": "r64",
+        "-offset-": "r64",
+        "-lighting-": "r64",
+        "-name-": "r64",
+        "-material-": "r64",
+        "-blend-": "r64",
+        "-bindchannels-": "r64",
+        "-tags-": "r64"
+    },
+    "88": {
+        "Comma": "r77"
+    },
+    "89": {
+        "ID": "s141"
+    },
+    "90": {
+        "Comma": "r78"
+    },
+    "91": {
+        "Comma": "s142"
+    },
+    "92": {
+        "Comma": "r79"
+    },
+    "93": {
+        "ID": "s143"
+    },
+    "94": {
+        "LBrace": "s144"
+    },
+    "95": {
+        "ID": "s145",
+        "stencil_stms": "s147",
+        "stencil_stm": "s146",
+        "RBrace": "r90"
+    },
+    "96": {
+        "subshr_body_elms": "s148",
+        "-cginclude-": "s62",
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-pass-": "s67",
+        "-settexture-": "s68",
+        "shr_pass": "s75",
+        "-usepass-": "s71",
+        "-offset-": "s66",
+        "-lighting-": "s37",
+        "-alphatomask-": "s31",
+        "cmd_name": "s73",
+        "-tags-": "s70",
+        "-colormaterial-": "s35",
+        "-stencil-": "s69",
+        "-cull-": "s36",
+        "cmd_stm": "s74",
+        "-alphatest-": "s59",
+        "-cgprogram-": "s63",
+        "-ztest-": "s47",
+        "RBrace": "r50",
+        "-bindchannels-": "s60",
+        "cg_prog": "s72",
+        "tags": "s78",
+        "-name-": "s65",
+        "subshr_body_elm": "s76",
+        "-material-": "s64",
+        "-blend-": "s61",
+        "-separatespecular-": "s42"
+    },
+    "97": {
+        "tags_body": "s151",
+        "String": "s149",
+        "RBrace": "r57",
+        "tag_smt": "s150"
+    },
+    "98": {
+        "RBrace": "r43"
+    },
+    "99": {
+        "-customeditor-": "r42",
+        "-subshader-": "r42",
+        "-properties-": "r42",
+        "-cgprogram-": "r42",
+        "-category-": "r42",
+        "-cginclude-": "r42",
+        "-fallback-": "r42",
+        "RBrace": "r42"
+    },
+    "100": {
+        "-colormaterial-": "r77",
+        "-stencil-": "r77",
+        "-alphatomask-": "r77",
+        "-lod-": "r77",
+        "-zwrite-": "r77",
+        "-alphatest-": "r77",
+        "-colormask-": "r77",
+        "-separatespecular-": "r77",
+        "-settexture-": "r77",
+        "-offset-": "r77",
+        "RBrace": "r77",
+        "-ztest-": "r77",
+        "-subshader-": "r77",
+        "-lighting-": "r77",
+        "-material-": "r77",
+        "-name-": "r77",
+        "-cull-": "r77",
+        "-blend-": "r77",
+        "-bindchannels-": "r77",
+        "-tags-": "r77"
+    },
+    "101": {
+        "ID": "s152"
+    },
+    "102": {
+        "-colormaterial-": "r78",
+        "-stencil-": "r78",
+        "-alphatomask-": "r78",
+        "-lod-": "r78",
+        "-zwrite-": "r78",
+        "-alphatest-": "r78",
+        "-colormask-": "r78",
+        "-separatespecular-": "r78",
+        "-settexture-": "r78",
+        "-ztest-": "r78",
+        "RBrace": "r78",
+        "-lighting-": "r78",
+        "-subshader-": "r78",
+        "-offset-": "r78",
+        "-material-": "r78",
+        "-name-": "r78",
+        "-cull-": "r78",
+        "-blend-": "r78",
+        "-bindchannels-": "r78",
+        "-tags-": "r78"
+    },
+    "103": {
+        "-colormaterial-": "r59",
+        "-stencil-": "r59",
+        "-material-": "r59",
+        "-lod-": "r59",
+        "-alphatest-": "r59",
+        "-zwrite-": "r59",
+        "-colormask-": "r59",
+        "-alphatomask-": "r59",
+        "-separatespecular-": "r59",
+        "-settexture-": "r59",
+        "-ztest-": "r59",
+        "RBrace": "r59",
+        "-lighting-": "r59",
+        "-subshader-": "r59",
+        "-offset-": "r59",
+        "-name-": "r59",
+        "-cull-": "r59",
+        "-blend-": "r59",
+        "-bindchannels-": "r59",
+        "-tags-": "r59"
+    },
+    "104": {
+        "-colormaterial-": "r79",
+        "-stencil-": "r79",
+        "-material-": "r79",
+        "-lod-": "r79",
+        "-alphatest-": "r79",
+        "-zwrite-": "r79",
+        "-colormask-": "r79",
+        "-alphatomask-": "r79",
+        "-separatespecular-": "r79",
+        "-settexture-": "r79",
+        "-ztest-": "r79",
+        "RBrace": "r79",
+        "-lighting-": "r79",
+        "-subshader-": "r79",
+        "-offset-": "r79",
+        "-name-": "r79",
+        "-cull-": "r79",
+        "-blend-": "r79",
+        "-bindchannels-": "r79",
+        "-tags-": "r79"
+    },
+    "105": {
+        "String": "s153"
+    },
+    "106": {
+        "LParen": "s154"
+    },
+    "107": {
+        "LParen": "s155"
+    },
+    "108": {
+        "LParen": "s156"
+    },
+    "109": {
+        "RBrack": "s157"
+    },
+    "110": {
+        "RBrace": "r11"
+    },
+    "111": {
+        "-customeditor-": "r10",
+        "-subshader-": "r10",
+        "-fallback-": "r10",
+        "-cgprogram-": "r10",
+        "-category-": "r10",
+        "-properties-": "r10",
+        "-cginclude-": "r10",
+        "RBrace": "r10"
+    },
+    "112": {
+        "placeholder": "s158",
+        "LBrack": "s126"
+    },
+    "113": {
+        "bind_channel_stm": "s134",
+        "-bind-": "s133",
+        "RBrace": "r84",
+        "bind_channel_stms": "s159"
+    },
+    "114": {
+        "ID": "s125",
+        "id_or_number_or_placeholder": "s160",
+        "Number": "s127",
+        "LBrack": "s126",
+        "placeholder": "s129"
+    },
+    "115": {
+        "-settexture-": "r116",
+        "-lod-": "r116",
+        "-zwrite-": "r116",
+        "-colormask-": "r116",
+        "-separatespecular-": "r116",
+        "-cginclude-": "r116",
+        "-usepass-": "r116",
+        "-lighting-": "r116",
+        "-offset-": "r116",
+        "-alphatomask-": "r116",
+        "-tags-": "r116",
+        "-colormaterial-": "r116",
+        "-stencil-": "r116",
+        "-cull-": "r116",
+        "-alphatest-": "r116",
+        "-cgprogram-": "r116",
+        "-ztest-": "r116",
+        "RBrace": "r116",
+        "-bindchannels-": "r116",
+        "-name-": "r116",
+        "-material-": "r116",
+        "-blend-": "r116",
+        "-pass-": "r116"
+    },
+    "116": {
+        "-settexture-": "r115",
+        "-lod-": "r115",
+        "-zwrite-": "r115",
+        "-colormask-": "r115",
+        "-separatespecular-": "r115",
+        "-cginclude-": "r115",
+        "-usepass-": "r115",
+        "-offset-": "r115",
+        "-lighting-": "r115",
+        "-tags-": "r115",
+        "-colormaterial-": "r115",
+        "-stencil-": "r115",
+        "-cull-": "r115",
+        "-alphatest-": "r115",
+        "-cgprogram-": "r115",
+        "-alphatomask-": "r115",
+        "-pass-": "r115",
+        "-ztest-": "r115",
+        "RBrace": "r115",
+        "-name-": "r115",
+        "-material-": "r115",
+        "-blend-": "r115",
+        "-bindchannels-": "r115"
+    },
+    "117": {
+        "ID": "s138",
+        "meterial_stms": "s161",
+        "RBrace": "r87",
+        "meterial_stm": "s139"
+    },
+    "118": {
+        "-cginclude-": "r64",
+        "-lod-": "r64",
+        "-zwrite-": "r64",
+        "-colormask-": "r64",
+        "-separatespecular-": "r64",
+        "-settexture-": "r64",
+        "-usepass-": "r64",
+        "-offset-": "r64",
+        "-lighting-": "r64",
+        "-cull-": "r64",
+        "-tags-": "r64",
+        "-colormaterial-": "r64",
+        "-stencil-": "r64",
+        "-alphatomask-": "r64",
+        "-alphatest-": "r64",
+        "-cgprogram-": "r64",
+        "-ztest-": "r64",
+        "RBrace": "r64",
+        "-bindchannels-": "r64",
+        "-name-": "r64",
+        "-material-": "r64",
+        "-blend-": "r64",
+        "-pass-": "r64"
+    },
+    "119": {
+        "Comma": "s162"
+    },
+    "120": {
+        "-cginclude-": "s166",
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-separatespecular-": "s42",
+        "-settexture-": "s171",
+        "-offset-": "s170",
+        "-lighting-": "s37",
+        "pass_body_elms": "s178",
+        "pass_body_elm": "s177",
+        "-alphatomask-": "s31",
+        "cmd_name": "s175",
+        "-tags-": "s173",
+        "-colormaterial-": "s35",
+        "-stencil-": "s172",
+        "-cull-": "s36",
+        "cmd_stm": "s176",
+        "-alphatest-": "s163",
+        "-cgprogram-": "s167",
+        "-ztest-": "s47",
+        "RBrace": "r111",
+        "cg_prog": "s174",
+        "-name-": "s169",
+        "tags": "s179",
+        "-material-": "s168",
+        "-blend-": "s165",
+        "-bindchannels-": "s164"
+    },
+    "121": {
+        "LBrace": "s180"
+    },
+    "122": {
+        "ID": "s145",
+        "stencil_stms": "s181",
+        "stencil_stm": "s146",
+        "RBrace": "r90"
+    },
+    "123": {
+        "tags_body": "s182",
+        "String": "s149",
+        "RBrace": "r57",
+        "tag_smt": "s150"
+    },
+    "124": {
+        "-cginclude-": "r109",
+        "-lod-": "r109",
+        "-zwrite-": "r109",
+        "-colormask-": "r109",
+        "-separatespecular-": "r109",
+        "-settexture-": "r109",
+        "-usepass-": "r109",
+        "-lighting-": "r109",
+        "-offset-": "r109",
+        "-alphatomask-": "r109",
+        "-tags-": "r109",
+        "-colormaterial-": "r109",
+        "-stencil-": "r109",
+        "-cull-": "r109",
+        "-alphatest-": "r109",
+        "-cgprogram-": "r109",
+        "-ztest-": "r109",
+        "RBrace": "r109",
+        "-bindchannels-": "r109",
+        "-name-": "r109",
+        "-material-": "r109",
+        "-blend-": "r109",
+        "-pass-": "r109"
+    },
+    "125": {
+        "-settexture-": "r77",
+        "-lod-": "r77",
+        "-zwrite-": "r77",
+        "-colormask-": "r77",
+        "-usepass-": "r77",
+        "-pass-": "r77",
+        "-cginclude-": "r77",
+        "-offset-": "r77",
+        "-lighting-": "r77",
+        "-alphatomask-": "r77",
+        "-tags-": "r77",
+        "-colormaterial-": "r77",
+        "-stencil-": "r77",
+        "-cull-": "r77",
+        "-alphatest-": "r77",
+        "-cgprogram-": "r77",
+        "-ztest-": "r77",
+        "RBrace": "r77",
+        "-bindchannels-": "r77",
+        "-name-": "r77",
+        "-material-": "r77",
+        "-blend-": "r77",
+        "-separatespecular-": "r77"
+    },
+    "126": {
+        "ID": "s183"
+    },
+    "127": {
+        "-settexture-": "r78",
+        "-lod-": "r78",
+        "-zwrite-": "r78",
+        "-colormask-": "r78",
+        "-usepass-": "r78",
+        "-separatespecular-": "r78",
+        "-cginclude-": "r78",
+        "-offset-": "r78",
+        "-lighting-": "r78",
+        "-alphatomask-": "r78",
+        "-tags-": "r78",
+        "-colormaterial-": "r78",
+        "-stencil-": "r78",
+        "-cull-": "r78",
+        "-alphatest-": "r78",
+        "-cgprogram-": "r78",
+        "-ztest-": "r78",
+        "RBrace": "r78",
+        "-bindchannels-": "r78",
+        "-name-": "r78",
+        "-material-": "r78",
+        "-blend-": "r78",
+        "-pass-": "r78"
+    },
+    "128": {
+        "-settexture-": "r59",
+        "-lod-": "r59",
+        "-zwrite-": "r59",
+        "-colormask-": "r59",
+        "-separatespecular-": "r59",
+        "-cginclude-": "r59",
+        "-usepass-": "r59",
+        "-lighting-": "r59",
+        "-offset-": "r59",
+        "-alphatomask-": "r59",
+        "-tags-": "r59",
+        "-colormaterial-": "r59",
+        "-stencil-": "r59",
+        "-cull-": "r59",
+        "-alphatest-": "r59",
+        "-cgprogram-": "r59",
+        "-ztest-": "r59",
+        "RBrace": "r59",
+        "-bindchannels-": "r59",
+        "-name-": "r59",
+        "-material-": "r59",
+        "-blend-": "r59",
+        "-pass-": "r59"
+    },
+    "129": {
+        "-cginclude-": "r79",
+        "-lod-": "r79",
+        "-zwrite-": "r79",
+        "-colormask-": "r79",
+        "-separatespecular-": "r79",
+        "-settexture-": "r79",
+        "-usepass-": "r79",
+        "-lighting-": "r79",
+        "-offset-": "r79",
+        "-cull-": "r79",
+        "-tags-": "r79",
+        "-colormaterial-": "r79",
+        "-stencil-": "r79",
+        "-alphatomask-": "r79",
+        "-alphatest-": "r79",
+        "-cgprogram-": "r79",
+        "-pass-": "r79",
+        "-ztest-": "r79",
+        "RBrace": "r79",
+        "-name-": "r79",
+        "-material-": "r79",
+        "-blend-": "r79",
+        "-bindchannels-": "r79"
+    },
+    "130": {
+        "RBrace": "r49"
+    },
+    "131": {
+        "-customeditor-": "r48",
+        "-subshader-": "r48",
+        "-cginclude-": "r48",
+        "-fallback-": "r48",
+        "-category-": "r48",
+        "-properties-": "r48",
+        "-cgprogram-": "r48",
+        "RBrace": "r48"
+    },
+    "132": {
+        "-colormaterial-": "r60",
+        "-stencil-": "r60",
+        "-cull-": "r60",
+        "-lod-": "r60",
+        "-alphatest-": "r60",
+        "-zwrite-": "r60",
+        "-colormask-": "r60",
+        "-alphatomask-": "r60",
+        "-separatespecular-": "r60",
+        "-settexture-": "r60",
+        "-ztest-": "r60",
+        "RBrace": "r60",
+        "-lighting-": "r60",
+        "-subshader-": "r60",
+        "-offset-": "r60",
+        "-name-": "r60",
+        "-material-": "r60",
+        "-blend-": "r60",
+        "-bindchannels-": "r60",
+        "-tags-": "r60"
+    },
+    "133": {
+        "String": "s184"
+    },
+    "134": {
+        "bind_channel_stm": "s134",
+        "-bind-": "s133",
+        "RBrace": "r84",
+        "bind_channel_stms": "s185"
+    },
+    "135": {
+        "RBrace": "s186"
+    },
+    "136": {
+        "RBrack": "s187"
+    },
+    "137": {
+        "-colormaterial-": "r62",
+        "-stencil-": "r62",
+        "-alphatomask-": "r62",
+        "-lod-": "r62",
+        "-zwrite-": "r62",
+        "-alphatest-": "r62",
+        "-colormask-": "r62",
+        "-cull-": "r62",
+        "-separatespecular-": "r62",
+        "-settexture-": "r62",
+        "-offset-": "r62",
+        "RBrace": "r62",
+        "-lighting-": "r62",
+        "-subshader-": "r62",
+        "-ztest-": "r62",
+        "-name-": "r62",
+        "-material-": "r62",
+        "-blend-": "r62",
+        "-bindchannels-": "r62",
+        "-tags-": "r62"
+    },
+    "138": {
+        "ID": "s188",
+        "id_or_number_or_placeholder": "s191",
+        "Number": "s190",
+        "LBrack": "s189",
+        "placeholder": "s192"
+    },
+    "139": {
+        "ID": "s138",
+        "meterial_stms": "s193",
+        "RBrace": "r87",
+        "meterial_stm": "s139"
+    },
+    "140": {
+        "RBrace": "s194"
+    },
+    "141": {
+        "RBrack": "s195"
+    },
+    "142": {
+        "ID": "s100",
+        "id_or_number_or_placeholder": "s196",
+        "Number": "s102",
+        "LBrack": "s101",
+        "placeholder": "s104"
+    },
+    "143": {
+        "RBrack": "s197"
+    },
+    "144": {
+        "-combine-": "s198",
+        "set_texture_stms": "s202",
+        "set_texture_stm": "s201",
+        "-matrix-": "s200",
+        "-constantcolor-": "s199",
+        "RBrace": "r93"
+    },
+    "145": {
+        "ID": "s188",
+        "id_or_number_or_placeholder": "s203",
+        "Number": "s190",
+        "LBrack": "s189",
+        "placeholder": "s192"
+    },
+    "146": {
+        "ID": "s145",
+        "stencil_stms": "s204",
+        "stencil_stm": "s146",
+        "RBrace": "r90"
+    },
+    "147": {
+        "RBrace": "s205"
+    },
+    "148": {
+        "RBrace": "s206"
+    },
+    "149": {
+        "Assign": "s207"
+    },
+    "150": {
+        "tags_body": "s208",
+        "String": "s149",
+        "RBrace": "r57",
+        "tag_smt": "s150"
+    },
+    "151": {
+        "RBrace": "s209"
+    },
+    "152": {
+        "RBrack": "s210"
+    },
+    "153": {
+        "Comma": "s211"
+    },
+    "154": {
+        "ID": "s212",
+        "Number": "s213",
+        "enum_items": "s215",
+        "enum_item": "s214"
+    },
+    "155": {
+        "Comma": "r81",
+        "ID": "s216",
+        "ids": "s217",
+        "ids_with_comma": "s218"
+    },
+    "156": {
+        "ID": "s212",
+        "Number": "s213",
+        "enum_items": "s219",
+        "enum_item": "s214"
+    },
+    "157": {
+        "ID": "s220"
+    },
+    "158": {
+        "-cginclude-": "r60",
+        "-lod-": "r60",
+        "-zwrite-": "r60",
+        "-colormask-": "r60",
+        "-pass-": "r60",
+        "-settexture-": "r60",
+        "-usepass-": "r60",
+        "-offset-": "r60",
+        "-lighting-": "r60",
+        "-cull-": "r60",
+        "-tags-": "r60",
+        "-colormaterial-": "r60",
+        "-stencil-": "r60",
+        "-alphatomask-": "r60",
+        "-alphatest-": "r60",
+        "-cgprogram-": "r60",
+        "-ztest-": "r60",
+        "RBrace": "r60",
+        "-bindchannels-": "r60",
+        "-name-": "r60",
+        "-material-": "r60",
+        "-blend-": "r60",
+        "-separatespecular-": "r60"
+    },
+    "159": {
+        "RBrace": "s221"
+    },
+    "160": {
+        "-settexture-": "r62",
+        "-lod-": "r62",
+        "-zwrite-": "r62",
+        "-colormask-": "r62",
+        "-separatespecular-": "r62",
+        "-cginclude-": "r62",
+        "-usepass-": "r62",
+        "-offset-": "r62",
+        "-lighting-": "r62",
+        "-tags-": "r62",
+        "-colormaterial-": "r62",
+        "-stencil-": "r62",
+        "-cull-": "r62",
+        "-alphatest-": "r62",
+        "-cgprogram-": "r62",
+        "-alphatomask-": "r62",
+        "-ztest-": "r62",
+        "RBrace": "r62",
+        "-bindchannels-": "r62",
+        "-name-": "r62",
+        "-material-": "r62",
+        "-blend-": "r62",
+        "-pass-": "r62"
+    },
+    "161": {
+        "RBrace": "s222"
+    },
+    "162": {
+        "ID": "s125",
+        "id_or_number_or_placeholder": "s223",
+        "Number": "s127",
+        "LBrack": "s126",
+        "placeholder": "s129"
+    },
+    "163": {
+        "ID": "s224"
+    },
+    "164": {
+        "LBrace": "s225"
+    },
+    "165": {
+        "ID": "s81",
+        "id_or_number_or_placeholder": "s226",
+        "Number": "s83",
+        "LBrack": "s82",
+        "placeholder": "s85"
+    },
+    "166": {
+        "-endcg-": "s227"
+    },
+    "167": {
+        "-endcg-": "s228"
+    },
+    "168": {
+        "LBrace": "s229"
+    },
+    "169": {
+        "String": "s230"
+    },
+    "170": {
+        "ID": "s88",
+        "id_or_number_or_placeholder": "s231",
+        "Number": "s90",
+        "LBrack": "s89",
+        "placeholder": "s92"
+    },
+    "171": {
+        "placeholder": "s232",
+        "LBrack": "s93"
+    },
+    "172": {
+        "LBrace": "s233"
+    },
+    "173": {
+        "LBrace": "s234"
+    },
+    "174": {
+        "-colormaterial-": "r114",
+        "-stencil-": "r114",
+        "-alphatomask-": "r114",
+        "-lod-": "r114",
+        "-alphatest-": "r114",
+        "-zwrite-": "r114",
+        "-cgprogram-": "r114",
+        "-cull-": "r114",
+        "-separatespecular-": "r114",
+        "-cginclude-": "r114",
+        "-offset-": "r114",
+        "RBrace": "r114",
+        "-lighting-": "r114",
+        "-settexture-": "r114",
+        "-colormask-": "r114",
+        "-ztest-": "r114",
+        "-name-": "r114",
+        "-material-": "r114",
+        "-blend-": "r114",
+        "-bindchannels-": "r114",
+        "-tags-": "r114"
+    },
+    "175": {
+        "ID": "s235",
+        "id_or_number_or_placeholder": "s238",
+        "Number": "s237",
+        "LBrack": "s236",
+        "placeholder": "s239"
+    },
+    "176": {
+        "-colormaterial-": "r113",
+        "-stencil-": "r113",
+        "-cull-": "r113",
+        "-lod-": "r113",
+        "-cgprogram-": "r113",
+        "-alphatest-": "r113",
+        "-colormask-": "r113",
+        "-blend-": "r113",
+        "-separatespecular-": "r113",
+        "-cginclude-": "r113",
+        "-offset-": "r113",
+        "RBrace": "r113",
+        "-ztest-": "r113",
+        "-settexture-": "r113",
+        "-lighting-": "r113",
+        "-zwrite-": "r113",
+        "-name-": "r113",
+        "-material-": "r113",
+        "-alphatomask-": "r113",
+        "-bindchannels-": "r113",
+        "-tags-": "r113"
+    },
+    "177": {
+        "-cginclude-": "s166",
+        "-lod-": "s38",
+        "-zwrite-": "s48",
+        "-colormask-": "s34",
+        "-separatespecular-": "s42",
+        "-settexture-": "s171",
+        "-offset-": "s170",
+        "-lighting-": "s37",
+        "pass_body_elms": "s240",
+        "pass_body_elm": "s177",
+        "-alphatomask-": "s31",
+        "cmd_name": "s175",
+        "-tags-": "s173",
+        "-colormaterial-": "s35",
+        "-stencil-": "s172",
+        "-cull-": "s36",
+        "cmd_stm": "s176",
+        "-alphatest-": "s163",
+        "-cgprogram-": "s167",
+        "-ztest-": "s47",
+        "RBrace": "r111",
+        "cg_prog": "s174",
+        "-name-": "s169",
+        "tags": "s179",
+        "-material-": "s168",
+        "-blend-": "s165",
+        "-bindchannels-": "s164"
+    },
+    "178": {
+        "RBrace": "s241"
+    },
+    "179": {
+        "-colormaterial-": "r112",
+        "-stencil-": "r112",
+        "-material-": "r112",
+        "-lod-": "r112",
+        "-alphatest-": "r112",
+        "-zwrite-": "r112",
+        "-colormask-": "r112",
+        "-cgprogram-": "r112",
+        "-separatespecular-": "r112",
+        "-settexture-": "r112",
+        "-offset-": "r112",
+        "RBrace": "r112",
+        "-lighting-": "r112",
+        "-cginclude-": "r112",
+        "-cull-": "r112",
+        "-ztest-": "r112",
+        "-name-": "r112",
+        "-alphatomask-": "r112",
+        "-blend-": "r112",
+        "-bindchannels-": "r112",
+        "-tags-": "r112"
+    },
+    "180": {
+        "-combine-": "s198",
+        "set_texture_stms": "s242",
+        "set_texture_stm": "s201",
+        "-matrix-": "s200",
+        "-constantcolor-": "s199",
+        "RBrace": "r93"
+    },
+    "181": {
+        "RBrace": "s243"
+    },
+    "182": {
+        "RBrace": "s244"
+    },
+    "183": {
+        "RBrack": "s245"
+    },
+    "184": {
+        "Comma": "s246"
+    },
+    "185": {
+        "RBrace": "r83"
+    },
+    "186": {
+        "-colormaterial-": "r61",
+        "-stencil-": "r61",
+        "-alphatomask-": "r61",
+        "-lod-": "r61",
+        "-zwrite-": "r61",
+        "-alphatest-": "r61",
+        "-colormask-": "r61",
+        "-cull-": "r61",
+        "-separatespecular-": "r61",
+        "-settexture-": "r61",
+        "-subshader-": "r61",
+        "-ztest-": "r61",
+        "RBrace": "r61",
+        "-offset-": "r61",
+        "-lighting-": "r61",
+        "-name-": "r61",
+        "-material-": "r61",
+        "-blend-": "r61",
+        "-bindchannels-": "r61",
+        "-tags-": "r61"
+    },
+    "187": {
+        "ID": "r82",
+        "Number": "r82",
+        "LBrack": "r82"
+    },
+    "188": {
+        "ID": "r77",
+        "RBrace": "r77"
+    },
+    "189": {
+        "ID": "s247"
+    },
+    "190": {
+        "ID": "r78",
+        "RBrace": "r78"
+    },
+    "191": {
+        "ID": "r88",
+        "RBrace": "r88"
+    },
+    "192": {
+        "ID": "r79",
+        "RBrace": "r79"
+    },
+    "193": {
+        "RBrace": "r86"
+    },
+    "194": {
+        "-ztest-": "r63",
+        "-colormaterial-": "r63",
+        "-stencil-": "r63",
+        "-cull-": "r63",
+        "-lod-": "r63",
+        "-zwrite-": "r63",
+        "-alphatest-": "r63",
+        "-colormask-": "r63",
+        "-separatespecular-": "r63",
+        "-settexture-": "r63",
+        "-offset-": "r63",
+        "RBrace": "r63",
+        "-lighting-": "r63",
+        "-subshader-": "r63",
+        "-material-": "r63",
+        "-name-": "r63",
+        "-alphatomask-": "r63",
+        "-blend-": "r63",
+        "-bindchannels-": "r63",
+        "-tags-": "r63"
+    },
+    "195": {
+        "Comma": "r82"
+    },
+    "196": {
+        "-colormaterial-": "r65",
+        "-stencil-": "r65",
+        "-cull-": "r65",
+        "-lod-": "r65",
+        "-zwrite-": "r65",
+        "-alphatest-": "r65",
+        "-colormask-": "r65",
+        "-alphatomask-": "r65",
+        "-separatespecular-": "r65",
+        "-settexture-": "r65",
+        "-offset-": "r65",
+        "RBrace": "r65",
+        "-lighting-": "r65",
+        "-subshader-": "r65",
+        "-ztest-": "r65",
+        "-name-": "r65",
+        "-material-": "r65",
+        "-blend-": "r65",
+        "-bindchannels-": "r65",
+        "-tags-": "r65"
+    },
+    "197": {
+        "LBrace": "r82"
+    },
+    "198": {
+        "combine_option": "s250",
+        "-constantcolor-": "r101",
+        "LParen": "s249",
+        "ID": "s248",
+        "-matrix-": "r101",
+        "-combine-": "r101",
+        "RBrace": "r101",
+        "combine_options": "s251"
+    },
+    "199": {
+        "placeholder": "s254",
+        "LParen": "s253",
+        "LBrack": "s252"
+    },
+    "200": {
+        "placeholder": "s255",
+        "LBrack": "s252"
+    },
+    "201": {
+        "-combine-": "s198",
+        "set_texture_stms": "s256",
+        "set_texture_stm": "s201",
+        "-matrix-": "s200",
+        "-constantcolor-": "s199",
+        "RBrace": "r93"
+    },
+    "202": {
+        "RBrace": "s257"
+    },
+    "203": {
+        "ID": "r91",
+        "RBrace": "r91"
+    },
+    "204": {
+        "RBrace": "r89"
+    },
+    "205": {
+        "-colormaterial-": "r66",
+        "-stencil-": "r66",
+        "-alphatomask-": "r66",
+        "-lod-": "r66",
+        "-alphatest-": "r66",
+        "-zwrite-": "r66",
+        "-colormask-": "r66",
+        "-cull-": "r66",
+        "-separatespecular-": "r66",
+        "-settexture-": "r66",
+        "-ztest-": "r66",
+        "RBrace": "r66",
+        "-offset-": "r66",
+        "-subshader-": "r66",
+        "-lighting-": "r66",
+        "-name-": "r66",
+        "-material-": "r66",
+        "-blend-": "r66",
+        "-bindchannels-": "r66",
+        "-tags-": "r66"
+    },
+    "206": {
+        "-colormaterial-": "r48",
+        "-stencil-": "r48",
+        "-material-": "r48",
+        "-lod-": "r48",
+        "-zwrite-": "r48",
+        "-alphatest-": "r48",
+        "-colormask-": "r48",
+        "-blend-": "r48",
+        "-separatespecular-": "r48",
+        "-settexture-": "r48",
+        "-offset-": "r48",
+        "RBrace": "r48",
+        "-ztest-": "r48",
+        "-subshader-": "r48",
+        "-lighting-": "r48",
+        "-name-": "r48",
+        "-cull-": "r48",
+        "-alphatomask-": "r48",
+        "-bindchannels-": "r48",
+        "-tags-": "r48"
+    },
+    "207": {
+        "String": "s258"
+    },
+    "208": {
+        "RBrace": "r56"
+    },
+    "209": {
+        "-colormaterial-": "r55",
+        "-stencil-": "r55",
+        "-cull-": "r55",
+        "-lod-": "r55",
+        "-zwrite-": "r55",
+        "-alphatest-": "r55",
+        "-colormask-": "r55",
+        "-material-": "r55",
+        "-separatespecular-": "r55",
+        "-settexture-": "r55",
+        "-offset-": "r55",
+        "RBrace": "r55",
+        "-lighting-": "r55",
+        "-subshader-": "r55",
+        "-ztest-": "r55",
+        "-name-": "r55",
+        "-alphatomask-": "r55",
+        "-blend-": "r55",
+        "-bindchannels-": "r55",
+        "-tags-": "r55"
+    },
+    "210": {
+        "-colormaterial-": "r82",
+        "-stencil-": "r82",
+        "-cull-": "r82",
+        "-lod-": "r82",
+        "-zwrite-": "r82",
+        "-alphatest-": "r82",
+        "-colormask-": "r82",
+        "-blend-": "r82",
+        "-separatespecular-": "r82",
+        "-settexture-": "r82",
+        "-ztest-": "r82",
+        "RBrace": "r82",
+        "-offset-": "r82",
+        "-subshader-": "r82",
+        "-lighting-": "r82",
+        "-name-": "r82",
+        "-material-": "r82",
+        "-alphatomask-": "r82",
+        "-bindchannels-": "r82",
+        "-tags-": "r82"
+    },
+    "211": {
+        "-cube-": "s263",
+        "-color-": "s262",
+        "-range-": "s266",
+        "-any-": "s261",
+        "-vector-": "s267",
+        "-float-": "s264",
+        "-int-": "s265",
+        "-2d-": "s259",
+        "prop_type": "s268",
+        "-3d-": "s260"
+    },
+    "212": {
+        "Comma": "r34",
+        "RParen": "r34"
+    },
+    "213": {
+        "Comma": "r35",
+        "RParen": "r35"
+    },
+    "214": {
+        "Comma": "s269",
+        "RParen": "r38",
+        "enum_item_successor": "s270"
+    },
+    "215": {
+        "RParen": "s271"
+    },
+    "216": {
+        "Comma": "r81",
+        "ID": "s216",
+        "ids": "s272"
+    },
+    "217": {
+        "Comma": "s273",
+        "id_with_comma_successor": "s274"
+    },
+    "218": {
+        "RParen": "s275"
+    },
+    "219": {
+        "RParen": "s276"
+    },
+    "220": {
+        "LParen": "s277"
+    },
+    "221": {
+        "-settexture-": "r61",
+        "-lod-": "r61",
+        "-zwrite-": "r61",
+        "-colormask-": "r61",
+        "-cull-": "r61",
+        "-separatespecular-": "r61",
+        "-cginclude-": "r61",
+        "-offset-": "r61",
+        "-usepass-": "r61",
+        "-lighting-": "r61",
+        "-tags-": "r61",
+        "-colormaterial-": "r61",
+        "-stencil-": "r61",
+        "-alphatomask-": "r61",
+        "-alphatest-": "r61",
+        "-cgprogram-": "r61",
+        "-pass-": "r61",
+        "-ztest-": "r61",
+        "RBrace": "r61",
+        "-name-": "r61",
+        "-material-": "r61",
+        "-blend-": "r61",
+        "-bindchannels-": "r61"
+    },
+    "222": {
+        "-settexture-": "r63",
+        "-lod-": "r63",
+        "-zwrite-": "r63",
+        "-colormask-": "r63",
+        "-pass-": "r63",
+        "-cginclude-": "r63",
+        "-usepass-": "r63",
+        "-offset-": "r63",
+        "-lighting-": "r63",
+        "-alphatomask-": "r63",
+        "-separatespecular-": "r63",
+        "-tags-": "r63",
+        "-colormaterial-": "r63",
+        "-stencil-": "r63",
+        "-cull-": "r63",
+        "-alphatest-": "r63",
+        "-cgprogram-": "r63",
+        "-ztest-": "r63",
+        "RBrace": "r63",
+        "-name-": "r63",
+        "-material-": "r63",
+        "-blend-": "r63",
+        "-bindchannels-": "r63"
+    },
+    "223": {
+        "-settexture-": "r65",
+        "-lod-": "r65",
+        "-zwrite-": "r65",
+        "-colormask-": "r65",
+        "-pass-": "r65",
+        "-cginclude-": "r65",
+        "-usepass-": "r65",
+        "-offset-": "r65",
+        "-lighting-": "r65",
+        "-separatespecular-": "r65",
+        "-tags-": "r65",
+        "-colormaterial-": "r65",
+        "-stencil-": "r65",
+        "-cull-": "r65",
+        "-alphatest-": "r65",
+        "-cgprogram-": "r65",
+        "-alphatomask-": "r65",
+        "-ztest-": "r65",
+        "RBrace": "r65",
+        "-name-": "r65",
+        "-material-": "r65",
+        "-blend-": "r65",
+        "-bindchannels-": "r65"
+    },
+    "224": {
+        "placeholder": "s278",
+        "LBrack": "s236"
+    },
+    "225": {
+        "bind_channel_stm": "s134",
+        "-bind-": "s133",
+        "RBrace": "r84",
+        "bind_channel_stms": "s279"
+    },
+    "226": {
+        "ID": "s235",
+        "id_or_number_or_placeholder": "s280",
+        "Number": "s237",
+        "LBrack": "s236",
+        "placeholder": "s239"
+    },
+    "227": {
+        "-colormaterial-": "r116",
+        "-stencil-": "r116",
+        "-material-": "r116",
+        "-lod-": "r116",
+        "-alphatest-": "r116",
+        "-zwrite-": "r116",
+        "-cgprogram-": "r116",
+        "-alphatomask-": "r116",
+        "-separatespecular-": "r116",
+        "-settexture-": "r116",
+        "-ztest-": "r116",
+        "RBrace": "r116",
+        "-offset-": "r116",
+        "-cginclude-": "r116",
+        "-lighting-": "r116",
+        "-name-": "r116",
+        "-colormask-": "r116",
+        "-cull-": "r116",
+        "-blend-": "r116",
+        "-bindchannels-": "r116",
+        "-tags-": "r116"
+    },
+    "228": {
+        "-colormaterial-": "r115",
+        "-stencil-": "r115",
+        "-cull-": "r115",
+        "-lod-": "r115",
+        "-cgprogram-": "r115",
+        "-alphatest-": "r115",
+        "-colormask-": "r115",
+        "-separatespecular-": "r115",
+        "-settexture-": "r115",
+        "-ztest-": "r115",
+        "RBrace": "r115",
+        "-lighting-": "r115",
+        "-cginclude-": "r115",
+        "-zwrite-": "r115",
+        "-offset-": "r115",
+        "-material-": "r115",
+        "-name-": "r115",
+        "-alphatomask-": "r115",
+        "-blend-": "r115",
+        "-bindchannels-": "r115",
+        "-tags-": "r115"
+    },
+    "229": {
+        "ID": "s138",
+        "meterial_stms": "s281",
+        "RBrace": "r87",
+        "meterial_stm": "s139"
+    },
+    "230": {
+        "-colormaterial-": "r64",
+        "-stencil-": "r64",
+        "-cull-": "r64",
+        "-lod-": "r64",
+        "-zwrite-": "r64",
+        "-alphatest-": "r64",
+        "-colormask-": "r64",
+        "-alphatomask-": "r64",
+        "-separatespecular-": "r64",
+        "-settexture-": "r64",
+        "-cgprogram-": "r64",
+        "-offset-": "r64",
+        "RBrace": "r64",
+        "-ztest-": "r64",
+        "-cginclude-": "r64",
+        "-lighting-": "r64",
+        "-name-": "r64",
+        "-material-": "r64",
+        "-blend-": "r64",
+        "-bindchannels-": "r64",
+        "-tags-": "r64"
+    },
+    "231": {
+        "Comma": "s282"
+    },
+    "232": {
+        "LBrace": "s283"
+    },
+    "233": {
+        "ID": "s145",
+        "stencil_stms": "s284",
+        "stencil_stm": "s146",
+        "RBrace": "r90"
+    },
+    "234": {
+        "tags_body": "s285",
+        "String": "s149",
+        "RBrace": "r57",
+        "tag_smt": "s150"
+    },
+    "235": {
+        "-colormaterial-": "r77",
+        "-stencil-": "r77",
+        "-cginclude-": "r77",
+        "-lod-": "r77",
+        "-zwrite-": "r77",
+        "-alphatest-": "r77",
+        "-cgprogram-": "r77",
+        "-cull-": "r77",
+        "-separatespecular-": "r77",
+        "-settexture-": "r77",
+        "-offset-": "r77",
+        "RBrace": "r77",
+        "-bindchannels-": "r77",
+        "-name-": "r77",
+        "-lighting-": "r77",
+        "-ztest-": "r77",
+        "-colormask-": "r77",
+        "-material-": "r77",
+        "-alphatomask-": "r77",
+        "-blend-": "r77",
+        "-tags-": "r77"
+    },
+    "236": {
+        "ID": "s286"
+    },
+    "237": {
+        "-colormaterial-": "r78",
+        "-stencil-": "r78",
+        "-cginclude-": "r78",
+        "-lod-": "r78",
+        "-cgprogram-": "r78",
+        "-zwrite-": "r78",
+        "-colormask-": "r78",
+        "-alphatomask-": "r78",
+        "-separatespecular-": "r78",
+        "-settexture-": "r78",
+        "-ztest-": "r78",
+        "RBrace": "r78",
+        "-lighting-": "r78",
+        "-alphatest-": "r78",
+        "-offset-": "r78",
+        "-material-": "r78",
+        "-name-": "r78",
+        "-cull-": "r78",
+        "-blend-": "r78",
+        "-bindchannels-": "r78",
+        "-tags-": "r78"
+    },
+    "238": {
+        "-colormaterial-": "r59",
+        "-stencil-": "r59",
+        "-material-": "r59",
+        "-lod-": "r59",
+        "-cgprogram-": "r59",
+        "-zwrite-": "r59",
+        "-colormask-": "r59",
+        "-alphatomask-": "r59",
+        "-separatespecular-": "r59",
+        "-cginclude-": "r59",
+        "-ztest-": "r59",
+        "RBrace": "r59",
+        "-lighting-": "r59",
+        "-settexture-": "r59",
+        "-alphatest-": "r59",
+        "-offset-": "r59",
+        "-name-": "r59",
+        "-cull-": "r59",
+        "-blend-": "r59",
+        "-bindchannels-": "r59",
+        "-tags-": "r59"
+    },
+    "239": {
+        "-colormaterial-": "r79",
+        "-stencil-": "r79",
+        "-material-": "r79",
+        "-lod-": "r79",
+        "-alphatest-": "r79",
+        "-zwrite-": "r79",
+        "-cgprogram-": "r79",
+        "-alphatomask-": "r79",
+        "-separatespecular-": "r79",
+        "-cginclude-": "r79",
+        "-ztest-": "r79",
+        "RBrace": "r79",
+        "-offset-": "r79",
+        "-settexture-": "r79",
+        "-lighting-": "r79",
+        "-colormask-": "r79",
+        "-name-": "r79",
+        "-cull-": "r79",
+        "-blend-": "r79",
+        "-bindchannels-": "r79",
+        "-tags-": "r79"
+    },
+    "240": {
+        "RBrace": "r110"
+    },
+    "241": {
+        "-cginclude-": "r108",
+        "-lod-": "r108",
+        "-zwrite-": "r108",
+        "-colormask-": "r108",
+        "-separatespecular-": "r108",
+        "-settexture-": "r108",
+        "-usepass-": "r108",
+        "-lighting-": "r108",
+        "-offset-": "r108",
+        "-alphatomask-": "r108",
+        "-tags-": "r108",
+        "-colormaterial-": "r108",
+        "-stencil-": "r108",
+        "-cull-": "r108",
+        "-alphatest-": "r108",
+        "-cgprogram-": "r108",
+        "-ztest-": "r108",
+        "RBrace": "r108",
+        "-bindchannels-": "r108",
+        "-name-": "r108",
+        "-material-": "r108",
+        "-blend-": "r108",
+        "-pass-": "r108"
+    },
+    "242": {
+        "RBrace": "s287"
+    },
+    "243": {
+        "-cginclude-": "r66",
+        "-lod-": "r66",
+        "-zwrite-": "r66",
+        "-colormask-": "r66",
+        "-pass-": "r66",
+        "-settexture-": "r66",
+        "-usepass-": "r66",
+        "-offset-": "r66",
+        "-lighting-": "r66",
+        "-alphatomask-": "r66",
+        "-separatespecular-": "r66",
+        "-tags-": "r66",
+        "-colormaterial-": "r66",
+        "-stencil-": "r66",
+        "-cull-": "r66",
+        "-alphatest-": "r66",
+        "-cgprogram-": "r66",
+        "-ztest-": "r66",
+        "RBrace": "r66",
+        "-name-": "r66",
+        "-material-": "r66",
+        "-blend-": "r66",
+        "-bindchannels-": "r66"
+    },
+    "244": {
+        "-cginclude-": "r55",
+        "-lod-": "r55",
+        "-zwrite-": "r55",
+        "-colormask-": "r55",
+        "-pass-": "r55",
+        "-settexture-": "r55",
+        "-offset-": "r55",
+        "-usepass-": "r55",
+        "-lighting-": "r55",
+        "-cull-": "r55",
+        "-tags-": "r55",
+        "-colormaterial-": "r55",
+        "-stencil-": "r55",
+        "-alphatomask-": "r55",
+        "-alphatest-": "r55",
+        "-cgprogram-": "r55",
+        "-ztest-": "r55",
+        "RBrace": "r55",
+        "-bindchannels-": "r55",
+        "-name-": "r55",
+        "-material-": "r55",
+        "-blend-": "r55",
+        "-separatespecular-": "r55"
+    },
+    "245": {
+        "-cginclude-": "r82",
+        "-lod-": "r82",
+        "-zwrite-": "r82",
+        "-colormask-": "r82",
+        "-separatespecular-": "r82",
+        "-settexture-": "r82",
+        "-usepass-": "r82",
+        "-lighting-": "r82",
+        "-offset-": "r82",
+        "-cull-": "r82",
+        "-tags-": "r82",
+        "-colormaterial-": "r82",
+        "-stencil-": "r82",
+        "-alphatomask-": "r82",
+        "-alphatest-": "r82",
+        "-cgprogram-": "r82",
+        "-ztest-": "r82",
+        "RBrace": "r82",
+        "-bindchannels-": "r82",
+        "-name-": "r82",
+        "-material-": "r82",
+        "-blend-": "r82",
+        "-pass-": "r82"
+    },
+    "246": {
+        "ID": "s288"
+    },
+    "247": {
+        "RBrack": "s289"
+    },
+    "248": {
+        "Comma": "r102",
+        "-combine-": "r102",
+        "-matrix-": "r102",
+        "Minus": "r102",
+        "Times": "r102",
+        "Plus": "r102",
+        "ID": "r102",
+        "LParen": "r102",
+        "Divide": "r102",
+        "-constantcolor-": "r102",
+        "RBrace": "r102"
+    },
+    "249": {
+        "ID": "s290"
+    },
+    "250": {
+        "Plus": "s294",
+        "ID": "s248",
+        "Divide": "s292",
+        "-combine-": "r101",
+        "RBrace": "r101",
+        "Comma": "s291",
+        "combine_option": "s250",
+        "-constantcolor-": "r101",
+        "Minus": "s293",
+        "Times": "s295",
+        "combine_option_op": "s296",
+        "-matrix-": "r101",
+        "combine_options": "s297",
+        "LParen": "s249"
+    },
+    "251": {
+        "-constantcolor-": "r97",
+        "-matrix-": "r97",
+        "-combine-": "r97",
+        "RBrace": "r97"
+    },
+    "252": {
+        "ID": "s298"
+    },
+    "253": {
+        "Number": "s299"
+    },
+    "254": {
+        "-combine-": "r95",
+        "-matrix-": "r95",
+        "-constantcolor-": "r95",
+        "RBrace": "r95"
+    },
+    "255": {
+        "-constantcolor-": "r94",
+        "-matrix-": "r94",
+        "-combine-": "r94",
+        "RBrace": "r94"
+    },
+    "256": {
+        "RBrace": "r92"
+    },
+    "257": {
+        "-colormaterial-": "r67",
+        "-stencil-": "r67",
+        "-alphatomask-": "r67",
+        "-lod-": "r67",
+        "-alphatest-": "r67",
+        "-zwrite-": "r67",
+        "-colormask-": "r67",
+        "-cull-": "r67",
+        "-separatespecular-": "r67",
+        "-settexture-": "r67",
+        "-offset-": "r67",
+        "RBrace": "r67",
+        "-ztest-": "r67",
+        "-subshader-": "r67",
+        "-lighting-": "r67",
+        "-name-": "r67",
+        "-material-": "r67",
+        "-blend-": "r67",
+        "-bindchannels-": "r67",
+        "-tags-": "r67"
+    },
+    "258": {
+        "RBrace": "r58",
+        "String": "r58"
+    },
+    "259": {
+        "RParen": "r23"
+    },
+    "260": {
+        "RParen": "r25"
+    },
+    "261": {
+        "RParen": "r26"
+    },
+    "262": {
+        "RParen": "r18"
+    },
+    "263": {
+        "RParen": "r24"
+    },
+    "264": {
+        "RParen": "r22"
+    },
+    "265": {
+        "RParen": "r21"
+    },
+    "266": {
+        "RParen": "r20",
+        "LParen": "s300"
+    },
+    "267": {
+        "RParen": "r19"
+    },
+    "268": {
+        "RParen": "s301"
+    },
+    "269": {
+        "ID": "s212",
+        "Number": "s213",
+        "enum_item": "s302"
+    },
+    "270": {
+        "RParen": "r33"
+    },
+    "271": {
+        "RBrack": "s303"
+    },
+    "272": {
+        "Comma": "r80"
+    },
+    "273": {
+        "Comma": "r81",
+        "ID": "s304",
+        "ids": "s305",
+        "RParen": "r81"
+    },
+    "274": {
+        "RParen": "r39"
+    },
+    "275": {
+        "RBrack": "s306"
+    },
+    "276": {
+        "RBrack": "s307"
+    },
+    "277": {
+        "String": "s308"
+    },
+    "278": {
+        "-colormaterial-": "r60",
+        "-stencil-": "r60",
+        "-settexture-": "r60",
+        "-lod-": "r60",
+        "-cgprogram-": "r60",
+        "-alphatest-": "r60",
+        "-colormask-": "r60",
+        "-cull-": "r60",
+        "-separatespecular-": "r60",
+        "-cginclude-": "r60",
+        "-alphatomask-": "r60",
+        "-ztest-": "r60",
+        "RBrace": "r60",
+        "-lighting-": "r60",
+        "-zwrite-": "r60",
+        "-offset-": "r60",
+        "-name-": "r60",
+        "-material-": "r60",
+        "-blend-": "r60",
+        "-bindchannels-": "r60",
+        "-tags-": "r60"
+    },
+    "279": {
+        "RBrace": "s309"
+    },
+    "280": {
+        "-colormaterial-": "r62",
+        "-stencil-": "r62",
+        "-alphatomask-": "r62",
+        "-lod-": "r62",
+        "-zwrite-": "r62",
+        "-alphatest-": "r62",
+        "-colormask-": "r62",
+        "-cull-": "r62",
+        "-separatespecular-": "r62",
+        "-cgprogram-": "r62",
+        "-offset-": "r62",
+        "RBrace": "r62",
+        "-lighting-": "r62",
+        "-settexture-": "r62",
+        "-cginclude-": "r62",
+        "-ztest-": "r62",
+        "-name-": "r62",
+        "-material-": "r62",
+        "-blend-": "r62",
+        "-bindchannels-": "r62",
+        "-tags-": "r62"
+    },
+    "281": {
+        "RBrace": "s310"
+    },
+    "282": {
+        "ID": "s235",
+        "id_or_number_or_placeholder": "s311",
+        "Number": "s237",
+        "LBrack": "s236",
+        "placeholder": "s239"
+    },
+    "283": {
+        "-combine-": "s198",
+        "set_texture_stms": "s312",
+        "set_texture_stm": "s201",
+        "-matrix-": "s200",
+        "-constantcolor-": "s199",
+        "RBrace": "r93"
+    },
+    "284": {
+        "RBrace": "s313"
+    },
+    "285": {
+        "RBrace": "s314"
+    },
+    "286": {
+        "RBrack": "s315"
+    },
+    "287": {
+        "-cginclude-": "r67",
+        "-lod-": "r67",
+        "-zwrite-": "r67",
+        "-colormask-": "r67",
+        "-separatespecular-": "r67",
+        "-settexture-": "r67",
+        "-usepass-": "r67",
+        "-offset-": "r67",
+        "-lighting-": "r67",
+        "-alphatomask-": "r67",
+        "-tags-": "r67",
+        "-colormaterial-": "r67",
+        "-stencil-": "r67",
+        "-cull-": "r67",
+        "-alphatest-": "r67",
+        "-cgprogram-": "r67",
+        "-ztest-": "r67",
+        "RBrace": "r67",
+        "-bindchannels-": "r67",
+        "-name-": "r67",
+        "-material-": "r67",
+        "-blend-": "r67",
+        "-pass-": "r67"
+    },
+    "288": {
+        "-bind-": "r85",
+        "RBrace": "r85"
+    },
+    "289": {
+        "ID": "r82",
+        "RBrace": "r82"
+    },
+    "290": {
+        "RParen": "s316"
+    },
+    "291": {
+        "combine_option": "s250",
+        "-constantcolor-": "r101",
+        "LParen": "s249",
+        "ID": "s248",
+        "-matrix-": "r101",
+        "-combine-": "r101",
+        "RBrace": "r101",
+        "combine_options": "s317"
+    },
+    "292": {
+        "-combine-": "r107",
+        "RBrace": "r107",
+        "ID": "r107",
+        "-matrix-": "r107",
+        "-constantcolor-": "r107",
+        "LParen": "r107"
+    },
+    "293": {
+        "-combine-": "r105",
+        "RBrace": "r105",
+        "ID": "r105",
+        "-matrix-": "r105",
+        "-constantcolor-": "r105",
+        "LParen": "r105"
+    },
+    "294": {
+        "-combine-": "r104",
+        "RBrace": "r104",
+        "ID": "r104",
+        "-matrix-": "r104",
+        "-constantcolor-": "r104",
+        "LParen": "r104"
+    },
+    "295": {
+        "-constantcolor-": "r106",
+        "LParen": "r106",
+        "ID": "r106",
+        "-matrix-": "r106",
+        "-combine-": "r106",
+        "RBrace": "r106"
+    },
+    "296": {
+        "combine_option": "s250",
+        "-constantcolor-": "r101",
+        "LParen": "s249",
+        "ID": "s248",
+        "-matrix-": "r101",
+        "-combine-": "r101",
+        "RBrace": "r101",
+        "combine_options": "s318"
+    },
+    "297": {
+        "-constantcolor-": "r98",
+        "-matrix-": "r98",
+        "-combine-": "r98",
+        "RBrace": "r98"
+    },
+    "298": {
+        "RBrack": "s319"
+    },
+    "299": {
+        "Comma": "s320"
+    },
+    "300": {
+        "Number": "s321"
+    },
+    "301": {
+        "Assign": "s322"
+    },
+    "302": {
+        "Comma": "s269",
+        "RParen": [
+            "r38",
+            "r36"
+        ],
+        "enum_item_successor": "s323"
+    },
+    "303": {
+        "ID": "s324"
+    },
+    "304": {
+        "Comma": "r81",
+        "ID": "s304",
+        "ids": "s325",
+        "RParen": "r81"
+    },
+    "305": {
+        "Comma": "s273",
+        "id_with_comma_successor": "s326",
+        "RParen": "r40"
+    },
+    "306": {
+        "ID": "s327"
+    },
+    "307": {
+        "ID": "s328"
+    },
+    "308": {
+        "Comma": "s329"
+    },
+    "309": {
+        "-colormaterial-": "r61",
+        "-stencil-": "r61",
+        "-material-": "r61",
+        "-lod-": "r61",
+        "-zwrite-": "r61",
+        "-alphatest-": "r61",
+        "-cgprogram-": "r61",
+        "-cull-": "r61",
+        "-separatespecular-": "r61",
+        "-colormask-": "r61",
+        "-offset-": "r61",
+        "RBrace": "r61",
+        "-lighting-": "r61",
+        "-settexture-": "r61",
+        "-cginclude-": "r61",
+        "-ztest-": "r61",
+        "-name-": "r61",
+        "-alphatomask-": "r61",
+        "-blend-": "r61",
+        "-bindchannels-": "r61",
+        "-tags-": "r61"
+    },
+    "310": {
+        "-colormaterial-": "r63",
+        "-stencil-": "r63",
+        "-cginclude-": "r63",
+        "-lod-": "r63",
+        "-alphatest-": "r63",
+        "-zwrite-": "r63",
+        "-cgprogram-": "r63",
+        "-cull-": "r63",
+        "-separatespecular-": "r63",
+        "-settexture-": "r63",
+        "-offset-": "r63",
+        "RBrace": "r63",
+        "-lighting-": "r63",
+        "-ztest-": "r63",
+        "-colormask-": "r63",
+        "-material-": "r63",
+        "-name-": "r63",
+        "-alphatomask-": "r63",
+        "-blend-": "r63",
+        "-bindchannels-": "r63",
+        "-tags-": "r63"
+    },
+    "311": {
+        "-colormaterial-": "r65",
+        "-stencil-": "r65",
+        "-cull-": "r65",
+        "-lod-": "r65",
+        "-zwrite-": "r65",
+        "-alphatest-": "r65",
+        "-colormask-": "r65",
+        "-cgprogram-": "r65",
+        "-separatespecular-": "r65",
+        "-cginclude-": "r65",
+        "-alphatomask-": "r65",
+        "-offset-": "r65",
+        "RBrace": "r65",
+        "-lighting-": "r65",
+        "-settexture-": "r65",
+        "-ztest-": "r65",
+        "-name-": "r65",
+        "-material-": "r65",
+        "-blend-": "r65",
+        "-bindchannels-": "r65",
+        "-tags-": "r65"
+    },
+    "312": {
+        "RBrace": "s330"
+    },
+    "313": {
+        "-colormaterial-": "r66",
+        "-stencil-": "r66",
+        "-alphatomask-": "r66",
+        "-lod-": "r66",
+        "-alphatest-": "r66",
+        "-zwrite-": "r66",
+        "-cgprogram-": "r66",
+        "-cull-": "r66",
+        "-separatespecular-": "r66",
+        "-cginclude-": "r66",
+        "-ztest-": "r66",
+        "RBrace": "r66",
+        "-lighting-": "r66",
+        "-settexture-": "r66",
+        "-colormask-": "r66",
+        "-offset-": "r66",
+        "-name-": "r66",
+        "-material-": "r66",
+        "-blend-": "r66",
+        "-bindchannels-": "r66",
+        "-tags-": "r66"
+    },
+    "314": {
+        "-colormaterial-": "r55",
+        "-stencil-": "r55",
+        "-cull-": "r55",
+        "-lod-": "r55",
+        "-zwrite-": "r55",
+        "-alphatest-": "r55",
+        "-cgprogram-": "r55",
+        "-material-": "r55",
+        "-separatespecular-": "r55",
+        "-cginclude-": "r55",
+        "-offset-": "r55",
+        "RBrace": "r55",
+        "-lighting-": "r55",
+        "-settexture-": "r55",
+        "-colormask-": "r55",
+        "-ztest-": "r55",
+        "-name-": "r55",
+        "-alphatomask-": "r55",
+        "-blend-": "r55",
+        "-bindchannels-": "r55",
+        "-tags-": "r55"
+    },
+    "315": {
+        "-colormaterial-": "r82",
+        "-stencil-": "r82",
+        "-material-": "r82",
+        "-lod-": "r82",
+        "-zwrite-": "r82",
+        "-alphatest-": "r82",
+        "-cgprogram-": "r82",
+        "-cull-": "r82",
+        "-separatespecular-": "r82",
+        "-colormask-": "r82",
+        "-offset-": "r82",
+        "RBrace": "r82",
+        "-ztest-": "r82",
+        "-settexture-": "r82",
+        "-lighting-": "r82",
+        "-cginclude-": "r82",
+        "-name-": "r82",
+        "-alphatomask-": "r82",
+        "-blend-": "r82",
+        "-bindchannels-": "r82",
+        "-tags-": "r82"
+    },
+    "316": {
+        "Comma": "r103",
+        "-combine-": "r103",
+        "Divide": "r103",
+        "Minus": "r103",
+        "RBrace": "r103",
+        "Plus": "r103",
+        "ID": "r103",
+        "Times": "r103",
+        "-matrix-": "r103",
+        "-constantcolor-": "r103",
+        "LParen": "r103"
+    },
+    "317": {
+        "-combine-": "r99",
+        "-matrix-": "r99",
+        "-constantcolor-": "r99",
+        "RBrace": "r99"
+    },
+    "318": {
+        "-constantcolor-": "r100",
+        "-matrix-": "r100",
+        "-combine-": "r100",
+        "RBrace": "r100"
+    },
+    "319": {
+        "-constantcolor-": "r82",
+        "-matrix-": "r82",
+        "-combine-": "r82",
+        "RBrace": "r82"
+    },
+    "320": {
+        "Number": "s331"
+    },
+    "321": {
+        "Comma": "s332"
+    },
+    "322": {
+        "prop_init": "s336",
+        "Number": "s334",
+        "String": "s335",
+        "LParen": "s333"
+    },
+    "323": {
+        "RParen": "r37"
+    },
+    "324": {
+        "LParen": "s337"
+    },
+    "325": {
+        "Comma": "r80",
+        "RParen": "r80"
+    },
+    "326": {
+        "RParen": "r41"
+    },
+    "327": {
+        "LParen": "s338"
+    },
+    "328": {
+        "LParen": "s339"
+    },
+    "329": {
+        "-cube-": "s263",
+        "-color-": "s262",
+        "-range-": "s266",
+        "-any-": "s261",
+        "-vector-": "s267",
+        "-float-": "s264",
+        "-int-": "s265",
+        "-2d-": "s259",
+        "prop_type": "s340",
+        "-3d-": "s260"
+    },
+    "330": {
+        "-colormaterial-": "r67",
+        "-stencil-": "r67",
+        "-cginclude-": "r67",
+        "-lod-": "r67",
+        "-alphatest-": "r67",
+        "-zwrite-": "r67",
+        "-colormask-": "r67",
+        "-alphatomask-": "r67",
+        "-separatespecular-": "r67",
+        "-settexture-": "r67",
+        "-cgprogram-": "r67",
+        "-offset-": "r67",
+        "RBrace": "r67",
+        "-lighting-": "r67",
+        "-cull-": "r67",
+        "-ztest-": "r67",
+        "-name-": "r67",
+        "-material-": "r67",
+        "-blend-": "r67",
+        "-bindchannels-": "r67",
+        "-tags-": "r67"
+    },
+    "331": {
+        "Comma": "s341"
+    },
+    "332": {
+        "Number": "s342"
+    },
+    "333": {
+        "Number": "s343"
+    },
+    "334": {
+        "ID": "r28",
+        "RBrace": "r28",
+        "LBrack": "r28"
+    },
+    "335": {
+        "LBrace": "s344"
+    },
+    "336": {
+        "ID": "r13",
+        "RBrace": "r13",
+        "LBrack": "r13"
+    },
+    "337": {
+        "String": "s345"
+    },
+    "338": {
+        "String": "s346"
+    },
+    "339": {
+        "String": "s347"
+    },
+    "340": {
+        "RParen": "s348"
+    },
+    "341": {
+        "Number": "s349"
+    },
+    "342": {
+        "RParen": "s350"
+    },
+    "343": {
+        "Comma": "s351"
+    },
+    "344": {
+        "ID": "s352",
+        "RBrace": "s353"
+    },
+    "345": {
+        "Comma": "s354"
+    },
+    "346": {
+        "Comma": "s355"
+    },
+    "347": {
+        "Comma": "s356"
+    },
+    "348": {
+        "Assign": "s357"
+    },
+    "349": {
+        "Comma": "s358"
+    },
+    "350": {
+        "RParen": "r27"
+    },
+    "351": {
+        "Number": "s359"
+    },
+    "352": {
+        "RBrace": "s360"
+    },
+    "353": {
+        "ID": "r29",
+        "LBrack": "r29",
+        "RBrace": "r29"
+    },
+    "354": {
+        "-cube-": "s263",
+        "-color-": "s262",
+        "-range-": "s266",
+        "-any-": "s261",
+        "-vector-": "s267",
+        "-float-": "s264",
+        "-int-": "s265",
+        "-2d-": "s259",
+        "prop_type": "s361",
+        "-3d-": "s260"
+    },
+    "355": {
+        "-cube-": "s263",
+        "-color-": "s262",
+        "-range-": "s266",
+        "-any-": "s261",
+        "-vector-": "s267",
+        "-float-": "s264",
+        "-int-": "s265",
+        "-2d-": "s259",
+        "prop_type": "s362",
+        "-3d-": "s260"
+    },
+    "356": {
+        "-cube-": "s263",
+        "-color-": "s262",
+        "-range-": "s266",
+        "-any-": "s261",
+        "-vector-": "s267",
+        "-float-": "s264",
+        "-int-": "s265",
+        "-2d-": "s259",
+        "prop_type": "s363",
+        "-3d-": "s260"
+    },
+    "357": {
+        "prop_init": "s364",
+        "Number": "s334",
+        "String": "s335",
+        "LParen": "s333"
+    },
+    "358": {
+        "Number": "s365"
+    },
+    "359": {
+        "Comma": "s366"
+    },
+    "360": {
+        "ID": "r30",
+        "RBrace": "r30",
+        "LBrack": "r30"
+    },
+    "361": {
+        "RParen": "s367"
+    },
+    "362": {
+        "RParen": "s368"
+    },
+    "363": {
+        "RParen": "s369"
+    },
+    "364": {
+        "ID": "r14",
+        "LBrack": "r14",
+        "RBrace": "r14"
+    },
+    "365": {
+        "RParen": "s370"
+    },
+    "366": {
+        "Number": "s371"
+    },
+    "367": {
+        "Assign": "s372"
+    },
+    "368": {
+        "Assign": "s373"
+    },
+    "369": {
+        "Assign": "s374"
+    },
+    "370": {
+        "-constantcolor-": "r96",
+        "-matrix-": "r96",
+        "-combine-": "r96",
+        "RBrace": "r96"
+    },
+    "371": {
+        "Comma": "s375",
+        "RParen": "s376"
+    },
+    "372": {
+        "prop_init": "s377",
+        "Number": "s334",
+        "String": "s335",
+        "LParen": "s333"
+    },
+    "373": {
+        "prop_init": "s378",
+        "Number": "s334",
+        "String": "s335",
+        "LParen": "s333"
+    },
+    "374": {
+        "prop_init": "s379",
+        "Number": "s334",
+        "String": "s335",
+        "LParen": "s333"
+    },
+    "375": {
+        "Number": "s380"
+    },
+    "376": {
+        "ID": "r31",
+        "LBrack": "r31",
+        "RBrace": "r31"
+    },
+    "377": {
+        "ID": "r15",
+        "LBrack": "r15",
+        "RBrace": "r15"
+    },
+    "378": {
+        "ID": "r17",
+        "RBrace": "r17",
+        "LBrack": "r17"
+    },
+    "379": {
+        "ID": "r16",
+        "LBrack": "r16",
+        "RBrace": "r16"
+    },
+    "380": {
+        "RParen": "s381"
+    },
+    "381": {
+        "ID": "r32",
+        "LBrack": "r32",
+        "RBrace": "r32"
+    }
+}

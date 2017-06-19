@@ -110,7 +110,7 @@ class Test(unittest.TestCase):
         translator.writeNonterminals(productionList, productionNonterminals)
 
 
-    def testCg(self):
+    def DtestCg(self):
         prepare()
 
         # 词法分析
@@ -132,3 +132,27 @@ class Test(unittest.TestCase):
         translator.mergeProductionListToFile(productionList, productionNonterminals, TokenType, os.path.join(__file__, '../../test/cg_test/productions.py'))
         translator.writeNonterminals(productionList, productionNonterminals)
         translator.mergeNonterminalsToFile(productionList, productionNonterminals, os.path.join(__file__, '../../test/cg_test/nonterminals.py'))
+
+
+    def testShader(self):
+        prepare()
+
+        syntaxFile = os.path.abspath(os.path.join(__file__, '../../test/shader_test/syntax.txt'))
+        with open(syntaxFile, encoding='utf-8') as f:
+            buf = f.read()
+        tokens = lexer.analyze(buf, isKeepSpace=False, isKeepComment=False)
+
+        # for debug
+        lexOutputFile = os.path.abspath(os.path.join(__file__, '../output/lex_output.txt'))
+        with open(lexOutputFile, 'w', encoding='utf-8') as f:
+            for token in tokens:
+                f.write(str(token) + '\n')
+
+        # 语法分析
+        productionNonterminals = collectNonterminalOfProduction(tokens)
+        productionList = analyze(tokens)
+
+        translator.writeProductionList(productionList, productionNonterminals, TokenType)
+        translator.mergeProductionListToFile(productionList, productionNonterminals, TokenType, os.path.join(__file__, '../../test/shader_test/productions.py'))
+        translator.writeNonterminals(productionList, productionNonterminals)
+        translator.mergeNonterminalsToFile(productionList, productionNonterminals, os.path.join(__file__, '../../test/shader_test/nonterminals.py'))

@@ -5,7 +5,8 @@ from .lex_tokens import TokenType
 
 
 def LexicalError(text):
-    error_message.error('find a lexical error. The pending text : ' + text)
+    raise Exception('find a lexical error. The pending text : ' + text)
+    # error_message.error('find a lexical error. The pending text : ' + text)
     return Token(TokenType.LexicalError, text)
 
 
@@ -32,8 +33,9 @@ def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
     return Token(TokenType.SpaceLike, text)
 
 
-floatPattern = '[-+]?([\d]*[\.]?[\d]+)[fF]?'
+floatPattern = r'(\b[-+]?[\d]+[\.]?[\d]*|(?<=\B)[-+]?[\.][\d]+)[fF]?\b'
 numberPattern = '%s(e%s)?' % (floatPattern, floatPattern)
+
 
 rules = [
     # priority 1 行注释
@@ -46,17 +48,17 @@ rules = [
     {'pattern': re.compile(r'\"[^\"]*\"'),
      'action': lambda text: Token(TokenType.String, text, text)},
     # 保留字
-    {'pattern': re.compile(r'\b(Color|Vector|Range|Int|Float|2D|Cube|3D)\b'),
-     'action': lambda text: Token(TokenType.ReservedWord, text, text)},
-    {'pattern': re.compile(r'\b(Lighting|Cull|ZTest|ZWrite|Blend)\b'),
-     'action': lambda text: Token(TokenType.ReservedWord, text, text)},
-    # priority 2 ID，ID的前后一定要是\b
-    {'pattern': re.compile(r"\bpragma\b"),
-     'action': PragmaSpecialDealer},
-    {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
-     'action': lambda text: Token(TokenType.ID, text, text)},
+    # {'pattern': re.compile(r'\b(Color|Vector|Range|Int|Float|2D|Cube|3D)\b'),
+    #  'action': lambda text: Token(TokenType.ReservedWord, text, text)},
+    # {'pattern': re.compile(r'\b(Lighting|Cull|ZTest|ZWrite|Blend)\b'),
+    #  'action': lambda text: Token(TokenType.ReservedWord, text, text)},
+    # priority 2 ID，ID的前后一定要是\b。特别注意，2D应该被识别为ID。
     {'pattern': re.compile(numberPattern),
      'action': lambda text: Token(TokenType.Number, text, text)},
+    {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
+     'action': lambda text: Token(TokenType.ID, text, text)},
+    {'pattern': re.compile(r"\b[0-9a-zA-Z_]\w*\b"),
+     'action': lambda text: Token(TokenType.ID, text, text)},
     # 标点符号
     {'pattern': re.compile(r"->"),
      'action': lambda text: Token(TokenType.RightArrow, text)},
@@ -163,5 +165,5 @@ rules = [
     {'pattern': re.compile(r".*"),
      'action': LexicalError},
     {'pattern': re.compile(r".", re.DOTALL),
-     'action': lambda text: Token(TokenType.Any, text)},
+     'action': lambda text: Token(TokenType.AnyString, text)},
 ]

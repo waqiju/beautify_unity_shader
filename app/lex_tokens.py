@@ -6,7 +6,7 @@ class TokenType(SymbolType):
     # 变量
     ID = "ID"
     String = "String"
-    Int = "Int"
+    Int = "NumberInt"
     Number = "Number"  # Int Float
     Comment = "Comment"
     SpaceLike = "SpaceLike"
@@ -69,7 +69,7 @@ class TokenType(SymbolType):
     ReservedWord = "ReservedWord"
     LexicalError = "LexicalError"
     # NULL = 'NULL'
-    Any = "Any"
+    AnyString = "AnyString"
 
     def isNonterminal(self):
         return False

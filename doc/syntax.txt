@@ -1,8 +1,8 @@
-/* 为了方便写出可以被 ？？识别的product，做以下约定：
-1. 小写字母开头 = 语法Symbol
+/* syntax.txt中的元素与语法分析概念的对应关系。
+1. 小写字母开头 = 语法Nontermminal
 2. 大写字母开头 = 词法Token
-3. 单引号开头 = TokenType.ID( xxx )
-4. 标点 = TokenType.XXX
+3. 单引号开头 = 词法Token集合中的关键字，实现上是TokenType.ID( xxx )
+4. 标点 = 也是词法Token
 */
 //1
 prog        -> 'Shader' String { shader_body }

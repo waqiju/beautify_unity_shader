@@ -12,6 +12,9 @@
             return c;
         }
 
+
+        
+
         sampler2D _MaskTex;
         sampler2D _MainTex;
         sampler2D _MainTex2;

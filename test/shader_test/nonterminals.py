@@ -353,20 +353,20 @@ class prop_stmp13(prop_stm):
 
 class prop_stmp14(prop_stm):
     # prop_stm --> [ ID ] ID ( String , prop_type ) = prop_init
-    def __init__(self, LBrack, ID, RBrack, ID, LParen, String, Comma, prop_type, RParen, Assign, prop_init):
-        self.ID = ID
-        self.ID = ID
+    def __init__(self, LBrack, ID1, RBrack, ID2, LParen, String, Comma, prop_type, RParen, Assign, prop_init):
+        self.ID1 = ID1
+        self.ID2 = ID2
         self.String = String
         self.prop_type = prop_type
         self.prop_init = prop_init
 
     def toCode(self):
-        return '[' + self.ID.toCode() + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+        return '[' + self.ID1.toCode() + ']' + self.ID2.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
 
 
 class prop_stmp15(prop_stm):
     # prop_stm --> [ 'Enum' ( enum_items ) ] ID ( String , prop_type ) = prop_init
-    def __init__(self, LBrack, Enum, LParen, enum_items, RParen, RBrack, ID, LParen, String, Comma, prop_type, RParen, Assign, prop_init):
+    def __init__(self, LBrack, Enum, LParen1, enum_items, RParen1, RBrack, ID, LParen2, String, Comma, prop_type, RParen2, Assign, prop_init):
         self.enum_items = enum_items
         self.ID = ID
         self.String = String
@@ -379,7 +379,7 @@ class prop_stmp15(prop_stm):
 
 class prop_stmp16(prop_stm):
     # prop_stm --> [ 'MaterialEnum' ( enum_items ) ] ID ( String , prop_type ) = prop_init
-    def __init__(self, LBrack, MaterialEnum, LParen, enum_items, RParen, RBrack, ID, LParen, String, Comma, prop_type, RParen, Assign, prop_init):
+    def __init__(self, LBrack, MaterialEnum, LParen1, enum_items, RParen1, RBrack, ID, LParen2, String, Comma, prop_type, RParen2, Assign, prop_init):
         self.enum_items = enum_items
         self.ID = ID
         self.String = String
@@ -392,7 +392,7 @@ class prop_stmp16(prop_stm):
 
 class prop_stmp17(prop_stm):
     # prop_stm --> [ 'KeywordEnum' ( ids_with_comma ) ] ID ( String , prop_type ) = prop_init
-    def __init__(self, LBrack, KeywordEnum, LParen, ids_with_comma, RParen, RBrack, ID, LParen, String, Comma, prop_type, RParen, Assign, prop_init):
+    def __init__(self, LBrack, KeywordEnum, LParen1, ids_with_comma, RParen1, RBrack, ID, LParen2, String, Comma, prop_type, RParen2, Assign, prop_init):
         self.ids_with_comma = ids_with_comma
         self.ID = ID
         self.String = String
@@ -450,7 +450,7 @@ class prop_typep22(prop_type):
 
 class prop_typep23(prop_type):
     # prop_type --> '2D'
-    def __init__(self, 2D):
+    def __init__(self, _2D):
         pass
 
     def toCode(self):
@@ -468,7 +468,7 @@ class prop_typep24(prop_type):
 
 class prop_typep25(prop_type):
     # prop_type --> '3D'
-    def __init__(self, 3D):
+    def __init__(self, _3D):
         pass
 
     def toCode(self):
@@ -486,12 +486,12 @@ class prop_typep26(prop_type):
 
 class prop_typep27(prop_type):
     # prop_type --> 'Range' ( Number , Number )
-    def __init__(self, Range, LParen, Number, Comma, Number, RParen):
-        self.Number = Number
-        self.Number = Number
+    def __init__(self, Range, LParen, Number1, Comma, Number2, RParen):
+        self.Number1 = Number1
+        self.Number2 = Number2
 
     def toCode(self):
-        return 'Range' + '(' + self.Number.toCode() + ',' + self.Number.toCode() + ')'
+        return 'Range' + '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ')'
 
 
 class prop_initp28(prop_init):
@@ -524,25 +524,25 @@ class prop_initp30(prop_init):
 
 class prop_initp31(prop_init):
     # prop_init --> ( Number , Number , Number )
-    def __init__(self, LParen, Number, Comma, Number, Comma, Number, RParen):
-        self.Number = Number
-        self.Number = Number
-        self.Number = Number
+    def __init__(self, LParen, Number1, Comma1, Number2, Comma2, Number3, RParen):
+        self.Number1 = Number1
+        self.Number2 = Number2
+        self.Number3 = Number3
 
     def toCode(self):
-        return '(' + self.Number.toCode() + ',' + self.Number.toCode() + ',' + self.Number.toCode() + ')'
+        return '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ')'
 
 
 class prop_initp32(prop_init):
     # prop_init --> ( Number , Number , Number , Number )
-    def __init__(self, LParen, Number, Comma, Number, Comma, Number, Comma, Number, RParen):
-        self.Number = Number
-        self.Number = Number
-        self.Number = Number
-        self.Number = Number
+    def __init__(self, LParen, Number1, Comma1, Number2, Comma2, Number3, Comma3, Number4, RParen):
+        self.Number1 = Number1
+        self.Number2 = Number2
+        self.Number3 = Number3
+        self.Number4 = Number4
 
     def toCode(self):
-        return '(' + self.Number.toCode() + ',' + self.Number.toCode() + ',' + self.Number.toCode() + ',' + self.Number.toCode() + ')'
+        return '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ',' + self.Number4.toCode() + ')'
 
 
 class enum_itemsp33(enum_items):
@@ -779,12 +779,12 @@ class tags_bodyp57(tags_body):
 
 class tag_smtp58(tag_smt):
     # tag_smt --> String = String
-    def __init__(self, String, Assign, String):
-        self.String = String
-        self.String = String
+    def __init__(self, key, Assign, value):
+        self.key = key
+        self.value = value
 
     def toCode(self):
-        return self.String.toCode() + '=' + self.String.toCode()
+        return self.key.toCode() + '=' + self.value.toCode()
 
 
 class cmd_stmp59(cmd_stm):
@@ -818,12 +818,12 @@ class cmd_stmp61(cmd_stm):
 
 class cmd_stmp62(cmd_stm):
     # cmd_stm --> 'Blend' id_or_number_or_placeholder id_or_number_or_placeholder
-    def __init__(self, Blend, id_or_number_or_placeholder, id_or_number_or_placeholder):
-        self.id_or_number_or_placeholder = id_or_number_or_placeholder
-        self.id_or_number_or_placeholder = id_or_number_or_placeholder
+    def __init__(self, Blend, id_or_number_or_placeholder1, id_or_number_or_placeholder2):
+        self.id_or_number_or_placeholder1 = id_or_number_or_placeholder1
+        self.id_or_number_or_placeholder2 = id_or_number_or_placeholder2
 
     def toCode(self):
-        return 'Blend' + self.id_or_number_or_placeholder.toCode() + self.id_or_number_or_placeholder.toCode()
+        return 'Blend' + self.id_or_number_or_placeholder1.toCode() + self.id_or_number_or_placeholder2.toCode()
 
 
 class cmd_stmp63(cmd_stm):
@@ -846,12 +846,12 @@ class cmd_stmp64(cmd_stm):
 
 class cmd_stmp65(cmd_stm):
     # cmd_stm --> 'Offset' id_or_number_or_placeholder , id_or_number_or_placeholder
-    def __init__(self, Offset, id_or_number_or_placeholder, Comma, id_or_number_or_placeholder):
-        self.id_or_number_or_placeholder = id_or_number_or_placeholder
-        self.id_or_number_or_placeholder = id_or_number_or_placeholder
+    def __init__(self, Offset, id_or_number_or_placeholder1, Comma, id_or_number_or_placeholder2):
+        self.id_or_number_or_placeholder1 = id_or_number_or_placeholder1
+        self.id_or_number_or_placeholder2 = id_or_number_or_placeholder2
 
     def toCode(self):
-        return 'Offset' + self.id_or_number_or_placeholder.toCode() + ',' + self.id_or_number_or_placeholder.toCode()
+        return 'Offset' + self.id_or_number_or_placeholder1.toCode() + ',' + self.id_or_number_or_placeholder2.toCode()
 
 
 class cmd_stmp66(cmd_stm):
@@ -1135,14 +1135,14 @@ class set_texture_stmp95(set_texture_stm):
 
 class set_texture_stmp96(set_texture_stm):
     # set_texture_stm --> 'constantColor' ( Number , Number , Number , Number )
-    def __init__(self, constantColor, LParen, Number, Comma, Number, Comma, Number, Comma, Number, RParen):
-        self.Number = Number
-        self.Number = Number
-        self.Number = Number
-        self.Number = Number
+    def __init__(self, constantColor, LParen, Number1, Comma1, Number2, Comma2, Number3, Comma3, Number4, RParen):
+        self.Number1 = Number1
+        self.Number2 = Number2
+        self.Number3 = Number3
+        self.Number4 = Number4
 
     def toCode(self):
-        return 'constantColor' + '(' + self.Number.toCode() + ',' + self.Number.toCode() + ',' + self.Number.toCode() + ',' + self.Number.toCode() + ')'
+        return 'constantColor' + '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ',' + self.Number4.toCode() + ')'
 
 
 class set_texture_stmp97(set_texture_stm):

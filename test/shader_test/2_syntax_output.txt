@@ -1,0 +1,95 @@
+{
+    "String": "String(\"Standard\")",
+    "shader_body_elms": {
+        "shader_body_elms": {},
+        "shader_body_elm": {
+            "props": {
+                "props_body": {
+                    "prop_stm": {
+                        "prop_init": {
+                            "String": "String(\"white\")"
+                        },
+                        "ID": "ID(_DetailMask)",
+                        "String": "String(\"Detail Mask\")",
+                        "prop_type": {}
+                    },
+                    "props_body": {
+                        "prop_stm": {
+                            "prop_init": {
+                                "String": "String(\"grey\")"
+                            },
+                            "ID": "ID(_DetailAlbedoMap)",
+                            "String": "String(\"Detail Albedo x2\")",
+                            "prop_type": {}
+                        },
+                        "props_body": {
+                            "prop_stm": {
+                                "prop_init": {
+                                    "Number": "Number(1.0)"
+                                },
+                                "ID": "ID(_DetailNormalMapScale)",
+                                "String": "String(\"Scale\")",
+                                "prop_type": {}
+                            },
+                            "props_body": {
+                                "prop_stm": {
+                                    "prop_init": {
+                                        "String": "String(\"bump\")"
+                                    },
+                                    "ID": "ID(_DetailNormalMap)",
+                                    "String": "String(\"Normal Map\")",
+                                    "prop_type": {}
+                                },
+                                "props_body": {
+                                    "prop_stm": {
+                                        "ID2": "ID(_Mode)",
+                                        "prop_init": {
+                                            "Number": "Number(0.0)"
+                                        },
+                                        "String": "String(\"__mode\")",
+                                        "prop_type": {},
+                                        "ID1": "ID(HideInInspector)"
+                                    },
+                                    "props_body": {
+                                        "prop_stm": {
+                                            "ID2": "ID(_SrcBlend)",
+                                            "prop_init": {
+                                                "Number": "Number(1.0)"
+                                            },
+                                            "String": "String(\"__src\")",
+                                            "prop_type": {},
+                                            "ID1": "ID(HideInInspector)"
+                                        },
+                                        "props_body": {
+                                            "prop_stm": {
+                                                "ID2": "ID(_DstBlend)",
+                                                "prop_init": {
+                                                    "Number": "Number(0.0)"
+                                                },
+                                                "String": "String(\"__dst\")",
+                                                "prop_type": {},
+                                                "ID1": "ID(HideInInspector)"
+                                            },
+                                            "props_body": {
+                                                "prop_stm": {
+                                                    "ID2": "ID(_ZWrite)",
+                                                    "prop_init": {
+                                                        "Number": "Number(1.0)"
+                                                    },
+                                                    "String": "String(\"__zw\")",
+                                                    "prop_type": {},
+                                                    "ID1": "ID(HideInInspector)"
+                                                },
+                                                "props_body": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

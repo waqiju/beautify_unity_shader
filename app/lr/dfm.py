@@ -28,7 +28,8 @@ def reduce(production, symbols):
 
 
 def run(edges, productions, tokens, isDebug=False):
-    productions.insert(0, None)
+    if productions[0] is not None:
+        productions.insert(0, None)
     stack = SymbolStack()
 
     stack.push('__Begin', 0)
@@ -39,7 +40,7 @@ def run(edges, productions, tokens, isDebug=False):
         # notice, should try toLiteral() for TokenType.ID firstly
         actionStr = edges[stateId].get(token.toLiteral()) or edges[stateId].get(token.kind) 
         if actionStr is None:
-            print('syntax error: stateId = %s, token = %s' % (stateId, token))
+            raise Exception('syntax error: stateId = %s, token = %s' % (stateId, token))
             break
         elif actionStr[0] == 's':
             stateId = int(actionStr[1:])
@@ -59,7 +60,7 @@ def run(edges, productions, tokens, isDebug=False):
 
             actionStr = edges[topStateId].get(nonterminal.kind)
             if actionStr is None:
-                print('syntax error: stateId = %s, symbol = %s' % (topStateId, nonterminal.kind))
+                raise Exception('syntax error: stateId = %s, symbol = %s' % (topStateId, nonterminal.kind))
                 break
             stateId = int(actionStr[1:])
             stack.push(nonterminal, stateId)
