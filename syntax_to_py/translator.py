@@ -1,4 +1,5 @@
 import os
+from .unduplicate_mapper import TokenNameMapper
 
 
 # write nonterminls.py
@@ -101,21 +102,26 @@ def _writeDeriveClass(file, production):
     text = "class %s%s(%s):\n" % (production.left.text, production.name, production.left.text)
     text += "    # %s\n" % production.text 
     # line 3
+    textMapper = TokenNameMapper(production.right)
     text += "    def __init__(self"
     for symbol in production.right:
         if symbol.kind == "ID":
-            symbolStr = symbol.text
+            # symbolStr = symbol.text
+            symbolStr = textMapper.get(symbol)
         elif symbol.kind == "String":
             symbolStr = symbol.text[1:-1]
         else:
-            symbolStr = str(symbol)
+            # symbolStr = str(symbol)
+            symbolStr = textMapper.getByPunctuator(symbol)
         text += ", %s" % symbolStr
     text += "):\n"
     # line 4 ...
+    textMapper.resetUsedCount()
     line4Count = 0
     for symbol in production.right:
         if symbol.kind == "ID":
-            symbolStr = symbol.text
+            # symbolStr = symbol.text
+            symbolStr = textMapper.get(symbol)
         else:
             continue
 
@@ -126,6 +132,7 @@ def _writeDeriveClass(file, production):
         text += "        pass\n"
 
     # block 2, toCode()
+    textMapper.resetUsedCount()
     # line 1
     text += '\n'
     # line 2
@@ -135,7 +142,8 @@ def _writeDeriveClass(file, production):
     for symbol in production.right:
         codeText +=  (' + ' if codeText != '' else '') 
         if symbol.kind == "ID":
-            codeText += 'self.' + symbol.text+ ".toCode()"
+            # codeText += 'self.' + symbol.text+ ".toCode()"
+            codeText += 'self.' + textMapper.get(symbol) + ".toCode()"
         elif symbol.kind == "String":
             codeText += symbol.text
         else :

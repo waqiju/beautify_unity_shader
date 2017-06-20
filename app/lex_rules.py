@@ -33,8 +33,8 @@ def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
     return Token(TokenType.SpaceLike, text)
 
 
-floatPattern = r'(\b[-+]?[\d]+[\.]?[\d]*|(?<=\B)[-+]?[\.][\d]+)[fF]?\b'
-numberPattern = '%s(e%s)?' % (floatPattern, floatPattern)
+floatPattern = r'[-+]?((?<=[^\w\.])[\d]+[\.]?[\d]*|(?<=\W)[\.][\d]+)[fF]?'
+numberPattern = '%s(e%s)?' % (floatPattern+r'(?=[\We])', floatPattern+r'(?=[\W])')
 
 
 rules = [

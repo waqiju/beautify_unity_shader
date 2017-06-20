@@ -1,86 +1,576 @@
 {
-    "String": "String(\"Standard\")",
     "shader_body_elms": {
-        "shader_body_elms": {},
-        "shader_body_elm": {
-            "props": {
-                "props_body": {
-                    "prop_stm": {
-                        "prop_init": {
-                            "String": "String(\"white\")"
+        "shader_body_elms": {
+            "shader_body_elms": {
+                "shader_body_elms": {
+                    "shader_body_elms": {
+                        "shader_body_elms": {
+                            "shader_body_elms": {},
+                            "shader_body_elm": {
+                                "custom_editor_cmd": {
+                                    "String": "String(\"StandardShaderGUI\")"
+                                }
+                            }
                         },
-                        "ID": "ID(_DetailMask)",
-                        "String": "String(\"Detail Mask\")",
-                        "prop_type": {}
+                        "shader_body_elm": {
+                            "fall_back_cmd": {
+                                "String": "String(\"VertexLit\")"
+                            }
+                        }
                     },
-                    "props_body": {
-                        "prop_stm": {
-                            "prop_init": {
-                                "String": "String(\"grey\")"
-                            },
-                            "ID": "ID(_DetailAlbedoMap)",
-                            "String": "String(\"Detail Albedo x2\")",
-                            "prop_type": {}
-                        },
-                        "props_body": {
-                            "prop_stm": {
-                                "prop_init": {
-                                    "Number": "Number(1.0)"
-                                },
-                                "ID": "ID(_DetailNormalMapScale)",
-                                "String": "String(\"Scale\")",
-                                "prop_type": {}
-                            },
-                            "props_body": {
-                                "prop_stm": {
-                                    "prop_init": {
-                                        "String": "String(\"bump\")"
-                                    },
-                                    "ID": "ID(_DetailNormalMap)",
-                                    "String": "String(\"Normal Map\")",
-                                    "prop_type": {}
-                                },
-                                "props_body": {
-                                    "prop_stm": {
-                                        "ID2": "ID(_Mode)",
-                                        "prop_init": {
-                                            "Number": "Number(0.0)"
-                                        },
-                                        "String": "String(\"__mode\")",
-                                        "prop_type": {},
-                                        "ID1": "ID(HideInInspector)"
-                                    },
-                                    "props_body": {
-                                        "prop_stm": {
-                                            "ID2": "ID(_SrcBlend)",
-                                            "prop_init": {
-                                                "Number": "Number(1.0)"
+                    "shader_body_elm": {
+                        "subshr": {
+                            "subshr_body_elms": {
+                                "subshr_body_elm": {
+                                    "tags": {
+                                        "tags_body": {
+                                            "tags_body": {
+                                                "tags_body": {},
+                                                "tag_smt": {
+                                                    "value": "String(\"False\")",
+                                                    "key": "String(\"PerformanceChecks\")"
+                                                }
                                             },
-                                            "String": "String(\"__src\")",
-                                            "prop_type": {},
-                                            "ID1": "ID(HideInInspector)"
-                                        },
-                                        "props_body": {
-                                            "prop_stm": {
-                                                "ID2": "ID(_DstBlend)",
-                                                "prop_init": {
-                                                    "Number": "Number(0.0)"
-                                                },
-                                                "String": "String(\"__dst\")",
-                                                "prop_type": {},
-                                                "ID1": "ID(HideInInspector)"
+                                            "tag_smt": {
+                                                "value": "String(\"Opaque\")",
+                                                "key": "String(\"RenderType\")"
+                                            }
+                                        }
+                                    }
+                                },
+                                "subshr_body_elms": {
+                                    "subshr_body_elm": {
+                                        "cmd_stm": {
+                                            "id_or_number_or_placeholder": {
+                                                "Number": "Number(150)"
                                             },
-                                            "props_body": {
-                                                "prop_stm": {
-                                                    "ID2": "ID(_ZWrite)",
-                                                    "prop_init": {
-                                                        "Number": "Number(1.0)"
+                                            "cmd_name": {}
+                                        }
+                                    },
+                                    "subshr_body_elms": {
+                                        "subshr_body_elm": {
+                                            "shr_pass": {
+                                                "pass_body_elms": {
+                                                    "pass_body_elms": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {},
+                                                                    "pass_body_elm": {
+                                                                        "cg_prog": {}
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "id_or_number_or_placeholder": {
+                                                                            "placeholder": {
+                                                                                "ID": "ID(_ZWrite)"
+                                                                            }
+                                                                        },
+                                                                        "cmd_name": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "cmd_stm": {
+                                                                    "id_or_number_or_placeholder2": {
+                                                                        "placeholder": {
+                                                                            "ID": "ID(_DstBlend)"
+                                                                        }
+                                                                    },
+                                                                    "id_or_number_or_placeholder1": {
+                                                                        "placeholder": {
+                                                                            "ID": "ID(_SrcBlend)"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "pass_body_elm": {
+                                                            "tags": {
+                                                                "tags_body": {
+                                                                    "tags_body": {},
+                                                                    "tag_smt": {
+                                                                        "value": "String(\"ForwardBase\")",
+                                                                        "key": "String(\"LightMode\")"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     },
-                                                    "String": "String(\"__zw\")",
-                                                    "prop_type": {},
-                                                    "ID1": "ID(HideInInspector)"
+                                                    "pass_body_elm": {
+                                                        "cmd_stm": {
+                                                            "String": "String(\"FORWARD\")"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "subshr_body_elms": {
+                                            "subshr_body_elm": {
+                                                "shr_pass": {
+                                                    "pass_body_elms": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {
+                                                                            "pass_body_elms": {
+                                                                                "pass_body_elms": {},
+                                                                                "pass_body_elm": {
+                                                                                    "cg_prog": {}
+                                                                                }
+                                                                            },
+                                                                            "pass_body_elm": {
+                                                                                "cmd_stm": {
+                                                                                    "id_or_number_or_placeholder": {
+                                                                                        "ID": "ID(LEqual)"
+                                                                                    },
+                                                                                    "cmd_name": {}
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "pass_body_elm": {
+                                                                            "cmd_stm": {
+                                                                                "id_or_number_or_placeholder": {
+                                                                                    "ID": "ID(Off)"
+                                                                                },
+                                                                                "cmd_name": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "cmd_stm": {
+                                                                            "Number1": "Number(0)",
+                                                                            "Number2": "Number(0)",
+                                                                            "Number4": "Number(0)",
+                                                                            "Number3": "Number(0)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "id_or_number_or_placeholder2": {
+                                                                            "ID": "ID(One)"
+                                                                        },
+                                                                        "id_or_number_or_placeholder1": {
+                                                                            "placeholder": {
+                                                                                "ID": "ID(_SrcBlend)"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "tags": {
+                                                                    "tags_body": {
+                                                                        "tags_body": {},
+                                                                        "tag_smt": {
+                                                                            "value": "String(\"ForwardAdd\")",
+                                                                            "key": "String(\"LightMode\")"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "pass_body_elm": {
+                                                            "cmd_stm": {
+                                                                "String": "String(\"FORWARD_DELTA\")"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "subshr_body_elms": {
+                                                "subshr_body_elm": {
+                                                    "shr_pass": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {
+                                                                            "pass_body_elms": {},
+                                                                            "pass_body_elm": {
+                                                                                "cg_prog": {}
+                                                                            }
+                                                                        },
+                                                                        "pass_body_elm": {
+                                                                            "cmd_stm": {
+                                                                                "id_or_number_or_placeholder": {
+                                                                                    "ID": "ID(LEqual)"
+                                                                                },
+                                                                                "cmd_name": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "cmd_stm": {
+                                                                            "id_or_number_or_placeholder": {
+                                                                                "ID": "ID(On)"
+                                                                            },
+                                                                            "cmd_name": {}
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "tags": {
+                                                                        "tags_body": {
+                                                                            "tags_body": {},
+                                                                            "tag_smt": {
+                                                                                "value": "String(\"ShadowCaster\")",
+                                                                                "key": "String(\"LightMode\")"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "cmd_stm": {
+                                                                    "String": "String(\"ShadowCaster\")"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 },
-                                                "props_body": {}
+                                                "subshr_body_elms": {
+                                                    "subshr_body_elm": {
+                                                        "shr_pass": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {
+                                                                            "pass_body_elms": {},
+                                                                            "pass_body_elm": {
+                                                                                "cg_prog": {}
+                                                                            }
+                                                                        },
+                                                                        "pass_body_elm": {
+                                                                            "cmd_stm": {
+                                                                                "id_or_number_or_placeholder": {
+                                                                                    "ID": "ID(Off)"
+                                                                                },
+                                                                                "cmd_name": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "tags": {
+                                                                            "tags_body": {
+                                                                                "tags_body": {},
+                                                                                "tag_smt": {
+                                                                                    "value": "String(\"Meta\")",
+                                                                                    "key": "String(\"LightMode\")"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "String": "String(\"META\")"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "subshr_body_elms": {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "shader_body_elm": {
+                    "subshr": {
+                        "subshr_body_elms": {
+                            "subshr_body_elm": {
+                                "tags": {
+                                    "tags_body": {
+                                        "tags_body": {
+                                            "tags_body": {},
+                                            "tag_smt": {
+                                                "value": "String(\"False\")",
+                                                "key": "String(\"PerformanceChecks\")"
+                                            }
+                                        },
+                                        "tag_smt": {
+                                            "value": "String(\"Opaque\")",
+                                            "key": "String(\"RenderType\")"
+                                        }
+                                    }
+                                }
+                            },
+                            "subshr_body_elms": {
+                                "subshr_body_elm": {
+                                    "cmd_stm": {
+                                        "id_or_number_or_placeholder": {
+                                            "Number": "Number(300)"
+                                        },
+                                        "cmd_name": {}
+                                    }
+                                },
+                                "subshr_body_elms": {
+                                    "subshr_body_elm": {
+                                        "shr_pass": {
+                                            "pass_body_elms": {
+                                                "pass_body_elms": {
+                                                    "pass_body_elms": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {},
+                                                                "pass_body_elm": {
+                                                                    "cg_prog": {}
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "cmd_stm": {
+                                                                    "id_or_number_or_placeholder": {
+                                                                        "placeholder": {
+                                                                            "ID": "ID(_ZWrite)"
+                                                                        }
+                                                                    },
+                                                                    "cmd_name": {}
+                                                                }
+                                                            }
+                                                        },
+                                                        "pass_body_elm": {
+                                                            "cmd_stm": {
+                                                                "id_or_number_or_placeholder2": {
+                                                                    "placeholder": {
+                                                                        "ID": "ID(_DstBlend)"
+                                                                    }
+                                                                },
+                                                                "id_or_number_or_placeholder1": {
+                                                                    "placeholder": {
+                                                                        "ID": "ID(_SrcBlend)"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "pass_body_elm": {
+                                                        "tags": {
+                                                            "tags_body": {
+                                                                "tags_body": {},
+                                                                "tag_smt": {
+                                                                    "value": "String(\"ForwardBase\")",
+                                                                    "key": "String(\"LightMode\")"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "pass_body_elm": {
+                                                    "cmd_stm": {
+                                                        "String": "String(\"FORWARD\")"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "subshr_body_elms": {
+                                        "subshr_body_elm": {
+                                            "shr_pass": {
+                                                "pass_body_elms": {
+                                                    "pass_body_elms": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {
+                                                                            "pass_body_elms": {},
+                                                                            "pass_body_elm": {
+                                                                                "cg_prog": {}
+                                                                            }
+                                                                        },
+                                                                        "pass_body_elm": {
+                                                                            "cmd_stm": {
+                                                                                "id_or_number_or_placeholder": {
+                                                                                    "ID": "ID(LEqual)"
+                                                                                },
+                                                                                "cmd_name": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "cmd_stm": {
+                                                                            "id_or_number_or_placeholder": {
+                                                                                "ID": "ID(Off)"
+                                                                            },
+                                                                            "cmd_name": {}
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "Number1": "Number(0)",
+                                                                        "Number2": "Number(0)",
+                                                                        "Number4": "Number(0)",
+                                                                        "Number3": "Number(0)"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "cmd_stm": {
+                                                                    "id_or_number_or_placeholder2": {
+                                                                        "ID": "ID(One)"
+                                                                    },
+                                                                    "id_or_number_or_placeholder1": {
+                                                                        "placeholder": {
+                                                                            "ID": "ID(_SrcBlend)"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "pass_body_elm": {
+                                                            "tags": {
+                                                                "tags_body": {
+                                                                    "tags_body": {},
+                                                                    "tag_smt": {
+                                                                        "value": "String(\"ForwardAdd\")",
+                                                                        "key": "String(\"LightMode\")"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "pass_body_elm": {
+                                                        "cmd_stm": {
+                                                            "String": "String(\"FORWARD_DELTA\")"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "subshr_body_elms": {
+                                            "subshr_body_elm": {
+                                                "shr_pass": {
+                                                    "pass_body_elms": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {},
+                                                                        "pass_body_elm": {
+                                                                            "cg_prog": {}
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "cmd_stm": {
+                                                                            "id_or_number_or_placeholder": {
+                                                                                "ID": "ID(LEqual)"
+                                                                            },
+                                                                            "cmd_name": {}
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "id_or_number_or_placeholder": {
+                                                                            "ID": "ID(On)"
+                                                                        },
+                                                                        "cmd_name": {}
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "tags": {
+                                                                    "tags_body": {
+                                                                        "tags_body": {},
+                                                                        "tag_smt": {
+                                                                            "value": "String(\"ShadowCaster\")",
+                                                                            "key": "String(\"LightMode\")"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "pass_body_elm": {
+                                                            "cmd_stm": {
+                                                                "String": "String(\"ShadowCaster\")"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "subshr_body_elms": {
+                                                "subshr_body_elm": {
+                                                    "shr_pass": {
+                                                        "pass_body_elms": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {},
+                                                                    "pass_body_elm": {
+                                                                        "cg_prog": {}
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "tags": {
+                                                                        "tags_body": {
+                                                                            "tags_body": {},
+                                                                            "tag_smt": {
+                                                                                "value": "String(\"Deferred\")",
+                                                                                "key": "String(\"LightMode\")"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "pass_body_elm": {
+                                                                "cmd_stm": {
+                                                                    "String": "String(\"DEFERRED\")"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "subshr_body_elms": {
+                                                    "subshr_body_elm": {
+                                                        "shr_pass": {
+                                                            "pass_body_elms": {
+                                                                "pass_body_elms": {
+                                                                    "pass_body_elms": {
+                                                                        "pass_body_elms": {
+                                                                            "pass_body_elms": {},
+                                                                            "pass_body_elm": {
+                                                                                "cg_prog": {}
+                                                                            }
+                                                                        },
+                                                                        "pass_body_elm": {
+                                                                            "cmd_stm": {
+                                                                                "id_or_number_or_placeholder": {
+                                                                                    "ID": "ID(Off)"
+                                                                                },
+                                                                                "cmd_name": {}
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "pass_body_elm": {
+                                                                        "tags": {
+                                                                            "tags_body": {
+                                                                                "tags_body": {},
+                                                                                "tag_smt": {
+                                                                                    "value": "String(\"Meta\")",
+                                                                                    "key": "String(\"LightMode\")"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pass_body_elm": {
+                                                                    "cmd_stm": {
+                                                                        "String": "String(\"META\")"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "subshr_body_elms": {}
+                                                }
                                             }
                                         }
                                     }
@@ -89,7 +579,368 @@
                         }
                     }
                 }
+            },
+            "shader_body_elm": {
+                "cg_prog": {}
+            }
+        },
+        "shader_body_elm": {
+            "props": {
+                "props_body": {
+                    "props_body": {
+                        "props_body": {
+                            "props_body": {
+                                "props_body": {
+                                    "props_body": {
+                                        "props_body": {
+                                            "props_body": {
+                                                "props_body": {
+                                                    "props_body": {
+                                                        "props_body": {
+                                                            "props_body": {
+                                                                "props_body": {
+                                                                    "props_body": {
+                                                                        "props_body": {
+                                                                            "props_body": {
+                                                                                "props_body": {
+                                                                                    "props_body": {
+                                                                                        "props_body": {
+                                                                                            "props_body": {
+                                                                                                "props_body": {
+                                                                                                    "props_body": {
+                                                                                                        "props_body": {
+                                                                                                            "props_body": {
+                                                                                                                "props_body": {
+                                                                                                                    "props_body": {
+                                                                                                                        "props_body": {
+                                                                                                                            "props_body": {},
+                                                                                                                            "prop_stm": {
+                                                                                                                                "prop_init": {
+                                                                                                                                    "Number": "Number(1.0)"
+                                                                                                                                },
+                                                                                                                                "ID1": "ID(HideInInspector)",
+                                                                                                                                "ID2": "ID(_ZWrite)",
+                                                                                                                                "String": "String(\"__zw\")",
+                                                                                                                                "prop_type": {}
+                                                                                                                            }
+                                                                                                                        },
+                                                                                                                        "prop_stm": {
+                                                                                                                            "prop_init": {
+                                                                                                                                "Number": "Number(0.0)"
+                                                                                                                            },
+                                                                                                                            "ID1": "ID(HideInInspector)",
+                                                                                                                            "ID2": "ID(_DstBlend)",
+                                                                                                                            "String": "String(\"__dst\")",
+                                                                                                                            "prop_type": {}
+                                                                                                                        }
+                                                                                                                    },
+                                                                                                                    "prop_stm": {
+                                                                                                                        "prop_init": {
+                                                                                                                            "Number": "Number(1.0)"
+                                                                                                                        },
+                                                                                                                        "ID1": "ID(HideInInspector)",
+                                                                                                                        "ID2": "ID(_SrcBlend)",
+                                                                                                                        "String": "String(\"__src\")",
+                                                                                                                        "prop_type": {}
+                                                                                                                    }
+                                                                                                                },
+                                                                                                                "prop_stm": {
+                                                                                                                    "prop_init": {
+                                                                                                                        "Number": "Number(0.0)"
+                                                                                                                    },
+                                                                                                                    "ID1": "ID(HideInInspector)",
+                                                                                                                    "ID2": "ID(_Mode)",
+                                                                                                                    "String": "String(\"__mode\")",
+                                                                                                                    "prop_type": {}
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "prop_stm": {
+                                                                                                                "prop_init": {
+                                                                                                                    "Number": "Number(0)"
+                                                                                                                },
+                                                                                                                "String": "String(\"UV Set for secondary textures\")",
+                                                                                                                "prop_type": {},
+                                                                                                                "ID": "ID(_UVSec)",
+                                                                                                                "enum_items": {
+                                                                                                                    "enum_items": {
+                                                                                                                        "enum_items": {
+                                                                                                                            "enum_items": {
+                                                                                                                                "enum_item": {
+                                                                                                                                    "Number": "Number(1)"
+                                                                                                                                }
+                                                                                                                            },
+                                                                                                                            "enum_item": {
+                                                                                                                                "id_list": {
+                                                                                                                                    "ID": "ID(UV1)"
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        },
+                                                                                                                        "enum_item": {
+                                                                                                                            "Number": "Number(0)"
+                                                                                                                        }
+                                                                                                                    },
+                                                                                                                    "enum_item": {
+                                                                                                                        "id_list": {
+                                                                                                                            "ID": "ID(UV0)"
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "prop_stm": {
+                                                                                                            "prop_init": {
+                                                                                                                "String": "String(\"bump\")"
+                                                                                                            },
+                                                                                                            "String": "String(\"Normal Map\")",
+                                                                                                            "ID": "ID(_DetailNormalMap)",
+                                                                                                            "prop_type": {}
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "prop_stm": {
+                                                                                                        "prop_init": {
+                                                                                                            "Number": "Number(1.0)"
+                                                                                                        },
+                                                                                                        "String": "String(\"Scale\")",
+                                                                                                        "ID": "ID(_DetailNormalMapScale)",
+                                                                                                        "prop_type": {}
+                                                                                                    }
+                                                                                                },
+                                                                                                "prop_stm": {
+                                                                                                    "prop_init": {
+                                                                                                        "String": "String(\"grey\")"
+                                                                                                    },
+                                                                                                    "String": "String(\"Detail Albedo x2\")",
+                                                                                                    "ID": "ID(_DetailAlbedoMap)",
+                                                                                                    "prop_type": {}
+                                                                                                }
+                                                                                            },
+                                                                                            "prop_stm": {
+                                                                                                "prop_init": {
+                                                                                                    "String": "String(\"white\")"
+                                                                                                },
+                                                                                                "String": "String(\"Detail Mask\")",
+                                                                                                "ID": "ID(_DetailMask)",
+                                                                                                "prop_type": {}
+                                                                                            }
+                                                                                        },
+                                                                                        "prop_stm": {
+                                                                                            "prop_init": {
+                                                                                                "String": "String(\"white\")"
+                                                                                            },
+                                                                                            "String": "String(\"Emission\")",
+                                                                                            "ID": "ID(_EmissionMap)",
+                                                                                            "prop_type": {}
+                                                                                        }
+                                                                                    },
+                                                                                    "prop_stm": {
+                                                                                        "prop_init": {
+                                                                                            "Number1": "Number(0)",
+                                                                                            "Number2": "Number(0)",
+                                                                                            "Number3": "Number(0)"
+                                                                                        },
+                                                                                        "String": "String(\"Color\")",
+                                                                                        "ID": "ID(_EmissionColor)",
+                                                                                        "prop_type": {}
+                                                                                    }
+                                                                                },
+                                                                                "prop_stm": {
+                                                                                    "prop_init": {
+                                                                                        "String": "String(\"white\")"
+                                                                                    },
+                                                                                    "String": "String(\"Occlusion\")",
+                                                                                    "ID": "ID(_OcclusionMap)",
+                                                                                    "prop_type": {}
+                                                                                }
+                                                                            },
+                                                                            "prop_stm": {
+                                                                                "prop_init": {
+                                                                                    "Number": "Number(1.0)"
+                                                                                },
+                                                                                "String": "String(\"Strength\")",
+                                                                                "ID": "ID(_OcclusionStrength)",
+                                                                                "prop_type": {
+                                                                                    "Number1": "Number(0.0)",
+                                                                                    "Number2": "Number(1.0)"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "prop_stm": {
+                                                                            "prop_init": {
+                                                                                "String": "String(\"black\")"
+                                                                            },
+                                                                            "String": "String(\"Height Map\")",
+                                                                            "ID": "ID(_ParallaxMap)",
+                                                                            "prop_type": {}
+                                                                        }
+                                                                    },
+                                                                    "prop_stm": {
+                                                                        "prop_init": {
+                                                                            "Number": "Number(0.02)"
+                                                                        },
+                                                                        "String": "String(\"Height Scale\")",
+                                                                        "ID": "ID(_Parallax)",
+                                                                        "prop_type": {
+                                                                            "Number1": "Number(0.005)",
+                                                                            "Number2": "Number(0.08)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "prop_stm": {
+                                                                    "prop_init": {
+                                                                        "String": "String(\"bump\")"
+                                                                    },
+                                                                    "String": "String(\"Normal Map\")",
+                                                                    "ID": "ID(_BumpMap)",
+                                                                    "prop_type": {}
+                                                                }
+                                                            },
+                                                            "prop_stm": {
+                                                                "prop_init": {
+                                                                    "Number": "Number(1.0)"
+                                                                },
+                                                                "String": "String(\"Scale\")",
+                                                                "ID": "ID(_BumpScale)",
+                                                                "prop_type": {}
+                                                            }
+                                                        },
+                                                        "prop_stm": {
+                                                            "prop_init": {
+                                                                "Number": "Number(1.0)"
+                                                            },
+                                                            "String": "String(\"Glossy Reflections\")",
+                                                            "ID": "ID(_GlossyReflections)",
+                                                            "prop_type": {}
+                                                        }
+                                                    },
+                                                    "prop_stm": {
+                                                        "prop_init": {
+                                                            "Number": "Number(1.0)"
+                                                        },
+                                                        "String": "String(\"Specular Highlights\")",
+                                                        "ID": "ID(_SpecularHighlights)",
+                                                        "prop_type": {}
+                                                    }
+                                                },
+                                                "prop_stm": {
+                                                    "prop_init": {
+                                                        "String": "String(\"white\")"
+                                                    },
+                                                    "String": "String(\"Metallic\")",
+                                                    "ID": "ID(_MetallicGlossMap)",
+                                                    "prop_type": {}
+                                                }
+                                            },
+                                            "prop_stm": {
+                                                "prop_init": {
+                                                    "Number": "Number(0.0)"
+                                                },
+                                                "ID1": "ID(Gamma)",
+                                                "ID2": "ID(_Metallic)",
+                                                "String": "String(\"Metallic\")",
+                                                "prop_type": {
+                                                    "Number1": "Number(0.0)",
+                                                    "Number2": "Number(1.0)"
+                                                }
+                                            }
+                                        },
+                                        "prop_stm": {
+                                            "prop_init": {
+                                                "Number": "Number(0)"
+                                            },
+                                            "String": "String(\"Smoothness texture channel\")",
+                                            "prop_type": {},
+                                            "ID": "ID(_SmoothnessTextureChannel)",
+                                            "enum_items": {
+                                                "enum_items": {
+                                                    "enum_items": {
+                                                        "enum_items": {
+                                                            "enum_item": {
+                                                                "Number": "Number(1)"
+                                                            }
+                                                        },
+                                                        "enum_item": {
+                                                            "id_list": {
+                                                                "id_list": {
+                                                                    "ID": "ID(Alpha)"
+                                                                },
+                                                                "ID": "ID(Albedo)"
+                                                            }
+                                                        }
+                                                    },
+                                                    "enum_item": {
+                                                        "Number": "Number(0)"
+                                                    }
+                                                },
+                                                "enum_item": {
+                                                    "id_list": {
+                                                        "id_list": {
+                                                            "ID": "ID(Alpha)"
+                                                        },
+                                                        "ID": "ID(Metallic)"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "prop_stm": {
+                                        "prop_init": {
+                                            "Number": "Number(1.0)"
+                                        },
+                                        "String": "String(\"Smoothness Scale\")",
+                                        "ID": "ID(_GlossMapScale)",
+                                        "prop_type": {
+                                            "Number1": "Number(0.0)",
+                                            "Number2": "Number(1.0)"
+                                        }
+                                    }
+                                },
+                                "prop_stm": {
+                                    "prop_init": {
+                                        "Number": "Number(0.5)"
+                                    },
+                                    "String": "String(\"Smoothness\")",
+                                    "ID": "ID(_Glossiness)",
+                                    "prop_type": {
+                                        "Number1": "Number(0.0)",
+                                        "Number2": "Number(1.0)"
+                                    }
+                                }
+                            },
+                            "prop_stm": {
+                                "prop_init": {
+                                    "Number": "Number(0.5)"
+                                },
+                                "String": "String(\"Alpha Cutoff\")",
+                                "ID": "ID(_Cutoff)",
+                                "prop_type": {
+                                    "Number1": "Number(0.0)",
+                                    "Number2": "Number(1.0)"
+                                }
+                            }
+                        },
+                        "prop_stm": {
+                            "prop_init": {
+                                "String": "String(\"white\")"
+                            },
+                            "String": "String(\"Albedo\")",
+                            "ID": "ID(_MainTex)",
+                            "prop_type": {}
+                        }
+                    },
+                    "prop_stm": {
+                        "prop_init": {
+                            "Number1": "Number(1)",
+                            "Number2": "Number(1)",
+                            "Number4": "Number(1)",
+                            "Number3": "Number(1)"
+                        },
+                        "String": "String(\"Color\")",
+                        "ID": "ID(_Color)",
+                        "prop_type": {}
+                    }
+                }
             }
         }
-    }
+    },
+    "String": "String(\"Standard\")"
 }

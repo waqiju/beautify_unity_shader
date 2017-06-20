@@ -115,6 +115,6 @@ def verifyAll():
 
 
 if __name__ == '__main__':
-    construct()
+    # construct()
     # verify()
-    # verifyAll()
+    verifyAll()
