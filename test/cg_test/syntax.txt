@@ -7,6 +7,7 @@ cg_stms     -> cg_stm cg_stms
 cg_stm      -> preprocessing_stm
             -> function_definition
             -> dec
+            -> 'CBUFFER_START' ( ID ) dec_list 'CBUFFER_END'   // tradeoff
 function_definition     -> dec_specifier declarator compound_stm 
                         -> dec_specifier declarator : ID compound_stm 
 //8 预处理当做特殊的stm处理好了，简单点
@@ -17,17 +18,29 @@ function_definition     -> dec_specifier declarator compound_stm
 //  一个证据是typedef，半个证据是preprocess
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
-pp_if_stm   -> # 'if' ID
+                    -> marco_unfold  // tradeoff
+pp_if_stm   -> # 'if' binary_exp Enter
             -> # 'ifdef' ID
             -> # 'ifndef' ID
             -> # 'elif' ID
             -> # 'else'
             -> # 'endif'
 pp_cmd      -> # 'include' String
-            -> # 'pragma' ids_or_numbers Enter
-ids_or_numbers    -> ID ids_or_numbers
-                  -> Number ids_or_numbers
-                  ->
+            -> # 'pragma' pragma_item_list Enter
+            -> # 'define' exp exp Enter
+//            -> # 'define' ID ID Enter  // hacking
+//            -> # 'define' ID ( id_list )  ID ( id_list ) Enter // hacking
+marco_unfold      -> exp ;
+pragma_item_list  -> pragma_item
+                  -> pragma_item_list pragma_item
+pragma_item       -> ID
+                  -> Number
+                  -> ID : ID
+dec_list          -> dec
+                  -> dec_list dec
+id_list           -> ID
+                  -> id_list ID
+
 
 //9 expression，C语言的简化版
 primary_exp -> ID
@@ -38,6 +51,7 @@ postfix_exp -> primary_exp
             -> postfix_exp [ exp ]
             -> postfix_exp ( )
             -> postfix_exp ( argument_exp_list )
+            -> buildin_type_name ( argument_exp_list )  // tradeoff
             -> postfix_exp . ID
             -> postfix_exp ++
             -> postfix_exp --
@@ -51,7 +65,9 @@ unary_op    -> +
             -> -
             -> !
             -> ~
-binary_exp  -> unary_exp
+cast_exp    -> unary_exp
+            -> ( type_specifier ) cast_exp
+binary_exp  -> cast_exp
             -> binary_exp binary_op unary_exp
 binary_op   -> *
             -> /
@@ -95,7 +111,9 @@ dec               -> struct_specifier ;
                   -> dec_specifier init_dec_list ;
 dec_specifier     -> type_specifier
                   -> type_qualifier type_specifier
-type_specifier    -> 'void'
+type_specifier    -> buildin_type_name
+                  -> typedef_name
+buildin_type_name -> 'void'
                   -> 'char'
                   -> 'short'
                   -> 'int'
@@ -112,9 +130,11 @@ type_specifier    -> 'void'
                   -> 'fixed2'
                   -> 'fixed3'
                   -> 'fixed4'
-                  -> typedef_name
+                  -> 'float3x3'
 type_qualifier    -> 'uniform'
                   -> 'inout'
+                  -> 'inline'
+                  -> 'const'
 typedef_name      -> ID
 
 struct_specifier  -> 'struct' ID
@@ -122,6 +142,10 @@ struct_specifier  -> 'struct' ID
 struct_dec_list   -> struct_dec
                   -> struct_dec_list struct_dec
 struct_dec        -> type_specifier struct_declarator_list ;
+                  -> ID ;                                   // hacking for V2F_SHADOW_CASTER;
+                  -> ID ( Number )                          // hacking for UNITY_FOG_COORDS(1)
+                  -> pp_if_stm                              // tradeoff，理想的处理方式不是这样子的。理想的处理方式是模拟出分支，而不要破坏语法的完整性。
+                  -> 'INTERNAL_DATA'
 struct_declarator_list  -> struct_declarator
                         -> struct_declarator_list , struct_declarator
 struct_declarator -> declarator
@@ -131,10 +155,12 @@ declarator        -> ID
 // 因为typedef的存在，'ID ('会存在两种解释，所以禁用这条。
 //                  -> ( declarator )
                   -> declarator [ exp ]
+                  -> declarator ( )
                   -> declarator ( parameter_list )
 parameter_list    -> parameter_dec
                   -> parameter_list , parameter_dec
 parameter_dec     -> dec_specifier declarator
+                  -> dec_specifier declarator : ID
 
 init_dec_list     -> init_dec
                   -> init_dec_list , init_dec
@@ -146,6 +172,11 @@ stm               -> exp_stm
                   -> selection_stm
                   -> iteration_stm
                   -> jump_stm
+                  -> pp_if_stm            // tradeoff
+                  -> 'UNITY_BRANCH'       // tradeoff
+                  -> 'UNITY_UNROLL'
+                  -> 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' (ID)
+                  -> 'SHADOW_CASTER_FRAGMENT' (ID)
 exp_stm           -> exp ;
                   -> ;
 compound_stm      -> { block_item_list }
@@ -159,6 +190,7 @@ selection_stm     -> 'if' ( exp ) stm
 iteration_stm     -> 'while' (exp) stm
                   -> 'do' stm 'while' (exp);
                   -> 'for' (exp; exp; exp) stm 
+                  -> 'for' (dec_specifier init_dec_list; exp; exp) stm 
 jump_stm          -> 'goto' ID
                   -> 'continue'
                   -> 'break'

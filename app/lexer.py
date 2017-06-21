@@ -1,5 +1,5 @@
 import unittest
-from .lex_rules import rules
+from .lex_rules import rules, FilterHangingSign
 from . import error_message
 from .symbol_type import SymbolType
 from .lex_token import Token
@@ -20,6 +20,8 @@ def analyze(inputText, isKeepSpace=True, isKeepComment=True, isEnding=False):
                 error_message.forward(matchText)
                 pos = match.end()
                 break
+
+    tokens = FilterHangingSign(tokens)
 
     # 建立源文件中的token顺序链表，包括SpaceLike和Comment
     for i in range(0, len(tokens)-1):

@@ -110,7 +110,7 @@ class Test(unittest.TestCase):
         translator.writeNonterminals(productionList, productionNonterminals)
 
 
-    def DtestCg(self):
+    def testCg(self):
         prepare()
 
         # 词法分析
@@ -134,7 +134,7 @@ class Test(unittest.TestCase):
         translator.mergeNonterminalsToFile(productionList, productionNonterminals, os.path.join(__file__, '../../test/cg_test/nonterminals.py'))
 
 
-    def testShader(self):
+    def DtestShader(self):
         prepare()
 
         syntaxFile = os.path.abspath(os.path.join(__file__, '../../test/shader_test/syntax.txt'))

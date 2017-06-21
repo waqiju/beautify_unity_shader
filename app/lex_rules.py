@@ -20,8 +20,6 @@ def PragmaSpecialDealer(text):
     return Token(TokenType.ID, text, text)
 
 
-
-
 def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
     if modifyEnv:
         modifyEnv(env)
@@ -33,8 +31,32 @@ def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
     return Token(TokenType.SpaceLike, text)
 
 
-floatPattern = r'[-+]?((?<=[^\w\.])[\d]+[\.]?[\d]*|(?<=\W)[\.][\d]+)[fF]?'
-numberPattern = '%s(e%s)?' % (floatPattern+r'(?=[\We])', floatPattern+r'(?=[\W])')
+# 过滤hanging状态的正负号
+def FilterHangingSign(tokens):
+    newTokens = []
+
+    i = 0
+    while i < len(tokens):
+        token = tokens[i]
+        # 判断后置是否满足hanging条件
+        if (token.kind == TokenType.Plus or token.kind == TokenType.Minus) and i+1 < len(tokens) and tokens[i+1].kind == TokenType.Number:
+            # 判定前置是否满足hanging条件
+            if i == 0 or ( tokens[i-1].kind != TokenType.ID and tokens[i-1].kind != TokenType.Number ):
+                newTokens.append(Token(TokenType.Number, token.text + tokens[i+1].text))
+                i+=2
+                continue
+                
+        newTokens.append(token)
+        i += 1
+
+    return newTokens
+
+
+# floatPattern = r'[-+]?((?<=[^\w\.])[\d]+[\.]?[\d]*|(?<=\W)[\.][\d]+)[fF]?'
+# numberPattern = '%s(e%s)?' % (floatPattern+r'(?=[\We])', floatPattern+r'(?=[\W])')
+# Number是否包含+/-是条件性的。假如前一个Token是ID或者Number，则应该被看作Operator。
+floatPattern = r'((?<=[^\w\.])[\d]+[\.]?[\d]*|(?<=\W)[\.][\d]+)[fF]?'
+numberPattern = '%s(e%s)?' % (floatPattern+r'(?=[\We])', r'[-+]?' + floatPattern + r'(?=[\W])')
 
 
 rules = [
@@ -48,13 +70,14 @@ rules = [
     {'pattern': re.compile(r'\"[^\"]*\"'),
      'action': lambda text: Token(TokenType.String, text, text)},
     # 保留字
-    # {'pattern': re.compile(r'\b(Color|Vector|Range|Int|Float|2D|Cube|3D)\b'),
-    #  'action': lambda text: Token(TokenType.ReservedWord, text, text)},
     # {'pattern': re.compile(r'\b(Lighting|Cull|ZTest|ZWrite|Blend)\b'),
     #  'action': lambda text: Token(TokenType.ReservedWord, text, text)},
+
     # priority 2 ID，ID的前后一定要是\b。特别注意，2D应该被识别为ID。
     {'pattern': re.compile(numberPattern),
      'action': lambda text: Token(TokenType.Number, text, text)},
+    {'pattern': re.compile(r"\b(pragma|define|(?<=#)if)\b"),
+     'action': PragmaSpecialDealer},
     {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
      'action': lambda text: Token(TokenType.ID, text, text)},
     {'pattern': re.compile(r"\b[0-9a-zA-Z_]\w*\b"),

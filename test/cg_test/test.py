@@ -39,7 +39,6 @@ def verify():
     with open(os.path.join(__file__, '../2_edges_conflict_free.json'), 'w') as f:
         json.dump(edges, f, indent=4)
 
-    # exit()
 
     # 用shader进行验证
     with open(os.path.join(__file__, '../test.shader')) as f:
@@ -62,6 +61,63 @@ def verify():
         f.write(ast.toCode())
 
 
+def verifyAll():
+    import os
+    from .productions import productionList
+    from app import lexer
+    from app.lr import dfm
+    import json
+    import re
+    from . import known_conflicts
+
+    def json2Edges(d):
+        edges = {}
+        for key in d:
+            edges[int(key)] = d[key]
+        return edges
+
+    with open(os.path.join(__file__, '../2_edges.json')) as f:
+        edges = json2Edges(json.load(f))
+
+    # 消除已知的冲突
+    edges = known_conflicts.applyTo(edges)
+    with open(os.path.join(__file__, '../2_edges_conflict_free.json'), 'w') as f:
+        json.dump(edges, f, indent=4)
+
+
+    # 用shader进行验证
+    shaderFiles = []
+    for path, dirs, files in os.walk(r'D:\Protable_Program\Sublime Text Build 3126 x64\Data\Packages\UnityShader'):
+        for file in files:
+            if os.path.splitext(file)[1] == '.shader':
+                filePath = os.path.join(path, file)
+                shaderFiles.append(filePath)
+
+    count = 0
+    for filePath in shaderFiles:
+        if os.path.split(filePath)[1] == 'Internal-DeferredShading.shader':
+            continue
+
+        with open(filePath) as f:
+            inputText = f.read()
+            count += 1
+
+            for match in re.finditer(r'CGPROGRAM.*?ENDCG|CGINCLUDE.*?ENDCG', inputText, re.DOTALL):
+                try:
+                    filterText = match.group()
+
+                    tokens = lexer.analyze(filterText, isKeepSpace=False, isKeepComment=False, isEnding=True)
+                    ast = dfm.run(edges, productionList, tokens, isDebug=False)
+
+                    print(count, filePath, 'ok')
+                except Exception as e:
+                    print(filePath, 'failed')
+                    with open(os.path.join(__file__, '../test.shader'), 'w') as testShaderFile:
+                        testShaderFile.write(filterText)
+
+                    raise e
+
+
 
 def profileConstruct():
     import cProfile
@@ -72,6 +128,11 @@ def profileConstruct():
 
 
 if __name__ == '__main__':
-    # profileConstruct()
-    # construct()
+    import sys
+    if (len(sys.argv) > 1 and sys.argv[1] == 'construct'):
+        # profileConstruct()
+        construct()
+        exit()
+
     verify()
+    # verifyAll()

@@ -14,12 +14,17 @@ class NonterminalType(SymbolType):
     preprocessing_stm = 'preprocessing_stm'
     pp_if_stm = 'pp_if_stm'
     pp_cmd = 'pp_cmd'
-    ids_or_numbers = 'ids_or_numbers'
+    marco_unfold = 'marco_unfold'
+    pragma_item_list = 'pragma_item_list'
+    pragma_item = 'pragma_item'
+    dec_list = 'dec_list'
+    id_list = 'id_list'
     primary_exp = 'primary_exp'
     postfix_exp = 'postfix_exp'
     argument_exp_list = 'argument_exp_list'
     unary_exp = 'unary_exp'
     unary_op = 'unary_op'
+    cast_exp = 'cast_exp'
     binary_exp = 'binary_exp'
     binary_op = 'binary_op'
     conditional_exp = 'conditional_exp'
@@ -29,6 +34,7 @@ class NonterminalType(SymbolType):
     dec = 'dec'
     dec_specifier = 'dec_specifier'
     type_specifier = 'type_specifier'
+    buildin_type_name = 'buildin_type_name'
     type_qualifier = 'type_qualifier'
     typedef_name = 'typedef_name'
     struct_specifier = 'struct_specifier'
@@ -83,7 +89,23 @@ class pp_cmd(Nonterminal):
     pass
 
 
-class ids_or_numbers(Nonterminal):
+class marco_unfold(Nonterminal):
+    pass
+
+
+class pragma_item_list(Nonterminal):
+    pass
+
+
+class pragma_item(Nonterminal):
+    pass
+
+
+class dec_list(Nonterminal):
+    pass
+
+
+class id_list(Nonterminal):
     pass
 
 
@@ -104,6 +126,10 @@ class unary_exp(Nonterminal):
 
 
 class unary_op(Nonterminal):
+    pass
+
+
+class cast_exp(Nonterminal):
     pass
 
 
@@ -140,6 +166,10 @@ class dec_specifier(Nonterminal):
 
 
 class type_specifier(Nonterminal):
+    pass
+
+
+class buildin_type_name(Nonterminal):
     pass
 
 
@@ -296,7 +326,17 @@ class cg_stmp8(cg_stm):
         return self.dec.toCode()
 
 
-class function_definitionp9(function_definition):
+class cg_stmp9(cg_stm):
+    # cg_stm --> 'CBUFFER_START' ( ID ) dec_list 'CBUFFER_END'
+    def __init__(self, CBUFFER_START, LParen, ID, RParen, dec_list, CBUFFER_END):
+        self.ID = ID
+        self.dec_list = dec_list
+
+    def toCode(self):
+        return 'CBUFFER_START' + '(' + self.ID.toCode() + ')' + self.dec_list.toCode() + 'CBUFFER_END'
+
+
+class function_definitionp10(function_definition):
     # function_definition --> dec_specifier declarator compound_stm
     def __init__(self, dec_specifier, declarator, compound_stm):
         self.dec_specifier = dec_specifier
@@ -307,7 +347,7 @@ class function_definitionp9(function_definition):
         return GB() + I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + '\n' + self.compound_stm.toCode() + GA()
 
 
-class function_definitionp10(function_definition):
+class function_definitionp11(function_definition):
     # function_definition --> dec_specifier declarator : ID compound_stm
     def __init__(self, dec_specifier, declarator, Colon, ID, compound_stm):
         self.dec_specifier = dec_specifier
@@ -319,7 +359,7 @@ class function_definitionp10(function_definition):
         return GB() + I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + ' : ' + self.ID.toCode() + '\n' + self.compound_stm.toCode() + GA()
 
 
-class preprocessing_stmp11(preprocessing_stm):
+class preprocessing_stmp12(preprocessing_stm):
     # preprocessing_stm --> pp_if_stm
     def __init__(self, pp_if_stm):
         self.pp_if_stm = pp_if_stm
@@ -328,7 +368,7 @@ class preprocessing_stmp11(preprocessing_stm):
         return self.pp_if_stm.toCode()
 
 
-class preprocessing_stmp12(preprocessing_stm):
+class preprocessing_stmp13(preprocessing_stm):
     # preprocessing_stm --> pp_cmd
     def __init__(self, pp_cmd):
         self.pp_cmd = pp_cmd
@@ -337,16 +377,26 @@ class preprocessing_stmp12(preprocessing_stm):
         return self.pp_cmd.toCode()
 
 
-class pp_if_stmp13(pp_if_stm):
-    # pp_if_stm --> # 'if' ID
-    def __init__(self, Pound, _if, ID):
-        self.ID = ID
+class preprocessing_stmp14(preprocessing_stm):
+    # preprocessing_stm --> marco_unfold
+    def __init__(self, marco_unfold):
+        self.marco_unfold = marco_unfold
 
     def toCode(self):
-        return '#' + 'if' + self.ID.toCode()
+        return self.marco_unfold.toCode()
 
 
-class pp_if_stmp14(pp_if_stm):
+class pp_if_stmp15(pp_if_stm):
+    # pp_if_stm --> # 'if' binary_exp Enter
+    def __init__(self, Pound, _if, binary_exp, Enter):
+        self.binary_exp = binary_exp
+        self.Enter = Enter
+
+    def toCode(self):
+        return '#' + 'if' + self.binary_exp.toCode() + self.Enter.toCode()
+
+
+class pp_if_stmp16(pp_if_stm):
     # pp_if_stm --> # 'ifdef' ID
     def __init__(self, Pound, ifdef, ID):
         self.ID = ID
@@ -355,7 +405,7 @@ class pp_if_stmp14(pp_if_stm):
         return '#' + 'ifdef' + self.ID.toCode()
 
 
-class pp_if_stmp15(pp_if_stm):
+class pp_if_stmp17(pp_if_stm):
     # pp_if_stm --> # 'ifndef' ID
     def __init__(self, Pound, ifndef, ID):
         self.ID = ID
@@ -364,7 +414,7 @@ class pp_if_stmp15(pp_if_stm):
         return '#' + 'ifndef' + self.ID.toCode()
 
 
-class pp_if_stmp16(pp_if_stm):
+class pp_if_stmp18(pp_if_stm):
     # pp_if_stm --> # 'elif' ID
     def __init__(self, Pound, _elif, ID):
         self.ID = ID
@@ -373,7 +423,7 @@ class pp_if_stmp16(pp_if_stm):
         return '#' + 'elif' + self.ID.toCode()
 
 
-class pp_if_stmp17(pp_if_stm):
+class pp_if_stmp19(pp_if_stm):
     # pp_if_stm --> # 'else'
     def __init__(self, Pound, _else):
         pass
@@ -382,7 +432,7 @@ class pp_if_stmp17(pp_if_stm):
         return '#' + 'else'
 
 
-class pp_if_stmp18(pp_if_stm):
+class pp_if_stmp20(pp_if_stm):
     # pp_if_stm --> # 'endif'
     def __init__(self, Pound, endif):
         pass
@@ -391,7 +441,7 @@ class pp_if_stmp18(pp_if_stm):
         return '#' + 'endif'
 
 
-class pp_cmdp19(pp_cmd):
+class pp_cmdp21(pp_cmd):
     # pp_cmd --> # 'include' String
     def __init__(self, Pound, include, String):
         self.String = String
@@ -400,45 +450,122 @@ class pp_cmdp19(pp_cmd):
         return '#' + 'include' + self.String.toCode()
 
 
-class pp_cmdp20(pp_cmd):
-    # pp_cmd --> # 'pragma' ids_or_numbers Enter
-    def __init__(self, Pound, pragma, ids_or_numbers, Enter):
-        self.ids_or_numbers = ids_or_numbers
+class pp_cmdp22(pp_cmd):
+    # pp_cmd --> # 'pragma' pragma_item_list Enter
+    def __init__(self, Pound, pragma, pragma_item_list, Enter):
+        self.pragma_item_list = pragma_item_list
+        self.Enter = Enter
 
     def toCode(self):
-        return I() + '#' + 'pragma' + self.ids_or_numbers.toCode() + '\n'
+        return '#' + 'pragma' + self.pragma_item_list.toCode() + self.Enter.toCode()
 
 
-class ids_or_numbersp21(ids_or_numbers):
-    # ids_or_numbers --> ID ids_or_numbers
-    def __init__(self, ID, ids_or_numbers):
+class pp_cmdp23(pp_cmd):
+    # pp_cmd --> # 'define' exp exp Enter
+    def __init__(self, Pound, define, exp1, exp2, Enter):
+        self.exp1 = exp1
+        self.exp2 = exp2
+        self.Enter = Enter
+
+    def toCode(self):
+        return '#' + 'define' + self.exp1.toCode() + self.exp2.toCode() + self.Enter.toCode()
+
+
+class marco_unfoldp24(marco_unfold):
+    # marco_unfold --> exp ;
+    def __init__(self, exp, Semicolon):
+        self.exp = exp
+
+    def toCode(self):
+        return self.exp.toCode() + ';'
+
+
+class pragma_item_listp25(pragma_item_list):
+    # pragma_item_list --> pragma_item
+    def __init__(self, pragma_item):
+        self.pragma_item = pragma_item
+
+    def toCode(self):
+        return self.pragma_item.toCode()
+
+
+class pragma_item_listp26(pragma_item_list):
+    # pragma_item_list --> pragma_item_list pragma_item
+    def __init__(self, pragma_item_list, pragma_item):
+        self.pragma_item_list = pragma_item_list
+        self.pragma_item = pragma_item
+
+    def toCode(self):
+        return self.pragma_item_list.toCode() + self.pragma_item.toCode()
+
+
+class pragma_itemp27(pragma_item):
+    # pragma_item --> ID
+    def __init__(self, ID):
         self.ID = ID
-        self.ids_or_numbers = ids_or_numbers
 
     def toCode(self):
-        return ' ' + self.ID.toCode() + self.ids_or_numbers.toCode()
+        return self.ID.toCode()
 
 
-class ids_or_numbersp22(ids_or_numbers):
-    # ids_or_numbers --> Number ids_or_numbers
-    def __init__(self, Number, ids_or_numbers):
+class pragma_itemp28(pragma_item):
+    # pragma_item --> Number
+    def __init__(self, Number):
         self.Number = Number
-        self.ids_or_numbers = ids_or_numbers
 
     def toCode(self):
-        return self.Number.toCode() + self.ids_or_numbers.toCode()
+        return self.Number.toCode()
 
 
-class ids_or_numbersp23(ids_or_numbers):
-    # ids_or_numbers -->
-    def __init__(self):
-        pass
+class pragma_itemp29(pragma_item):
+    # pragma_item --> ID : ID
+    def __init__(self, ID1, Colon, ID2):
+        self.ID1 = ID1
+        self.ID2 = ID2
 
     def toCode(self):
-        return ''
+        return self.ID1.toCode() + ':' + self.ID2.toCode()
 
 
-class primary_expp24(primary_exp):
+class dec_listp30(dec_list):
+    # dec_list --> dec
+    def __init__(self, dec):
+        self.dec = dec
+
+    def toCode(self):
+        return self.dec.toCode()
+
+
+class dec_listp31(dec_list):
+    # dec_list --> dec_list dec
+    def __init__(self, dec_list, dec):
+        self.dec_list = dec_list
+        self.dec = dec
+
+    def toCode(self):
+        return self.dec_list.toCode() + self.dec.toCode()
+
+
+class id_listp32(id_list):
+    # id_list --> ID
+    def __init__(self, ID):
+        self.ID = ID
+
+    def toCode(self):
+        return self.ID.toCode()
+
+
+class id_listp33(id_list):
+    # id_list --> id_list ID
+    def __init__(self, id_list, ID):
+        self.id_list = id_list
+        self.ID = ID
+
+    def toCode(self):
+        return self.id_list.toCode() + self.ID.toCode()
+
+
+class primary_expp34(primary_exp):
     # primary_exp --> ID
     def __init__(self, ID):
         self.ID = ID
@@ -447,7 +574,7 @@ class primary_expp24(primary_exp):
         return self.ID.toCode()
 
 
-class primary_expp25(primary_exp):
+class primary_expp35(primary_exp):
     # primary_exp --> String
     def __init__(self, String):
         self.String = String
@@ -456,7 +583,7 @@ class primary_expp25(primary_exp):
         return self.String.toCode()
 
 
-class primary_expp26(primary_exp):
+class primary_expp36(primary_exp):
     # primary_exp --> Number
     def __init__(self, Number):
         self.Number = Number
@@ -465,7 +592,7 @@ class primary_expp26(primary_exp):
         return self.Number.toCode()
 
 
-class primary_expp27(primary_exp):
+class primary_expp37(primary_exp):
     # primary_exp --> ( exp )
     def __init__(self, LParen, exp, RParen):
         self.exp = exp
@@ -474,7 +601,7 @@ class primary_expp27(primary_exp):
         return '(' + self.exp.toCode() + ')'
 
 
-class postfix_expp28(postfix_exp):
+class postfix_expp38(postfix_exp):
     # postfix_exp --> primary_exp
     def __init__(self, primary_exp):
         self.primary_exp = primary_exp
@@ -483,7 +610,7 @@ class postfix_expp28(postfix_exp):
         return self.primary_exp.toCode()
 
 
-class postfix_expp29(postfix_exp):
+class postfix_expp39(postfix_exp):
     # postfix_exp --> postfix_exp [ exp ]
     def __init__(self, postfix_exp, LBrack, exp, RBrack):
         self.postfix_exp = postfix_exp
@@ -493,7 +620,7 @@ class postfix_expp29(postfix_exp):
         return self.postfix_exp.toCode() + '[' + self.exp.toCode() + ']'
 
 
-class postfix_expp30(postfix_exp):
+class postfix_expp40(postfix_exp):
     # postfix_exp --> postfix_exp ( )
     def __init__(self, postfix_exp, LParen, RParen):
         self.postfix_exp = postfix_exp
@@ -502,7 +629,7 @@ class postfix_expp30(postfix_exp):
         return self.postfix_exp.toCode() + '(' + ')'
 
 
-class postfix_expp31(postfix_exp):
+class postfix_expp41(postfix_exp):
     # postfix_exp --> postfix_exp ( argument_exp_list )
     def __init__(self, postfix_exp, LParen, argument_exp_list, RParen):
         self.postfix_exp = postfix_exp
@@ -512,7 +639,17 @@ class postfix_expp31(postfix_exp):
         return self.postfix_exp.toCode() + '(' + self.argument_exp_list.toCode() + ')'
 
 
-class postfix_expp32(postfix_exp):
+class postfix_expp42(postfix_exp):
+    # postfix_exp --> buildin_type_name ( argument_exp_list )
+    def __init__(self, buildin_type_name, LParen, argument_exp_list, RParen):
+        self.buildin_type_name = buildin_type_name
+        self.argument_exp_list = argument_exp_list
+
+    def toCode(self):
+        return self.buildin_type_name.toCode() + '(' + self.argument_exp_list.toCode() + ')'
+
+
+class postfix_expp43(postfix_exp):
     # postfix_exp --> postfix_exp . ID
     def __init__(self, postfix_exp, Dot, ID):
         self.postfix_exp = postfix_exp
@@ -522,7 +659,7 @@ class postfix_expp32(postfix_exp):
         return self.postfix_exp.toCode() + '.' + self.ID.toCode()
 
 
-class postfix_expp33(postfix_exp):
+class postfix_expp44(postfix_exp):
     # postfix_exp --> postfix_exp ++
     def __init__(self, postfix_exp, Increment):
         self.postfix_exp = postfix_exp
@@ -531,7 +668,7 @@ class postfix_expp33(postfix_exp):
         return self.postfix_exp.toCode() + '++'
 
 
-class postfix_expp34(postfix_exp):
+class postfix_expp45(postfix_exp):
     # postfix_exp --> postfix_exp --
     def __init__(self, postfix_exp, Decrement):
         self.postfix_exp = postfix_exp
@@ -540,7 +677,7 @@ class postfix_expp34(postfix_exp):
         return self.postfix_exp.toCode() + '--'
 
 
-class argument_exp_listp35(argument_exp_list):
+class argument_exp_listp46(argument_exp_list):
     # argument_exp_list --> assignment_exp
     def __init__(self, assignment_exp):
         self.assignment_exp = assignment_exp
@@ -549,7 +686,7 @@ class argument_exp_listp35(argument_exp_list):
         return self.assignment_exp.toCode()
 
 
-class argument_exp_listp36(argument_exp_list):
+class argument_exp_listp47(argument_exp_list):
     # argument_exp_list --> argument_exp_list , assignment_exp
     def __init__(self, argument_exp_list, Comma, assignment_exp):
         self.argument_exp_list = argument_exp_list
@@ -559,7 +696,7 @@ class argument_exp_listp36(argument_exp_list):
         return self.argument_exp_list.toCode() + ', ' + self.assignment_exp.toCode()
 
 
-class unary_expp37(unary_exp):
+class unary_expp48(unary_exp):
     # unary_exp --> postfix_exp
     def __init__(self, postfix_exp):
         self.postfix_exp = postfix_exp
@@ -568,7 +705,7 @@ class unary_expp37(unary_exp):
         return self.postfix_exp.toCode()
 
 
-class unary_expp38(unary_exp):
+class unary_expp49(unary_exp):
     # unary_exp --> ++ unary_exp
     def __init__(self, Increment, unary_exp):
         self.unary_exp = unary_exp
@@ -577,7 +714,7 @@ class unary_expp38(unary_exp):
         return '++' + self.unary_exp.toCode()
 
 
-class unary_expp39(unary_exp):
+class unary_expp50(unary_exp):
     # unary_exp --> -- unary_exp
     def __init__(self, Decrement, unary_exp):
         self.unary_exp = unary_exp
@@ -586,7 +723,7 @@ class unary_expp39(unary_exp):
         return '--' + self.unary_exp.toCode()
 
 
-class unary_expp40(unary_exp):
+class unary_expp51(unary_exp):
     # unary_exp --> unary_op unary_exp
     def __init__(self, unary_op, unary_exp):
         self.unary_op = unary_op
@@ -596,7 +733,7 @@ class unary_expp40(unary_exp):
         return self.unary_op.toCode() + self.unary_exp.toCode()
 
 
-class unary_opp41(unary_op):
+class unary_opp52(unary_op):
     # unary_op --> +
     def __init__(self, Plus):
         pass
@@ -605,7 +742,7 @@ class unary_opp41(unary_op):
         return '+'
 
 
-class unary_opp42(unary_op):
+class unary_opp53(unary_op):
     # unary_op --> -
     def __init__(self, Minus):
         pass
@@ -614,7 +751,7 @@ class unary_opp42(unary_op):
         return '-'
 
 
-class unary_opp43(unary_op):
+class unary_opp54(unary_op):
     # unary_op --> !
     def __init__(self, NOT):
         pass
@@ -623,7 +760,7 @@ class unary_opp43(unary_op):
         return '!'
 
 
-class unary_opp44(unary_op):
+class unary_opp55(unary_op):
     # unary_op --> ~
     def __init__(self, Tilde):
         pass
@@ -632,8 +769,8 @@ class unary_opp44(unary_op):
         return '~'
 
 
-class binary_expp45(binary_exp):
-    # binary_exp --> unary_exp
+class cast_expp56(cast_exp):
+    # cast_exp --> unary_exp
     def __init__(self, unary_exp):
         self.unary_exp = unary_exp
 
@@ -641,7 +778,26 @@ class binary_expp45(binary_exp):
         return self.unary_exp.toCode()
 
 
-class binary_expp46(binary_exp):
+class cast_expp57(cast_exp):
+    # cast_exp --> ( type_specifier ) cast_exp
+    def __init__(self, LParen, type_specifier, RParen, cast_exp):
+        self.type_specifier = type_specifier
+        self.cast_exp = cast_exp
+
+    def toCode(self):
+        return '(' + self.type_specifier.toCode() + ')' + self.cast_exp.toCode()
+
+
+class binary_expp58(binary_exp):
+    # binary_exp --> cast_exp
+    def __init__(self, cast_exp):
+        self.cast_exp = cast_exp
+
+    def toCode(self):
+        return self.cast_exp.toCode()
+
+
+class binary_expp59(binary_exp):
     # binary_exp --> binary_exp binary_op unary_exp
     def __init__(self, binary_exp, binary_op, unary_exp):
         self.binary_exp = binary_exp
@@ -652,7 +808,7 @@ class binary_expp46(binary_exp):
         return self.binary_exp.toCode() + ' ' + self.binary_op.toCode() + ' ' + self.unary_exp.toCode()
 
 
-class binary_opp47(binary_op):
+class binary_opp60(binary_op):
     # binary_op --> *
     def __init__(self, Times):
         pass
@@ -661,7 +817,7 @@ class binary_opp47(binary_op):
         return '*'
 
 
-class binary_opp48(binary_op):
+class binary_opp61(binary_op):
     # binary_op --> /
     def __init__(self, Divide):
         pass
@@ -670,7 +826,7 @@ class binary_opp48(binary_op):
         return '/'
 
 
-class binary_opp49(binary_op):
+class binary_opp62(binary_op):
     # binary_op --> %
     def __init__(self, Percent):
         pass
@@ -679,7 +835,7 @@ class binary_opp49(binary_op):
         return '%'
 
 
-class binary_opp50(binary_op):
+class binary_opp63(binary_op):
     # binary_op --> +
     def __init__(self, Plus):
         pass
@@ -688,7 +844,7 @@ class binary_opp50(binary_op):
         return '+'
 
 
-class binary_opp51(binary_op):
+class binary_opp64(binary_op):
     # binary_op --> -
     def __init__(self, Minus):
         pass
@@ -697,7 +853,7 @@ class binary_opp51(binary_op):
         return '-'
 
 
-class binary_opp52(binary_op):
+class binary_opp65(binary_op):
     # binary_op --> <<
     def __init__(self, LeftShift):
         pass
@@ -706,7 +862,7 @@ class binary_opp52(binary_op):
         return '<<'
 
 
-class binary_opp53(binary_op):
+class binary_opp66(binary_op):
     # binary_op --> >>
     def __init__(self, RightShift):
         pass
@@ -715,7 +871,7 @@ class binary_opp53(binary_op):
         return '>>'
 
 
-class binary_opp54(binary_op):
+class binary_opp67(binary_op):
     # binary_op --> <
     def __init__(self, LT):
         pass
@@ -724,7 +880,7 @@ class binary_opp54(binary_op):
         return '<'
 
 
-class binary_opp55(binary_op):
+class binary_opp68(binary_op):
     # binary_op --> >
     def __init__(self, GT):
         pass
@@ -733,7 +889,7 @@ class binary_opp55(binary_op):
         return '>'
 
 
-class binary_opp56(binary_op):
+class binary_opp69(binary_op):
     # binary_op --> <=
     def __init__(self, LE):
         pass
@@ -742,7 +898,7 @@ class binary_opp56(binary_op):
         return '<='
 
 
-class binary_opp57(binary_op):
+class binary_opp70(binary_op):
     # binary_op --> >=
     def __init__(self, GE):
         pass
@@ -751,7 +907,7 @@ class binary_opp57(binary_op):
         return '>='
 
 
-class binary_opp58(binary_op):
+class binary_opp71(binary_op):
     # binary_op --> ==
     def __init__(self, EQ):
         pass
@@ -760,7 +916,7 @@ class binary_opp58(binary_op):
         return '=='
 
 
-class binary_opp59(binary_op):
+class binary_opp72(binary_op):
     # binary_op --> !=
     def __init__(self, NEQ):
         pass
@@ -769,7 +925,7 @@ class binary_opp59(binary_op):
         return '!='
 
 
-class binary_opp60(binary_op):
+class binary_opp73(binary_op):
     # binary_op --> &
     def __init__(self, Ampersand):
         pass
@@ -778,7 +934,7 @@ class binary_opp60(binary_op):
         return '&'
 
 
-class binary_opp61(binary_op):
+class binary_opp74(binary_op):
     # binary_op --> ^
     def __init__(self, Caret):
         pass
@@ -787,7 +943,7 @@ class binary_opp61(binary_op):
         return '^'
 
 
-class binary_opp62(binary_op):
+class binary_opp75(binary_op):
     # binary_op --> |
     def __init__(self, VerticalBar):
         pass
@@ -796,7 +952,7 @@ class binary_opp62(binary_op):
         return '|'
 
 
-class binary_opp63(binary_op):
+class binary_opp76(binary_op):
     # binary_op --> &&
     def __init__(self, AND):
         pass
@@ -805,7 +961,7 @@ class binary_opp63(binary_op):
         return '&&'
 
 
-class binary_opp64(binary_op):
+class binary_opp77(binary_op):
     # binary_op --> ||
     def __init__(self, OR):
         pass
@@ -814,7 +970,7 @@ class binary_opp64(binary_op):
         return '||'
 
 
-class conditional_expp65(conditional_exp):
+class conditional_expp78(conditional_exp):
     # conditional_exp --> binary_exp
     def __init__(self, binary_exp):
         self.binary_exp = binary_exp
@@ -823,7 +979,7 @@ class conditional_expp65(conditional_exp):
         return self.binary_exp.toCode()
 
 
-class conditional_expp66(conditional_exp):
+class conditional_expp79(conditional_exp):
     # conditional_exp --> binary_exp ? exp : conditional_exp
     def __init__(self, binary_exp, Question, exp, Colon, conditional_exp):
         self.binary_exp = binary_exp
@@ -834,7 +990,7 @@ class conditional_expp66(conditional_exp):
         return self.binary_exp.toCode() + '?' + self.exp.toCode() + ':' + self.conditional_exp.toCode()
 
 
-class assignment_expp67(assignment_exp):
+class assignment_expp80(assignment_exp):
     # assignment_exp --> conditional_exp
     def __init__(self, conditional_exp):
         self.conditional_exp = conditional_exp
@@ -843,7 +999,7 @@ class assignment_expp67(assignment_exp):
         return self.conditional_exp.toCode()
 
 
-class assignment_expp68(assignment_exp):
+class assignment_expp81(assignment_exp):
     # assignment_exp --> unary_exp assignment_op assignment_exp
     def __init__(self, unary_exp, assignment_op, assignment_exp):
         self.unary_exp = unary_exp
@@ -854,7 +1010,7 @@ class assignment_expp68(assignment_exp):
         return self.unary_exp.toCode() + ' ' + self.assignment_op.toCode() + ' ' + self.assignment_exp.toCode()
 
 
-class assignment_opp69(assignment_op):
+class assignment_opp82(assignment_op):
     # assignment_op --> =
     def __init__(self, Assign):
         pass
@@ -863,7 +1019,7 @@ class assignment_opp69(assignment_op):
         return '='
 
 
-class assignment_opp70(assignment_op):
+class assignment_opp83(assignment_op):
     # assignment_op --> *=
     def __init__(self, AddAssign):
         pass
@@ -872,7 +1028,7 @@ class assignment_opp70(assignment_op):
         return '*='
 
 
-class assignment_opp71(assignment_op):
+class assignment_opp84(assignment_op):
     # assignment_op --> /=
     def __init__(self, SubAssign):
         pass
@@ -881,7 +1037,7 @@ class assignment_opp71(assignment_op):
         return '/='
 
 
-class assignment_opp72(assignment_op):
+class assignment_opp85(assignment_op):
     # assignment_op --> %=
     def __init__(self, MulAssign):
         pass
@@ -890,7 +1046,7 @@ class assignment_opp72(assignment_op):
         return '%='
 
 
-class assignment_opp73(assignment_op):
+class assignment_opp86(assignment_op):
     # assignment_op --> +=
     def __init__(self, DivAssign):
         pass
@@ -899,7 +1055,7 @@ class assignment_opp73(assignment_op):
         return '+='
 
 
-class assignment_opp74(assignment_op):
+class assignment_opp87(assignment_op):
     # assignment_op --> -=
     def __init__(self, ModAssign):
         pass
@@ -908,7 +1064,7 @@ class assignment_opp74(assignment_op):
         return '-='
 
 
-class assignment_opp75(assignment_op):
+class assignment_opp88(assignment_op):
     # assignment_op --> <<=
     def __init__(self, LeftShiftAssign):
         pass
@@ -917,7 +1073,7 @@ class assignment_opp75(assignment_op):
         return '<<='
 
 
-class assignment_opp76(assignment_op):
+class assignment_opp89(assignment_op):
     # assignment_op --> >>=
     def __init__(self, RightShiftAssign):
         pass
@@ -926,7 +1082,7 @@ class assignment_opp76(assignment_op):
         return '>>='
 
 
-class assignment_opp77(assignment_op):
+class assignment_opp90(assignment_op):
     # assignment_op --> &=
     def __init__(self, AndAssign):
         pass
@@ -935,7 +1091,7 @@ class assignment_opp77(assignment_op):
         return '&='
 
 
-class assignment_opp78(assignment_op):
+class assignment_opp91(assignment_op):
     # assignment_op --> ^=
     def __init__(self, XorAssign):
         pass
@@ -944,7 +1100,7 @@ class assignment_opp78(assignment_op):
         return '^='
 
 
-class assignment_opp79(assignment_op):
+class assignment_opp92(assignment_op):
     # assignment_op --> |=
     def __init__(self, OrAssign):
         pass
@@ -953,7 +1109,7 @@ class assignment_opp79(assignment_op):
         return '|='
 
 
-class expp80(exp):
+class expp93(exp):
     # exp --> assignment_exp
     def __init__(self, assignment_exp):
         self.assignment_exp = assignment_exp
@@ -962,7 +1118,7 @@ class expp80(exp):
         return self.assignment_exp.toCode()
 
 
-class expp81(exp):
+class expp94(exp):
     # exp --> exp , assignment_exp
     def __init__(self, exp, Comma, assignment_exp):
         self.exp = exp
@@ -972,7 +1128,7 @@ class expp81(exp):
         return self.exp.toCode() + ',' + self.assignment_exp.toCode()
 
 
-class decp82(dec):
+class decp95(dec):
     # dec --> struct_specifier ;
     def __init__(self, struct_specifier, Semicolon):
         self.struct_specifier = struct_specifier
@@ -981,7 +1137,7 @@ class decp82(dec):
         return GB() + I() + self.struct_specifier.toCode() + ';\n' + GA()
 
 
-class decp83(dec):
+class decp96(dec):
     # dec --> dec_specifier init_dec_list ;
     def __init__(self, dec_specifier, init_dec_list, Semicolon):
         self.dec_specifier = dec_specifier
@@ -991,7 +1147,7 @@ class decp83(dec):
         return I() + self.dec_specifier.toCode() + ' ' + self.init_dec_list.toCode() + ';\n'
 
 
-class dec_specifierp84(dec_specifier):
+class dec_specifierp97(dec_specifier):
     # dec_specifier --> type_specifier
     def __init__(self, type_specifier):
         self.type_specifier = type_specifier
@@ -1000,7 +1156,7 @@ class dec_specifierp84(dec_specifier):
         return self.type_specifier.toCode()
 
 
-class dec_specifierp85(dec_specifier):
+class dec_specifierp98(dec_specifier):
     # dec_specifier --> type_qualifier type_specifier
     def __init__(self, type_qualifier, type_specifier):
         self.type_qualifier = type_qualifier
@@ -1010,160 +1166,16 @@ class dec_specifierp85(dec_specifier):
         return self.type_qualifier.toCode() + ' ' + self.type_specifier.toCode()
 
 
-class type_specifierp86(type_specifier):
-    # type_specifier --> 'void'
-    def __init__(self, void):
-        pass
-
-    def toCode(self):
-        return 'void'
-
-
-class type_specifierp87(type_specifier):
-    # type_specifier --> 'char'
-    def __init__(self, char):
-        pass
-
-    def toCode(self):
-        return 'char'
-
-
-class type_specifierp88(type_specifier):
-    # type_specifier --> 'short'
-    def __init__(self, short):
-        pass
-
-    def toCode(self):
-        return 'short'
-
-
-class type_specifierp89(type_specifier):
-    # type_specifier --> 'int'
-    def __init__(self, int):
-        pass
-
-    def toCode(self):
-        return 'int'
-
-
-class type_specifierp90(type_specifier):
-    # type_specifier --> 'long'
-    def __init__(self, long):
-        pass
-
-    def toCode(self):
-        return 'long'
-
-
-class type_specifierp91(type_specifier):
-    # type_specifier --> 'float'
-    def __init__(self, float):
-        pass
-
-    def toCode(self):
-        return 'float'
-
-
-class type_specifierp92(type_specifier):
-    # type_specifier --> 'double'
-    def __init__(self, double):
-        pass
-
-    def toCode(self):
-        return 'double'
-
-
-class type_specifierp93(type_specifier):
-    # type_specifier --> 'sampler2D'
-    def __init__(self, sampler2D):
-        pass
-
-    def toCode(self):
-        return 'sampler2D'
-
-
-class type_specifierp94(type_specifier):
-    # type_specifier --> 'float2'
-    def __init__(self, float2):
-        pass
-
-    def toCode(self):
-        return 'float2'
-
-
-class type_specifierp95(type_specifier):
-    # type_specifier --> 'float3'
-    def __init__(self, float3):
-        pass
-
-    def toCode(self):
-        return 'float3'
-
-
-class type_specifierp96(type_specifier):
-    # type_specifier --> 'float4'
-    def __init__(self, float4):
-        pass
-
-    def toCode(self):
-        return 'float4'
-
-
-class type_specifierp97(type_specifier):
-    # type_specifier --> 'half2'
-    def __init__(self, half2):
-        pass
-
-    def toCode(self):
-        return 'half2'
-
-
-class type_specifierp98(type_specifier):
-    # type_specifier --> 'half3'
-    def __init__(self, half3):
-        pass
-
-    def toCode(self):
-        return 'half3'
-
-
 class type_specifierp99(type_specifier):
-    # type_specifier --> 'half4'
-    def __init__(self, half4):
-        pass
+    # type_specifier --> buildin_type_name
+    def __init__(self, buildin_type_name):
+        self.buildin_type_name = buildin_type_name
 
     def toCode(self):
-        return 'half4'
+        return self.buildin_type_name.toCode()
 
 
 class type_specifierp100(type_specifier):
-    # type_specifier --> 'fixed2'
-    def __init__(self, fixed2):
-        pass
-
-    def toCode(self):
-        return 'fixed2'
-
-
-class type_specifierp101(type_specifier):
-    # type_specifier --> 'fixed3'
-    def __init__(self, fixed3):
-        pass
-
-    def toCode(self):
-        return 'fixed3'
-
-
-class type_specifierp102(type_specifier):
-    # type_specifier --> 'fixed4'
-    def __init__(self, fixed4):
-        pass
-
-    def toCode(self):
-        return 'fixed4'
-
-
-class type_specifierp103(type_specifier):
     # type_specifier --> typedef_name
     def __init__(self, typedef_name):
         self.typedef_name = typedef_name
@@ -1172,7 +1184,169 @@ class type_specifierp103(type_specifier):
         return self.typedef_name.toCode()
 
 
-class type_qualifierp104(type_qualifier):
+class buildin_type_namep101(buildin_type_name):
+    # buildin_type_name --> 'void'
+    def __init__(self, void):
+        pass
+
+    def toCode(self):
+        return 'void'
+
+
+class buildin_type_namep102(buildin_type_name):
+    # buildin_type_name --> 'char'
+    def __init__(self, char):
+        pass
+
+    def toCode(self):
+        return 'char'
+
+
+class buildin_type_namep103(buildin_type_name):
+    # buildin_type_name --> 'short'
+    def __init__(self, short):
+        pass
+
+    def toCode(self):
+        return 'short'
+
+
+class buildin_type_namep104(buildin_type_name):
+    # buildin_type_name --> 'int'
+    def __init__(self, int):
+        pass
+
+    def toCode(self):
+        return 'int'
+
+
+class buildin_type_namep105(buildin_type_name):
+    # buildin_type_name --> 'long'
+    def __init__(self, long):
+        pass
+
+    def toCode(self):
+        return 'long'
+
+
+class buildin_type_namep106(buildin_type_name):
+    # buildin_type_name --> 'float'
+    def __init__(self, float):
+        pass
+
+    def toCode(self):
+        return 'float'
+
+
+class buildin_type_namep107(buildin_type_name):
+    # buildin_type_name --> 'double'
+    def __init__(self, double):
+        pass
+
+    def toCode(self):
+        return 'double'
+
+
+class buildin_type_namep108(buildin_type_name):
+    # buildin_type_name --> 'sampler2D'
+    def __init__(self, sampler2D):
+        pass
+
+    def toCode(self):
+        return 'sampler2D'
+
+
+class buildin_type_namep109(buildin_type_name):
+    # buildin_type_name --> 'float2'
+    def __init__(self, float2):
+        pass
+
+    def toCode(self):
+        return 'float2'
+
+
+class buildin_type_namep110(buildin_type_name):
+    # buildin_type_name --> 'float3'
+    def __init__(self, float3):
+        pass
+
+    def toCode(self):
+        return 'float3'
+
+
+class buildin_type_namep111(buildin_type_name):
+    # buildin_type_name --> 'float4'
+    def __init__(self, float4):
+        pass
+
+    def toCode(self):
+        return 'float4'
+
+
+class buildin_type_namep112(buildin_type_name):
+    # buildin_type_name --> 'half2'
+    def __init__(self, half2):
+        pass
+
+    def toCode(self):
+        return 'half2'
+
+
+class buildin_type_namep113(buildin_type_name):
+    # buildin_type_name --> 'half3'
+    def __init__(self, half3):
+        pass
+
+    def toCode(self):
+        return 'half3'
+
+
+class buildin_type_namep114(buildin_type_name):
+    # buildin_type_name --> 'half4'
+    def __init__(self, half4):
+        pass
+
+    def toCode(self):
+        return 'half4'
+
+
+class buildin_type_namep115(buildin_type_name):
+    # buildin_type_name --> 'fixed2'
+    def __init__(self, fixed2):
+        pass
+
+    def toCode(self):
+        return 'fixed2'
+
+
+class buildin_type_namep116(buildin_type_name):
+    # buildin_type_name --> 'fixed3'
+    def __init__(self, fixed3):
+        pass
+
+    def toCode(self):
+        return 'fixed3'
+
+
+class buildin_type_namep117(buildin_type_name):
+    # buildin_type_name --> 'fixed4'
+    def __init__(self, fixed4):
+        pass
+
+    def toCode(self):
+        return 'fixed4'
+
+
+class buildin_type_namep118(buildin_type_name):
+    # buildin_type_name --> 'float3x3'
+    def __init__(self, float3x3):
+        pass
+
+    def toCode(self):
+        return 'float3x3'
+
+
+class type_qualifierp119(type_qualifier):
     # type_qualifier --> 'uniform'
     def __init__(self, uniform):
         pass
@@ -1181,7 +1355,7 @@ class type_qualifierp104(type_qualifier):
         return 'uniform'
 
 
-class type_qualifierp105(type_qualifier):
+class type_qualifierp120(type_qualifier):
     # type_qualifier --> 'inout'
     def __init__(self, inout):
         pass
@@ -1190,7 +1364,25 @@ class type_qualifierp105(type_qualifier):
         return 'inout'
 
 
-class typedef_namep106(typedef_name):
+class type_qualifierp121(type_qualifier):
+    # type_qualifier --> 'inline'
+    def __init__(self, inline):
+        pass
+
+    def toCode(self):
+        return 'inline'
+
+
+class type_qualifierp122(type_qualifier):
+    # type_qualifier --> 'const'
+    def __init__(self, const):
+        pass
+
+    def toCode(self):
+        return 'const'
+
+
+class typedef_namep123(typedef_name):
     # typedef_name --> ID
     def __init__(self, ID):
         self.ID = ID
@@ -1199,7 +1391,7 @@ class typedef_namep106(typedef_name):
         return self.ID.toCode()
 
 
-class struct_specifierp107(struct_specifier):
+class struct_specifierp124(struct_specifier):
     # struct_specifier --> 'struct' ID
     def __init__(self, struct, ID):
         self.ID = ID
@@ -1208,7 +1400,7 @@ class struct_specifierp107(struct_specifier):
         return 'struct ' + self.ID.toCode()
 
 
-class struct_specifierp108(struct_specifier):
+class struct_specifierp125(struct_specifier):
     # struct_specifier --> 'struct' ID { struct_dec_list }
     def __init__(self, struct, ID, LBrace, struct_dec_list, RBrace):
         self.ID = ID
@@ -1218,7 +1410,7 @@ class struct_specifierp108(struct_specifier):
         return 'struct ' + self.ID.toCode() + '\n' + IAA() + '{' + '\n' + self.struct_dec_list.toCode() + SSI() + '}'
 
 
-class struct_dec_listp109(struct_dec_list):
+class struct_dec_listp126(struct_dec_list):
     # struct_dec_list --> struct_dec
     def __init__(self, struct_dec):
         self.struct_dec = struct_dec
@@ -1227,7 +1419,7 @@ class struct_dec_listp109(struct_dec_list):
         return self.struct_dec.toCode()
 
 
-class struct_dec_listp110(struct_dec_list):
+class struct_dec_listp127(struct_dec_list):
     # struct_dec_list --> struct_dec_list struct_dec
     def __init__(self, struct_dec_list, struct_dec):
         self.struct_dec_list = struct_dec_list
@@ -1237,7 +1429,7 @@ class struct_dec_listp110(struct_dec_list):
         return self.struct_dec_list.toCode() + self.struct_dec.toCode()
 
 
-class struct_decp111(struct_dec):
+class struct_decp128(struct_dec):
     # struct_dec --> type_specifier struct_declarator_list ;
     def __init__(self, type_specifier, struct_declarator_list, Semicolon):
         self.type_specifier = type_specifier
@@ -1247,7 +1439,44 @@ class struct_decp111(struct_dec):
         return I() + self.type_specifier.toCode() + ' ' + self.struct_declarator_list.toCode() + ';\n'
 
 
-class struct_declarator_listp112(struct_declarator_list):
+class struct_decp129(struct_dec):
+    # struct_dec --> ID ;
+    def __init__(self, ID, Semicolon):
+        self.ID = ID
+
+    def toCode(self):
+        return self.ID.toCode() + ';'
+
+
+class struct_decp130(struct_dec):
+    # struct_dec --> ID ( Number )
+    def __init__(self, ID, LParen, Number, RParen):
+        self.ID = ID
+        self.Number = Number
+
+    def toCode(self):
+        return self.ID.toCode() + '(' + self.Number.toCode() + ')'
+
+
+class struct_decp131(struct_dec):
+    # struct_dec --> pp_if_stm
+    def __init__(self, pp_if_stm):
+        self.pp_if_stm = pp_if_stm
+
+    def toCode(self):
+        return self.pp_if_stm.toCode()
+
+
+class struct_decp132(struct_dec):
+    # struct_dec --> 'INTERNAL_DATA'
+    def __init__(self, INTERNAL_DATA):
+        pass
+
+    def toCode(self):
+        return 'INTERNAL_DATA'
+
+
+class struct_declarator_listp133(struct_declarator_list):
     # struct_declarator_list --> struct_declarator
     def __init__(self, struct_declarator):
         self.struct_declarator = struct_declarator
@@ -1256,7 +1485,7 @@ class struct_declarator_listp112(struct_declarator_list):
         return self.struct_declarator.toCode()
 
 
-class struct_declarator_listp113(struct_declarator_list):
+class struct_declarator_listp134(struct_declarator_list):
     # struct_declarator_list --> struct_declarator_list , struct_declarator
     def __init__(self, struct_declarator_list, Comma, struct_declarator):
         self.struct_declarator_list = struct_declarator_list
@@ -1266,7 +1495,7 @@ class struct_declarator_listp113(struct_declarator_list):
         return self.struct_declarator_list.toCode() + ',' + self.struct_declarator.toCode()
 
 
-class struct_declaratorp114(struct_declarator):
+class struct_declaratorp135(struct_declarator):
     # struct_declarator --> declarator
     def __init__(self, declarator):
         self.declarator = declarator
@@ -1275,7 +1504,7 @@ class struct_declaratorp114(struct_declarator):
         return self.declarator.toCode()
 
 
-class struct_declaratorp115(struct_declarator):
+class struct_declaratorp136(struct_declarator):
     # struct_declarator --> declarator : ID
     def __init__(self, declarator, Colon, ID):
         self.declarator = declarator
@@ -1285,7 +1514,7 @@ class struct_declaratorp115(struct_declarator):
         return self.declarator.toCode() + ' : ' + self.ID.toCode()
 
 
-class declaratorp116(declarator):
+class declaratorp137(declarator):
     # declarator --> ID
     def __init__(self, ID):
         self.ID = ID
@@ -1294,7 +1523,7 @@ class declaratorp116(declarator):
         return self.ID.toCode()
 
 
-class declaratorp117(declarator):
+class declaratorp138(declarator):
     # declarator --> declarator [ exp ]
     def __init__(self, declarator, LBrack, exp, RBrack):
         self.declarator = declarator
@@ -1304,7 +1533,16 @@ class declaratorp117(declarator):
         return self.declarator.toCode() + '[' + self.exp.toCode() + ']'
 
 
-class declaratorp118(declarator):
+class declaratorp139(declarator):
+    # declarator --> declarator ( )
+    def __init__(self, declarator, LParen, RParen):
+        self.declarator = declarator
+
+    def toCode(self):
+        return self.declarator.toCode() + '(' + ')'
+
+
+class declaratorp140(declarator):
     # declarator --> declarator ( parameter_list )
     def __init__(self, declarator, LParen, parameter_list, RParen):
         self.declarator = declarator
@@ -1314,7 +1552,7 @@ class declaratorp118(declarator):
         return self.declarator.toCode() + '(' + self.parameter_list.toCode() + ')'
 
 
-class parameter_listp119(parameter_list):
+class parameter_listp141(parameter_list):
     # parameter_list --> parameter_dec
     def __init__(self, parameter_dec):
         self.parameter_dec = parameter_dec
@@ -1323,7 +1561,7 @@ class parameter_listp119(parameter_list):
         return self.parameter_dec.toCode()
 
 
-class parameter_listp120(parameter_list):
+class parameter_listp142(parameter_list):
     # parameter_list --> parameter_list , parameter_dec
     def __init__(self, parameter_list, Comma, parameter_dec):
         self.parameter_list = parameter_list
@@ -1333,7 +1571,7 @@ class parameter_listp120(parameter_list):
         return self.parameter_list.toCode() + ', ' + self.parameter_dec.toCode()
 
 
-class parameter_decp121(parameter_dec):
+class parameter_decp143(parameter_dec):
     # parameter_dec --> dec_specifier declarator
     def __init__(self, dec_specifier, declarator):
         self.dec_specifier = dec_specifier
@@ -1343,7 +1581,18 @@ class parameter_decp121(parameter_dec):
         return self.dec_specifier.toCode() + ' ' + self.declarator.toCode()
 
 
-class init_dec_listp122(init_dec_list):
+class parameter_decp144(parameter_dec):
+    # parameter_dec --> dec_specifier declarator : ID
+    def __init__(self, dec_specifier, declarator, Colon, ID):
+        self.dec_specifier = dec_specifier
+        self.declarator = declarator
+        self.ID = ID
+
+    def toCode(self):
+        return self.dec_specifier.toCode() + self.declarator.toCode() + ':' + self.ID.toCode()
+
+
+class init_dec_listp145(init_dec_list):
     # init_dec_list --> init_dec
     def __init__(self, init_dec):
         self.init_dec = init_dec
@@ -1352,7 +1601,7 @@ class init_dec_listp122(init_dec_list):
         return self.init_dec.toCode()
 
 
-class init_dec_listp123(init_dec_list):
+class init_dec_listp146(init_dec_list):
     # init_dec_list --> init_dec_list , init_dec
     def __init__(self, init_dec_list, Comma, init_dec):
         self.init_dec_list = init_dec_list
@@ -1362,7 +1611,7 @@ class init_dec_listp123(init_dec_list):
         return self.init_dec_list.toCode() + ',' + self.init_dec.toCode()
 
 
-class init_decp124(init_dec):
+class init_decp147(init_dec):
     # init_dec --> declarator
     def __init__(self, declarator):
         self.declarator = declarator
@@ -1371,7 +1620,7 @@ class init_decp124(init_dec):
         return self.declarator.toCode()
 
 
-class init_decp125(init_dec):
+class init_decp148(init_dec):
     # init_dec --> declarator = assignment_exp
     def __init__(self, declarator, Assign, assignment_exp):
         self.declarator = declarator
@@ -1381,7 +1630,7 @@ class init_decp125(init_dec):
         return self.declarator.toCode() + ' = ' + self.assignment_exp.toCode()
 
 
-class stmp126(stm):
+class stmp149(stm):
     # stm --> exp_stm
     def __init__(self, exp_stm):
         self.exp_stm = exp_stm
@@ -1390,7 +1639,7 @@ class stmp126(stm):
         return self.exp_stm.toCode()
 
 
-class stmp127(stm):
+class stmp150(stm):
     # stm --> compound_stm
     def __init__(self, compound_stm):
         self.compound_stm = compound_stm
@@ -1399,7 +1648,7 @@ class stmp127(stm):
         return self.compound_stm.toCode()
 
 
-class stmp128(stm):
+class stmp151(stm):
     # stm --> selection_stm
     def __init__(self, selection_stm):
         self.selection_stm = selection_stm
@@ -1408,7 +1657,7 @@ class stmp128(stm):
         return self.selection_stm.toCode()
 
 
-class stmp129(stm):
+class stmp152(stm):
     # stm --> iteration_stm
     def __init__(self, iteration_stm):
         self.iteration_stm = iteration_stm
@@ -1417,7 +1666,7 @@ class stmp129(stm):
         return self.iteration_stm.toCode()
 
 
-class stmp130(stm):
+class stmp153(stm):
     # stm --> jump_stm
     def __init__(self, jump_stm):
         self.jump_stm = jump_stm
@@ -1426,7 +1675,52 @@ class stmp130(stm):
         return self.jump_stm.toCode()
 
 
-class exp_stmp131(exp_stm):
+class stmp154(stm):
+    # stm --> pp_if_stm
+    def __init__(self, pp_if_stm):
+        self.pp_if_stm = pp_if_stm
+
+    def toCode(self):
+        return self.pp_if_stm.toCode()
+
+
+class stmp155(stm):
+    # stm --> 'UNITY_BRANCH'
+    def __init__(self, UNITY_BRANCH):
+        pass
+
+    def toCode(self):
+        return 'UNITY_BRANCH'
+
+
+class stmp156(stm):
+    # stm --> 'UNITY_UNROLL'
+    def __init__(self, UNITY_UNROLL):
+        pass
+
+    def toCode(self):
+        return 'UNITY_UNROLL'
+
+
+class stmp157(stm):
+    # stm --> 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' ( ID )
+    def __init__(self, TRANSFER_SHADOW_CASTER_NORMALOFFSET, LParen, ID, RParen):
+        self.ID = ID
+
+    def toCode(self):
+        return 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' + '(' + self.ID.toCode() + ')'
+
+
+class stmp158(stm):
+    # stm --> 'SHADOW_CASTER_FRAGMENT' ( ID )
+    def __init__(self, SHADOW_CASTER_FRAGMENT, LParen, ID, RParen):
+        self.ID = ID
+
+    def toCode(self):
+        return 'SHADOW_CASTER_FRAGMENT' + '(' + self.ID.toCode() + ')'
+
+
+class exp_stmp159(exp_stm):
     # exp_stm --> exp ;
     def __init__(self, exp, Semicolon):
         self.exp = exp
@@ -1435,7 +1729,7 @@ class exp_stmp131(exp_stm):
         return I() + self.exp.toCode() + ';\n'
 
 
-class exp_stmp132(exp_stm):
+class exp_stmp160(exp_stm):
     # exp_stm --> ;
     def __init__(self, Semicolon):
         pass
@@ -1444,7 +1738,7 @@ class exp_stmp132(exp_stm):
         return I() + ';\n'
 
 
-class compound_stmp133(compound_stm):
+class compound_stmp161(compound_stm):
     # compound_stm --> { block_item_list }
     def __init__(self, LBrace, block_item_list, RBrace):
         self.block_item_list = block_item_list
@@ -1453,7 +1747,7 @@ class compound_stmp133(compound_stm):
         return IAA() + '{' + '\n'+ self.block_item_list.toCode() + SSI() + '}' + '\n'
 
 
-class compound_stmp134(compound_stm):
+class compound_stmp162(compound_stm):
     # compound_stm --> { }
     def __init__(self, LBrace, RBrace):
         pass
@@ -1462,7 +1756,7 @@ class compound_stmp134(compound_stm):
         return I() + '{\n' +I() + '}\n'
 
 
-class block_item_listp135(block_item_list):
+class block_item_listp163(block_item_list):
     # block_item_list --> block_item
     def __init__(self, block_item):
         self.block_item = block_item
@@ -1471,7 +1765,7 @@ class block_item_listp135(block_item_list):
         return self.block_item.toCode()
 
 
-class block_item_listp136(block_item_list):
+class block_item_listp164(block_item_list):
     # block_item_list --> block_item_list block_item
     def __init__(self, block_item_list, block_item):
         self.block_item_list = block_item_list
@@ -1481,7 +1775,7 @@ class block_item_listp136(block_item_list):
         return self.block_item_list.toCode() + self.block_item.toCode()
 
 
-class block_itemp137(block_item):
+class block_itemp165(block_item):
     # block_item --> dec
     def __init__(self, dec):
         self.dec = dec
@@ -1490,7 +1784,7 @@ class block_itemp137(block_item):
         return self.dec.toCode()
 
 
-class block_itemp138(block_item):
+class block_itemp166(block_item):
     # block_item --> stm
     def __init__(self, stm):
         self.stm = stm
@@ -1499,7 +1793,7 @@ class block_itemp138(block_item):
         return self.stm.toCode()
 
 
-class selection_stmp139(selection_stm):
+class selection_stmp167(selection_stm):
     # selection_stm --> 'if' ( exp ) stm
     def __init__(self, _if, LParen, exp, RParen, stm):
         self.exp = exp
@@ -1509,7 +1803,7 @@ class selection_stmp139(selection_stm):
         return I() + 'if ' + '(' + self.exp.toCode() + ')\n' + self.stm.toCode()
 
 
-class selection_stmp140(selection_stm):
+class selection_stmp168(selection_stm):
     # selection_stm --> 'if' ( exp ) stm 'else' stm
     def __init__(self, _if, LParen, exp, RParen, stm1, _else, stm2):
         self.exp = exp
@@ -1520,7 +1814,7 @@ class selection_stmp140(selection_stm):
         return I() + 'if ' + '(' + self.exp.toCode() + ')\n' + self.stm.toCode() + I() + 'else' + self.stm.toCode()
 
 
-class iteration_stmp141(iteration_stm):
+class iteration_stmp169(iteration_stm):
     # iteration_stm --> 'while' ( exp ) stm
     def __init__(self, _while, LParen, exp, RParen, stm):
         self.exp = exp
@@ -1530,7 +1824,7 @@ class iteration_stmp141(iteration_stm):
         return 'while' + '(' + self.exp.toCode() + ')' + self.stm.toCode()
 
 
-class iteration_stmp142(iteration_stm):
+class iteration_stmp170(iteration_stm):
     # iteration_stm --> 'do' stm 'while' ( exp ) ;
     def __init__(self, do, stm, _while, LParen, exp, RParen, Semicolon):
         self.stm = stm
@@ -1540,7 +1834,7 @@ class iteration_stmp142(iteration_stm):
         return 'do' + self.stm.toCode() + 'while' + '(' + self.exp.toCode() + ')' + ';'
 
 
-class iteration_stmp143(iteration_stm):
+class iteration_stmp171(iteration_stm):
     # iteration_stm --> 'for' ( exp ; exp ; exp ) stm
     def __init__(self, _for, LParen, exp1, Semicolon1, exp2, Semicolon2, exp3, RParen, stm):
         self.exp1 = exp1
@@ -1552,7 +1846,20 @@ class iteration_stmp143(iteration_stm):
         return 'for' + '(' + self.exp.toCode() + ';' + self.exp.toCode() + ';' + self.exp.toCode() + ')' + self.stm.toCode()
 
 
-class jump_stmp144(jump_stm):
+class iteration_stmp172(iteration_stm):
+    # iteration_stm --> 'for' ( dec_specifier init_dec_list ; exp ; exp ) stm
+    def __init__(self, _for, LParen, dec_specifier, init_dec_list, Semicolon1, exp1, Semicolon2, exp2, RParen, stm):
+        self.dec_specifier = dec_specifier
+        self.init_dec_list = init_dec_list
+        self.exp1 = exp1
+        self.exp2 = exp2
+        self.stm = stm
+
+    def toCode(self):
+        return 'for' + '(' + self.dec_specifier.toCode() + self.init_dec_list.toCode() + ';' + self.exp1.toCode() + ';' + self.exp2.toCode() + ')' + self.stm.toCode()
+
+
+class jump_stmp173(jump_stm):
     # jump_stm --> 'goto' ID
     def __init__(self, goto, ID):
         self.ID = ID
@@ -1561,7 +1868,7 @@ class jump_stmp144(jump_stm):
         return I() + 'goto' + self.ID.toCode() + '\n'
 
 
-class jump_stmp145(jump_stm):
+class jump_stmp174(jump_stm):
     # jump_stm --> 'continue'
     def __init__(self, _continue):
         pass
@@ -1570,7 +1877,7 @@ class jump_stmp145(jump_stm):
         return I() + 'continue' + '\n'
 
 
-class jump_stmp146(jump_stm):
+class jump_stmp175(jump_stm):
     # jump_stm --> 'break'
     def __init__(self, _break):
         pass
@@ -1579,7 +1886,7 @@ class jump_stmp146(jump_stm):
         return I() + 'break' + '\n'
 
 
-class jump_stmp147(jump_stm):
+class jump_stmp176(jump_stm):
     # jump_stm --> 'return' exp ;
     def __init__(self, _return, exp, Semicolon):
         self.exp = exp
