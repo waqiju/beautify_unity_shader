@@ -21,7 +21,6 @@ def analyze(inputText, isKeepSpace=True, isKeepComment=True, isEnding=False):
                 pos = match.end()
                 break
 
-    tokens = FilterHangingSign(tokens)
 
     # 建立源文件中的token顺序链表，包括SpaceLike和Comment
     for i in range(0, len(tokens)-1):
@@ -29,6 +28,7 @@ def analyze(inputText, isKeepSpace=True, isKeepComment=True, isEnding=False):
 
     if not isKeepSpace:
         tokens = list(filter(lambda token: token.kind != TokenType.SpaceLike, tokens))
+        tokens = FilterHangingSign(tokens)
     if not isKeepComment:
         tokens = list(filter(lambda token: token.kind != TokenType.Comment, tokens))
 

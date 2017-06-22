@@ -64,6 +64,7 @@ class TokenType(SymbolType):
 
     # C语言的宏变量
     C_MARCO_VARIABLE = "C_MARCO_VARIABLE"
+    PPTokens = "PPTokens"
 
     # Debug
     ReservedWord = "ReservedWord"

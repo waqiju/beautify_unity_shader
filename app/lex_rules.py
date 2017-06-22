@@ -10,28 +10,7 @@ def LexicalError(text):
     return Token(TokenType.LexicalError, text)
 
 
-def PragmaSpecialDealer(text):
-    # 特殊处理（pragma一直吃到回车），要么特殊处理preprocess命令，要么近似为stm处理但是特殊捕获Enter
-    # 假如是pragma，则将下一个Enter捕获为Enter，而非SpaceLike。
-    def enableEnterOnce(d):
-        d['EnableEnterOnce'] = True
-        return d
-    SpaceDealer(modifyEnv=enableEnterOnce)
-    return Token(TokenType.ID, text, text)
-
-
-def SpaceDealer(text = '', env = {'EnableEnterOnce': False}, modifyEnv=None):
-    if modifyEnv:
-        modifyEnv(env)
-        return
-
-    if env['EnableEnterOnce'] and '\n' in text:
-        env['EnableEnterOnce'] = False
-        return Token(TokenType.Enter, text)
-    return Token(TokenType.SpaceLike, text)
-
-
-# 过滤hanging状态的正负号
+# 过滤hanging状态的正负号。需要在lexer.analyze() -> filterSpaceLike -> filterComment之后调用。
 def FilterHangingSign(tokens):
     newTokens = []
 
@@ -77,7 +56,7 @@ rules = [
     {'pattern': re.compile(numberPattern),
      'action': lambda text: Token(TokenType.Number, text, text)},
     {'pattern': re.compile(r"\b(pragma|define|(?<=#)if)\b"),
-     'action': PragmaSpecialDealer},
+     'action': lambda text: Token(TokenType.ID, text, text)},
     {'pattern': re.compile(r"\b[a-zA-Z_]\w*\b"),
      'action': lambda text: Token(TokenType.ID, text, text)},
     {'pattern': re.compile(r"\b[0-9a-zA-Z_]\w*\b"),
@@ -182,8 +161,10 @@ rules = [
     #   'action' : lambda text: Token(TokenType.tab2, text)},
     # priority 3
     # switchable Enter
-    {'pattern': re.compile(r"\s+", re.DOTALL),
-     'action': SpaceDealer},
+    {'pattern': re.compile(r"[ ]+", re.DOTALL),
+     'action': lambda text: Token(TokenType.SpaceLike, text)},
+    {'pattern': re.compile(r"[\n]+", re.DOTALL),
+     'action': lambda text: Token(TokenType.SpaceLike, text)},
      # 'action': lambda text: Token(TokenType.SpaceLike, text)},
     {'pattern': re.compile(r".*"),
      'action': LexicalError},
