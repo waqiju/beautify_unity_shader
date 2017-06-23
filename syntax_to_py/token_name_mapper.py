@@ -42,7 +42,7 @@ class TokenNameMapper:
 
     @staticmethod
     def avoidPythonKeyword(name):
-        if name in ['if', 'elif', 'else', 'for', 'while', 'continue', 'break', 'return']:
+        if name in ['if', 'elif', 'else', 'for', 'while', 'continue', 'break', 'return', '2D', '3D']:
             return '_' + name
 
         return name

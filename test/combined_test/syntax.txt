@@ -1,0 +1,351 @@
+/* syntax.txt中的元素与语法分析概念的对应关系。
+1. 小写字母开头 = 语法Nontermminal
+2. 大写字母开头 = 词法Token，变成TokenType.XXX
+3. 单引号开头 = 词法Token集合中的关键字，实现上是TokenType.ID( xxx )
+4. 标点 = 也是词法Token，变成TokenType.XXX
+*/
+//1
+prog        -> 'Shader' String { shader_body_elms }
+shader_body_elms  -> shader_body_elm shader_body_elms
+                  ->
+shader_body_elm   -> props
+                  -> category
+                  -> subshr
+                  -> cg_prog
+                  -> fall_back_cmd
+                  -> custom_editor_cmd
+                  -> dependency_cmd
+//2
+props       -> 'Properties' { props_body }
+props_body  -> prop_stm props_body
+            -> 
+prop_stm    -> ID ( String, prop_type ) = prop_init
+            -> [ ID ] ID ( String, prop_type ) = prop_init
+            -> [ ID ] [ID] ID ( String, prop_type ) = prop_init
+            -> [ 'Enum' ( enum_items ) ] ID ( String, prop_type ) = prop_init
+            -> [ 'MaterialEnum' ( enum_items ) ] ID ( String, prop_type ) = prop_init
+            -> [ 'KeywordEnum' ( enum_items ) ] ID ( String, prop_type ) = prop_init
+            -> [ 'Toggle' ( ID ) ] ID ( String, prop_type ) = prop_init
+            -> [ 'MaterialToggle' ] ID ( String, prop_type ) = prop_init
+            -> [ 'ToggleOff' ] ID ( String, prop_type ) = prop_init
+prop_type   -> 'Color'
+            -> 'Vector'
+            -> 'Range'
+            -> 'Int'
+            -> 'Float'
+            -> '2D'
+            -> 'Cube'
+            -> '3D'
+            -> 'Any'
+            -> 'Range' ( Number , Number )
+prop_init   -> Number
+            -> String { }
+            -> String { ID }
+            -> ( Number, Number, Number )
+            -> ( Number, Number, Number, Number )
+enum_items              -> enum_item
+                        -> enum_item , enum_items
+enum_item               -> id_list
+                        -> Number
+//3
+category    -> 'Category' { category_body_elms }
+category_body_elms -> category_body_elm category_body_elms
+                   -> 
+category_body_elm  -> cmd_stm
+                   -> subshr
+//4
+subshr      -> 'SubShader' { subshr_body_elms }
+subshr_body_elms  -> subshr_body_elm subshr_body_elms
+                  -> 
+subshr_body_elm   -> cmd_stm
+                  -> shr_pass
+                  -> cg_prog
+//5
+cmd_stm     -> cmd_name id_or_number_or_placeholder
+            -> 'Alphatest' ID
+            -> 'Alphatest' ID placeholder
+            -> 'BindChannels' { bind_channel_stms }
+            -> 'Blend' ID
+            -> 'Blend' id_or_number_or_placeholder id_or_number_or_placeholder
+            -> 'Fog' { 'Mode' ID }
+            -> 'Fog' { 'Color' ( Number, Number, Number, Number ) }
+            -> 'Material' { meterial_stms }
+            -> 'Name' String
+            -> 'Offset' id_or_number_or_placeholder , id_or_number_or_placeholder
+            -> 'Stencil' { stencil_stms }
+            -> 'SetTexture' placeholder { set_texture_stms }
+            -> 'Tags' { tags_stms }
+cmd_name    -> 'AlphaToMask'
+            -> 'ColorMask'
+            -> 'ColorMaterial'
+            -> 'Cull'
+            -> 'Lighting'
+            -> 'LOD'
+            -> 'SeparateSpecular'
+            -> 'ZTest'
+            -> 'ZWrite'
+id_or_number_or_placeholder   -> ID
+                              -> Number
+                              -> ( Number, Number, Number, Number )
+                              -> placeholder
+placeholder       -> [ ID ]
+bind_channel_stms -> bind_channel_stm bind_channel_stms
+                  -> 
+bind_channel_stm  -> 'Bind' String , ID
+meterial_stms     -> meterial_stm meterial_stms
+                  -> 
+meterial_stm      -> ID id_or_number_or_placeholder
+stencil_stms      -> stencil_stm stencil_stms
+                  -> 
+stencil_stm       -> ID id_or_number_or_placeholder
+set_texture_stms  -> set_texture_stm set_texture_stms
+                  -> 
+set_texture_stm   -> 'matrix' placeholder
+                  -> 'constantColor' id_or_number_or_placeholder
+                  -> 'combine' combine_options
+combine_options   -> combine_option combine_options
+                  -> combine_option , combine_options
+                  -> combine_option combine_option_op combine_options
+                  ->
+combine_option    -> ID
+                  -> ( ID )
+combine_option_op -> +
+                  -> -
+                  -> *
+                  -> /
+tags_stms         -> tag_smt tags_stms
+                  -> 
+tag_smt     -> String = String
+//6
+shr_pass    -> 'Pass' { pass_body_elms }
+            -> 'GrabPass' { pass_body_elms }
+            -> 'UsePass' String
+pass_body_elms    -> pass_body_elm pass_body_elms
+                  -> 
+pass_body_elm     -> cmd_stm
+                  -> cg_prog
+//7
+cg_prog     -> 'CGPROGRAM' cg_prog_body 'ENDCG'
+            -> 'CGINCLUDE' cg_prog_body 'ENDCG'
+//8
+fall_back_cmd -> 'FallBack' String
+              -> 'FallBack' 'Off'
+custom_editor_cmd -> 'CustomEditor' String
+dependency_cmd    -> 'Dependency' String = String
+//9 Common
+id_list           -> ID
+                  -> ID id_list
+
+
+
+
+// cg
+cg_prog_body-> cg_stms
+cg_stms     -> cg_stm cg_stms
+            -> 
+cg_stm      -> preprocessing_stm
+            -> function_definition
+            -> dec
+            -> 'CBUFFER_START' ( ID ) dec_list 'CBUFFER_END'   // tradeoff
+function_definition     -> dec_specifier declarator compound_stm 
+                        -> dec_specifier declarator : ID compound_stm 
+                        -> [ID(Number)] dec_specifier declarator compound_stm   // hacking for [maxvertexcount(3)]
+                        -> [ID(Number)] dec_specifier declarator : ID compound_stm 
+
+
+//8 预处理当做特殊的stm处理好了，简单点
+//  C语言的MARCO可以大致分为两种。一种是不带参数的宏，这个文法近似当做ID处理；另一种是带参数的宏，近似当做函数调用ID(...)处理。
+//  这种近似有漏洞吗？有的。比如MARCO展开后末尾有';'号，在源文件中就可以不加分号。这会导致语法识别错误。
+//  彻底解决这个问题的方法是把C语言的MARCO机制也模拟出来。BUT！我！不！想！模！拟！它！我！受！够！了！
+//题外话，C语言为什么不是context-free语法
+//  一个证据是typedef，半个证据是preprocess
+preprocessing_stm   -> pp_if_stm 
+                    -> pp_cmd
+                    -> marco_unfold  // tradeoff
+pp_if_stm   -> # 'if' PPTokens
+            -> # 'ifdef' ID
+            -> # 'ifndef' ID
+            -> # 'elif' PPTokens
+            -> # 'else'
+            -> # 'endif'
+pp_cmd      -> # 'include' String
+            -> # 'pragma' PPTokens
+            -> # 'define' PPTokens
+marco_unfold      -> exp ;
+dec_list          -> dec
+                  -> dec_list dec
+
+
+//9 expression，C语言的简化版
+primary_exp -> ID
+            -> String
+            -> Number
+            -> ( exp )
+postfix_exp -> primary_exp
+            -> postfix_exp [ exp ]
+            -> postfix_exp ( )
+            -> postfix_exp ( argument_exp_list )
+            -> buildin_type_name ( argument_exp_list )  // tradeoff
+            -> postfix_exp . ID
+            -> postfix_exp ++
+            -> postfix_exp --
+argument_exp_list       -> assignment_exp
+                        -> argument_exp_list , assignment_exp
+unary_exp   -> postfix_exp
+            -> ++ unary_exp
+            -> -- unary_exp
+            -> unary_op unary_exp
+unary_op    -> +
+            -> -
+            -> !
+            -> ~
+cast_exp    -> unary_exp
+            -> ( buildin_type_name ) cast_exp  // tradeoff C语法规则中打破lr1语法的一条，考虑下是否可以在代码中特判下处理。
+binary_exp  -> cast_exp
+            -> binary_exp binary_op unary_exp
+binary_op   -> *
+            -> /
+            -> %
+            -> +
+            -> -
+            -> <<
+            -> >>
+            -> <
+            -> >
+            -> <=
+            -> >=
+            -> ==
+            -> !=
+            -> &
+            -> ^
+            -> |
+            -> &&
+            -> ||
+conditional_exp   -> binary_exp
+                  -> binary_exp ? exp : conditional_exp
+assignment_exp    -> conditional_exp
+                  -> unary_exp assignment_op assignment_exp
+assignment_op     -> =
+                  -> *=
+                  -> /=
+                  -> %=
+                  -> +=
+                  -> -=
+                  -> <<=
+                  -> >>=
+                  -> &=
+                  -> ^=
+                  -> |=
+exp         -> assignment_exp
+            -> exp, assignment_exp
+// 10 declaration
+// 因为typedef的存在，'ID ;'存在两种解释。所以禁用这条，并且把struct_specifier和dec_specifier的关系。
+//dec               -> dec_specifier ;
+dec               -> struct_specifier ;
+                  -> dec_specifier init_dec_list ;
+dec_specifier     -> type_specifier
+                  -> type_qualifier dec_specifier
+                  -> storage_class_specifier dec_specifier
+type_specifier    -> buildin_type_name
+                  -> typedef_name
+buildin_type_name -> 'void'
+                  -> 'char'
+                  -> 'short'
+                  -> 'int'
+                  -> 'long'
+                  -> 'fixed'
+                  -> 'half'
+                  -> 'float'
+                  -> 'double'
+                  -> 'sampler2D'
+                  -> 'float2'
+                  -> 'float3'
+                  -> 'float4'
+                  -> 'half2'
+                  -> 'half3'
+                  -> 'half4'
+                  -> 'fixed2'
+                  -> 'fixed3'
+                  -> 'fixed4'
+                  -> 'float3x3'
+type_qualifier    -> 'uniform'
+                  -> 'inline'
+                  -> 'const'
+storage_class_specifier -> 'static'
+typedef_name      -> ID
+
+struct_specifier  -> 'struct' ID
+                  -> 'struct' ID { struct_dec_list }
+struct_dec_list   -> struct_dec
+                  -> struct_dec_list struct_dec
+struct_dec        -> type_specifier struct_declarator_list ;
+                  -> ID ;                                   // hacking for V2F_SHADOW_CASTER;
+                  -> ID ( Number )                          // hacking for UNITY_FOG_COORDS(1)
+                  -> ID ( Number, Number )                  // hacking for LIGHTING_COORDS(3,4)
+                  -> pp_if_stm                              // tradeoff，理想的处理方式不是这样子的。理想的处理方式是模拟出分支，而不要破坏语法的完整性。
+                  -> 'INTERNAL_DATA'
+                  -> 'UNITY_VERTEX_INPUT_INSTANCE_ID'
+                  -> 'UNITY_VERTEX_OUTPUT_STEREO'
+struct_declarator_list  -> struct_declarator
+                        -> struct_declarator_list , struct_declarator
+struct_declarator -> declarator
+                  -> declarator : ID
+
+declarator        -> ID
+// 因为typedef的存在，'ID ('会存在两种解释，所以禁用这条。
+//                  -> ( declarator )
+                  -> declarator [ exp ]
+                  -> declarator ( )
+                  -> declarator ( parameter_list )
+parameter_list    -> parameter_dec
+                  -> parameter_list , parameter_dec
+parameter_dec     -> parameter_dec_specifier declarator
+                  -> parameter_dec_specifier declarator : ID
+parameter_dec_specifier -> dec_specifier
+                        -> 'out' dec_specifier
+                        -> 'inout' dec_specifier
+                        -> 'triangle' dec_specifier
+                        -> 'inout' 'TriangleStream' < ID >
+
+init_dec_list     -> init_dec
+                  -> init_dec_list , init_dec
+init_dec          -> declarator
+                  -> declarator = initializer
+initializer       -> assignment_exp
+                  -> { initializer_list }
+                  -> { initializer_list , }
+initializer_list  -> initializer
+                  -> initializer_list , initializer
+// 11 statement
+stm               -> exp_stm
+                  -> compound_stm
+                  -> selection_stm
+                  -> iteration_stm
+                  -> jump_stm
+                  -> pp_if_stm            // tradeoff
+                  -> 'UNITY_BRANCH'       // tradeoff 这里可以考虑下是否有更好的策略，MARCO_UNFOLD的一个特征是全大写
+                  -> 'UNITY_UNROLL'
+                  -> 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' (ID)
+                  -> 'SHADOW_CASTER_FRAGMENT' (ID)
+                  -> 'SPEEDTREE_COPY_FRAG' (ID, ID)
+                  -> 'UNITY_TRANSFER_DITHER_CROSSFADE_HPOS' ( argument_exp_list )
+                  -> 'UNITY_APPLY_DITHER_CROSSFADE' (ID)
+exp_stm           -> exp ;
+                  -> ;
+compound_stm      -> { block_item_list }
+                  -> { }
+block_item_list   -> block_item
+                  -> block_item_list block_item
+block_item        -> dec
+                  -> stm
+selection_stm     -> 'if' ( exp ) stm
+                  -> 'if' ( exp ) stm 'else' stm
+iteration_stm     -> 'while' (exp) stm
+                  -> 'do' stm 'while' (exp);
+                  -> 'for' (exp; exp; exp) stm 
+                  -> 'for' (dec_specifier init_dec_list; exp; exp) stm 
+jump_stm          -> 'goto' ID
+                  -> 'continue'
+                  -> 'break'
+                  -> 'return' exp ;
+                  -> 'return' ;
