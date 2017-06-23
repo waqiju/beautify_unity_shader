@@ -7,7 +7,7 @@ ID(_MainTex)
 LParen
 String("Font Texture")
 Comma
-ReservedWord(2D)
+ID(2D)
 RParen
 Assign
 String("white")
@@ -17,7 +17,7 @@ ID(_Color)
 LParen
 String("Text Color")
 Comma
-ReservedWord(Color)
+ID(Color)
 RParen
 Assign
 LParen
@@ -47,15 +47,15 @@ String("PreviewType")
 Assign
 String("Plane")
 RBrace
-ReservedWord(Lighting)
+ID(Lighting)
 ID(Off)
-ReservedWord(Cull)
+ID(Cull)
 ID(Off)
-ReservedWord(ZTest)
+ID(ZTest)
 ID(Always)
-ReservedWord(ZWrite)
+ID(ZWrite)
 ID(Off)
-ReservedWord(Blend)
+ID(Blend)
 ID(SrcAlpha)
 ID(OneMinusSrcAlpha)
 ID(Pass)
@@ -127,4 +127,3 @@ ID(ENDCG)
 RBrace
 RBrace
 RBrace
-__End

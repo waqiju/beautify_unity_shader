@@ -1,5 +1,5 @@
 import os
-from .unduplicate_mapper import TokenNameMapper
+from .token_name_mapper import TokenNameMapper
 
 
 # write nonterminls.py
@@ -109,7 +109,8 @@ def _writeDeriveClass(file, production):
             # symbolStr = symbol.text
             symbolStr = textMapper.get(symbol)
         elif symbol.kind == "String":
-            symbolStr = symbol.text[1:-1]
+            # symbolStr = symbol.text[1:-1]
+            symbolStr = TokenNameMapper.avoidPythonKeyword(symbol.text[1:-1])
         else:
             # symbolStr = str(symbol)
             symbolStr = textMapper.getByPunctuator(symbol)

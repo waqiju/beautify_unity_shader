@@ -10,6 +10,10 @@ cg_stm      -> preprocessing_stm
             -> 'CBUFFER_START' ( ID ) dec_list 'CBUFFER_END'   // tradeoff
 function_definition     -> dec_specifier declarator compound_stm 
                         -> dec_specifier declarator : ID compound_stm 
+                        -> [ID(Number)] dec_specifier declarator compound_stm   // hacking for [maxvertexcount(3)]
+                        -> [ID(Number)] dec_specifier declarator : ID compound_stm 
+
+
 //8 预处理当做特殊的stm处理好了，简单点
 //  C语言的MARCO可以大致分为两种。一种是不带参数的宏，这个文法近似当做ID处理；另一种是带参数的宏，近似当做函数调用ID(...)处理。
 //  这种近似有漏洞吗？有的。比如MARCO展开后末尾有';'号，在源文件中就可以不加分号。这会导致语法识别错误。
@@ -19,27 +23,18 @@ function_definition     -> dec_specifier declarator compound_stm
 preprocessing_stm   -> pp_if_stm 
                     -> pp_cmd
                     -> marco_unfold  // tradeoff
-pp_if_stm   -> # 'if' binary_exp Enter
+pp_if_stm   -> # 'if' PPTokens
             -> # 'ifdef' ID
             -> # 'ifndef' ID
-            -> # 'elif' ID
+            -> # 'elif' PPTokens
             -> # 'else'
             -> # 'endif'
 pp_cmd      -> # 'include' String
-            -> # 'pragma' pragma_item_list Enter
-            -> # 'define' exp exp Enter
-//            -> # 'define' ID ID Enter  // hacking
-//            -> # 'define' ID ( id_list )  ID ( id_list ) Enter // hacking
+            -> # 'pragma' PPTokens
+            -> # 'define' PPTokens
 marco_unfold      -> exp ;
-pragma_item_list  -> pragma_item
-                  -> pragma_item_list pragma_item
-pragma_item       -> ID
-                  -> Number
-                  -> ID : ID
 dec_list          -> dec
                   -> dec_list dec
-id_list           -> ID
-                  -> id_list ID
 
 
 //9 expression，C语言的简化版
@@ -66,7 +61,7 @@ unary_op    -> +
             -> !
             -> ~
 cast_exp    -> unary_exp
-            -> ( type_specifier ) cast_exp
+            -> ( buildin_type_name ) cast_exp  // tradeoff C语法规则中打破lr1语法的一条，考虑下是否可以在代码中特判下处理。
 binary_exp  -> cast_exp
             -> binary_exp binary_op unary_exp
 binary_op   -> *
@@ -110,7 +105,8 @@ exp         -> assignment_exp
 dec               -> struct_specifier ;
                   -> dec_specifier init_dec_list ;
 dec_specifier     -> type_specifier
-                  -> type_qualifier type_specifier
+                  -> type_qualifier dec_specifier
+                  -> storage_class_specifier dec_specifier
 type_specifier    -> buildin_type_name
                   -> typedef_name
 buildin_type_name -> 'void'
@@ -118,6 +114,8 @@ buildin_type_name -> 'void'
                   -> 'short'
                   -> 'int'
                   -> 'long'
+                  -> 'fixed'
+                  -> 'half'
                   -> 'float'
                   -> 'double'
                   -> 'sampler2D'
@@ -132,9 +130,9 @@ buildin_type_name -> 'void'
                   -> 'fixed4'
                   -> 'float3x3'
 type_qualifier    -> 'uniform'
-                  -> 'inout'
                   -> 'inline'
                   -> 'const'
+storage_class_specifier -> 'static'
 typedef_name      -> ID
 
 struct_specifier  -> 'struct' ID
@@ -144,8 +142,11 @@ struct_dec_list   -> struct_dec
 struct_dec        -> type_specifier struct_declarator_list ;
                   -> ID ;                                   // hacking for V2F_SHADOW_CASTER;
                   -> ID ( Number )                          // hacking for UNITY_FOG_COORDS(1)
+                  -> ID ( Number, Number )                  // hacking for LIGHTING_COORDS(3,4)
                   -> pp_if_stm                              // tradeoff，理想的处理方式不是这样子的。理想的处理方式是模拟出分支，而不要破坏语法的完整性。
                   -> 'INTERNAL_DATA'
+                  -> 'UNITY_VERTEX_INPUT_INSTANCE_ID'
+                  -> 'UNITY_VERTEX_OUTPUT_STEREO'
 struct_declarator_list  -> struct_declarator
                         -> struct_declarator_list , struct_declarator
 struct_declarator -> declarator
@@ -159,13 +160,23 @@ declarator        -> ID
                   -> declarator ( parameter_list )
 parameter_list    -> parameter_dec
                   -> parameter_list , parameter_dec
-parameter_dec     -> dec_specifier declarator
-                  -> dec_specifier declarator : ID
+parameter_dec     -> parameter_dec_specifier declarator
+                  -> parameter_dec_specifier declarator : ID
+parameter_dec_specifier -> dec_specifier
+                        -> 'out' dec_specifier
+                        -> 'inout' dec_specifier
+                        -> 'triangle' dec_specifier
+                        -> 'inout' 'TriangleStream' < ID >
 
 init_dec_list     -> init_dec
                   -> init_dec_list , init_dec
 init_dec          -> declarator
-                  -> declarator = assignment_exp
+                  -> declarator = initializer
+initializer       -> assignment_exp
+                  -> { initializer_list }
+                  -> { initializer_list , }
+initializer_list  -> initializer
+                  -> initializer_list , initializer
 // 11 statement
 stm               -> exp_stm
                   -> compound_stm
@@ -173,10 +184,13 @@ stm               -> exp_stm
                   -> iteration_stm
                   -> jump_stm
                   -> pp_if_stm            // tradeoff
-                  -> 'UNITY_BRANCH'       // tradeoff
+                  -> 'UNITY_BRANCH'       // tradeoff 这里可以考虑下是否有更好的策略，MARCO_UNFOLD的一个特征是全大写
                   -> 'UNITY_UNROLL'
                   -> 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' (ID)
                   -> 'SHADOW_CASTER_FRAGMENT' (ID)
+                  -> 'SPEEDTREE_COPY_FRAG' (ID, ID)
+                  -> 'UNITY_TRANSFER_DITHER_CROSSFADE_HPOS' ( argument_exp_list )
+                  -> 'UNITY_APPLY_DITHER_CROSSFADE' (ID)
 exp_stm           -> exp ;
                   -> ;
 compound_stm      -> { block_item_list }

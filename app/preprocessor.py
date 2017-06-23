@@ -31,7 +31,7 @@ def analyze(tokens):
                 i += 1
             # ^----token is #      v----- token is 'if'
             token = tokens[i]
-            if token.text == 'if' or token.text == 'pragma' or token.text == 'define':
+            if token.text == 'if' or token.text == 'elif' or token.text == 'pragma' or token.text == 'define':
                 filterTokens.append(token)
                 i = eatPPToken(tokens, i + 1, filterTokens)
             else:
@@ -63,8 +63,10 @@ def eatPPToken(inputTokens, nowIndex, filterTokens):
             break
 
         ppToken.text += token.text
+        ppToken.nextToken = token.nextToken
         nowIndex += 1
 
+    ppToken.value = ppToken.text
     filterTokens.append(ppToken)
     nowIndex += 1
     return nowIndex
@@ -75,7 +77,7 @@ class Test(unittest.TestCase):
     def test(self):
         from . import lexer
 
-        with open(r'C:\1_Workspace\beautify_unity_shader\test\cg_test\test.shader') as f:
+        with open(r'C:\1_Workspace\beautify_unity_shader\test\preprocessor_test\test.shader') as f:
             inputText = f.read()
 
         tokens = lexer.analyze(inputText)

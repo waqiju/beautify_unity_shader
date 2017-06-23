@@ -1,11 +1,15 @@
+import os
+import json
+import re
 from app.lr import lr1
 from app.lr import inspector
-
+from .productions import productionList
+from app import lexer
+from app import preprocessor
+from app.lr import dfm
+from . import known_conflicts
 
 def construct():
-    import os
-    from .productions import productionList
-    import json
 
     edges, stateList, preStateIndex = lr1.construct(productionList, isDebug=True)
 
@@ -18,12 +22,6 @@ def construct():
 
 
 def verify():
-    import os
-    from .productions import productionList
-    from app import lexer
-    from app.lr import dfm
-    import json
-    from . import known_conflicts
 
     def json2Edges(d):
         edges = {}
@@ -43,7 +41,8 @@ def verify():
     # 用shader进行验证
     with open(os.path.join(__file__, '../test.shader')) as f:
         inputText = f.read()
-    tokens = lexer.analyze(inputText, isKeepSpace=False, isKeepComment=False, isEnding=True)
+    tokens = lexer.analyze(inputText, isEnding=True)
+    tokens = preprocessor.analyze(tokens)
     with open(os.path.join(__file__, '../1_lex_output.txt'), 'w') as f:
         for token in tokens:
             f.write(str(token))
@@ -53,7 +52,6 @@ def verify():
 
     outputFile = os.path.abspath(os.path.join(__file__, '../2_syntax_output.txt'))
     with open(outputFile, 'w') as f:
-        import json
         json.dump(ast.toDict(), f, indent=4)
 
     outputFile = os.path.abspath(os.path.join(__file__, '../3_formatted_code.shader'))
@@ -62,13 +60,6 @@ def verify():
 
 
 def verifyAll():
-    import os
-    from .productions import productionList
-    from app import lexer
-    from app.lr import dfm
-    import json
-    import re
-    from . import known_conflicts
 
     def json2Edges(d):
         edges = {}
@@ -106,7 +97,8 @@ def verifyAll():
                 try:
                     filterText = match.group()
 
-                    tokens = lexer.analyze(filterText, isKeepSpace=False, isKeepComment=False, isEnding=True)
+                    tokens = lexer.analyze(filterText, isEnding=True)
+                    tokens = preprocessor.analyze(tokens)
                     ast = dfm.run(edges, productionList, tokens, isDebug=False)
 
                     print(count, filePath, 'ok')
@@ -134,5 +126,5 @@ if __name__ == '__main__':
         construct()
         exit()
 
-    verify()
-    # verifyAll()
+    # verify()
+    verifyAll()
