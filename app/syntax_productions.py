@@ -1262,30 +1262,7 @@ class Test(unittest.TestCase):
 
 
 def _init():
-
-    for p in productionList:
-        # Production <--> Nonterminal
-        name1 = p.left
-        name2 = name1 + p.name
-
-        cls1 = Nonterminal.getClass(name1)
-        if cls1 is None:
-            print('error: lack of nonterminal class. production = %s' % p)
-        cls1.leadingProductions.append(p)
-        cls2 = Nonterminal.getClass(name2) or Nonterminal.getClass(name1)
-        cls2.production = p
-        p.LeftNonterminalClass = cls2
-
-        # add 'Shader' into TokenType
-        stTuple = ()
-        for elm in p.right:
-            if elm not in T and elm not in N:
-                newSt = '-%s-' % str.lower(elm)
-                T.add(newSt)
-                stTuple += (newSt,)
-            else:
-                stTuple += (elm,)
-        p.right = stTuple
+    Nonterminal.postInitialize(productionList)
 
 
 _init()

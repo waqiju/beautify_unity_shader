@@ -21,7 +21,16 @@ def construct():
         json.dump(edges, f, indent=4)
 
 
-def analyze(tokens):
+def analyze(tokens, edges = None):
+
+    if edges is None:
+        edges = loadEdges()
+
+    ast = dfm.run(edges, productionList, tokens, isDebug=False)
+    return ast
+
+
+def loadEdges():
 
     def json2Edges(d):
         edges = {}
@@ -34,11 +43,11 @@ def analyze(tokens):
 
     # 消除已知的冲突
     edges = known_conflicts.applyTo(edges)
-    with open(os.path.join(__file__, '../output/3_edges_conflict_free.json'), 'w') as f:
-        json.dump(edges, f, indent=4)
 
-    ast = dfm.run(edges, productionList, tokens, isDebug=False)
-    return ast
+    # with open(os.path.join(__file__, '../output/3_edges_conflict_free.json'), 'w') as f:
+    #     json.dump(edges, f, indent=4)
+
+    return edges
 
 
 class Test(unittest.TestCase):
