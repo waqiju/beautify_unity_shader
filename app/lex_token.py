@@ -1,5 +1,5 @@
 import unittest
-from . import formatter
+from .extension import formatter
 
 
 class Token:

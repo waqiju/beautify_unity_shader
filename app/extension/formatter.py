@@ -1,5 +1,5 @@
 import unittest
-from .lex_tokens import TokenType
+from ..symbol_type import SymbolType
 
 # Config
 isKeepComment = True
@@ -82,6 +82,7 @@ def RestoreComment():
 
     code = ''
     nextToken = lastToken.nextToken
+    TokenType = SymbolType.TokenType
     while nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number, TokenType.ReservedWord):
         if isKeepComment and nextToken.kind == TokenType.Comment:
             code += indenter.toCode() + nextToken.text + '\n'

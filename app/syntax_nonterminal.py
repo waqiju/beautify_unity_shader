@@ -42,7 +42,7 @@ class Nonterminal(metaclass=NonterminalMeta):
         for p in productionList:
             # Production <--> Nonterminal
             levelOneName = p.left
-            levelTwoName = p.left + p.name
+            levelTwoName = p.left + '_' + p.name
             # eg: prog
             levelOneCls = Nonterminal.getClass(levelOneName)
             levelOneCls.leadingProductions.append(p)
@@ -82,17 +82,7 @@ class Nonterminal(metaclass=NonterminalMeta):
         return d
 
     def toCode(self):
-        code = ''
-        for k in dir(self):
-            v = getattr(self, k)
-            # token
-            if isinstance(v, Token):
-                code += v.toCode() + ' '
-            # nonterminal
-            if isinstance(v, Nonterminal):
-                code += v.toCode()
-
-        return code
+        raise Exception("should not go here! may you need to import syntax_tree_to_code.")
 
 
 class Test(unittest.TestCase):

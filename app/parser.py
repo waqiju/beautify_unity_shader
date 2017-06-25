@@ -72,6 +72,8 @@ class Test(unittest.TestCase):
         with open(outputFile, 'w') as f:
             json.dump(ast.toDict(), f, indent=4)
 
+
+        from .extension import syntax_tree_to_code
         outputFile = os.path.abspath(os.path.join(__file__, '../output/4_formatted_code.shader'))
         with open(outputFile, 'w') as f:
             f.write(ast.toCode())

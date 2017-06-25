@@ -3,6 +3,7 @@ import os
 from app import lexer
 from app.lex_tokens import TokenType
 from . import translator
+from . import to_code_translator
 
 
 def prepare():
@@ -180,3 +181,5 @@ class Test(unittest.TestCase):
         translator.mergeProductionListToFile(productionList, productionNonterminals, TokenType, os.path.join(__file__, '../../test/cg_test/productions.py'))
         translator.writeNonterminals(productionList, productionNonterminals)
         translator.mergeNonterminalsToFile(productionList, productionNonterminals, os.path.join(__file__, '../../test/cg_test/nonterminals.py'))
+
+        to_code_translator.writeToCode(productionList, productionNonterminals)

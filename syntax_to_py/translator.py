@@ -21,14 +21,14 @@ def mergeNonterminalsToFile(productionList, productionNonterminals, filePath):
 
     # 纠正编号
     for production in productionList:
-        pattern = r"class %s(p\d+)\(%s\):\n" % (production.left.text, production.left.text)
+        pattern = r"class %s_(p\d+)\(%s\):\n" % (production.left.text, production.left.text)
         pattern += "    # %s\n" % _replaceRegexKeyWord(production.text)
 
         match = re.search(pattern, fileBuf)
         if match is None:
             continue
 
-        text = "class %s%s(%s):\n" % (production.left.text, production.name, production.left.text)
+        text = "class %s_%s(%s):\n" % (production.left.text, production.name, production.left.text)
         text += "    # %s\n" % production.text
 
         fileBuf = fileBuf[:match.start()] + text + fileBuf[match.end():]
@@ -54,7 +54,6 @@ def _writeBegin(file):
     texts = [
         "from app.symbol_type import SymbolType",
         "from app.syntax_nonterminal import Nonterminal",
-        "from app.formatter import I, AAI, IAA, SSI, ISS, GB, GA, RestoreComment",
         "import unittest",
     ]
     texts = map(lambda text: text + '\n', texts)
@@ -99,7 +98,7 @@ def _writeBaseClass(file, className):
 
 def _writeDeriveClass(file, production):
     file.write('\n\n')
-    text = "class %s%s(%s):\n" % (production.left.text, production.name, production.left.text)
+    text = "class %s_%s(%s):\n" % (production.left.text, production.name, production.left.text)
     text += "    # %s\n" % production.text 
     # line 3
     textMapper = TokenNameMapper(production.right)
@@ -131,28 +130,6 @@ def _writeDeriveClass(file, production):
 
     if line4Count == 0:
         text += "        pass\n"
-
-    # block 2, toCode()
-    textMapper.resetUsedCount()
-    # line 1
-    text += '\n'
-    # line 2
-    text += "    def toCode(self):\n"
-    # line 3
-    codeText = ''
-    for symbol in production.right:
-        codeText +=  (' + ' if codeText != '' else '') 
-        if symbol.kind == "ID":
-            # codeText += 'self.' + symbol.text+ ".toCode()"
-            codeText += 'self.' + textMapper.get(symbol) + ".toCode()"
-        elif symbol.kind == "String":
-            codeText += symbol.text
-        else :
-            codeText += "'%s'" % symbol.text
-    if codeText == '':
-        text += "        return ''\n"
-    else:
-        text += "        return " + codeText + '\n'
 
     file.write(text)
 
