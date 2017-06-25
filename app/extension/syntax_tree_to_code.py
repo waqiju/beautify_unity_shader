@@ -1,17 +1,20 @@
 import unittest
 from ..syntax_nonterminal import Nonterminal
 from ..syntax_productions import productionList
-from .formatter import I, AAI, IAA, SSI, ISS, GB, GA, RestoreComment
+from .formatter import I, AAI, IAA, SSI, ISS, RestoreComment, G, E
 
 
 # prog --> 'Shader' String { shader_body_elms }
 def _p1(self):
-    return 'Shader' + self.String.toCode() + '{' + self.shader_body_elms.toCode() + '}'
+    return I() + 'Shader' + self.String.toCode() + E() \
+        + IAA() + '{' + E() \
+        + G(-1) + self.shader_body_elms.toCode() + G(-1) \
+        + SSI() + '}'
 
 
 # shader_body_elms --> shader_body_elm shader_body_elms
 def _p2(self):
-    return self.shader_body_elm.toCode() + self.shader_body_elms.toCode()
+    return G() + self.shader_body_elm.toCode() + G() + self.shader_body_elms.toCode()
 
 
 # shader_body_elms -->
@@ -55,7 +58,10 @@ def _p10(self):
 
 # props --> 'Properties' { props_body }
 def _p11(self):
-    return 'Properties' + '{' + self.props_body.toCode() + '}'
+    return I() + 'Properties' + E() \
+        + IAA() + '{' + E() \
+        + self.props_body.toCode() \
+        + SSI() + '}' + E()
 
 
 # props_body --> prop_stm props_body
@@ -69,7 +75,7 @@ def _p13(self):
 
 # prop_stm --> ID ( String , prop_type ) = prop_init
 def _p14(self):
-    return self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return I() + self.ID.toCode() + '(' + self.String.toCode() + ', ' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode() + E()
 
 
 # prop_stm --> [ ID ] ID ( String , prop_type ) = prop_init
@@ -79,37 +85,37 @@ def _p15(self):
 
 # prop_stm --> [ ID ] [ ID ] ID ( String , prop_type ) = prop_init
 def _p16(self):
-    return '[' + self.ID1.toCode() + ']' + '[' + self.ID2.toCode() + ']' + self.ID3.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + self.ID1.toCode() + ']' + '[' + self.ID2.toCode() + ']' + self.ID3.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'Enum' ( enum_items ) ] ID ( String , prop_type ) = prop_init
 def _p17(self):
-    return '[' + 'Enum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'Enum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'MaterialEnum' ( enum_items ) ] ID ( String , prop_type ) = prop_init
 def _p18(self):
-    return '[' + 'MaterialEnum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'MaterialEnum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'KeywordEnum' ( enum_items ) ] ID ( String , prop_type ) = prop_init
 def _p19(self):
-    return '[' + 'KeywordEnum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'KeywordEnum' + '(' + self.enum_items.toCode() + ')' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'Toggle' ( ID ) ] ID ( String , prop_type ) = prop_init
 def _p20(self):
-    return '[' + 'Toggle' + '(' + self.ID1.toCode() + ')' + ']' + self.ID2.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'Toggle' + '(' + self.ID1.toCode() + ')' + ']' + self.ID2.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'MaterialToggle' ] ID ( String , prop_type ) = prop_init
 def _p21(self):
-    return '[' + 'MaterialToggle' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'MaterialToggle' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_stm --> [ 'ToggleOff' ] ID ( String , prop_type ) = prop_init
 def _p22(self):
-    return '[' + 'ToggleOff' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + '=' + self.prop_init.toCode()
+    return '[' + 'ToggleOff' + ']' + self.ID.toCode() + '(' + self.String.toCode() + ',' + self.prop_type.toCode() + ')' + ' = ' + self.prop_init.toCode()
 
 
 # prop_type --> 'Color'
@@ -159,7 +165,7 @@ def _p31(self):
 
 # prop_type --> 'Range' ( Number , Number )
 def _p32(self):
-    return 'Range' + '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ')'
+    return 'Range' + '(' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ')'
 
 
 # prop_init --> Number
@@ -169,22 +175,22 @@ def _p33(self):
 
 # prop_init --> String { }
 def _p34(self):
-    return self.String.toCode() + '{' + '}'
+    return self.String.toCode() + ' ' + '{ ' + '}'
 
 
 # prop_init --> String { ID }
 def _p35(self):
-    return self.String.toCode() + '{' + self.ID.toCode() + '}'
+    return self.String.toCode() + '{ ' + self.ID.toCode() + ' }'
 
 
 # prop_init --> ( Number , Number , Number )
 def _p36(self):
-    return '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ')'
+    return '(' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ', ' + self.Number3.toCode() + ')'
 
 
 # prop_init --> ( Number , Number , Number , Number )
 def _p37(self):
-    return '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ',' + self.Number4.toCode() + ')'
+    return '(' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ', ' + self.Number3.toCode() + ', ' + self.Number4.toCode() + ')'
 
 
 # enum_items --> enum_item
@@ -194,7 +200,7 @@ def _p38(self):
 
 # enum_items --> enum_item , enum_items
 def _p39(self):
-    return self.enum_item.toCode() + ',' + self.enum_items.toCode()
+    return self.enum_item.toCode() + ', ' + self.enum_items.toCode()
 
 
 # enum_item --> id_list
@@ -209,7 +215,10 @@ def _p41(self):
 
 # category --> 'Category' { category_body_elms }
 def _p42(self):
-    return 'Category' + '{' + self.category_body_elms.toCode() + '}'
+    return I() + 'Category' + E() \
+        + IAA() + '{' + E() \
+        + self.category_body_elms.toCode() \
+        + SSI() + '}' + E()
 
 
 # category_body_elms --> category_body_elm category_body_elms
@@ -233,7 +242,10 @@ def _p46(self):
 
 # subshr --> 'SubShader' { subshr_body_elms }
 def _p47(self):
-    return 'SubShader' + '{' + self.subshr_body_elms.toCode() + '}'
+    return I() + 'SubShader' + E() \
+        + IAA() + '{' + E() \
+        + self.subshr_body_elms.toCode() \
+        + SSI() + '}' + E()
 
 
 # subshr_body_elms --> subshr_body_elm subshr_body_elms
@@ -247,7 +259,7 @@ def _p49(self):
 
 # subshr_body_elm --> cmd_stm
 def _p50(self):
-    return self.cmd_stm.toCode()
+    return I() + self.cmd_stm.toCode() + E()
 
 
 # subshr_body_elm --> shr_pass
@@ -262,72 +274,78 @@ def _p52(self):
 
 # cmd_stm --> cmd_name id_or_number_or_placeholder
 def _p53(self):
-    return self.cmd_name.toCode() + self.id_or_number_or_placeholder.toCode()
+    return self.cmd_name.toCode() + ' ' + self.id_or_number_or_placeholder.toCode()
 
 
 # cmd_stm --> 'Alphatest' ID
 def _p54(self):
-    return 'Alphatest' + self.ID.toCode()
+    return 'Alphatest' + ' ' + self.ID.toCode()
 
 
 # cmd_stm --> 'Alphatest' ID placeholder
 def _p55(self):
-    return 'Alphatest' + self.ID.toCode() + self.placeholder.toCode()
+    return 'Alphatest' + ' ' + self.ID.toCode() + ' ' + self.placeholder.toCode()
 
 
 # cmd_stm --> 'BindChannels' { bind_channel_stms }
 def _p56(self):
-    return 'BindChannels' + '{' + self.bind_channel_stms.toCode() + '}'
+    return 'BindChannels' + E() \
+        + AAI() + '{' + E() \
+        + self.bind_channel_stms.toCode() \
+        + ISS() + '}' + E()
 
 
 # cmd_stm --> 'Blend' ID
 def _p57(self):
-    return 'Blend' + self.ID.toCode()
+    return 'Blend' + ' ' + self.ID.toCode()
 
 
 # cmd_stm --> 'Blend' id_or_number_or_placeholder id_or_number_or_placeholder
 def _p58(self):
-    return 'Blend' + self.id_or_number_or_placeholder1.toCode() + self.id_or_number_or_placeholder2.toCode()
+    return 'Blend' + ' ' + self.id_or_number_or_placeholder1.toCode() + ' ' + self.id_or_number_or_placeholder2.toCode()
 
 
 # cmd_stm --> 'Fog' { 'Mode' ID }
 def _p59(self):
-    return 'Fog' + '{' + 'Mode' + self.ID.toCode() + '}'
+    return I() + 'Fog' + ' { ' + 'Mode ' + self.ID.toCode() + ' }'
 
 
 # cmd_stm --> 'Fog' { 'Color' ( Number , Number , Number , Number ) }
 def _p60(self):
-    return 'Fog' + '{' + 'Color' + '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ',' + self.Number4.toCode() + ')' + '}'
+    return 'Fog' + ' { ' + 'Color' + ' (' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ', ' + self.Number3.toCode() + ', ' + self.Number4.toCode() + ')' + ' }'
 
 
 # cmd_stm --> 'Material' { meterial_stms }
 def _p61(self):
-    return 'Material' + '{' + self.meterial_stms.toCode() + '}'
+    return 'Material' + ' { ' + self.meterial_stms.toCode() + ' }'
 
 
 # cmd_stm --> 'Name' String
 def _p62(self):
-    return 'Name' + self.String.toCode()
+    return 'Name ' + self.String.toCode()
 
 
 # cmd_stm --> 'Offset' id_or_number_or_placeholder , id_or_number_or_placeholder
 def _p63(self):
-    return 'Offset' + self.id_or_number_or_placeholder1.toCode() + ',' + self.id_or_number_or_placeholder2.toCode()
+    return 'Offset ' + self.id_or_number_or_placeholder1.toCode() + ', ' + self.id_or_number_or_placeholder2.toCode()
 
 
 # cmd_stm --> 'Stencil' { stencil_stms }
 def _p64(self):
-    return 'Stencil' + '{' + self.stencil_stms.toCode() + '}'
+    return 'Stencil' + ' { ' + self.stencil_stms.toCode() + ' }'
 
 
 # cmd_stm --> 'SetTexture' placeholder { set_texture_stms }
 def _p65(self):
-    return 'SetTexture' + self.placeholder.toCode() + '{' + self.set_texture_stms.toCode() + '}'
+    return 'SetTexture ' + self.placeholder.toCode() + ' { ' + self.set_texture_stms.toCode() + ' }'
 
 
 # cmd_stm --> 'Tags' { tags_stms }
 def _p66(self):
-    return 'Tags' + '{' + self.tags_stms.toCode() + '}'
+    return 'Tags' + E() \
+        + IAA() + '{' + E() \
+        + self.tags_stms.toCode() \
+        + SSI() + '}' + E() \
 
 
 # cmd_name --> 'AlphaToMask'
@@ -387,7 +405,7 @@ def _p77(self):
 
 # id_or_number_or_placeholder --> ( Number , Number , Number , Number )
 def _p78(self):
-    return '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ',' + self.Number3.toCode() + ',' + self.Number4.toCode() + ')'
+    return '(' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ', ' + self.Number3.toCode() + ', ' + self.Number4.toCode() + ')'
 
 
 # id_or_number_or_placeholder --> placeholder
@@ -411,7 +429,7 @@ def _p82(self):
 
 # bind_channel_stm --> 'Bind' String , ID
 def _p83(self):
-    return 'Bind' + self.String.toCode() + ',' + self.ID.toCode()
+    return I() + 'Bind ' + self.String.toCode() + ' , ' + self.ID.toCode() + E()
 
 
 # meterial_stms --> meterial_stm meterial_stms
@@ -425,7 +443,7 @@ def _p85(self):
 
 # meterial_stm --> ID id_or_number_or_placeholder
 def _p86(self):
-    return self.ID.toCode() + self.id_or_number_or_placeholder.toCode()
+    return I() + self.ID.toCode() + ' ' + self.id_or_number_or_placeholder.toCode() + E()
 
 
 # stencil_stms --> stencil_stm stencil_stms
@@ -439,7 +457,7 @@ def _p88(self):
 
 # stencil_stm --> ID id_or_number_or_placeholder
 def _p89(self):
-    return self.ID.toCode() + self.id_or_number_or_placeholder.toCode()
+    return I() + self.ID.toCode() + ' ' + self.id_or_number_or_placeholder.toCode() + E()
 
 
 # set_texture_stms --> set_texture_stm set_texture_stms
@@ -453,17 +471,17 @@ def _p91(self):
 
 # set_texture_stm --> 'matrix' placeholder
 def _p92(self):
-    return 'matrix' + self.placeholder.toCode()
+    return I() + 'matrix ' + self.placeholder.toCode() + E()
 
 
 # set_texture_stm --> 'constantColor' id_or_number_or_placeholder
 def _p93(self):
-    return 'constantColor' + self.id_or_number_or_placeholder.toCode()
+    return I() + 'constantColor ' + self.id_or_number_or_placeholder.toCode() + E()
 
 
 # set_texture_stm --> 'combine' combine_options
 def _p94(self):
-    return 'combine' + self.combine_options.toCode()
+    return I() + 'combine ' + self.combine_options.toCode() + E()
 
 
 # combine_options --> combine_option combine_options
@@ -473,12 +491,12 @@ def _p95(self):
 
 # combine_options --> combine_option , combine_options
 def _p96(self):
-    return self.combine_option.toCode() + ',' + self.combine_options.toCode()
+    return self.combine_option.toCode() + ' ,' + self.combine_options.toCode()
 
 
 # combine_options --> combine_option combine_option_op combine_options
 def _p97(self):
-    return self.combine_option.toCode() + self.combine_option_op.toCode() + self.combine_options.toCode()
+    return self.combine_option.toCode() + ' ' + self.combine_option_op.toCode() + ' ' + self.combine_options.toCode()
 
 
 # combine_options -->
@@ -526,22 +544,25 @@ def _p106(self):
 
 # tag_smt --> String = String
 def _p107(self):
-    return self.String1.toCode() + '=' + self.String2.toCode()
+    return I() + self.String1.toCode() + ' = ' + self.String2.toCode() + E()
 
 
 # shr_pass --> 'Pass' { pass_body_elms }
 def _p108(self):
-    return 'Pass' + '{' + self.pass_body_elms.toCode() + '}'
+    return I() + 'Pass' + E() \
+        + IAA() + '{' + E() \
+        + self.pass_body_elms.toCode() \
+        + SSI() + '}' + E()
 
 
 # shr_pass --> 'GrabPass' { pass_body_elms }
 def _p109(self):
-    return 'GrabPass' + '{' + self.pass_body_elms.toCode() + '}'
+    return I() + 'GrabPass' + ' { ' + self.pass_body_elms.toCode() + ' }' + E()
 
 
 # shr_pass --> 'UsePass' String
 def _p110(self):
-    return 'UsePass' + self.String.toCode()
+    return I() + 'UsePass ' + self.String.toCode() + E()
 
 
 # pass_body_elms --> pass_body_elm pass_body_elms
@@ -555,7 +576,7 @@ def _p112(self):
 
 # pass_body_elm --> cmd_stm
 def _p113(self):
-    return self.cmd_stm.toCode()
+    return I() + self.cmd_stm.toCode() + E()
 
 
 # pass_body_elm --> cg_prog
@@ -565,32 +586,36 @@ def _p114(self):
 
 # cg_prog --> 'CGPROGRAM' cg_prog_body 'ENDCG'
 def _p115(self):
-    return 'CGPROGRAM' + self.cg_prog_body.toCode() + 'ENDCG'
+    return I() + 'CGPROGRAM' + E() \
+        + G(-1)+ self.cg_prog_body.toCode() + G(-1) \
+        + I() + 'ENDCG' + E()
 
 
 # cg_prog --> 'CGINCLUDE' cg_prog_body 'ENDCG'
 def _p116(self):
-    return 'CGINCLUDE' + self.cg_prog_body.toCode() + 'ENDCG'
+    return I() + 'CGINCLUDE' + E() \
+        + G(-1)+ self.cg_prog_body.toCode() + G(-1) \
+        + I() + 'ENDCG' + E()
 
 
 # fall_back_cmd --> 'FallBack' String
 def _p117(self):
-    return 'FallBack' + self.String.toCode()
+    return I() + 'FallBack ' + self.String.toCode() + E()
 
 
 # fall_back_cmd --> 'FallBack' 'Off'
 def _p118(self):
-    return 'FallBack' + 'Off'
+    return I() + 'FallBack ' + 'Off' + E()
 
 
 # custom_editor_cmd --> 'CustomEditor' String
 def _p119(self):
-    return 'CustomEditor' + self.String.toCode()
+    return I() + 'CustomEditor ' + self.String.toCode() + E()
 
 
 # dependency_cmd --> 'Dependency' String = String
 def _p120(self):
-    return 'Dependency' + self.String1.toCode() + '=' + self.String2.toCode()
+    return I() + 'Dependency ' + self.String1.toCode() + ' = ' + self.String2.toCode() + E()
 
 
 # id_list --> ID
@@ -600,7 +625,7 @@ def _p121(self):
 
 # id_list --> ID id_list
 def _p122(self):
-    return self.ID.toCode() + self.id_list.toCode()
+    return self.ID.toCode() + ' ' + self.id_list.toCode()
 
 
 # cg_prog_body --> cg_stms
@@ -624,7 +649,7 @@ def _p126(self):
 
 # cg_stm --> function_definition
 def _p127(self):
-    return self.function_definition.toCode()
+    return G() + self.function_definition.toCode() + G()
 
 
 # cg_stm --> dec
@@ -634,37 +659,45 @@ def _p128(self):
 
 # cg_stm --> 'CBUFFER_START' ( ID ) dec_list 'CBUFFER_END'
 def _p129(self):
-    return 'CBUFFER_START' + '(' + self.ID.toCode() + ')' + self.dec_list.toCode() + 'CBUFFER_END'
+    return IAA() + 'CBUFFER_START' + '(' + self.ID.toCode() + ')' + E() \
+        + self.dec_list.toCode() \
+        + SSI() + 'CBUFFER_END'
 
 
 # function_definition --> dec_specifier declarator compound_stm
 def _p130(self):
-    return self.dec_specifier.toCode() + self.declarator.toCode() + self.compound_stm.toCode()
+    return I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + E() \
+        + self.compound_stm.toCode()
 
 
 # function_definition --> dec_specifier declarator : ID compound_stm
 def _p131(self):
-    return self.dec_specifier.toCode() + self.declarator.toCode() + ':' + self.ID.toCode() + self.compound_stm.toCode()
+    return I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + ' : ' + self.ID.toCode() + E() \
+        + self.compound_stm.toCode()
 
 
 # function_definition --> [ ID ( Number ) ] dec_specifier declarator compound_stm
 def _p132(self):
-    return '[' + self.ID.toCode() + '(' + self.Number.toCode() + ')' + ']' + self.dec_specifier.toCode() + self.declarator.toCode() + self.compound_stm.toCode()
+    return I() + '[' + self.ID.toCode() + '(' + self.Number.toCode() + ')' + ']' + E() \
+        + I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + E() \
+        + self.compound_stm.toCode()
 
 
 # function_definition --> [ ID ( Number ) ] dec_specifier declarator : ID compound_stm
 def _p133(self):
-    return '[' + self.ID1.toCode() + '(' + self.Number.toCode() + ')' + ']' + self.dec_specifier.toCode() + self.declarator.toCode() + ':' + self.ID2.toCode() + self.compound_stm.toCode()
+    return I() + '[' + self.ID1.toCode() + '(' + self.Number.toCode() + ')' + ']' + E() \
+        + I() + self.dec_specifier.toCode() + ' ' + self.declarator.toCode() + E() + ' : ' + self.ID2.toCode() + E() \
+        + self.compound_stm.toCode()
 
 
 # preprocessing_stm --> pp_if_stm
 def _p134(self):
-    return self.pp_if_stm.toCode()
+    return I() + self.pp_if_stm.toCode() + E()
 
 
 # preprocessing_stm --> pp_cmd
 def _p135(self):
-    return self.pp_cmd.toCode()
+    return I() + self.pp_cmd.toCode() + E()
 
 
 # preprocessing_stm --> marco_unfold
@@ -674,22 +707,22 @@ def _p136(self):
 
 # pp_if_stm --> # 'if' PPTokens
 def _p137(self):
-    return '#' + 'if' + self.PPTokens.toCode()
+    return '#' + 'if' + ' ' + self.PPTokens.toCode()
 
 
 # pp_if_stm --> # 'ifdef' ID
 def _p138(self):
-    return '#' + 'ifdef' + self.ID.toCode()
+    return '#' + 'ifdef' + ' ' + self.ID.toCode()
 
 
 # pp_if_stm --> # 'ifndef' ID
 def _p139(self):
-    return '#' + 'ifndef' + self.ID.toCode()
+    return '#' + 'ifndef' + ' ' + self.ID.toCode()
 
 
 # pp_if_stm --> # 'elif' PPTokens
 def _p140(self):
-    return '#' + 'elif' + self.PPTokens.toCode()
+    return '#' + 'elif' + ' ' + self.PPTokens.toCode()
 
 
 # pp_if_stm --> # 'else'
@@ -704,22 +737,22 @@ def _p142(self):
 
 # pp_cmd --> # 'include' String
 def _p143(self):
-    return '#' + 'include' + self.String.toCode()
+    return '#' + 'include ' + self.String.toCode()
 
 
 # pp_cmd --> # 'pragma' PPTokens
 def _p144(self):
-    return '#' + 'pragma' + self.PPTokens.toCode()
+    return '#' + 'pragma ' + self.PPTokens.toCode()
 
 
 # pp_cmd --> # 'define' PPTokens
 def _p145(self):
-    return '#' + 'define' + self.PPTokens.toCode()
+    return '#' + 'define ' + self.PPTokens.toCode()
 
 
 # marco_unfold --> exp ;
 def _p146(self):
-    return self.exp.toCode() + ';'
+    return I() + self.exp.toCode() + ';' + E()
 
 
 # dec_list --> dec
@@ -799,7 +832,7 @@ def _p161(self):
 
 # argument_exp_list --> argument_exp_list , assignment_exp
 def _p162(self):
-    return self.argument_exp_list.toCode() + ',' + self.assignment_exp.toCode()
+    return self.argument_exp_list.toCode() + ', ' + self.assignment_exp.toCode()
 
 
 # unary_exp --> postfix_exp
@@ -859,7 +892,7 @@ def _p173(self):
 
 # binary_exp --> binary_exp binary_op unary_exp
 def _p174(self):
-    return self.binary_exp.toCode() + self.binary_op.toCode() + self.unary_exp.toCode()
+    return self.binary_exp.toCode() + ' ' + self.binary_op.toCode() + ' ' + self.unary_exp.toCode()
 
 
 # binary_op --> *
@@ -959,7 +992,7 @@ def _p193(self):
 
 # conditional_exp --> binary_exp ? exp : conditional_exp
 def _p194(self):
-    return self.binary_exp.toCode() + '?' + self.exp.toCode() + ':' + self.conditional_exp.toCode()
+    return self.binary_exp.toCode() + ' ? ' + self.exp.toCode() + ' : ' + self.conditional_exp.toCode()
 
 
 # assignment_exp --> conditional_exp
@@ -969,7 +1002,7 @@ def _p195(self):
 
 # assignment_exp --> unary_exp assignment_op assignment_exp
 def _p196(self):
-    return self.unary_exp.toCode() + self.assignment_op.toCode() + self.assignment_exp.toCode()
+    return self.unary_exp.toCode() + ' ' + self.assignment_op.toCode() + ' ' + self.assignment_exp.toCode()
 
 
 # assignment_op --> =
@@ -1034,17 +1067,17 @@ def _p208(self):
 
 # exp --> exp , assignment_exp
 def _p209(self):
-    return self.exp.toCode() + ',' + self.assignment_exp.toCode()
+    return self.exp.toCode() + ', ' + self.assignment_exp.toCode()
 
 
 # dec --> struct_specifier ;
 def _p210(self):
-    return self.struct_specifier.toCode() + ';'
+    return I() + self.struct_specifier.toCode() + ';' + E()
 
 
 # dec --> dec_specifier init_dec_list ;
 def _p211(self):
-    return self.dec_specifier.toCode() + self.init_dec_list.toCode() + ';'
+    return I() + self.dec_specifier.toCode() + ' ' + self.init_dec_list.toCode() + ';' + E()
 
 
 # dec_specifier --> type_specifier
@@ -1054,12 +1087,12 @@ def _p212(self):
 
 # dec_specifier --> type_qualifier dec_specifier
 def _p213(self):
-    return self.type_qualifier.toCode() + self.dec_specifier.toCode()
+    return self.type_qualifier.toCode() + ' ' + self.dec_specifier.toCode()
 
 
 # dec_specifier --> storage_class_specifier dec_specifier
 def _p214(self):
-    return self.storage_class_specifier.toCode() + self.dec_specifier.toCode()
+    return self.storage_class_specifier.toCode() + ' ' + self.dec_specifier.toCode()
 
 
 # type_specifier --> buildin_type_name
@@ -1199,12 +1232,15 @@ def _p241(self):
 
 # struct_specifier --> 'struct' ID
 def _p242(self):
-    return 'struct' + self.ID.toCode()
+    return 'struct' + ' ' + self.ID.toCode()
 
 
 # struct_specifier --> 'struct' ID { struct_dec_list }
 def _p243(self):
-    return 'struct' + self.ID.toCode() + '{' + self.struct_dec_list.toCode() + '}'
+    return 'struct' + ' ' + self.ID.toCode() + E() \
+        + IAA() + '{' + E() \
+        + self.struct_dec_list.toCode() \
+        + SSI() + '}'
 
 
 # struct_dec_list --> struct_dec
@@ -1219,42 +1255,42 @@ def _p245(self):
 
 # struct_dec --> type_specifier struct_declarator_list ;
 def _p246(self):
-    return self.type_specifier.toCode() + self.struct_declarator_list.toCode() + ';'
+    return I() + self.type_specifier.toCode() + ' ' + self.struct_declarator_list.toCode() + ';' + E()
 
 
 # struct_dec --> ID ;
 def _p247(self):
-    return self.ID.toCode() + ';'
+    return I() + self.ID.toCode() + ';' + E()
 
 
 # struct_dec --> ID ( Number )
 def _p248(self):
-    return self.ID.toCode() + '(' + self.Number.toCode() + ')'
+    return I() + self.ID.toCode() + '(' + self.Number.toCode() + ')' + E()
 
 
 # struct_dec --> ID ( Number , Number )
 def _p249(self):
-    return self.ID.toCode() + '(' + self.Number1.toCode() + ',' + self.Number2.toCode() + ')'
+    return I() + self.ID.toCode() + '(' + self.Number1.toCode() + ', ' + self.Number2.toCode() + ')' + E()
 
 
 # struct_dec --> pp_if_stm
 def _p250(self):
-    return self.pp_if_stm.toCode()
+    return I() + self.pp_if_stm.toCode() + E()
 
 
 # struct_dec --> 'INTERNAL_DATA'
 def _p251(self):
-    return 'INTERNAL_DATA'
+    return I() + 'INTERNAL_DATA' + E()
 
 
 # struct_dec --> 'UNITY_VERTEX_INPUT_INSTANCE_ID'
 def _p252(self):
-    return 'UNITY_VERTEX_INPUT_INSTANCE_ID'
+    return I() + 'UNITY_VERTEX_INPUT_INSTANCE_ID' + E()
 
 
 # struct_dec --> 'UNITY_VERTEX_OUTPUT_STEREO'
 def _p253(self):
-    return 'UNITY_VERTEX_OUTPUT_STEREO'
+    return I() + 'UNITY_VERTEX_OUTPUT_STEREO' + E()
 
 
 # struct_declarator_list --> struct_declarator
@@ -1264,7 +1300,7 @@ def _p254(self):
 
 # struct_declarator_list --> struct_declarator_list , struct_declarator
 def _p255(self):
-    return self.struct_declarator_list.toCode() + ',' + self.struct_declarator.toCode()
+    return self.struct_declarator_list.toCode() + ', ' + self.struct_declarator.toCode()
 
 
 # struct_declarator --> declarator
@@ -1274,7 +1310,7 @@ def _p256(self):
 
 # struct_declarator --> declarator : ID
 def _p257(self):
-    return self.declarator.toCode() + ':' + self.ID.toCode()
+    return self.declarator.toCode() + ' : ' + self.ID.toCode()
 
 
 # declarator --> ID
@@ -1304,17 +1340,17 @@ def _p262(self):
 
 # parameter_list --> parameter_list , parameter_dec
 def _p263(self):
-    return self.parameter_list.toCode() + ',' + self.parameter_dec.toCode()
+    return self.parameter_list.toCode() + ', ' + self.parameter_dec.toCode()
 
 
 # parameter_dec --> parameter_dec_specifier declarator
 def _p264(self):
-    return self.parameter_dec_specifier.toCode() + self.declarator.toCode()
+    return self.parameter_dec_specifier.toCode() + ' ' + self.declarator.toCode()
 
 
 # parameter_dec --> parameter_dec_specifier declarator : ID
 def _p265(self):
-    return self.parameter_dec_specifier.toCode() + self.declarator.toCode() + ':' + self.ID.toCode()
+    return self.parameter_dec_specifier.toCode() + ' ' + self.declarator.toCode() + ' : ' + self.ID.toCode()
 
 
 # parameter_dec_specifier --> dec_specifier
@@ -1324,22 +1360,22 @@ def _p266(self):
 
 # parameter_dec_specifier --> 'out' dec_specifier
 def _p267(self):
-    return 'out' + self.dec_specifier.toCode()
+    return 'out ' + self.dec_specifier.toCode()
 
 
 # parameter_dec_specifier --> 'inout' dec_specifier
 def _p268(self):
-    return 'inout' + self.dec_specifier.toCode()
+    return 'inout ' + self.dec_specifier.toCode()
 
 
 # parameter_dec_specifier --> 'triangle' dec_specifier
 def _p269(self):
-    return 'triangle' + self.dec_specifier.toCode()
+    return 'triangle ' + self.dec_specifier.toCode()
 
 
 # parameter_dec_specifier --> 'inout' 'TriangleStream' < ID >
 def _p270(self):
-    return 'inout' + 'TriangleStream' + '<' + self.ID.toCode() + '>'
+    return 'inout ' + 'TriangleStream ' + '<' + self.ID.toCode() + '>'
 
 
 # init_dec_list --> init_dec
@@ -1349,7 +1385,7 @@ def _p271(self):
 
 # init_dec_list --> init_dec_list , init_dec
 def _p272(self):
-    return self.init_dec_list.toCode() + ',' + self.init_dec.toCode()
+    return self.init_dec_list.toCode() + ', ' + self.init_dec.toCode()
 
 
 # init_dec --> declarator
@@ -1359,7 +1395,7 @@ def _p273(self):
 
 # init_dec --> declarator = initializer
 def _p274(self):
-    return self.declarator.toCode() + '=' + self.initializer.toCode()
+    return self.declarator.toCode() + ' = ' + self.initializer.toCode()
 
 
 # initializer --> assignment_exp
@@ -1369,12 +1405,14 @@ def _p275(self):
 
 # initializer --> { initializer_list }
 def _p276(self):
-    return '{' + self.initializer_list.toCode() + '}'
+    return IAA() + '{' + E() \
+        + self.initializer_list.toCode() \
+        + SSI() + '}'
 
 
 # initializer --> { initializer_list , }
 def _p277(self):
-    return '{' + self.initializer_list.toCode() + ',' + '}'
+    return '{' + self.initializer_list.toCode() + ', ' + '}'
 
 
 # initializer_list --> initializer
@@ -1419,57 +1457,59 @@ def _p285(self):
 
 # stm --> 'UNITY_BRANCH'
 def _p286(self):
-    return 'UNITY_BRANCH'
+    return I() + 'UNITY_BRANCH'
 
 
 # stm --> 'UNITY_UNROLL'
 def _p287(self):
-    return 'UNITY_UNROLL'
+    return I() + 'UNITY_UNROLL'  + E()
 
 
 # stm --> 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' ( ID )
 def _p288(self):
-    return 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' + '(' + self.ID.toCode() + ')'
+    return I() + 'TRANSFER_SHADOW_CASTER_NORMALOFFSET' + '(' + self.ID.toCode() + ')' + E()
 
 
 # stm --> 'SHADOW_CASTER_FRAGMENT' ( ID )
 def _p289(self):
-    return 'SHADOW_CASTER_FRAGMENT' + '(' + self.ID.toCode() + ')'
+    return I() + 'SHADOW_CASTER_FRAGMENT' + '(' + self.ID.toCode() + ')' + E()
 
 
 # stm --> 'SPEEDTREE_COPY_FRAG' ( ID , ID )
 def _p290(self):
-    return 'SPEEDTREE_COPY_FRAG' + '(' + self.ID1.toCode() + ',' + self.ID2.toCode() + ')'
+    return I() + 'SPEEDTREE_COPY_FRAG' + '(' + self.ID1.toCode() + ',' + self.ID2.toCode() + ')' + E()
 
 
 # stm --> 'UNITY_TRANSFER_DITHER_CROSSFADE_HPOS' ( argument_exp_list )
 def _p291(self):
-    return 'UNITY_TRANSFER_DITHER_CROSSFADE_HPOS' + '(' + self.argument_exp_list.toCode() + ')'
+    return I() + 'UNITY_TRANSFER_DITHER_CROSSFADE_HPOS' + '(' + self.argument_exp_list.toCode() + ')' + E()
 
 
 # stm --> 'UNITY_APPLY_DITHER_CROSSFADE' ( ID )
 def _p292(self):
-    return 'UNITY_APPLY_DITHER_CROSSFADE' + '(' + self.ID.toCode() + ')'
+    return I() + 'UNITY_APPLY_DITHER_CROSSFADE' + '(' + self.ID.toCode() + ')' + E()
 
 
 # exp_stm --> exp ;
 def _p293(self):
-    return self.exp.toCode() + ';'
+    return I() + self.exp.toCode() + ';' + E()
 
 
 # exp_stm --> ;
 def _p294(self):
-    return ';'
+    return I() + ';' + E()
 
 
 # compound_stm --> { block_item_list }
 def _p295(self):
-    return '{' + self.block_item_list.toCode() + '}'
+    return IAA() + '{' + E() \
+        + self.block_item_list.toCode()  \
+        + SSI() + '}' + E()
 
 
 # compound_stm --> { }
 def _p296(self):
-    return '{' + '}'
+    return ' { ' + '}'
 
 
 # block_item_list --> block_item
@@ -1494,52 +1534,59 @@ def _p300(self):
 
 # selection_stm --> 'if' ( exp ) stm
 def _p301(self):
-    return 'if' + '(' + self.exp.toCode() + ')' + self.stm.toCode()
+    return I() + 'if' + ' (' + self.exp.toCode() + ')' + E() \
+        + self.stm.toCode()
 
 
 # selection_stm --> 'if' ( exp ) stm 'else' stm
 def _p302(self):
-    return 'if' + '(' + self.exp.toCode() + ')' + self.stm1.toCode() + 'else' + self.stm2.toCode()
+    return I() + 'if' + ' (' + self.exp.toCode() + ')' + E() \
+        + self.stm1.toCode() + 'else' + self.stm2.toCode()
 
 
 # iteration_stm --> 'while' ( exp ) stm
 def _p303(self):
-    return 'while' + '(' + self.exp.toCode() + ')' + self.stm.toCode()
+    return I() + 'while' + '(' + self.exp.toCode() + ')' + E() \
+        + self.stm.toCode()
 
 
 # iteration_stm --> 'do' stm 'while' ( exp ) ;
 def _p304(self):
-    return 'do' + self.stm.toCode() + 'while' + '(' + self.exp.toCode() + ')' + ';'
+    return I() + 'do' + E() \
+        + self.stm.toCode() \
+        + I() + 'while' + '(' + self.exp.toCode() + ')' + ';' + E()
 
 
 # iteration_stm --> 'for' ( exp ; exp ; exp ) stm
 def _p305(self):
-    return 'for' + '(' + self.exp1.toCode() + ';' + self.exp2.toCode() + ';' + self.exp3.toCode() + ')' + self.stm.toCode()
+    return I() + 'for' + '(' + self.exp1.toCode() + '; ' + self.exp2.toCode() + '; ' + self.exp3.toCode() + ')' + E() \
+        + self.stm.toCode()
 
 
 # iteration_stm --> 'for' ( dec_specifier init_dec_list ; exp ; exp ) stm
 def _p306(self):
-    return 'for' + '(' + self.dec_specifier.toCode() + self.init_dec_list.toCode() + ';' + self.exp1.toCode() + ';' + self.exp2.toCode() + ')' + self.stm.toCode()
+    return I() + 'for' + '(' + self.dec_specifier.toCode() + self.init_dec_list.toCode() + '; ' + self.exp1.toCode() + '; ' + self.exp2.toCode() + ')' + E() \
+        + self.stm.toCode()
 
 
 # jump_stm --> 'goto' ID
 def _p307(self):
-    return 'goto' + self.ID.toCode()
+    return I() + 'goto' + ' ' + self.ID.toCode() + E()
 
 
 # jump_stm --> 'continue'
 def _p308(self):
-    return 'continue'
+    return I() + 'continue' + E()
 
 
 # jump_stm --> 'break'
 def _p309(self):
-    return 'break'
+    return I() + 'break' + E()
 
 
 # jump_stm --> 'return' exp ;
 def _p310(self):
-    return 'return' + self.exp.toCode() + ';'
+    return I() + 'return' + ' ' + self.exp.toCode() + ';' + E()
 
 
 def _init():

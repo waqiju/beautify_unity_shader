@@ -11,7 +11,7 @@ class Indenter:
     IndentWidth = 4
 
     def __init__(self):
-        self.nowLevel = 1
+        self.nowLevel = 0
 
     def toCode(self):
         return ' ' * self.IndentWidth * self.nowLevel
@@ -52,8 +52,15 @@ class GapManager:
         self.count = 1
         return '\n'
 
+    def placeGap(self, increment):
+        self.count += increment
+        return ''
+
     def startNewBlock(self):
-        self.count = 0
+        if self.count > 0:
+            self.count = 0
+            return '\n'
+        return ''
 
 
 def token2Code(token):
@@ -105,37 +112,50 @@ lastToken = None
 def I():
     # 正确的排版，新的一行总会是GB()或者I()开头
     code = RestoreComment()
-    gapManager.startNewBlock()
-    return code + indenter.toCode()
+    code += gapManager.startNewBlock()
+    code += indenter.toCode()
+    return code
 
 
 def AAI():
-    gapManager.startNewBlock()
-    return indenter.preAddAdd()
+    code = gapManager.startNewBlock()
+    code += indenter.preAddAdd()
+    return code
 
 
 def SSI():
-    gapManager.startNewBlock()
-    return indenter.preSubSub()
+    code = gapManager.startNewBlock()
+    code += indenter.preSubSub()
+    return code
 
 
 def IAA():
-    gapManager.startNewBlock()
-    return indenter.postAddAdd()
+    code = gapManager.startNewBlock()
+    code += indenter.postAddAdd()
+    return code
 
 
 def ISS():
-    gapManager.startNewBlock()
-    return indenter.postSubSub()
+    code = gapManager.startNewBlock()
+    code += indenter.postSubSub()
+    return code
 
 
-def GB():
-    code = RestoreComment()
-    return code + gapManager.placeGapBefore()
+# def GB():
+#     code = RestoreComment()
+#     return code + gapManager.placeGapBefore()
 
 
-def GA():
-    return gapManager.placeGapAfter()
+# def GA():
+#     return gapManager.placeGapAfter()
+
+
+def G(increment = 1):
+    return gapManager.placeGap(increment)
+
+
+def E():
+    return '\n'
 
 
 class Test(unittest.TestCase):
