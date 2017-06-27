@@ -21,9 +21,6 @@ class Token:
         if self.kind == "ID":
             return '-%s-' % str.lower(self.value) # 该死的Unity Shader并不严格区分关键字的大小写。eg: SubShader和Subshader。
 
-    def toCode(self):
-        return formatter.token2Code(self)
-
 
 class Test(unittest.TestCase):
 

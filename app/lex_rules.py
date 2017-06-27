@@ -163,7 +163,7 @@ rules = [
     # switchable Enter
     {'pattern': re.compile(r"[ \t]+", re.DOTALL),
      'action': lambda text: Token(TokenType.SpaceLike, text)},
-    {'pattern': re.compile(r"[\n]+", re.DOTALL),
+    {'pattern': re.compile(r"[\n]", re.DOTALL),
      'action': lambda text: Token(TokenType.SpaceLike, text)},
      # 'action': lambda text: Token(TokenType.SpaceLike, text)},
     {'pattern': re.compile(r".*"),

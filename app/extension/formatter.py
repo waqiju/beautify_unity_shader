@@ -1,6 +1,9 @@
 import unittest
 from ..symbol_type import SymbolType
 
+# todo, 把formatter改写为一个类
+
+
 # Config
 isKeepComment = True
 isKeepGap = True
@@ -60,57 +63,81 @@ class GapManager:
         if self.count > 0:
             self.count = 0
             return '\n'
+        
+        self.count = 0
         return ''
 
 
-def token2Code(token):
+def Token2Code(token):
+    global tokenIndex
+    tokenIndex += 1
+
+    print(str(token), tokenIndex)
+
     code = token.text
-
-    global lastToken
-    lastToken = token
-
-    # code += RestoreComment()
-
     return code
 
 
-def _isContainGap(text):
+def String2Code(s):
+    global tokenIndex
+    tokenIndex += 1
+
+    # print(s, tokenIndex)
+
+    return s;
+
+
+def _eatSpace(token):
     enterCount = 0
-    for ch in text:
-        if ch == '\n':
+    while token.kind == SymbolType.TokenType.SpaceLike:
+        if token.text == '\n':
             enterCount += 1
-    return enterCount >= 2
+
+        token = token.nextToken
+
+    return token, enterCount
 
 
 def RestoreComment():
-    global lastToken
-    if lastToken is None:
-        return ''
+    return '' 
 
-    code = ''
-    nextToken = lastToken.nextToken
-    TokenType = SymbolType.TokenType
-    while nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number, TokenType.ReservedWord):
-        if isKeepComment and nextToken.kind == TokenType.Comment:
-            code += indenter.toCode() + nextToken.text + '\n'
-        elif isKeepGap and _isContainGap(nextToken.text):
-            code += gapManager.placeGapBefore()
+    # if tokenIndex < 0: 
+    #     return ''
 
-        nextToken = nextToken.nextToken
+    # lastToken = tokens[tokenIndex]
 
-    lastToken = None
-    return code
+    # print('')
+    # print('last token = %s , ' % lastToken.text, end=' ')
+    # code = ''
+    # nextToken = lastToken.nextToken
+    # TokenType = SymbolType.TokenType
+    # while nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number):  # tradeoff
+    #     print(nextToken.text, end=' ')
+    #     if isKeepComment and nextToken.kind == TokenType.Comment:
+    #         code += indenter.toCode() + nextToken.text + '\n'
+    #     elif isKeepGap and nextToken.text == '\n':
+    #         nextToken, enterCount = _eatSpace(nextToken)
+    #         if enterCount >= 2:
+    #             code += gapManager.placeGap(1)
+
+    #         continue
+
+    #     nextToken = nextToken.nextToken
+
+    # lastToken = None
+    # return code
 
 
 
 indenter = Indenter()
 gapManager = GapManager()
-lastToken = None
+tokens = []
+tokenIndex = -1
 
 
 # shortcut for frequently call
 def I():
-    # 正确的排版，新的一行总会是GB()或者I()开头
+    # 正确的排版，新的一行总会是G()或者I()开头
     code = RestoreComment()
     code += gapManager.startNewBlock()
     code += indenter.toCode()
@@ -139,6 +166,18 @@ def ISS():
     code = gapManager.startNewBlock()
     code += indenter.postSubSub()
     return code
+
+
+def SetTokens(inputTokens):
+    global tokens, tokenIndex
+    tokens = inputTokens
+    tokenIndex = -1
+
+    print('Len = ', len(tokens))
+
+
+def STR(s):
+    return String2Code(s)
 
 
 # def GB():

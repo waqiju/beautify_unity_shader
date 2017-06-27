@@ -1,4 +1,4 @@
-Shader"Hidden/Camera-DepthNormalTexture"
+Shader "Hidden/Camera-DepthNormalTexture"
 {
     Properties
     {
@@ -17,14 +17,15 @@ Shader"Hidden/Camera-DepthNormalTexture"
         Pass
         {
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             struct v2f
             {
                 float4 pos : SV_POSITION;
                 float4 nz : TEXCOORD0;
             };
+
             v2f vert(appdata_base v)
             {
                 v2f o;
@@ -52,8 +53,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         Pass
         {
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             struct v2f
             {
@@ -62,6 +63,7 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float4 nz : TEXCOORD1;
             };
             uniform float4 _MainTex_ST;
+
             v2f vert(appdata_base v)
             {
                 v2f o;
@@ -96,8 +98,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         Pass
         {
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
             #include "UnityBuiltin3xTreeLibrary.cginc"
@@ -107,6 +109,7 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float2 uv : TEXCOORD0;
                 float4 nz : TEXCOORD1;
             };
+
             v2f vert(appdata_full v)
             {
                 v2f o;
@@ -136,8 +139,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         Pass
         {
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
             #include "UnityBuiltin3xTreeLibrary.cginc"
@@ -147,6 +150,7 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float2 uv : TEXCOORD0;
                 float4 nz : TEXCOORD1;
             };
+
             v2f vert(appdata_full v)
             {
                 v2f o;
@@ -184,8 +188,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         Pass
         {
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
             struct v2f
@@ -199,6 +203,7 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float3 normal : NORMAL;
                 fixed4 color : COLOR;
             };
+
             v2f vert(appdata v)
             {
                 v2f o;
@@ -229,10 +234,11 @@ Shader"Hidden/Camera-DepthNormalTexture"
         {
             Cull Back
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
+
 
             struct v2f
             {
@@ -272,14 +278,16 @@ Shader"Hidden/Camera-DepthNormalTexture"
             }
             ENDCG
         }
+
         Pass
         {
             Cull Front
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
+
 
             struct v2f
             {
@@ -330,8 +338,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         {
             Cull Off
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
             struct v2f
@@ -340,6 +348,7 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float2 uv : TEXCOORD0;
                 float4 nz : TEXCOORD1;
             };
+
             v2f vert(appdata_tree_billboard v)
             {
                 v2f o;
@@ -375,10 +384,11 @@ Shader"Hidden/Camera-DepthNormalTexture"
         {
             Cull Off
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
+
 
             struct v2f
             {
@@ -425,8 +435,8 @@ Shader"Hidden/Camera-DepthNormalTexture"
         {
             Cull Off
             CGPROGRAM
-            #pragma  vertex vert
-            #pragma  fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
             #include "UnityCG.cginc"
             #include "TerrainEngine.cginc"
             struct v2f
@@ -436,7 +446,6 @@ Shader"Hidden/Camera-DepthNormalTexture"
                 float2 uv : TEXCOORD0;
                 float4 nz : TEXCOORD1;
             };
-
 
             v2f vert(appdata_full v)
             {
