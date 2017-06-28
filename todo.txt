@@ -1,0 +1,31 @@
+
+
+[ ] example_for_formatter.shader
+
+[ ] shader_part1_test
+
+
+() 合并cg_test和shader_part_test
+
+() github重整
+
+() ？实现的到底是lr1还是lalr1
+
+() 记忆。eg: re, StringIO
+
+() python unittest 
+
+() wingIDE
+
+() Git
+
+1. 等同svn的revert
+
+2. 从历史提交记录中移除文件
+
+() python循环引用怎么解决？
+
+eg: from a import testA, b.py
+    from b import testB, a.py
+
+现在的work around是在用的时候才导入。

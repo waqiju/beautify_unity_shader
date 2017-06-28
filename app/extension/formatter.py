@@ -1,5 +1,8 @@
 import unittest
 from ..symbol_type import SymbolType
+from ..lex_token import Token
+from ..syntax_nonterminal import Nonterminal
+from ..syntax_productions import productionList
 
 # todo, 把formatter改写为一个类
 
@@ -72,8 +75,6 @@ def Token2Code(token):
     global tokenIndex
     tokenIndex += 1
 
-    print(str(token), tokenIndex)
-
     code = token.text
     return code
 
@@ -81,8 +82,6 @@ def Token2Code(token):
 def String2Code(s):
     global tokenIndex
     tokenIndex += 1
-
-    # print(s, tokenIndex)
 
     return s;
 
@@ -99,33 +98,28 @@ def _eatSpace(token):
 
 
 def RestoreComment():
-    return '' 
+    TokenType = SymbolType.TokenType
 
-    # if tokenIndex < 0: 
-    #     return ''
+    if tokenIndex < 0: 
+        return ''
 
-    # lastToken = tokens[tokenIndex]
+    code = ''
+    lastToken = tokens[tokenIndex]
+    nextToken = lastToken.nextToken
+    while nextToken is not None and nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number):  # tradeoff
+        if isKeepComment and nextToken.kind == TokenType.Comment:
+            code += indenter.toCode() + nextToken.text + '\n'
+        elif isKeepGap and nextToken.text == '\n':
+            nextToken, enterCount = _eatSpace(nextToken)
+            if enterCount >= 2:
+                code += gapManager.placeGap(1)
 
-    # print('')
-    # print('last token = %s , ' % lastToken.text, end=' ')
-    # code = ''
-    # nextToken = lastToken.nextToken
-    # TokenType = SymbolType.TokenType
-    # while nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number):  # tradeoff
-    #     print(nextToken.text, end=' ')
-    #     if isKeepComment and nextToken.kind == TokenType.Comment:
-    #         code += indenter.toCode() + nextToken.text + '\n'
-    #     elif isKeepGap and nextToken.text == '\n':
-    #         nextToken, enterCount = _eatSpace(nextToken)
-    #         if enterCount >= 2:
-    #             code += gapManager.placeGap(1)
+            continue
 
-    #         continue
+        nextToken = nextToken.nextToken
 
-    #     nextToken = nextToken.nextToken
-
-    # lastToken = None
-    # return code
+    lastToken = None
+    return code
 
 
 
@@ -173,20 +167,14 @@ def SetTokens(inputTokens):
     tokens = inputTokens
     tokenIndex = -1
 
-    print('Len = ', len(tokens))
+    # do injection
+    from . import syntax_tree_to_code
+    syntax_tree_to_code.doInjection(productionList, Token, Nonterminal)
+
 
 
 def STR(s):
     return String2Code(s)
-
-
-# def GB():
-#     code = RestoreComment()
-#     return code + gapManager.placeGapBefore()
-
-
-# def GA():
-#     return gapManager.placeGapAfter()
 
 
 def G(increment = 1):

@@ -28,15 +28,20 @@ Shader "Test/Formater"
             #pragma fragment frag
             #pragma multi_compile_particles
             #pragma multi_compile_fog
+
             #include "UnityCG.cginc"
+
             sampler2D _MainTex;
+
             fixed4 _TintColor;
+
             struct appdata_t
             {
                 float4 vertex : POSITION;
                 fixed4 color : COLOR;
                 float2 texcoord : TEXCOORD0;
             };
+
             struct v2f
             {
                 float4 vertex : SV_POSITION;
@@ -47,6 +52,7 @@ Shader "Test/Formater"
                 float4 projPos : TEXCOORD2;
                 #endif
             };
+
             float4 _MainTex_ST;
 
             v2f vert(appdata_t v)
@@ -74,7 +80,9 @@ Shader "Test/Formater"
                 float fade = saturate(_InvFade * (sceneZ - partZ));
                 i.color.a *= fade;
                 #endif
+
                 fixed4 col = 2.0f * i.color * _TintColor * tex2D(_MainTex, i.texcoord);
+                // fog towards black due to our blend mode
                 UNITY_APPLY_FOG_COLOR(i.fogCoord, col, fixed4(0, 0, 0, 0));
                 return col;
             }

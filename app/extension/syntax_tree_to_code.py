@@ -1,7 +1,4 @@
 import unittest
-from ..syntax_nonterminal import Nonterminal
-from ..syntax_productions import productionList
-from ..lex_token import Token
 from . import formatter
 from .formatter import I, AAI, IAA, SSI, ISS, G, E, STR
 
@@ -1591,17 +1588,13 @@ def _p310(self):
     return I() + STR('return') + ' ' + self.exp.toCode() + STR(';') + E()
 
 
-def _init():
-    # token
+def doInjection(productionList, Token, Nonterminal):
     setattr(Token, 'toCode', formatter.Token2Code)
 
     for p in productionList:
         if p is None :  # production[0]可能是None
             continue
-        levelTwoName = p.left + STR('_') + p.name
+        levelTwoName = p.left + '_' + p.name
         levelTwoCls = Nonterminal.getClass(levelTwoName)
         localMethond = globals()['_' + p.name]
         setattr(levelTwoCls, 'toCode', localMethond)
-
-
-_init()

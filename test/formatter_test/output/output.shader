@@ -52,7 +52,7 @@ Shader "Test/Formater"
                 float4 projPos : TEXCOORD2;
                 #endif
             };
-            
+
             float4 _MainTex_ST;
 
             v2f vert(appdata_t v)
@@ -80,7 +80,7 @@ Shader "Test/Formater"
                 float fade = saturate(_InvFade * (sceneZ - partZ));
                 i.color.a *= fade;
                 #endif
-                
+
                 fixed4 col = 2.0f * i.color * _TintColor * tex2D(_MainTex, i.texcoord);
                 // fog towards black due to our blend mode
                 UNITY_APPLY_FOG_COLOR(i.fogCoord, col, fixed4(0, 0, 0, 0));
@@ -89,5 +89,4 @@ Shader "Test/Formater"
             ENDCG
         }
     }
-
 }
