@@ -21,6 +21,67 @@ Shader "Test/Formater"
 
     SubShader
     {
+        // ---- cmd_stm -----
+        AlphaToMask True
+        ColorMask RGB
+        AlphaTest off
+        AlphaTest Greater [_Cutoff]
+        BindChannels
+        {
+            Bind "Vertex", vertex
+            Bind "normal", normal
+            // lightmap uses 2nd uv
+            Bind "texcoord1", texcoord0
+            // unused
+            Bind "texcoord1", texcoord1
+            // main uses 1st uv
+            Bind "texcoord", texcoord2
+        }
+        Blend Off
+        Blend One OneMinusSrcAlpha
+        Fog { Mode off }
+        // in additive pass fog should be black
+        Fog { Color (0, 0, 0, 0) }
+        Material
+        {
+            Diffuse [_Color]
+            Ambient [_Color]
+            Shininess [_Shininess]
+            Specular [_SpecColor]
+            Emission [_Emission]
+        }
+        Name "BASE"
+        Offset [_ZBias], [_ZBias]
+        Stencil { Comp Always Pass Zero }
+        SetTexture [_MainTex]
+        { 
+            combine texture * primaryDOUBLE, texture * primary
+        }
+        SetTexture [unity_Lightmap]
+        { 
+            matrix [unity_LightmapMatrix]
+            constantColor [_Color]
+            combine texture * constant
+        }
+        Tags
+        {
+            "RenderType" = "TreeOpaque"
+            "DisableBatching" = "True"
+        }
+        // ---- cmd_stm ----
+
+        // ---- shr_pass ----
+        GrabPass
+        {
+            Name "BASE"
+            Tags
+            {
+                "LightMode" = "Always"
+            }
+        }
+
+        UsePass "Reflective/Bumped Unlit/BASE"
+
         Pass
         {
             CGPROGRAM
@@ -88,5 +149,39 @@ Shader "Test/Formater"
             }
             ENDCG
         }
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+            struct v2f
+            {
+                float4 pos : SV_POSITION;
+                float4 nz : TEXCOORD0;
+            };
+
+            v2f vert(appdata_base v)
+            {
+                v2f o;
+                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+                o.nz.xyz = COMPUTE_VIEW_NORMAL;
+                o.nz.w = COMPUTE_DEPTH_01;
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
+            }
+            ENDCG
+        }
+        // ---- shr_pass ----
     }
+
+    FallBack Off
+    FallBack "Legacy Shaders/Transparent/Diffuse"
+    CustomEditor "LegacyIlluminShaderGUI"
+    Dependency "BaseMapShader" = "Hidden/TerrainEngine/Splatmap/Standard-Base"
 }

@@ -1,6 +1,6 @@
 import unittest
 from . import formatter
-from .formatter import I, AAI, IAA, SSI, ISS, G, E, STR
+from .formatter import I, IAA, SSI, G, E, STR
 
 
 # prog --> 'Shader' String { shader_body_elms }
@@ -13,7 +13,7 @@ def _p1(self):
 
 # shader_body_elms --> shader_body_elm shader_body_elms
 def _p2(self):
-    return G() + self.shader_body_elm.toCode() + G() + self.shader_body_elms.toCode()
+    return self.shader_body_elm.toCode() + self.shader_body_elms.toCode()
 
 
 # shader_body_elms -->
@@ -22,22 +22,22 @@ def _p3(self):
 
 # shader_body_elm --> props
 def _p4(self):
-    return self.props.toCode()
+    return G() + self.props.toCode() + G()
 
 
 # shader_body_elm --> category
 def _p5(self):
-    return self.category.toCode()
+    return G() + self.category.toCode() + G()
 
 
 # shader_body_elm --> subshr
 def _p6(self):
-    return self.subshr.toCode()
+    return G() + self.subshr.toCode() + G()
 
 
 # shader_body_elm --> cg_prog
 def _p7(self):
-    return self.cg_prog.toCode()
+    return G() + self.cg_prog.toCode() + G()
 
 
 # shader_body_elm --> fall_back_cmd
@@ -276,22 +276,22 @@ def _p53(self):
     return I() + self.cmd_name.toCode() + ' ' + self.id_or_number_or_placeholder.toCode() + E()
 
 
-# cmd_stm --> 'Alphatest' ID
+# cmd_stm --> 'AlphaTest' ID
 def _p54(self):
-    return I() + STR('Alphatest') + ' ' + self.ID.toCode() + E()
+    return I() + STR('AlphaTest') + ' ' + self.ID.toCode() + E()
 
 
-# cmd_stm --> 'Alphatest' ID placeholder
+# cmd_stm --> 'AlphaTest' ID placeholder
 def _p55(self):
-    return I() + STR('Alphatest') + ' ' + self.ID.toCode() + ' ' + self.placeholder.toCode() + E()
+    return I() + STR('AlphaTest') + ' ' + self.ID.toCode() + ' ' + self.placeholder.toCode() + E()
 
 
 # cmd_stm --> 'BindChannels' { bind_channel_stms }
 def _p56(self):
     return I() + STR('BindChannels') + E() \
-        + AAI() + STR('{') + E() \
+        + IAA() + STR('{') + E() \
         + self.bind_channel_stms.toCode() \
-        + ISS() + STR('}') + E()
+        + SSI() + STR('}') + E()
 
 
 # cmd_stm --> 'Blend' ID
@@ -316,7 +316,10 @@ def _p60(self):
 
 # cmd_stm --> 'Material' { meterial_stms }
 def _p61(self):
-    return I() + STR('Material') + STR(' { ') + self.meterial_stms.toCode() + STR(' }') + E()
+    return I() + STR('Material') + E() \
+        + IAA() + STR('{') + E() \
+        + self.meterial_stms.toCode() \
+        + SSI() + STR('}') + E()
 
 
 # cmd_stm --> 'Name' String
@@ -326,17 +329,20 @@ def _p62(self):
 
 # cmd_stm --> 'Offset' id_or_number_or_placeholder , id_or_number_or_placeholder
 def _p63(self):
-    return I() + STR('Offset ') + self.id_or_number_or_placeholder1.toCode() + STR(', ') + self.id_or_number_or_placeholder2.toCode()
+    return I() + STR('Offset ') + self.id_or_number_or_placeholder1.toCode() + STR(', ') + self.id_or_number_or_placeholder2.toCode() + E()
 
 
 # cmd_stm --> 'Stencil' { stencil_stms }
 def _p64(self):
-    return I() + STR('Stencil') + STR(' { ') + self.stencil_stms.toCode() + STR(' }') + E()
+    return I() + STR('Stencil') + STR(' {') + self.stencil_stms.toCode() + STR(' }') + E()
 
 
 # cmd_stm --> 'SetTexture' placeholder { set_texture_stms }
 def _p65(self):
-    return I() + STR('SetTexture ') + self.placeholder.toCode() + STR(' { ') + self.set_texture_stms.toCode() + STR(' }') + E()
+    return I() + STR('SetTexture ') + self.placeholder.toCode() + E() \
+        + IAA() + STR('{ ') + E() \
+        + self.set_texture_stms.toCode() \
+        + SSI() + STR('}') + E()
 
 
 # cmd_stm --> 'Tags' { tags_stms }
@@ -428,7 +434,7 @@ def _p82(self):
 
 # bind_channel_stm --> 'Bind' String , ID
 def _p83(self):
-    return I() + STR('Bind ') + self.String.toCode() + STR(' , ') + self.ID.toCode() + E()
+    return I() + STR('Bind ') + self.String.toCode() + STR(', ') + self.ID.toCode() + E()
 
 
 # meterial_stms --> meterial_stm meterial_stms
@@ -456,7 +462,7 @@ def _p88(self):
 
 # stencil_stm --> ID id_or_number_or_placeholder
 def _p89(self):
-    return I() + self.ID.toCode() + ' ' + self.id_or_number_or_placeholder.toCode() + E()
+    return ' ' + self.ID.toCode() + ' ' + self.id_or_number_or_placeholder.toCode()
 
 
 # set_texture_stms --> set_texture_stm set_texture_stms
@@ -490,7 +496,7 @@ def _p95(self):
 
 # combine_options --> combine_option , combine_options
 def _p96(self):
-    return self.combine_option.toCode() + STR(' ,') + self.combine_options.toCode()
+    return self.combine_option.toCode() + STR(', ') + self.combine_options.toCode()
 
 
 # combine_options --> combine_option combine_option_op combine_options
@@ -556,7 +562,10 @@ def _p108(self):
 
 # shr_pass --> 'GrabPass' { pass_body_elms }
 def _p109(self):
-    return I() + STR('GrabPass') + STR(' { ') + self.pass_body_elms.toCode() + STR(' }') + E()
+    return I() + STR('GrabPass') + E() \
+        + IAA() + STR('{') + E() \
+        + self.pass_body_elms.toCode() \
+        + SSI() + STR('}') + E()
 
 
 # shr_pass --> 'UsePass' String

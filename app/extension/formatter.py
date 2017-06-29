@@ -46,29 +46,33 @@ class GapManager:
 
     def __init__(self):
         self.count = 0
+        self.commentListAhead = []
+        self.commentListBehind = []
 
-    def placeGapBefore(self):
-        if self.count > 0:
-            return ''
+    def insertCommentAhead(self, comment):
+        self.commentListAhead.append(comment)
 
-        self.count += 1
-        return '\n'
-
-    def placeGapAfter(self):
-        self.count = 1
-        return '\n'
+    def insertCommentBehind(self, comment):
+        self.commentListBehind.append(comment)
 
     def placeGap(self, increment):
         self.count += increment
         return ''
 
     def startNewBlock(self):
+        code = ''
+        for comment in self.commentListAhead:
+            code += comment + '\n'
         if self.count > 0:
-            self.count = 0
-            return '\n'
-        
+            code += '\n'
+        for comment in self.commentListBehind:
+            code += comment + '\n'
+
         self.count = 0
-        return ''
+        self.commentListAhead = []
+        self.commentListBehind = []
+
+        return code
 
 
 def Token2Code(token):
@@ -103,22 +107,35 @@ def RestoreComment():
     if tokenIndex < 0: 
         return ''
 
-    code = ''
+    commentList = []
     lastToken = tokens[tokenIndex]
+    stopToken = tokens[tokenIndex + 1] if tokenIndex + 1 < len(tokens) else None
     nextToken = lastToken.nextToken
-    while nextToken is not None and nextToken.kind not in (TokenType.ID, TokenType.String, TokenType.Number):  # tradeoff
+    while nextToken is not stopToken:
         if isKeepComment and nextToken.kind == TokenType.Comment:
-            code += indenter.toCode() + nextToken.text + '\n'
+            commentWithIndent = indenter.toCode() + nextToken.text
+            commentList.append(commentWithIndent)
         elif isKeepGap and nextToken.text == '\n':
             nextToken, enterCount = _eatSpace(nextToken)
             if enterCount >= 2:
-                code += gapManager.placeGap(1)
+                gapManager.placeGap(1)
 
             continue
 
         nextToken = nextToken.nextToken
 
     lastToken = None
+
+    code = ''
+    if len(commentList) == 0:
+        pass
+    elif len(commentList) == 1:
+        gapManager.insertCommentBehind(commentList[0])
+    else:
+        gapManager.insertCommentAhead(commentList[0])
+        for i in range(1, len(commentList)):
+            gapManager.insertCommentBehind(commentList[i])
+
     return code
 
 
@@ -138,27 +155,17 @@ def I():
     return code
 
 
-def AAI():
-    code = gapManager.startNewBlock()
-    code += indenter.preAddAdd()
-    return code
-
-
-def SSI():
-    code = gapManager.startNewBlock()
-    code += indenter.preSubSub()
-    return code
-
-
 def IAA():
-    code = gapManager.startNewBlock()
+    code = RestoreComment()
+    code += gapManager.startNewBlock()
     code += indenter.postAddAdd()
     return code
 
 
-def ISS():
-    code = gapManager.startNewBlock()
-    code += indenter.postSubSub()
+def SSI():
+    code = RestoreComment()
+    code += gapManager.startNewBlock()
+    code += indenter.preSubSub()
     return code
 
 

@@ -62,8 +62,8 @@ subshr_body_elm   -> cmd_stm
                   -> cg_prog
 //5
 cmd_stm     -> cmd_name id_or_number_or_placeholder
-            -> 'Alphatest' ID
-            -> 'Alphatest' ID placeholder
+            -> 'AlphaTest' ID
+            -> 'AlphaTest' ID placeholder
             -> 'BindChannels' { bind_channel_stms }
             -> 'Blend' ID
             -> 'Blend' id_or_number_or_placeholder id_or_number_or_placeholder

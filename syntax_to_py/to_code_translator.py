@@ -102,7 +102,7 @@ def _writeDeriveClass(file, production):
         else :
             codeText += "'%s'" % symbol.text
     if codeText == '':
-        text += "    return ''"
+        text += "    return ''" + '\n'
     else:
         text += "    return " + codeText + '\n'
 

@@ -23,6 +23,8 @@
 
 2. 从历史提交记录中移除文件
 
+3. 等同svn的diff
+
 () python循环引用怎么解决？
 
 eg: from a import testA, b.py
