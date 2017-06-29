@@ -18,12 +18,12 @@ class Test(unittest.TestCase):
             for token in tokens:
                 f.write(str(token) + '\n')
 
-        from app.extension import formatter
-        formatter.SetTokens(tokens)
+        from app.extension.formatter import Formatter
+        formatter = Formatter(tokens, ast)
         outFilePath = os.path.abspath(os.path.join(__file__, '../output/output.shader'))
         with open(outFilePath, 'w') as f:
-            f.write(ast.toCode())
+            f.write(formatter.toCode())
 
-        formatter.SetTokens(tokens)
+        formatter.reset()
         self.maxDiff = None
-        self.assertEqual(inputText, ast.toCode())
+        self.assertEqual(inputText, formatter.toCode())
