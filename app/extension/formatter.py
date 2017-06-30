@@ -1,4 +1,5 @@
 import unittest
+import functools
 from ..symbol_type import SymbolType
 from ..lex_token import Token
 from ..syntax_nonterminal import Nonterminal
@@ -75,117 +76,135 @@ class GapManager:
         return code
 
 
-def Token2Code(token):
-    global tokenIndex
-    tokenIndex += 1
+SCFormatter = None
 
-    code = token.text
-    return code
+class Formatter:
 
+    def __init__(self, tokens, ast):
+        global SCFormatter
+        SCFormatter = self
 
-def String2Code(s):
-    global tokenIndex
-    tokenIndex += 1
+        self.tokens = tokens
+        self.ast = ast
+        self.indenter = Indenter()
+        self.gapManager = GapManager()
+        self.tokenIndex = -1
 
-    return s;
-
-
-def _eatSpace(token):
-    enterCount = 0
-    while token.kind == SymbolType.TokenType.SpaceLike:
-        if token.text == '\n':
-            enterCount += 1
-
-        token = token.nextToken
-
-    return token, enterCount
+        self.reset()
 
 
-def RestoreComment():
-    TokenType = SymbolType.TokenType
-
-    if tokenIndex < 0: 
-        return ''
-
-    commentList = []
-    lastToken = tokens[tokenIndex]
-    stopToken = tokens[tokenIndex + 1] if tokenIndex + 1 < len(tokens) else None
-    nextToken = lastToken.nextToken
-    while nextToken is not stopToken:
-        if isKeepComment and nextToken.kind == TokenType.Comment:
-            commentWithIndent = indenter.toCode() + nextToken.text
-            commentList.append(commentWithIndent)
-        elif isKeepGap and nextToken.text == '\n':
-            nextToken, enterCount = _eatSpace(nextToken)
-            if enterCount >= 2:
-                gapManager.placeGap(1)
-
-            continue
-
-        nextToken = nextToken.nextToken
-
-    lastToken = None
-
-    code = ''
-    if len(commentList) == 0:
-        pass
-    elif len(commentList) == 1:
-        gapManager.insertCommentBehind(commentList[0])
-    else:
-        gapManager.insertCommentAhead(commentList[0])
-        for i in range(1, len(commentList)):
-            gapManager.insertCommentBehind(commentList[i])
-
-    return code
+    def toCode(self):
+        return self.ast.toCode()
 
 
+    # ---- for Token and String ----
+    def Token2Code(self, token):
+        self.tokenIndex += 1
 
-indenter = Indenter()
-gapManager = GapManager()
-tokens = []
-tokenIndex = -1
+        code = token.text
+        return code
+
+
+    def String2Code(self, s):
+        self.tokenIndex += 1
+
+        return s;
+
+
+    # ---- for Utility ----
+    @staticmethod
+    def _eatSpace(token):
+        enterCount = 0
+        while token.kind == SymbolType.TokenType.SpaceLike:
+            if token.text == '\n':
+                enterCount += 1
+
+            token = token.nextToken
+
+        return token, enterCount
+
+
+    def restoreComment(self):
+        TokenType = SymbolType.TokenType
+
+        if self.tokenIndex < 0: 
+            return ''
+
+        commentList = []
+        lastToken = self.tokens[self.tokenIndex]
+        stopToken = self.tokens[self.tokenIndex + 1] if self.tokenIndex + 1 < len(self.tokens) else None
+        nextToken = lastToken.nextToken
+        while nextToken is not stopToken:
+            if isKeepComment and nextToken.kind == TokenType.Comment:
+                commentWithIndent = self.indenter.toCode() + nextToken.text
+                commentList.append(commentWithIndent)
+            elif isKeepGap and nextToken.text == '\n':
+                nextToken, enterCount = Formatter._eatSpace(nextToken)
+                if enterCount >= 2:
+                    self.gapManager.placeGap(1)
+
+                continue
+
+            nextToken = nextToken.nextToken
+
+        lastToken = None
+
+        code = ''
+        if len(commentList) == 0:
+            pass
+        elif len(commentList) == 1:
+            self.gapManager.insertCommentBehind(commentList[0])
+        else:
+            self.gapManager.insertCommentAhead(commentList[0])
+            for i in range(1, len(commentList)):
+                self.gapManager.insertCommentBehind(commentList[i])
+
+        return code
+
+
+    def reset(self):
+        self.indenter = Indenter()
+        self.gapManager = GapManager()
+        self.tokenIndex = -1
+
+        # do injection
+        from . import syntax_tree_to_code
+        syntax_tree_to_code.doInjection(productionList, Token, Nonterminal)
 
 
 # shortcut for frequently call
 def I():
     # 正确的排版，新的一行总会是G()或者I()开头
-    code = RestoreComment()
-    code += gapManager.startNewBlock()
-    code += indenter.toCode()
+    code = SCFormatter.restoreComment()
+    code += SCFormatter.gapManager.startNewBlock()
+    code += SCFormatter.indenter.toCode()
     return code
 
 
 def IAA():
-    code = RestoreComment()
-    code += gapManager.startNewBlock()
-    code += indenter.postAddAdd()
+    code = SCFormatter.restoreComment()
+    code += SCFormatter.gapManager.startNewBlock()
+    code += SCFormatter.indenter.postAddAdd()
     return code
 
 
 def SSI():
-    code = RestoreComment()
-    code += gapManager.startNewBlock()
-    code += indenter.preSubSub()
+    code = SCFormatter.restoreComment()
+    code += SCFormatter.gapManager.startNewBlock()
+    code += SCFormatter.indenter.preSubSub()
     return code
 
 
-def SetTokens(inputTokens):
-    global tokens, tokenIndex
-    tokens = inputTokens
-    tokenIndex = -1
-
-    # do injection
-    from . import syntax_tree_to_code
-    syntax_tree_to_code.doInjection(productionList, Token, Nonterminal)
-
-
-
 def STR(s):
-    return String2Code(s)
+    return SCFormatter.String2Code(s)
+
+
+def Token2Code(token):
+    return SCFormatter.Token2Code(token)
 
 
 def G(increment = 1):
-    return gapManager.placeGap(increment)
+    return SCFormatter.gapManager.placeGap(increment)
 
 
 def E():

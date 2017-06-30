@@ -44,9 +44,6 @@ def loadEdges():
     # 消除已知的冲突
     edges = known_conflicts.applyTo(edges)
 
-    # with open(os.path.join(__file__, '../output/3_edges_conflict_free.json'), 'w') as f:
-    #     json.dump(edges, f, indent=4)
-
     return edges
 
 
