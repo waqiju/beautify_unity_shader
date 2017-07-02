@@ -47,66 +47,40 @@ def loadEdges():
     return edges
 
 
+def analyzeCodeText(codeText, edges=None):
+    tokens = lexer.analyze(codeText, isEnding=True)
+    tokens = preprocessor.analyze(tokens)
+    ast = analyze(tokens, edges)
+    return ast, tokens
+
+
 class Test(unittest.TestCase):
 
     def DtestConstruct(self):
         construct()
 
-    def testAnalyze(self):
+    def DtestAnalyze(self):
         # 用shader进行验证
         with open(os.path.join(__file__, '../../test/combined_test/test.shader')) as f:
             inputText = f.read()
-        tokens = lexer.analyze(inputText, isEnding=True)
-        tokens = preprocessor.analyze(tokens)
-        with open(os.path.join(__file__, '../output/2_lex_output.txt'), 'w') as f:
-            for token in tokens:
-                f.write(str(token))
-                f.write('\n')
 
-        ast = analyze(tokens)
+        ast = analyzeCodeText(inputText)
 
         outputFile = os.path.abspath(os.path.join(__file__, '../output/3_syntax_output.txt'))
         with open(outputFile, 'w') as f:
             json.dump(ast.toDict(), f, indent=4)
 
+    def DtestFormatter(self):
+        with open(os.path.join(__file__, '../../test/formatter_test/formatted.shader')) as f:
+            inputText = f.read()
+        ast, tokens = analyzeCodeText(inputText)
 
-        from .extension import syntax_tree_to_code
+        from app.extension.formatter import Formatter
+        formatter = Formatter(tokens, ast)
         outputFile = os.path.abspath(os.path.join(__file__, '../output/4_formatted_code.shader'))
         with open(outputFile, 'w') as f:
-            f.write(ast.toCode())
+            f.write(formatter.toCode())
 
-
-    def _writeTokens(tokens):
-        import os
-        outputFile = os.path.abspath(os.path.join(__file__, r"../../test/lex_output.txt"))
-        with open(outputFile, 'w') as f:
-            for token in tokens:
-                f.write(str(token))
-                f.write('\n')
-
-    def DtestLexer(self):
-        import os
-        testFile = os.path.abspath(os.path.join(__file__, r"../../test/test.shader"))
-
-        with open(testFile) as f:
-            buf = f.read()
-            tokens = lexer.analyze(buf, isKeepSpace=False, isEnding=True)
-            Test._writeTokens(tokens)
-
-    def DtestLRConstruct(self):
-        print(1000)
-        # edges = lr1.construct(productionList, isDebug=True)
-
-    def Dtest(self):
-        import os
-        testFile = os.path.abspath(os.path.join(__file__, r"../../test/test.shader"))
-
-        with open(testFile) as f:
-            buf = f.read()
-            tokens = lexer.analyze(buf, isKeepSpace=False, isEnding=True)
-            Test._writeTokens(tokens)
-
-        # ast = analyze(tokens)
-
-if __name__ == '__main__':
-    edges = lr1.construct(productionList, isDebug=True)
+        formatter.reset()
+        self.maxDiff = None
+        self.assertEqual(inputText, formatter.toCode())

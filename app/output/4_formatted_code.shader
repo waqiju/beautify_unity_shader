@@ -1,189 +1,154 @@
-Shader "Hidden/Camera-DepthNormalTexture"
+Shader "Test/Formater"
 {
     Properties
     {
-        _MainTex("", 2D) = "white" { }
-        _Cutoff("", Float) = 0.5
-        _Color("", Color) = (1, 1, 1, 1)
+        _MainTex ("Main Text", 2D) = "white" { }
+        _Cutoff ("Cutoff", Range(0, 1)) = 0.5
+        _Color ("Color", Color) = (1, 1, 1, 1)
+        [Enum(UV0, 0, UV1, 1)] _UVSec ("UV Set for secondary textures", Float) = 0
+        [MaterialEnum(None, 0, Fastest, 1, Fast, 2, Better, 3, Best, 4, Palm, 5)] _WindQuality ("Wind Quality", Range(0, 5)) = 0
+        [KeywordEnum(None, Simple, High Quality)] _SunDisk ("Sun", Int) = 2
+        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
+        [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
+        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
+        [ToggleOff] _GlossyReflections ("Glossy Reflections", Float) = 1.0
+    }
+
+    Category
+    {
+        Blend One OneMinusSrcAlpha
     }
 
     SubShader
     {
-        Tags
+        // ---- cmd_stm -----
+        AlphaToMask True
+        ColorMask RGB
+        AlphaTest off
+        AlphaTest Greater [_Cutoff]
+        BindChannels
         {
-            "RenderType" = "Opaque"
+            Bind "Vertex", vertex
+            Bind "normal", normal
+            // lightmap uses 2nd uv
+            Bind "texcoord1", texcoord0
+            // unused
+            Bind "texcoord1", texcoord1
+            // main uses 1st uv
+            Bind "texcoord", texcoord2
         }
-
-        Pass
+        Blend Off
+        Blend One OneMinusSrcAlpha
+        Fog { Mode off }
+        // in additive pass fog should be black
+        Fog { Color (0, 0, 0, 0) }
+        Material
         {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float4 nz : TEXCOORD0;
-            };
-
-            v2f vert(appdata_base v)
-            {
-                v2f o;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
+            Diffuse [_Color]
+            Ambient [_Color]
+            Shininess [_Shininess]
+            Specular [_SpecColor]
+            Emission [_Emission]
         }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "TransparentCutout"
+        Name "BASE"
+        Offset [_ZBias], [_ZBias]
+        Stencil { Comp Always Pass Zero }
+        SetTexture [_MainTex]
+        { 
+            combine texture * primaryDOUBLE, texture * primary
         }
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-            uniform float4 _MainTex_ST;
-
-            v2f vert(appdata_base v)
-            {
-                v2f o;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-            uniform fixed4 _Color;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                fixed4 texcol = tex2D(_MainTex, i.uv);
-                clip(texcol.a * _Color.a - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
+        SetTexture [unity_Lightmap]
+        { 
+            matrix [unity_LightmapMatrix]
+            constantColor [_Color]
+            combine texture * constant
         }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "TreeBark"
-        }
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
-            #include "UnityBuiltin3xTreeLibrary.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-
-            v2f vert(appdata_full v)
-            {
-                v2f o;
-                TreeVertBark(v);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord.xy;
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "TreeLeaf"
-        }
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
-            #include "UnityBuiltin3xTreeLibrary.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-
-            v2f vert(appdata_full v)
-            {
-                v2f o;
-                TreeVertLeaf(v);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord.xy;
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                half alpha = tex2D(_MainTex, i.uv).a;
-
-
-                clip(alpha - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
         Tags
         {
             "RenderType" = "TreeOpaque"
             "DisableBatching" = "True"
         }
+        // ---- cmd_stm ----
+
+        // ---- shr_pass ----
+        GrabPass
+        {
+            Name "BASE"
+            Tags
+            {
+                "LightMode" = "Always"
+            }
+        }
+
+        UsePass "Reflective/Bumped Unlit/BASE"
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #pragma multi_compile_particles
+            #pragma multi_compile_fog
+
+            #include "UnityCG.cginc"
+
+            sampler2D _MainTex;
+
+            fixed4 _TintColor;
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+                fixed4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+                fixed4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
+                UNITY_FOG_COORDS(1)
+                #ifdef SOFTPARTICLES_ON
+                float4 projPos : TEXCOORD2;
+                #endif
+            };
+
+            float4 _MainTex_ST;
+
+            v2f vert(appdata_t v)
+            {
+                v2f o;
+                o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+                #ifdef SOFTPARTICLES_ON
+                o.projPos = ComputeScreenPos(o.vertex);
+                COMPUTE_EYEDEPTH(o.projPos.z);
+                #endif
+                o.color = v.color;
+                o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+                UNITY_TRANSFER_FOG(o, o.vertex);
+                return o;
+            }
+
+            sampler2D_float _CameraDepthTexture;
+            float _InvFade;
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                #ifdef SOFTPARTICLES_ON
+                float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)));
+                float partZ = i.projPos.z;
+                float fade = saturate(_InvFade * (sceneZ - partZ));
+                i.color.a *= fade;
+                #endif
+
+                fixed4 col = 2.0f * i.color * _TintColor * tex2D(_MainTex, i.texcoord);
+                // fog towards black due to our blend mode
+                UNITY_APPLY_FOG_COLOR(i.fogCoord, col, fixed4(0, 0, 0, 0));
+                return col;
+            }
+            ENDCG
+        }
 
         Pass
         {
@@ -191,23 +156,15 @@ Shader "Hidden/Camera-DepthNormalTexture"
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
             struct v2f
             {
                 float4 pos : SV_POSITION;
                 float4 nz : TEXCOORD0;
             };
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                fixed4 color : COLOR;
-            };
 
-            v2f vert(appdata v)
+            v2f vert(appdata_base v)
             {
                 v2f o;
-                TerrainAnimateTree(v.vertex, v.color.w);
                 o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
                 o.nz.xyz = COMPUTE_VIEW_NORMAL;
                 o.nz.w = COMPUTE_DEPTH_01;
@@ -220,258 +177,11 @@ Shader "Hidden/Camera-DepthNormalTexture"
             }
             ENDCG
         }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "TreeTransparentCutout"
-            "DisableBatching" = "True"
-        }
-
-        Pass
-        {
-            Cull Back
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
-
-
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                fixed4 color : COLOR;
-                float4 texcoord : TEXCOORD0;
-            };
-
-            v2f vert(appdata v)
-            {
-                v2f o;
-                TerrainAnimateTree(v.vertex, v.color.w);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord.xy;
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                half alpha = tex2D(_MainTex, i.uv).a;
-
-
-                clip(alpha - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-
-        Pass
-        {
-            Cull Front
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
-
-
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                fixed4 color : COLOR;
-                float4 texcoord : TEXCOORD0;
-            };
-
-            v2f vert(appdata v)
-            {
-                v2f o;
-                TerrainAnimateTree(v.vertex, v.color.w);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord.xy;
-                o.nz.xyz = -COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                fixed4 texcol = tex2D(_MainTex, i.uv);
-                clip(texcol.a - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "TreeBillboard"
-        }
-
-        Pass
-        {
-            Cull Off
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-
-            v2f vert(appdata_tree_billboard v)
-            {
-                v2f o;
-                TerrainBillboardTree(v.vertex, v.texcoord1.xy, v.texcoord.y);
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv.x = v.texcoord.x;
-                o.uv.y = v.texcoord.y > 0;
-                o.nz.xyz = float3(0, 0, 1);
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                fixed4 texcol = tex2D(_MainTex, i.uv);
-                clip(texcol.a - 0.001);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "GrassBillboard"
-        }
-
-        Pass
-        {
-            Cull Off
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
-
-
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                fixed4 color : COLOR;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-
-            v2f vert(appdata_full v)
-            {
-                v2f o;
-                WavingGrassBillboardVert(v);
-                o.color = v.color;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord.xy;
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                fixed4 texcol = tex2D(_MainTex, i.uv);
-                fixed alpha = texcol.a * i.color.a;
-                clip(alpha - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
-        Tags
-        {
-            "RenderType" = "Grass"
-        }
-
-        Pass
-        {
-            Cull Off
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-            #include "TerrainEngine.cginc"
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-                fixed4 color : COLOR;
-                float2 uv : TEXCOORD0;
-                float4 nz : TEXCOORD1;
-            };
-
-            v2f vert(appdata_full v)
-            {
-                v2f o;
-                WavingGrassVert(v);
-                o.color = v.color;
-                o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.texcoord;
-                o.nz.xyz = COMPUTE_VIEW_NORMAL;
-                o.nz.w = COMPUTE_DEPTH_01;
-                return o;
-            }
-
-            uniform sampler2D _MainTex;
-            uniform fixed _Cutoff;
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                fixed4 texcol = tex2D(_MainTex, i.uv);
-                fixed alpha = texcol.a * i.color.a;
-                clip(alpha - _Cutoff);
-                return EncodeDepthNormal(i.nz.w, i.nz.xyz);
-            }
-            ENDCG
-        }
+        // ---- shr_pass ----
     }
 
     FallBack Off
+    FallBack "Legacy Shaders/Transparent/Diffuse"
+    CustomEditor "LegacyIlluminShaderGUI"
+    Dependency "BaseMapShader" = "Hidden/TerrainEngine/Splatmap/Standard-Base"
 }
