@@ -5,8 +5,6 @@ from app.extension.formatter import Formatter
 
 
 def formatFile(inputFilePath, outputFilePath):
-    print('format', inputFilePath, outputFilePath)
-
     try:
         with open(inputFilePath) as f:
             inputText = f.read()
@@ -23,8 +21,6 @@ def formatFile(inputFilePath, outputFilePath):
 
 
 def parseFile(inputFilePath, outputFilePath):
-    print('parse', inputFilePath, outputFilePath)
-
     try:
         with open(inputFilePath) as f:
             inputText = f.read()
