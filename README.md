@@ -34,4 +34,4 @@ A concise parser for Unity Shader.
 
 ## Technology Detail
 
-关于技术细节，[这里]()有一小部分开发文档。
+关于技术细节，[这里](doc/)有一小部分开发文档。
