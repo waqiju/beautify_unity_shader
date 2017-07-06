@@ -1,50 +1,17 @@
 
+『事项』
 
-[ ] example_for_formatter.shader
+[ ] 新功能开发，toScope来增强代码高亮功能。类似toCode实现代码格式化。
 
-[ ] shader_part1_test
+[ ] GitHub上的文件整理，把一些生成的文件从仓库历史中移除。eg: 大多数output目录下的文件。
 
+[ ] 由于模块相对路径的改变，syntax_to_py生成的模块路径需要做一下相对处理。eg：在test/目录下的模块需要用import app.symbol_type，而在app/目录下用import .symbol_type。有一点小区别，加个条件判断即可。
 
-() 合并cg_test和shader_part_test
-
-() github重整
-
-() ？实现的到底是lr1还是lalr1
-
-() 记忆。eg: re, StringIO
-
-() python unittest 
-
-() wingIDE
-
-() Git
-
-1. 等同svn的revert
-
-2. 从历史提交记录中移除文件
-
-3. 等同svn的diff
-
-() python循环引用怎么解决？
-
-eg: from a import testA, b.py
-    from b import testB, a.py
-
-现在的work around是在用的时候才导入。
+[ ] 代码重构1。把lr0的部分从base_algorithms.py中分离出来。
 
 
-[ ] 手工填充to_code.py
+『疑惑』
 
-[ ] 完善beautify_unity_shader的cmd
-    1. 输出格式化代码文件
-    2. 输出Syntax Tree
+？实现的是算lr1还是算lalr1，有点糊涂了。
 
-[ ] Github事项。公开这个仓库，清理仓库，增加文档
-
-[ ] 把格式化功能接入到UnityShaderST3
-
-[ ] UnityShaderST3发布新版本，0.3
-
-[ ] to_scope.py
-
-[ ] 把toScope接入到UnityShaderST3
+？代码增强1。set的实现应该有更贴近python原生的方式。

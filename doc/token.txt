@@ -9,6 +9,8 @@ INT
 COMMENT
     //.*$
     \*.**/
+
+
 ## 标点符号
 COMMA   逗号
 COLON   冒号
@@ -39,10 +41,3 @@ QUESTION
 
 
 ## 语言保留字
-if
-then
-else
-while
-for
-break
-nil
